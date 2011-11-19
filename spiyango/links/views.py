@@ -68,7 +68,7 @@ class LinkDetail(DetailView):
 class TopLinksView(ListView):
 
     context_object_name = "links"
-
+    paginate_by = 10
     def get_queryset(self):
 
         try:
@@ -101,8 +101,10 @@ class TopLinksView(ListView):
         return context
 
 class LatestLinksView(ListView):
+
     context_object_name = "links"
     queryset = Link.objects_with_scores.all().order_by("-posted_at")
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(LatestLinksView, self).get_context_data(**kwargs)

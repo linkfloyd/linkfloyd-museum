@@ -1,6 +1,6 @@
 {% extends "base.html" %}{% load i18n %}
 {% block content %}
-<div style="width:100%;margin-top:10px;">
+<div style="width:100%;margin-top:20px;">
     {% for link in links %}
         {% include "links/link_as_list_item.html" %}
     {% empty %}
@@ -8,6 +8,19 @@
    	         {% trans "No links shared today. Share it now!" %}
         </div>
     {% endfor %}
+        <div class="pagination">
+            <span class="page_links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page_current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
 </div>
 <script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
 <script type="text/javascript">

@@ -4,6 +4,7 @@ div#head {
 	padding: 5px 10px 0 5px;
 	background: #195695;
 	border-bottom: 5px solid #D3D7F9;
+    color: #666;
 }
 div.wrapper {
 	width: 970px;
@@ -35,7 +36,7 @@ ul.navigation {
 }
 ul.navigation > li {
 	margin: 0 0 0 30px;
-	padding: 5px;
+	padding: 5px 8px;
 	float: left;
 	list-style-type: none;
 	font-size: 12px;
@@ -70,6 +71,10 @@ div.section.panel {
 div#content {
 	margin-top: 0;
     z-index: 0;
+}
+div#footer {
+	min-height: 200px;
+    background: #ddd;
 }
 iframe#linkView {
 	display: block;

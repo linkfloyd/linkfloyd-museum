@@ -1,7 +1,5 @@
 {% extends "base.html" %}{% load i18n %}{% block extra_head %}{{form.media}}{% endblock %}
 {% block content %}
-<div class="wrapper">
-	<div class="section narrow left">
 		<form action="#" method="post">
             <div class="fieldWrapper">
                 {{ form.url.errors }}
@@ -41,8 +39,6 @@
             {{form.thumbnail_url}}
             <input type="submit" value="{% trans 'Submit' %}" />
 		</form>
-	</div>
-</div>
 <script type="application/javascript">
     $("#id_tags").tagsInput({"width": "480px", "height": "30px"});
 </script>
