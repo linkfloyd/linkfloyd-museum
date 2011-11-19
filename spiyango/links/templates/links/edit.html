@@ -1,0 +1,40 @@
+{% extends "base.html" %}{% load i18n %}{% block extra_head %}{{form.media}}{% endblock %}
+{% block content %}
+<div class="wrapper">
+	<div class="section narrow left">
+		<form action="#" method="post">
+            <div class="fieldWrapper">
+                {{ form.rating.errors }}
+                <label fory="id_rating">{% trans "Rating" %}<span class="desc">{{form.rating.help_text}}</label>
+                {{ form.rating }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.language.errors }}
+                <label fory="id_rating">{% trans "Language" %}<span class="desc">{{form.language.help_text}}</label>
+                {{ form.language }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.title.errors }}
+                <label for="id_title">{% trans "Title" %}<span class="desc">{{form.title.help_text}}</label>
+                {{ form.title }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.description.errors }}
+                <label for="id_description">{% trans "Description" %}<span class="desc">{{form.description.help_text}}</label>
+                {{ form.description }}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.tags.errors }}
+                <label for="id_tags">{% trans "Tags" %}<span class="desc">{{form.tags.help_text}}</label>
+                {{ form.tags }}
+            </div>
+			{% csrf_token %}
+            {{form.thumbnail_url}}
+            <input type="submit" value="{% trans 'Update' %}" />
+		</form>
+	</div>
+</div>
+<script type="application/javascript">
+    $("#id_tags").tagsInput({"width": "480px", "height": "30px"});
+</script>
+{% endblock content %}

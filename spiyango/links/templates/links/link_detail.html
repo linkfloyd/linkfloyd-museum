@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{link.title}}{% endblock title %}
+{% if link.thumbnail_url %}{% block og_image %}{{link.thumbnail_url}}{% endblock %}{% endif %}
+
+{% block extra_nav %}
+<div class="left">
+    <ul class="navigation">
+        <li><a href="{{link.url}}">{{link.title}}</a> via <a href="#">{{link.posted_by}}</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<iframe id="linkView" src="{{link.url}}"></iframe>
+{% endblock content %}

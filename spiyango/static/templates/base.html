@@ -1,0 +1,63 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>{%block title%}SitePiyango{%endblock title%}</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="description" content="{% block desc %}Site Piyango, site trafiği kazanmak için oynanan basit bir oyundur. Websitenizi kayıt ederek, çekilişe katılabilir ve sürpriz ziyaretçiler kazanabilirsiniz.{% endblock desc %}">
+		<meta name="keywords" content="{% block keyw %}web sitesi, site, trafik, istatistik, internet, internet trafiği{% endblock keyw %}">
+		<meta name="robots" CONTENT="index, follow">
+		<meta property="og:image" content="{{STATIC_PREFIX}}logo.png"/>
+		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+		<link href="{{STATIC_PREFIX}}css/base.css" rel="stylesheet" type="text/css" />
+		{% block extra_head %} {% endblock extra_head %}
+	</head>
+	<body>
+		<div id="head">
+			<div class="wrapper">
+				<div class="left">
+					<a id="logo" href="/"> <img alt="sitepiyango"  src="{{STATIC_PREFIX}}/logo.png"> </a>
+				</div>
+				<div class="right">
+					<ul class="navigation">
+						<li>
+							<a href="/faq/">Bu Nedir?</a>
+						</li>
+						<li>
+							<a href="/attenders/">Katılımcılar</a>
+						</li>
+						<li>
+							<a href="/archive/">Çekilişler</a>
+						</li>
+						<li>
+							<a href="/statistics/">İstatistikler</a>
+						</li>
+						<li style="margin-top:-3px;">
+							<iframe src="http://www.facebook.com/plugins/like.php?app_id=149250715143125&amp;href=https%3A%2F%2Fwww.facebook.com%2Fsitepiyango&amp;send=true&amp;layout=button_count&amp;width=150&amp;show_faces=false&amp;action=recommend&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="content">
+			{%block content%}{%endblock content%}
+		</div>
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-6315603-10']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</body>
+</html>

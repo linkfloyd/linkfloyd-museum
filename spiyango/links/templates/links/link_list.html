@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}
+<div style="width:100%;margin-top:10px;">
+    {% for link in links %}
+        {% include "links/link_as_list_item.html" %}
+    {% empty %}
+        <div class="oops">
+   	         {% trans "No links shared today. Share it now!" %}
+        </div>
+    {% endfor %}
+</div>
+<script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
+<script type="text/javascript">
+    var addthis_config =
+        { services_compact: 'email, gmail, facebook, twitter',
+          services_exclude: 'formspring',
+          ui_click: true }
+
+    var addthis_localize =
+        { share_caption: "{% trans 'Share' %}",
+        email: "{% trans 'E-posta' %}" }
+</script>
+<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ec6bf7a4c4877e7"></script>
+{% endblock content %}

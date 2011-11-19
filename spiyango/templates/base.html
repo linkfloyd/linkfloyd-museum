@@ -1,0 +1,64 @@
+{% load static i18n %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>{% block title %}SitePiyango{% endblock title %}</title>
+
+		<meta name="description" content="{% block description %}Site Piyango, site trafiği kazanmak için oynanan basit bir oyundur. Websitenizi kayıt ederek, çekilişe katılabilir ve sürpriz ziyaretçiler kazanabilirsiniz.{% endblock %}" />
+
+		<script type="text/javascript" src="{{STATIC_PREFIX}}/js/libs/jquery-1.7.min.js"></script>
+		<link href="{{STATIC_PREFIX}}css/base.css" rel="stylesheet" type="text/css" />
+
+		<meta property="og:image" content="{% block og_image %}{{STATIC_PREFIX}}logo.png{% endblock og_image %}" />
+		<meta name="robots" CONTENT="index, follow" />
+		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+		<link href="{{STATIC_PREFIX}}css/base.css" rel="stylesheet" type="text/css" />
+		{% block extra_head %}
+        {% endblock extra_head %}
+	</head>
+	<body>
+		<div id="head">
+			<a id="logo" href="/">
+                <img alt="sitepiyango" src="{{STATIC_PREFIX}}/logo.png" />
+            </a>
+            {% block extra_nav %}
+            {% endblock extra_nav %}
+			<div class="right">
+				<ul class="navigation">
+					<li{% if active_nav_item == "highest" %} class="active"{% endif %}>
+						<a href="/">{% trans "Highest" %}</a>
+					</li>
+					<li{% if active_nav_item == "controversial" %} class="active"{% endif %}>
+						<a href="/links/latest/">{% trans "Controversial" %}</a>
+					</li>
+					<li{% if active_nav_item == "latest" %} class="active"{% endif %}>
+						<a href="/links/latest/">{% trans "Latest" %}</a>
+					</li>
+					<li{% if active_nav_item == "submit" %} class="active"{% endif %}>
+						<a href="/links/submit/">{% trans "Submit a Link" %}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+			{%block content%}{%endblock content%}
+		</div>
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-6315603-10']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+	</body>
+</html>
+
