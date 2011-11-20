@@ -1,5 +1,5 @@
 from django import forms
-from links.models import Link, SITE_RATINGS
+from spiyango.links.models import Link, SITE_RATINGS
 from taggit.forms import TagField
 
 class SubmitLinkForm(forms.ModelForm):

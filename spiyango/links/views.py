@@ -3,12 +3,13 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from links.models import Link
-from links.forms import SubmitLinkForm, EditLinkForm
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.db.models import Sum
 from datetime import datetime
+
+from spiyango.links.models import Link
+from spiyango.links.forms import SubmitLinkForm, EditLinkForm
 
 @login_required
 def submit(request):

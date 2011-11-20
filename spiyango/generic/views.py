@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from links.models import Link
+from spiyango.links.models import Link
 from django.db.models import Sum
 from django.template import RequestContext
 

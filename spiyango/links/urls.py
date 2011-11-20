@@ -1,8 +1,8 @@
 
 from django.conf.urls.defaults import patterns, include, url
-from links.models import Link
+from spiyango.links.models import Link
 
-from links.views import LatestLinksView, LinkDetail
+from spiyango.links.views import LatestLinksView, LinkDetail
 
 urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$', LinkDetail.as_view(), name='show_link'),
