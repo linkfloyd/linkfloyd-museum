@@ -17,7 +17,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sqlite.db',
+        'NAME': os.path.join(PROJECT_ROOT, 'sqlite.db'),
     }
 }
 # Local time zone for this installation. Choices can be found here:
