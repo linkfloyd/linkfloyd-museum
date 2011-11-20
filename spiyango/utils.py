@@ -2,6 +2,7 @@ from urllib2 import urlopen, URLError
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from sorl.thumbnail import get_thumbnail
 from django.contrib.sites.models import Site
+from urlparse import urljoin
 
 def get_info(url):
     """Fetches the contents of url and extracts (and utf-8 encodes)
@@ -70,6 +71,13 @@ def get_info(url):
         resp_dict['description'] == resp_dict['description'].strip()
         resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
             convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+
+    # if thumbnail url is relative, make it absolute url.
+
+    if resp_dict.has_key('image'):
+        if  not resp_dict['image'].startswith("http") or \
+            resp_dict['image'].startswith("ftp"):
+            resp_dict['image'] = urljoin(url, resp_dict['image'])
 
     opener.close()
     return resp_dict
