@@ -119,11 +119,9 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'spiyango.links',
-    'captcha',
     'taggit',
     'sorl.thumbnail',
     'django_votes',
-    #'devserver'
 )
 
 # A sample logging configuration. The only tangible logging
