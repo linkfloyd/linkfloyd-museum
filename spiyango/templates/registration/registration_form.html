@@ -2,8 +2,7 @@
 {% block title %}Register for an account{% endblock %}
 {% block content %}
 <form action="#" method="post">
-
-<form action="#" method="post">
+    {% crsf_token %}
     <div class="fieldWrapper">
         <label for="id_username">{% trans "Username" %} <span>{{form.username.help_text}}</span></label>
         {{ form.username }}
