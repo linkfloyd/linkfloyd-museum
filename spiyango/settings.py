@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'django_votes',
     'registration',
-    'registration_defaults'
 )
 
 # A sample logging configuration. The only tangible logging
