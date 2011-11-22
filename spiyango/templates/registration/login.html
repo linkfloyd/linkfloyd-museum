@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}Login{% endblock %}
+
+{% block extra_nav %}
+<div class="left">
+    <ul class="navigation">
+        <li class="active">Login</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
+    {% endif %}
+    <form method="post" action="{% url django.contrib.auth.views.login %}">
+        {% csrf_token %}
+        <div class="fieldWrapper">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div class="fieldWrapper">
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+        <p>
+            <a href="{% url auth_password_reset %}">Forgot</a> your password?, <a href="{% url registration_register %}">Need an account</a>?
+        </p>
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+{% endblock %}

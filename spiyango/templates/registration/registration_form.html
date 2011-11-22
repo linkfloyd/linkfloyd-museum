@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}Register for an account{% endblock %}
+{% block content %}
+<form action="#" method="post">
+
+<form action="#" method="post">
+    <div class="fieldWrapper">
+        <label for="id_username">{% trans "Username" %} <span>{{form.username.help_text}}</span></label>
+        {{ form.username }}
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_email">{% trans "Email" %} <span>{{form.email.help_text}}</span></label>
+        {{ form.username }}
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_password1">{% trans "Password" %} <span>{{form.password1.help_text}}</span></label>
+        {{ form.password1 }}
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_password2">{% trans "Password Again" %} <span>{{form.password2.help_text}}</span></label>
+        {{ form.password2 }}
+    </div>
+
+    <input type="submit" value="{% trans 'Submit' %}"/>
+</form>
+<script type="text/javascript">
+    $(function() {
+         $('input').attr('autocomplete', 'off');
+    });
+</script>
+{% endblock %}

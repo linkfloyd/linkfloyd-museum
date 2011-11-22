@@ -1,5 +1,7 @@
 # Django settings for spiyango project.
 
+from registration_defaults.settings import *
+
 import os
 
 DEBUG = True
@@ -31,7 +33,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'tr'
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 
@@ -122,6 +124,8 @@ INSTALLED_APPS = (
     'taggit',
     'sorl.thumbnail',
     'django_votes',
+    'registration',
+    'registration_defaults'
 )
 
 # A sample logging configuration. The only tangible logging

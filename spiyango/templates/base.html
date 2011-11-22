@@ -36,6 +36,11 @@
 					<li{% if active_nav_item == "latest" %} class="active"{% endif %}>
 						<a href="/links/latest/">{% trans "Latest" %}</a>
 					</li>
+                    {% if user.is_authenticated %}
+					<li{% if active_nav_item == "fromme" %} class="active"{% endif %}>
+						<a href="#">{% trans "From me" %}</a>
+					</li>
+                    {% endif %}
 					<li{% if active_nav_item == "submit" %} class="active"{% endif %}>
 						<a href="/links/submit/">{% trans "Submit a Link" %}</a>
 					</li>
