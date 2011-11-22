@@ -1,7 +1,5 @@
 # Django settings for spiyango project.
 
-from registration_defaults.settings import *
-
 import os
 
 DEBUG = True
