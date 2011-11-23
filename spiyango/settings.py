@@ -133,6 +133,8 @@ EMAIL_HOST = "smtp.webfaction.com"
 EMAIL_HOST_USER = "miratcan_automessages"
 EMAIL_HOST_PASSWORD = "kukuleta"
 
+ACCOUNT_ACTIVATION_DAYS = 3
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
