@@ -6,7 +6,7 @@ distribute==0.6.19
 django-registration==0.7
 django-taggit==0.9.3
 pycrypto==2.4.1
-qhonuskan-votes==0.0.0
+-e git+git@github.com:mcbayrak/qhonuskan-votes.git@7788ca9f6a235bba2468c28aa315b810ab2efcc2#egg=qhonuskan_votes-dev
 sorl-thumbnail==11.09.1
 ssh==1.7.11
 wsgiref==0.1.2
