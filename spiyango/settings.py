@@ -125,11 +125,20 @@ INSTALLED_APPS = (
     'registration',
 )
 
+SERVER_EMAIL = 'noreply@sitepiyango.com'
+DEFAULT_FROM_EMAIL = "admin@sitepiyango.com"
+SEND_BROKEN_LINK_EMAILS=True
+
+EMAIL_HOST = "smtp.webfaction.com"
+EMAIL_HOST_USER = "miratcan_automessages"
+EMAIL_HOST_PASSWORD = "kukuleta"
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

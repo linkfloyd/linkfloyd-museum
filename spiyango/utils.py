@@ -64,13 +64,20 @@ def get_info(url):
 
     if resp_dict.has_key('title'):
         resp_dict['title'] = resp_dict['title'].strip()
-        resp_dict['title'] = BeautifulStoneSoup(resp_dict['title'],
-            convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+        print resp_dict['title']
+        try:
+            resp_dict['title'] = BeautifulStoneSoup(resp_dict['title'],
+                convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+        except IndexError:
+            pass
 
     if resp_dict.has_key('description'):
         resp_dict['description'] == resp_dict['description'].strip()
-        resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
-            convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+        try:
+            resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
+                convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+        except IndexError:
+            pass
 
     # if thumbnail url is relative, make it absolute url.
 
