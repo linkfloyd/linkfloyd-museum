@@ -18,8 +18,6 @@ def get_info(url):
     except URLError:
         return resp_dict
 
-    print opener.info().getheaders('content-type')
-
     if "text/html" in opener.info().getheaders('content-type')[0]:
         data = opener.read(8096)
         opener.close()
@@ -64,7 +62,7 @@ def get_info(url):
 
     if resp_dict.has_key('title'):
         resp_dict['title'] = resp_dict['title'].strip()
-        print resp_dict['title']
+
         try:
             resp_dict['title'] = BeautifulStoneSoup(resp_dict['title'],
                 convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
