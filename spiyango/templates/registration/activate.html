@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block title %}{% if account %}Activation complete{% else %}Activation problem{% endif %}{% endblock %}
-{% block content %}
-
 {% block extra_nav %}
 <div class="left">
     <ul class="navigation">
@@ -10,6 +8,7 @@
 </div>
 {% endblock %}
 
+{% block content %}
 {% if account %}
     <p class="success">Thanks {{ account }}, activation complete!  You may now <a href='{% url auth_login %}'>login</a> using the username and password you set at registration.</p>
 {% else %}
