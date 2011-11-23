@@ -1,10 +1,20 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}Register for an account{% endblock %}
+
+{% block extra_nav %}
+<div class="left">
+    <ul class="navigation">
+        <li class="active">Login</li>
+    </ul>
+</div>
+{% endblock %}
+
 {% block content %}
 <form action="#" method="post">
     {% csrf_token %}
     <div class="fieldWrapper">
         <label for="id_username">{% trans "Username" %} <span>{{form.username.help_text}}</span></label>
+        {{ form.username.errors }}
         {{ form.username }}
     </div>
     <div class="fieldWrapper">

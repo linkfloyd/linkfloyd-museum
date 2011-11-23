@@ -5,7 +5,7 @@ from django.db import models
 from django.db.models import F
 from django.db.models import Sum
 
-from django_votes.models import VotesField
+from qhonuskan_votes.models import VotesField
 
 from taggit.managers import TaggableManager
 

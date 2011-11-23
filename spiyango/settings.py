@@ -121,7 +121,7 @@ INSTALLED_APPS = (
     'spiyango.links',
     'taggit',
     'sorl.thumbnail',
-    'django_votes',
+    'qhonuskan_votes',
     'registration',
 )
 
