@@ -103,7 +103,7 @@ class TopLinksView(ListView):
     def get_context_data(self, **kwargs):
         context = super(TopLinksView, self).get_context_data(**kwargs)
         context['active_nav_item'] = 'highest'
-        context['top_tags'] = Tag.objects.annotate(score=Count('taggit_taggeditem_items')).order_by('-score')
+        context['top_tags'] = Tag.objects.annotate(score=Count('taggit_taggeditem_items')).exclude(score=0).order_by('-score')
         return context
 
 class LatestLinksView(ListView):
