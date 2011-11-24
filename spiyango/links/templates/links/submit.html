@@ -37,6 +37,7 @@
             </div>
 			{% csrf_token %}
             {{form.thumbnail_url}}
+            {{form.player}}
             <input type="submit" value="{% trans 'Submit' %}" />
 		</form>
 <script type="application/javascript">

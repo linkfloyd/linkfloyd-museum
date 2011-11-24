@@ -1,8 +1,16 @@
-from urllib2 import urlopen, URLError
+from urllib2 import build_opener, URLError
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from sorl.thumbnail import get_thumbnail
 from django.contrib.sites.models import Site
 from urlparse import urljoin
+from django.db import models
+from django.db.models import aggregates
+from django.db.models.sql import aggregates as sql_aggregates
+from django.utils import simplejson
+
+client = build_opener()
+client.addheaders = [('User-agent', 'Mozilla/5.0')]
+urlopen = client.open
 
 def get_info(url):
     """Fetches the contents of url and extracts (and utf-8 encodes)
@@ -20,7 +28,9 @@ def get_info(url):
 
     if "text/html" in opener.info().getheaders('content-type')[0]:
         data = opener.read(8096)
+
         opener.close()
+
         bs = BeautifulSoup(data)
 
         if not bs:
@@ -55,34 +65,69 @@ def get_info(url):
                 if first_img_bs:
                     resp_dict['image'] = first_img_bs['src']
 
+        # cleanup title and description
+
+        if resp_dict.has_key('title'):
+            resp_dict['title'] = resp_dict['title'].strip()
+
+            try:
+                resp_dict['title'] = BeautifulStoneSoup(resp_dict['title'],
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+            except IndexError:
+                pass
+
+            if resp_dict.has_key('description'):
+                resp_dict['description'] == resp_dict['description'].strip()
+            try:
+                resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+            except IndexError:
+                pass
+
+        # if thumbnail url is relative, make it absolute url.
+
+        if resp_dict.has_key('image'):
+            if  not resp_dict['image'].startswith("http") or \
+                resp_dict['image'].startswith("ftp"):
+                resp_dict['image'] = urljoin(url, resp_dict['image'])
+
+        # if there is a embed link:
+        embed_bs = bs.find('link', attrs={'type': 'application/json+oembed'})
+
+        if embed_bs:
+            print embed_bs['href']
+            try:
+                embed_link_opener = urlopen(embed_bs['href'], None, timeout=15)
+            except URLError:
+                embed_link_opener = None
+                print "i could'nt open embed link", embed_bs['href']
+                exit
+
+            if embed_link_opener:
+                try:
+                    embed_data = simplejson.loads(embed_link_opener.read())
+                except ValueError:
+                    embed_data = None
+
+            if embed_data:
+                try:
+                    resp_dict['player'] = embed_data['html']
+                except IndexError:
+                    exit
+
     if "image" in opener.info().getheaders('content-type')[0]:
         resp_dict['image'] = url
 
-    # cleanup title and description
-
-    if resp_dict.has_key('title'):
-        resp_dict['title'] = resp_dict['title'].strip()
-
-        try:
-            resp_dict['title'] = BeautifulStoneSoup(resp_dict['title'],
-                convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
-        except IndexError:
-            pass
-
-    if resp_dict.has_key('description'):
-        resp_dict['description'] == resp_dict['description'].strip()
-        try:
-            resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
-                convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
-        except IndexError:
-            pass
-
-    # if thumbnail url is relative, make it absolute url.
-
-    if resp_dict.has_key('image'):
-        if  not resp_dict['image'].startswith("http") or \
-            resp_dict['image'].startswith("ftp"):
-            resp_dict['image'] = urljoin(url, resp_dict['image'])
-
     opener.close()
     return resp_dict
+
+
+class SumWithDefault(aggregates.Aggregate):
+    name = 'SumWithDefault'
+
+
+class SQLSumWithDefault(sql_aggregates.Sum):
+    sql_template = 'COALESCE(%(function)s(%(field)s), %(default)s)'
+
+
+setattr(sql_aggregates, 'SumWithDefault', SQLSumWithDefault)

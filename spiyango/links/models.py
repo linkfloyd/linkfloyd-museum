@@ -5,6 +5,8 @@ from django.db import models
 from django.db.models import F
 from django.db.models import Sum
 
+from spiyango.utils import SumWithDefault
+
 from qhonuskan_votes.models import VotesField
 
 from taggit.managers import TaggableManager
@@ -24,7 +26,8 @@ SITE_LANGUAGES = (
 class LinksWithScoresManager(models.Manager):
     def get_query_set(self):
         return super(LinksWithScoresManager, self).get_query_set().filter(\
-            is_banned=False).annotate(score=Sum('linkvote__value'))
+            is_banned=False).annotate(
+                vote_score=SumWithDefault('linkvote__value', default=0))
 
 class Link(models.Model):
 
@@ -49,7 +52,7 @@ class Link(models.Model):
     votes = VotesField()
     tags = TaggableManager()
     shown = models.PositiveIntegerField(default=0)
-
+    player = models.TextField(null=True, blank=True)
     is_banned = models.BooleanField(default=False)
 
     objects = models.Manager()

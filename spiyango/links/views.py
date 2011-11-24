@@ -70,6 +70,7 @@ class TopLinksView(ListView):
 
     context_object_name = "links"
     paginate_by = 10
+
     def get_queryset(self):
 
         try:
@@ -90,9 +91,9 @@ class TopLinksView(ListView):
 
         if get_links_after:
             queryset = Link.objects_with_scores.filter(\
-                posted_at__lte=get_links_after).order_by("-score")
+                posted_at__lte=get_links_after).order_by("-vote_score")
         else:
-            queryset = Link.objects_with_scores.all().order_by("-score")
+            queryset = Link.objects_with_scores.all().order_by("-vote_score")
 
         return queryset
 
@@ -110,4 +111,18 @@ class LatestLinksView(ListView):
     def get_context_data(self, **kwargs):
         context = super(LatestLinksView, self).get_context_data(**kwargs)
         context['active_nav_item'] = 'latest'
+        return context
+
+class LinksFromUserView(ListView):
+
+    context_object_name = "links"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Link.objects_with_scores.filter(posted_by__username__exact=self.kwargs['username']).order_by("-posted_at")
+
+    def get_context_data(self, **kwargs):
+        context = super(LinksFromUserView, self).get_context_data(**kwargs)
+        if self.request.user.username == self.kwargs['username']:
+            context['active_nav_item'] = 'from_me'
         return context

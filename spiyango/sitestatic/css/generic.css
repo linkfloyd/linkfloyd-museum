@@ -14,27 +14,30 @@ form {
 	display:block;
     margin: 20px auto;
 	padding: 10px;
-    border: 5px dashed #eee;
+    border: 5px solid #ccc;
     background: #e5e5e5;
 }
 form div.fieldWrapper label {
 	display: block;
-	font-size: 16px;
-    margin-bottom: 5px;
-    margin-top: 10px;
+	font-size: 13px;
+    font-weight: bold;
+    margin: 5px 0 3px 0;
 }
 form div.fieldWrapper:first-child label {
 	margin-top: 0;
 }
+
 form div.fieldWrapper label > span.desc {
     font-size: 10px;
+    font-weight: normal;
     color: #888;
     margin: 0 0 0 5px;
 }
 input, textarea, select {
     width: 480px;
-    padding: 5px;
-    border: 2px inside #666;
+    padding: 4px;
+    margin: 0 0 5px 0;
+    border: 1px solid #666;
 }
 textarea {
     height: 80px;
@@ -153,6 +156,13 @@ div.link > h3.title > span.domain {
     font-weight: normal;
     color: #888;
 }
+
+div.link div.embed_player {
+    display: block;
+    clear: both;
+    display: none;
+}
+
 span.tag {
     border: 1px solid #cBc9d8;
     -moz-border-radius:2px;

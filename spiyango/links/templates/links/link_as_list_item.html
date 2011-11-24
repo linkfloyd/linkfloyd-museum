@@ -2,11 +2,11 @@
 <div class="link" id="{{link.id}}">
     <div class="vote_buttons">
         <a href="#" class="upVote{% if link|is_up_voted_by:user %} voted{%endif%}" x:value="+1"></a>
-        <div class="score">{% if link.score %}{{link.score}}{% else %}0{% endif %}</div>
+        <div class="score">{% if link.vote_score %}{{link.vote_score}}{% else %}0{% endif %}</div>
         <a href="#" class="downVote{% if link|is_down_voted_by:user %} voted{%endif%}" x:value="-1"></a>
     </div>
 	{% if link.thumbnail_url %}
-	<a href="{{link.get_absolute_url}}" class="thumbnail">
+	<a {%if link.player %}href="#" onClick="$(this).parent().find('div.embed_player').toggle(); return false"{% else %} href="{{link.get_absolute_url}}"{% endif %} class="thumbnail">
         {% thumbnail link.thumbnail_url "160x100" crop="center" as im %}
         <img src="{{ im.url }}">
         {% endthumbnail %}
@@ -14,10 +14,17 @@
 	{% endif %}
     <div class="header">
         <div class="tags">
+            {% ifnotequal link.rating r %}
+            <span class="tag rating"><a href="#">{{link.rating}}</a></span>
+            {% endifnotequal %}
+            {% ifnotequal link.rating r %}
+            <span class="tag lang"><a href="#">{{link.language}}</a></span>
+            {% endifnotequal %}
             {% for tag in link.tags.all %}
             <span class="tag"><a href="/tags/{{tag.slug}}/">{{tag}}</a></span>
             {% endfor %}
         </div>
+
 	    <h3 class="title" href="{{link.url}}"><a href="{{link.get_absolute_url}}">{{link.title}}</a> <span class="domain">{{link.get_domain}}</span></h3>
     </div>
 	<p class="description">{{link.description}}</p>
@@ -40,5 +47,8 @@
         {% else %}
         <li><a href="#">{% trans "Complain" %}</a></li>
         {% endifequal %}
+
+        {% if link.player %}
+        <div class="embed_player">{{link.player|safe}}{% endif %}</div>
     </ul>
 </div>

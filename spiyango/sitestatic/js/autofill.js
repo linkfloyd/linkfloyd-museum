@@ -16,9 +16,9 @@ $(document).ready(function() {
                 $("#id_title").val(data['title']);
                 $("#id_description").val(data['description']);
                 $("#id_title, #id_description").removeAttr("disabled");
-                $("#id_title, #id_description").css(
-                    {"background": "white"});
+                $("#id_title, #id_description").css({"background": "white"});
                 $("#id_thumbnail_url").val(data['image']);
+                $("#id_player").val(data['player']);
 			},
 			error : function(data) {
                 $("#id_title, #id_description").removeAttr("disabled");

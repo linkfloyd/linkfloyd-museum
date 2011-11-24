@@ -7,6 +7,10 @@ class SubmitLinkForm(forms.ModelForm):
         widget=forms.widgets.HiddenInput,
         required=False)
 
+    player = forms.CharField(
+        widget=forms.widgets.HiddenInput,
+        required=False)
+
     description = forms.CharField(
         max_length=4096,
         widget=forms.widgets.Textarea,
