@@ -14,14 +14,8 @@
 	{% endif %}
     <div class="header">
         <div class="tags">
-            {% ifnotequal link.rating r %}
-            <span class="tag rating"><a href="#">{{link.rating}}</a></span>
-            {% endifnotequal %}
-            {% ifnotequal link.rating r %}
-            <span class="tag lang"><a href="#">{{link.language}}</a></span>
-            {% endifnotequal %}
             {% for tag in link.tags.all %}
-            <span class="tag"><a href="/tags/{{tag.slug}}/">{{tag}}</a></span>
+            <span class="tag"><a href="/links/list/?tagged={{tag.slug}}">{{tag}}</a></span>
             {% endfor %}
         </div>
 

@@ -1,6 +1,17 @@
 {% extends "base.html" %}{% load i18n %}
 {% block content %}
-<div style="width:100%;margin-top:20px;">
+
+<div class="sidebar" style="float:right;width:400px;background:#ddd">
+    {% if top_tags %}
+    <div class="tags">
+        {% for tag in top_tags %}
+        <span class="tag"><a href="#" style="font-size:{{tag.score|add:10}}px">{{tag}}</a></span>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<div style="float:left">
     {% for link in links %}
         {% include "links/link_as_list_item.html" %}
     {% empty %}

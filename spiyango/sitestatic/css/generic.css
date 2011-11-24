@@ -166,12 +166,11 @@ div.embed_player > iframe {
     width: 803px;
     height: 230px;
 }
-span.tag {
+.tag {
     border: 1px solid #cBc9d8;
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
-    display: block;
-    float: left;
+    float:left;
     padding: 2px;
     text-decoration:none;
     background: #eBe9f8;
@@ -180,6 +179,10 @@ span.tag {
     margin-bottom:5px;
     font-family: helvetica;
     font-size:13px;
+}
+p.tag {
+    float: both;
+    display: block;
 }
 span.tag a {
     font-weight: bold;

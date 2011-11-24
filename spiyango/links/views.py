@@ -5,11 +5,14 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from datetime import datetime
+from taggit.models import Tag
 
 from spiyango.links.models import Link
 from spiyango.links.forms import SubmitLinkForm, EditLinkForm
+
+from django.db.models import Q
 
 @login_required
 def submit(request):
@@ -100,6 +103,7 @@ class TopLinksView(ListView):
     def get_context_data(self, **kwargs):
         context = super(TopLinksView, self).get_context_data(**kwargs)
         context['active_nav_item'] = 'highest'
+        context['top_tags'] = Tag.objects.annotate(score=Count('taggit_taggeditem_items')).order_by('-score')
         return context
 
 class LatestLinksView(ListView):
@@ -126,3 +130,27 @@ class LinksFromUserView(ListView):
         if self.request.user.username == self.kwargs['username']:
             context['active_nav_item'] = 'from_me'
         return context
+
+class LinksListView(ListView):
+
+    context_object_name = "links"
+    paginate_by = 10
+
+    def get_queryset(self):
+
+        query = Q()
+
+        if self.request.GET.has_key("from"):
+            query = query & Q(posted_by__username=self.request.GET['from'])
+
+        if self.request.GET.has_key("tagged"):
+            print self.request.GET.getlist('tagged')
+            query = query & Q(tags__slug__in=self.request.GET.getlist('tagged'))
+
+        order_by = self.request.GET.get("order_by", False)
+
+        if order_by in ("vote_score", "comment_score", "-vote_score",
+                        "-comment_score", "posted_at", "-posted_at"):
+            return Link.objects_with_scores.filter(query).order_by(order_by)
+        else:
+            return Link.objects_with_scores.filter(query)
