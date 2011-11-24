@@ -157,12 +157,15 @@ div.link > h3.title > span.domain {
     color: #888;
 }
 
-div.link div.embed_player {
+div.embed_player {
     display: block;
     clear: both;
     display: none;
 }
-
+div.embed_player > iframe {
+    width: 803px;
+    height: 230px;
+}
 span.tag {
     border: 1px solid #cBc9d8;
     -moz-border-radius:2px;
