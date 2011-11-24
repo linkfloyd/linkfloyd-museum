@@ -5,7 +5,7 @@
     {% if top_tags %}
     <div class="tags">
         {% for tag in top_tags %}
-        <span class="tag"><a href="#" style="font-size:{{tag.score|add:10}}px">{{tag}}</a></span>
+        <span class="tag"><a href="/links/list/?tagged={{tag.slug}}" style="font-size:{{tag.score|add:10}}px">{{tag}}</a></span>
         {% endfor %}
     </div>
     {% endif %}
