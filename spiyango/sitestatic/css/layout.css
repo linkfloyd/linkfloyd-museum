@@ -71,6 +71,8 @@ div.section.panel {
 div#content {
 	margin-top: 0;
     z-index: 0;
+    overflow: auto;
+    min-height: 300px;
 }
 div#footer {
 	min-height: 200px;
