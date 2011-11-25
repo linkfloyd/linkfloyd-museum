@@ -113,6 +113,13 @@ def get_info(url):
                     resp_dict['player'] = embed_data['html']
                 except IndexError:
                     exit
+        else: # there is no oembed
+
+            og_video_bs = bs.find("meta", attrs={"property": "og:video"})
+
+            if og_video_bs:
+                resp_dict['player'] = "<embed src='%s'/>" % og_video_bs['content']
+
 
     if "image" in opener.info().getheaders('content-type')[0]:
         resp_dict['image'] = url

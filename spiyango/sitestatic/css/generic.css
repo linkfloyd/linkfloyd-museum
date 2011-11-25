@@ -138,7 +138,7 @@ div.link > p.description {
 }
 div.link > p.info {
     font-size: 10px;
-    color: #aaa;
+    color: #888;
 }
 div.link ul.actions {
     margin: 10px 0 0 50px;
@@ -162,9 +162,9 @@ div.embed_player {
     clear: both;
     display: none;
 }
-div.embed_player > iframe {
+div.embed_player > * {
     width: 803px;
-    height: 230px;
+    height: 260px;
 }
 .tag {
     border: 1px solid #cBc9d8;
