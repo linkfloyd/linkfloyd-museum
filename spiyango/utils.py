@@ -27,8 +27,7 @@ def get_info(url):
         return resp_dict
 
     if "text/html" in opener.info().getheaders('content-type')[0]:
-        data = opener.read(8096)
-
+        data = opener.read()
         opener.close()
 
         bs = BeautifulSoup(data)
