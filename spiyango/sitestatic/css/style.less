@@ -91,7 +91,13 @@ div.section {
         border-top-right-radius: 5px;
     }
 }
-div.two-sections {
+
+div.one-column {
+    div.section.narrow {
+        width: 600px;
+    }
+}
+div.two-column {
     div.panel {
         float: right;
         ul.channels {
@@ -241,16 +247,14 @@ div.link {
 }
 form {
 	display:block;
-    margin: auto;
-	padding: 1em;
-    width: 500px;
+    margin: 10px;
+	padding: 0;
     div.fieldWrapper{
         margin: 0 0 5px 0;
         padding: 0;
-        border: 1px solid black;
         label {
 	        display: block;
-	        font-size: 1em;
+	        font-size: 16px;
             font-weight: bold;
             margin: 0;
             padding: 0;
@@ -258,7 +262,7 @@ form {
 	            margin-top: 0;
             }
             span.desc {
-                font-size: 0.6em;
+                font-size: 12px;
                 font-weight: normal;
                 margin: 0 0 0 0.3em;
             }
@@ -278,12 +282,14 @@ form {
             }
         }
     }
-    input, textarea, select, textarea {
-        width: 100%;
-        border-radius: 5px;
-        padding: 0.3em;
-        margin: 0 0 0.5em 0;
+    input, textarea, select, textarea, ul.token-input-list {
+        width: 99%;
+        padding: 0.5%;
         border: none;
+        margin: 0;
+        background: lighten(@pencil-grey, 25%);
+        border-radius: 5px;
+        border: 1px solid darken(@pencil-grey, 0%);
     }
     input[type='submit'] {
 	    font-size:16px;

@@ -81,7 +81,7 @@ def get_info(url):
             try:
                 resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
                     convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
-            except IndexError:
+            except KeyError:
                 pass
 
         # if thumbnail url is relative, make it absolute url.
