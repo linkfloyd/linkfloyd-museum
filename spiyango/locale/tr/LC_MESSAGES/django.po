@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-18 16:18-0600\n"
+"POT-Creation-Date: 2011-12-04 03:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,120 +17,204 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: links/models.py:9
+#: settings.py:39
+msgid "English"
+msgstr ""
+
+#: settings.py:40
+msgid "Türkçe"
+msgstr ""
+
+#: links/models.py:17
 msgid "Suitable with any audience type."
 msgstr "Herkes için uygun."
 
-#: links/models.py:10
+#: links/models.py:18
 msgid "Can Contain rude gestures, the lesser swear words, or mild violence"
 msgstr "Kaba hareketler ya da sözler, saldırganlık içerebilir."
 
-#: links/models.py:11
+#: links/models.py:19
 msgid ""
 "Can Contain such things as harsh profanity, intense violence, nudity or drug "
 "use."
 msgstr ""
 "Sert küfürler, saldırganlık, çıplaklık ve uyuşturucu kullanımı içerebilir."
 
-#: links/models.py:12
+#: links/models.py:20
 msgid "Can Contain hardcore sexual imagery or extremely disturbing violence."
 msgstr "Hardcore seks sahneleri ve aşırı şiddet görüntüleri içerebilir."
 
-#: links/models.py:24
+#: links/models.py:41
+msgid "title"
+msgstr "başlık"
+
+#: links/models.py:42
+msgid "slug"
+msgstr "takoz"
+
+#: links/models.py:43
+msgid "description"
+msgstr "açıklama"
+
+#: links/models.py:65
 msgid "paste url of your link here"
 msgstr "bağlantınızın adresini buraya yapıştırın"
 
-#: links/models.py:27
+#: links/models.py:68
 msgid "title of your link"
 msgstr "bağlantınızın başlığı"
 
-#: links/models.py:30
+#: links/models.py:71
 msgid "say something about that link"
 msgstr "bağlantınız hakkında bir şeyler söyleyin"
 
-#: links/models.py:36
+#: links/models.py:78
 msgid "warn people about your link"
 msgstr "bağlantınızın içeriği konusunda insanları uyarın"
 
-#: links/templates/links/edit.html:8 links/templates/links/submit.html:13
+#: links/templates/links/edit.html:6 links/templates/links/submit.html:10
 msgid "Rating"
 msgstr "Derecelendirme"
 
-#: links/templates/links/edit.html:13 links/templates/links/submit.html:19
+#: links/templates/links/edit.html:11 links/templates/links/submit.html:16
 msgid "Language"
 msgstr "Dil"
 
-#: links/templates/links/edit.html:18 links/templates/links/submit.html:25
+#: links/templates/links/edit.html:16 links/templates/links/submit.html:21
 msgid "Title"
 msgstr "Başlık"
 
-#: links/templates/links/edit.html:23 links/templates/links/submit.html:31
+#: links/templates/links/edit.html:21 links/templates/links/submit.html:26
 msgid "Description"
 msgstr "Açıklama"
 
-#: links/templates/links/edit.html:28 links/templates/links/submit.html:37
+#: links/templates/links/edit.html:26
 msgid "Tags"
 msgstr "Etiketler"
 
-#: links/templates/links/edit.html:33
+#: links/templates/links/edit.html:31
 msgid "Update"
 msgstr "Güncelle"
 
-#: links/templates/links/link_as_list_item.html:25
-#, fuzzy, python-format
-msgid "Posted by %(poster)s, %(posted_at)s ago."
-msgstr "%(poster)s tarafından %(posted_at|timesince)s önce gönderildi."
-
-#: links/templates/links/link_as_list_item.html:26
-#, python-format
-msgid "Displayed %(shown)s times."
-msgstr "%(shown)s kere gösterldi."
-
-#: links/templates/links/link_as_list_item.html:35
+#: links/templates/links/link_as_list_item.html:32
+#: links/templates/links/link_list.html:57
 msgid "Share"
 msgstr "Paylaş"
 
-#: links/templates/links/link_as_list_item.html:38
+#: links/templates/links/link_as_list_item.html:35
 msgid "Edit"
 msgstr "Düzenle"
 
-#: links/templates/links/link_as_list_item.html:39
+#: links/templates/links/link_as_list_item.html:36
 msgid "Are you sure to delete this link?"
-msgstr ""
+msgstr "Bu bağlantıyı silmek istediğinizden emin misiniz?"
 
-#: links/templates/links/link_as_list_item.html:39
+#: links/templates/links/link_as_list_item.html:36
 msgid "Delete"
 msgstr "Sil"
 
-#: links/templates/links/link_as_list_item.html:41
+#: links/templates/links/link_as_list_item.html:38
 msgid "Complain"
 msgstr "Gammazla"
 
-#: links/templates/links/link_list.html:8 static/templates/index.html:10
-#: templates/index.html:4
+#: links/templates/links/link_as_list_item.html:40
+msgid "Info"
+msgstr "Bilgi"
+
+#: links/templates/links/link_list.html:7 links/templates/links/submit.html:31
+msgid "Channel"
+msgstr "Kanal"
+
+#: links/templates/links/link_list.html:18
+msgid "Top Channels"
+msgstr "Popüler Kanallar"
+
+#: links/templates/links/link_list.html:31 templates/index.html:3
 msgid "No links shared today. Share it now!"
 msgstr "Bu gün hiç bağ paylaşışmamış. Siz paylaşın :)"
 
-#: links/templates/links/submit.html:8
+#: links/templates/links/link_list.html:58
+msgid "E-posta"
+msgstr ""
+
+#: links/templates/links/submit.html:5
 msgid "URL"
 msgstr "URL"
 
-#: links/templates/links/submit.html:42
+#: links/templates/links/submit.html:39
+#: templates/registration/registration_form.html:33
 msgid "Submit"
 msgstr "Gönder"
 
-#: templates/base.html:30
-msgid "Latest"
-msgstr "En son"
-
 #: templates/base.html:33
-msgid "Controversial"
-msgstr "Tartışmalı"
-
-#: templates/base.html:36
 msgid "Highest"
 msgstr "En yüksek"
 
+#: templates/base.html:36
+msgid "Controversial"
+msgstr "Tartışmalı"
+
 #: templates/base.html:39
+msgid "Latest"
+msgstr "En son"
+
+#: templates/base.html:43
+msgid "From me"
+msgstr "Benden"
+
+#: templates/base.html:47
+msgid "Login"
+msgstr "Giriş Yap"
+
+#: templates/base.html:51
 msgid "Submit a Link"
 msgstr "Bir bağ gönder"
+
+#: templates/registration/login.html:14
+msgid "Your username and password didn't match. Please try again."
+msgstr "Kullanıcı adı ve şifreniz uyuşmadı. Tekrar deneyin."
+
+#: templates/registration/password_change_done.html:13
+msgid "Password successfully changed!"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:2
+msgid "Password reset complete"
+msgstr "Şifre sıfırlama tamamlandı"
+
+#: templates/registration/password_reset_done.html:2
+msgid "Password reset"
+msgstr "Şifre sıfırlama"
+
+#: templates/registration/password_reset_done.html:13
+msgid ""
+"We have sent you an email with a link to reset your password.  Please check "
+"your email and click the link to continue."
+msgstr "E-posta adresinize şifrenizi sıfırlayabilmeniz için bir bağlantı gönderdik. Lütfen epostanızı kontrol edip bağlantıya tıklayın."
+
+#: templates/registration/password_reset_form.html:2
+msgid "Reset password"
+msgstr "Şifre sıfırla"
+
+#: templates/registration/registration_form.html:16
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: templates/registration/registration_form.html:21
+msgid "Email"
+msgstr "E-posta"
+
+#: templates/registration/registration_form.html:25
+msgid "Password"
+msgstr "Şifre"
+
+#: templates/registration/registration_form.html:29
+msgid "Password Again"
+msgstr "Tekrar Şifre"
+
+#, fuzzy
+#~ msgid "Posted by %(poster)s, %(posted_at)s ago."
+#~ msgstr "%(poster)s tarafından %(posted_at|timesince)s önce gönderildi."
+
+#~ msgid "Displayed %(shown)s times."
+#~ msgstr "%(shown)s kere gösterldi."

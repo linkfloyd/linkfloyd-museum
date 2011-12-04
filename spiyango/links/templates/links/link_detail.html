@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load i18n gravatar %}
 {% block title %}{{link.title}}{% endblock title %}
 {% if link.thumbnail_url %}{% block og_image %}{{link.thumbnail_url}}{% endblock %}{% endif %}
 
@@ -8,8 +8,14 @@
         <li class="active"><a href="{{link.url}}">{{link.title}}</a> via <a href="#">{{link.posted_by}}</a></li>
     </ul>
 </div>
-{% endblock %}
+{% endblock extra_nav %}
 
 {% block content %}
-<iframe id="linkView" src="{{link.url}}"></iframe>
+    {% include "links/link_as_list_item.html" %}
+    {% for comment in link.comment_set.all %}
+        <div class="comment" style="background:#555;">
+            <img class="avatar" src="{% gravatar_for_user link.posted_by 40 %}">
+            <div class="body">{{comment.body|linebreaks|urlize}}</div>
+        </div>
+    {% endfor %}
 {% endblock content %}

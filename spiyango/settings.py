@@ -1,6 +1,8 @@
-# Django settings for spiyango project.
+# -*- coding: utf-8 -*-
 
 import os
+
+ugettext = lambda s: s # dummy ugettext function, as django's docs say
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -31,7 +33,12 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'tr'
+
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('tr', ugettext('Türkçe')),
+)
 
 SITE_ID = 1
 
@@ -123,18 +130,22 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'qhonuskan_votes',
     'registration',
+    'gravatar'
 )
 
+# EMAIL
 SERVER_EMAIL = 'noreply@sitepiyango.com'
-DEFAULT_FROM_EMAIL = "admin@sitepiyango.com"
 SEND_BROKEN_LINK_EMAILS=True
-
+DEFAULT_FROM_EMAIL = "admin@sitepiyango.com"
 EMAIL_HOST = "smtp.webfaction.com"
 EMAIL_HOST_USER = "miratcan_automessages"
 EMAIL_HOST_PASSWORD = "kukuleta"
 
+# REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 3
 
+# GRAVATAR
+GRAVATAR_DEFAULT_IMAGE = "mm"
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.

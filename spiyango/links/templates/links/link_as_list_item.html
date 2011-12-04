@@ -6,10 +6,12 @@
         <a href="#" class="downVote{% if link|is_down_voted_by:user %} voted{%endif%}" x:value="-1"></a>
     </div>
 	{% if link.thumbnail_url %}
-	<a {%if link.player %}href="#" onClick="$(this).parent().find('div.embed_player').toggle(); return false"{% else %} href="{{link.get_absolute_url}}"{% endif %} class="thumbnail">
+	<a {%if link.player %}href="#" onClick="$(this).parent().find('div.embed_player').toggle(); return false"{% else %}
+       href="{{link.get_absolute_url}}"{% endif %} class="thumbnail">
         {% thumbnail link.thumbnail_url "160x100" crop="center" as im %}
         <img src="{{ im.url }}">
         {% endthumbnail %}
+        {% if link.player %}<i></i>{% endif %}
 	</a>
 	{% endif %}
     <div class="header">
@@ -18,31 +20,25 @@
             <span class="tag"><a href="/links/list/?tagged={{tag.slug}}">{{tag}}</a></span>
             {% endfor %}
         </div>
-
-	    <h3 class="title" href="{{link.url}}"><a href="{{link.get_absolute_url}}">{{link.title}}</a> <span class="domain">{{link.get_domain}}</span></h3>
+	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain">{{link.get_domain}}</span></h3>
     </div>
 	<p class="description">{{link.description}}</p>
 	<p class="info">
-        {% blocktrans with poster=link.posted_by posted_at=link.posted_at|timesince %}Posted by {{poster}}, {{posted_at}} ago.{% endblocktrans %}
-        {% blocktrans with shown=Link.shown %}Displayed {{shown}} times.{% endblocktrans %}
+        Posted by {{link.posted_by}}, {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.
 	</p>
     <ul class="flat-list actions">
-        <li><a href="#">Comments</a></li>
+        <li><a href="#">Comments ({{link.comment_set.count}})</a></li>
         <li>
-            <a href="http://www.addthis.com/bookmark.php"
-               addthis:url="{{link.get_full_url}}"
-               addthis:title="{{link.title}}"
-               {% if link.description %}addthis:description="{{link.description}}"{% endif %}
-               style="text-decoration:none;" class="addthis_button">{% trans "Share" %}</a>
+            <a href="http://www.addthis.com/bookmark.php" addthis:url="{{link.get_full_url}}" addthis:title="{{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %} style="text-decoration:none;" class="addthis_button">{% trans "Share" %}</a>
         </li>
         {% ifequal link.posted_by user %}
-        <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
-        <li><a href="#" onClick = 'deleteLink("{% trans "Are you sure to delete this link?" %}", {{link.id}}), this'>{% trans "Delete" %}</a></li>
+            <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
+            <li><a href="#" onClick = 'deleteLink("{% trans "Are you sure to delete this link?" %}", {{link.id}}), this'>{% trans "Delete" %}</a></li>
         {% else %}
-        <li><a href="#">{% trans "Complain" %}</a></li>
+            <li><a href="#">{% trans "Complain" %}</a></li>
         {% endifequal %}
-
-        {% if link.player %}
-        <div class="embed_player">{{link.player|safe}}{% endif %}</div>
+        <li><a href="#" onClick = '$(this).parent().parent().parent().find("p.info").toggle("slow")'>{% trans "Info" %}</a></li>
+        {% if link.player %}<div class="embed_player">{{link.player|safe}}</div>{% endif %}
     </ul>
 </div>
+

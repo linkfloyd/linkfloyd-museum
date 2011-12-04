@@ -11,6 +11,8 @@ from qhonuskan_votes.models import VotesField
 
 from taggit.managers import TaggableManager
 
+from transmeta import TransMeta
+
 SITE_RATINGS = (
     ("G", _("Suitable with any audience type.")),
     ("PG",_("Can Contain rude gestures, the lesser swear words, or mild violence")),
@@ -23,6 +25,34 @@ SITE_LANGUAGES = (
     ("en", "English"),
 )
 
+class Comment(models.Model):
+    link = models.ForeignKey("Link")
+    body = models.TextField()
+    posted_by = models.ForeignKey(User, related_name="posted_by")
+    posted_at = models.DateTimeField(auto_now_add=True)
+    reported_by = models.ManyToManyField(User, null=True, blank=True)
+
+    def __unicode__(self):
+        return "%s's comment on %s" % (self.posted_by, self.link)
+
+class Channel(models.Model):
+    __metaclass__ = TransMeta
+
+    title = models.CharField(verbose_name=_("title"), max_length=255)
+    slug = models.SlugField(verbose_name=_("slug"), max_length=255)
+    description = models.TextField(verbose_name=_("description"))
+    is_official = models.BooleanField()
+
+    def __unicode__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "/links/channel/%s/" % self.slug
+
+    class Meta:
+        translate = ("title", "description")
+
+
 class LinksWithScoresManager(models.Manager):
     def get_query_set(self):
         return super(LinksWithScoresManager, self).get_query_set().filter(\
@@ -30,7 +60,6 @@ class LinksWithScoresManager(models.Manager):
                 vote_score=SumWithDefault('linkvote__value', default=0))
 
 class Link(models.Model):
-
     posted_by = models.ForeignKey(User)
     posted_at = models.DateTimeField(auto_now_add=True)
     url = models.URLField(help_text=_("paste url of your link here"))
@@ -40,6 +69,7 @@ class Link(models.Model):
 
     description = models.CharField(max_length=4096, null=True, blank=True,
         help_text=_("say something about that link"))
+
     thumbnail_url = models.URLField(null=True, blank=True)
 
     rating = models.CharField(
@@ -50,10 +80,12 @@ class Link(models.Model):
 
     language = models.CharField(max_length=5, choices=SITE_LANGUAGES)
     votes = VotesField()
-    tags = TaggableManager()
+
     shown = models.PositiveIntegerField(default=0)
     player = models.TextField(null=True, blank=True)
     is_banned = models.BooleanField(default=False)
+
+    channel = models.ForeignKey(Channel)
 
     objects = models.Manager()
     objects_with_scores = LinksWithScoresManager()

@@ -59,6 +59,7 @@ def get_info(url):
             img_src_bs = bs.find("link", attrs={"rel": "image_src"})
             if img_src_bs:
                 resp_dict['image'] = img_src_bs['href']
+                resp_dict['player'] = "<img src='%s' class='embed' />" %  img_src_bs['href']
             else:
                 first_img_bs = bs.find("img")
                 if first_img_bs:
@@ -123,6 +124,7 @@ def get_info(url):
 
     if "image" in opener.info().getheaders('content-type')[0]:
         resp_dict['image'] = url
+        resp_dict['player'] = "<img src='%s' class='embed' />" % url
 
     opener.close()
     return resp_dict

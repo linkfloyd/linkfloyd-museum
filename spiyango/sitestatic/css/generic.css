@@ -26,12 +26,25 @@ form div.fieldWrapper label {
 form div.fieldWrapper:first-child label {
 	margin-top: 0;
 }
-
 form div.fieldWrapper label > span.desc {
     font-size: 10px;
     font-weight: normal;
     color: #888;
     margin: 0 0 0 5px;
+}
+form div.fieldWrapper ul.errorlist {
+    margin: 0;
+    padding: 2px;
+    width: 490px;
+}
+form div.fieldWrapper ul.errorlist li {
+    list-style-type: none;
+    margin: 6px 0 0 0;
+    padding: 0;
+    color: red;
+    float:right;
+    font-weight: normal;
+    font-size: 10px;
 }
 input, textarea, select {
     width: 480px;
@@ -43,7 +56,7 @@ textarea {
     height: 80px;
 }
 select {
-    width: 494px;
+    width: 490px;
 }
 form > input[type='submit'] {
 	font-size:16px;
@@ -66,38 +79,6 @@ div.link > div.vote_buttons {
 a.upVote, a.downVote, div.score {
     height: 20px;
     display: block;
-}
-a.upVote {
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid #888;
-    margin: 0;
-}
-a.downVote {
-    width: 0;
-    height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid #888;
-    margin: 0;
-}
-a.upVote.voted {
-    border-bottom-color: #222;
-}
-a.downVote.voted {
-    border-top-color: #222;
-}
-div.score {
-    text-align: center;
-    vertical-align: center;
-    font-size: 13px;
-    font-weight: bold;
-    color: #888;
-    border-radius: 2px;
-    margin: 3px 0;
-    padding: 2px 0 0 0;
 }
 div.link > a.thumbnail {
     position: relative;
@@ -122,7 +103,8 @@ div.link > div.header > h3.title {
     font-size:13px;
     font-weight: bold;
     margin: 0 0 0 0;
-    padding: 3px 0 0 0;
+    pad
+ding: 3px 0 0 0;
 }
 div.link > div.header > h3.title > span {
     font-size: 10px;

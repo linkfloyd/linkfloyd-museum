@@ -2,45 +2,45 @@
 {% block content %}
 		<form action="#" method="post">
             <div class="fieldWrapper">
-                {{ form.url.errors }}
-                <label for="id_url">{% trans "URL" %}<span class="desc">{{form.url.help_text}}</label>
+                <label for="id_url">{{ form.url.errors }}{% trans "URL" %}<span class="desc">{{form.url.help_text}}</label>
+
                 {{ form.url }}
             </div>
             <div class="fieldWrapper">
-                {{ form.rating.errors }}
-                <label fory="id_rating">{% trans "Rating" %}<span class="desc">{{form.rating.help_text}}</label>
+                <label fory="id_rating">{{ form.rating.errors }}{% trans "Rating" %}<span class="desc">{{form.rating.help_text}}</label>
+
                 {{ form.rating }}
             </div>
 
             <div class="fieldWrapper">
-                {{ form.language.errors }}
-                <label fory="id_rating">{% trans "Language" %}<span class="desc">{{form.language.help_text}}</label>
+                <label fory="id_rating">{{ form.language.errors }}{% trans "Language" %}<span class="desc">{{form.language.help_text}}</label>
+
                 {{ form.language }}
             </div>
-
             <div class="fieldWrapper">
-                {{ form.title.errors }}
-                <label for="id_title">{% trans "Title" %}<span class="desc">{{form.title.help_text}}</label>
+                <label for="id_title">{{ form.title.errors }}{% trans "Title" %}<span class="desc">{{form.title.help_text}}</label>
                 {{ form.title }}
             </div>
 
             <div class="fieldWrapper">
-                {{ form.description.errors }}
-                <label for="id_description">{% trans "Description" %}<span class="desc">{{form.description.help_text}}</label>
+                <label for="id_description">{{ form.description.errors }}{% trans "Description" %}<span class="desc">{{form.description.help_text}}</label>
                 {{ form.description }}
             </div>
 
             <div class="fieldWrapper">
-                {{ form.tags.errors }}
-                <label for="id_tags">{% trans "Tags" %}<span class="desc">{{form.tags.help_text}}</label>
-                {{ form.tags }}
+                <label for="id_tags">{{ form.channel.errors }}{% trans "Channel" %}<span class="desc">{{form.channel.help_text}}</span></label>
+                {{ form.channel }}
             </div>
+
 			{% csrf_token %}
             {{form.thumbnail_url}}
             {{form.player}}
+
             <input type="submit" value="{% trans 'Submit' %}" />
 		</form>
-<script type="application/javascript">
-    $("#id_tags").tagsInput({"width": "480px", "height": "30px"});
-</script>
+        <script type="application/javascript">
+            $("#id_channel").tokenInput("/api/channels/list/", {
+                tokenLimit: 1
+            });
+        </script>
 {% endblock content %}

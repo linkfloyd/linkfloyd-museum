@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import simplejson
 from spiyango.utils import get_info
 from django.contrib.auth.decorators import login_required
-from spiyango.links.models import Link
+from spiyango.links.models import Link, Channel
 
 def fetch_info(request):
     if request.GET.has_key("url"):
@@ -27,3 +27,22 @@ def delete_link(request):
         return HttpResponse(status=400)
 
 
+def channels_list(request):
+
+    from django.utils.translation import get_language as langcode
+
+    query_string = request.GET.get("q", False)
+    if query_string:
+        kwargs = {"title_%s__contains" % langcode() : query_string}
+        channels = Channel.objects.filter(**kwargs)
+    else:
+        channels = Channel.objects.all()
+
+    response = []
+
+    for c in channels:
+        response.append({"id": c.id, "name": c.title })
+
+    return HttpResponse(
+        simplejson.dumps(response, 'application/javascript')
+    )

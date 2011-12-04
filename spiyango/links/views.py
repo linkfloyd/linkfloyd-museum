@@ -6,10 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.db.models import Sum, Count
+
 from datetime import datetime
+from datetime import timedelta
+
 from taggit.models import Tag
 
-from spiyango.links.models import Link
+from spiyango.links.models import Link, Channel
 from spiyango.links.forms import SubmitLinkForm, EditLinkForm
 
 from django.db.models import Q
@@ -17,12 +20,12 @@ from django.db.models import Q
 @login_required
 def submit(request):
     if request.POST:
+        print request.POST
         form = SubmitLinkForm(request.POST)
         if form.is_valid():
             link = form.save(commit=False)
             link.posted_by = request.user
             link.save()
-            form.save_m2m()
             return HttpResponseRedirect(link.get_absolute_url())
         else:
             print form.errors
@@ -37,7 +40,6 @@ def submit(request):
                 "form": SubmitLinkForm(),
                 "active_nav_item": "submit"
             }, context_instance=RequestContext(request))
-
 
 @login_required
 def edit(request, pk):
@@ -60,6 +62,7 @@ def edit(request, pk):
                     Link, pk=pk, posted_by=request.user)),
             }, context_instance=RequestContext(request))
 
+
 class LinkDetail(DetailView):
 
     queryset = Link.objects.all()
@@ -69,52 +72,68 @@ class LinkDetail(DetailView):
         object.inc_shown()
         return object
 
-class TopLinksView(ListView):
+
+def query_builder(request, **kwargs):
+    """Builds query via requestitem, if kwargs given overrides request.
+    """
+    query = Q()
+
+    if kwargs.has_key('user'):
+        query = query & Q(posted_by__username=kwargs['user'])
+    else:
+        if request.GET.has_key("user"):
+            query = query & Q(posted_by__username=request.GET['user'])
+
+    if kwargs.has_key("channel"):
+        query = query & Q(channel__slug=kwargs['channel'])
+    else:
+        if request.GET.has_key("channel"):
+            query = query & Q(channel__slug=request.GET['channel'])
+
+    if kwargs.has_key("days"):
+        query = query & Q(posted_at__gte=datetime.today() - timedelta(days=kwargs['days']))
+    else:
+        if request.GET.has_key("days"):
+            try:
+                days = int(request.GET["days"])
+            except ValueError:
+                days = False
+
+            if days:
+                query = query & Q(posted_at__gte=datetime.today() - timedelta(days=days))
+
+    if kwargs.has_key("order_by"):
+        order_by = kwargs["order_by"]
+    else:
+        order_by = request.GET.get("order_by", False)
+
+    if order_by in ("vote_score", "comment_score", "-vote_score",
+                    "-comment_score", "posted_at", "-posted_at"):
+        return Link.objects_with_scores.filter(query).order_by(order_by)
+    else:
+        return Link.objects_with_scores.filter(query).order_by("-vote_score")
+
+class LinksListView(ListView):
 
     context_object_name = "links"
     paginate_by = 10
 
     def get_queryset(self):
+        return query_builder(self.request)
 
-        try:
-            date_id = self.args[0]
-        except IndexError:
-            date_id = False
-
-        if date_id == "day":
-            get_links_after = datetime.today()
-        elif date_id == "month":
-            get_links_after = datetime.today() + relativedelta(months=1)
-        elif date_id == "year":
-            get_links_after = datetime.today() + relativedelta(months=12)
-        elif date_id == "bigbang":
-            get_links_after = False
-        else:
-            get_links_after = False
-
-        if get_links_after:
-            queryset = Link.objects_with_scores.filter(\
-                posted_at__lte=get_links_after).order_by("-vote_score")
-        else:
-            queryset = Link.objects_with_scores.all().order_by("-vote_score")
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(TopLinksView, self).get_context_data(**kwargs)
-        context['active_nav_item'] = 'highest'
-        context['top_tags'] = Tag.objects.annotate(score=Count('taggit_taggeditem_items')).exclude(score=0).order_by('-score')
-        return context
-
-class LatestLinksView(ListView):
+class HighestLinksView(ListView):
 
     context_object_name = "links"
-    queryset = Link.objects_with_scores.all().order_by("-posted_at")
     paginate_by = 10
 
+    def get_queryset(self):
+        return query_builder(self.request)
+
     def get_context_data(self, **kwargs):
-        context = super(LatestLinksView, self).get_context_data(**kwargs)
-        context['active_nav_item'] = 'latest'
+        context = super(HighestLinksView, self).get_context_data(**kwargs)
+        context['active_nav_item'] = "highest"
+        context['top_channels'] = Channel.objects.all().annotate(
+            link_count=Count("link")).order_by("-link_count")
         return context
 
 class LinksFromUserView(ListView):
@@ -123,34 +142,29 @@ class LinksFromUserView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Link.objects_with_scores.filter(posted_by__username__exact=self.kwargs['username']).order_by("-posted_at")
+        return query_builder(self.request, user=self.kwargs["user"])
 
     def get_context_data(self, **kwargs):
         context = super(LinksFromUserView, self).get_context_data(**kwargs)
-        if self.request.user.username == self.kwargs['username']:
-            context['active_nav_item'] = 'from_me'
+        if self.request.user.username == self.kwargs["user"]:
+            context['active_nav_item'] = "from_me"
+        context['top_channels'] = Channel.objects.all().annotate(
+            link_count=Count("link")).order_by("-link_count")
         return context
 
-class LinksListView(ListView):
+class LinksFromChannelView(ListView):
 
     context_object_name = "links"
     paginate_by = 10
 
     def get_queryset(self):
+        return query_builder(self.request, channel=self.kwargs["channel"])
 
-        query = Q()
+    def get_context_data(self, **kwargs):
+        context = super(LinksFromChannelView, self).get_context_data(**kwargs)
+        context['top_channels'] = Channel.objects.all().annotate(
+            link_count=Count("link")).order_by("-link_count")
+        context['active_channel'] = get_object_or_404(
+            Channel, slug=self.kwargs["channel"])
+        return context
 
-        if self.request.GET.has_key("from"):
-            query = query & Q(posted_by__username=self.request.GET['from'])
-
-        if self.request.GET.has_key("tagged"):
-            print self.request.GET.getlist('tagged')
-            query = query & Q(tags__slug__in=self.request.GET.getlist('tagged'))
-
-        order_by = self.request.GET.get("order_by", False)
-
-        if order_by in ("vote_score", "comment_score", "-vote_score",
-                        "-comment_score", "posted_at", "-posted_at"):
-            return Link.objects_with_scores.filter(query).order_by(order_by)
-        else:
-            return Link.objects_with_scores.filter(query)

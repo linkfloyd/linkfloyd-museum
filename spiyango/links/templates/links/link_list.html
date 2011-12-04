@@ -1,37 +1,46 @@
 {% extends "base.html" %}{% load i18n %}
-{% block content %}
 
-<div class="sidebar" style="float:right;width:400px;background:#ddd">
-    {% if top_tags %}
-    <div class="tags">
-        {% for tag in top_tags %}
-        <span class="tag"><a href="/links/list/?tagged={{tag.slug}}" style="font-size:{{tag.score|add:10}}px">{{tag}}</a></span>
-        {% endfor %}
-    </div>
+{% block extra_nav %}
+    {% if active_channel %}
+        <li class="active"><a href="#">{{active_channel}} {% trans "Channel" %}</a></li>
     {% endif %}
-</div>
+{% endblock %}
 
-<div style="float:left">
-    {% for link in links %}
+{% block content %}
+<div class="two-sections">
+    <div class="panel">
+        {% if top_channels %}
+        <ul class="channels section">
+            <h3>{% trans "Top Channels" %}</h3>
+            {% for channel in top_channels %}
+                <li><a href="{{channel.get_absolute_url}}">{{channel}} ({{channel.link_count}})</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <div class="content section">
+        {% for link in links %}
         {% include "links/link_as_list_item.html" %}
-    {% empty %}
+        {% empty %}
         <div class="oops">
-   	         {% trans "No links shared today. Share it now!" %}
+            {% trans "No links shared today. Share it now!" %}
         </div>
-    {% endfor %}
+        {% endfor %}
         <div class="pagination">
             <span class="page_links">
                 {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
                 {% endif %}
                 <span class="page_current">
                     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                 </span>
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
+    </div>
 </div>
 <script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
 <script type="text/javascript">
