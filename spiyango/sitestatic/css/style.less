@@ -75,12 +75,21 @@ div#head {
         }
     }
 }
-.section {
+div.section {
     margin: 0;
-    padding: 5px;
+    padding: 0;
     background: white;
     border-radius: 5px;
     border: 1px solid lighten(@pencil-grey, 10%);
+    > h2.header {
+        font-size: 22px;
+        margin: 0 0 10px 0;
+        padding: 5px 10px;
+        color: lighten(@pencil-grey, 20%);
+        background: lighten(@black, 12%);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
 }
 div.two-sections {
     div.panel {
@@ -128,6 +137,7 @@ div.link {
 	overflow: auto;
     float:both;
     padding: 5px;
+    margin: 0 0 30px 0;
     a.thumbnail {
         position: relative;
         float: right;
@@ -166,7 +176,7 @@ div.link {
         }
     }
     p.description, p.info, ul.actions {
-        margin: 8px 0 0 50px;
+        margin: 5px 0 0 50px;
         font-size: 12px;
     }
     p.info {
