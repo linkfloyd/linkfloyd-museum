@@ -121,50 +121,28 @@ class LinksListView(ListView):
     def get_queryset(self):
         return query_builder(self.request)
 
-class HighestLinksView(ListView):
-
-    context_object_name = "links"
-    paginate_by = 10
-
-    def get_queryset(self):
-        return query_builder(self.request)
-
     def get_context_data(self, **kwargs):
-        context = super(HighestLinksView, self).get_context_data(**kwargs)
-        context['active_nav_item'] = "highest"
+        context = super(LinksListView, self).get_context_data(**kwargs)
+        context['active_nav_item'] = "links"
+        context['listing'] = "Top Links"
         context['top_channels'] = Channel.objects.all().annotate(
             link_count=Count("link")).order_by("-link_count")
         return context
 
-class LinksFromUserView(ListView):
-
-    context_object_name = "links"
-    paginate_by = 10
-
+class LinksFromUserView(LinksListView):
     def get_queryset(self):
         return query_builder(self.request, user=self.kwargs["user"])
 
     def get_context_data(self, **kwargs):
         context = super(LinksFromUserView, self).get_context_data(**kwargs)
-        if self.request.user.username == self.kwargs["user"]:
-            context['active_nav_item'] = "from_me"
-        context['top_channels'] = Channel.objects.all().annotate(
-            link_count=Count("link")).order_by("-link_count")
+        context['listing'] = "Links From %s" % self.kwargs["user"]
         return context
 
-class LinksFromChannelView(ListView):
-
-    context_object_name = "links"
-    paginate_by = 10
-
+class LinksFromChannelView(LinksListView):
     def get_queryset(self):
         return query_builder(self.request, channel=self.kwargs["channel"])
 
     def get_context_data(self, **kwargs):
         context = super(LinksFromChannelView, self).get_context_data(**kwargs)
-        context['top_channels'] = Channel.objects.all().annotate(
-            link_count=Count("link")).order_by("-link_count")
-        context['active_channel'] = get_object_or_404(
-            Channel, slug=self.kwargs["channel"])
+        context['listing'] = "Links From %s Channel" % get_object_or_404(Channel, slug=self.kwargs["channel"])
         return context
-

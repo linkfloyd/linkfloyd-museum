@@ -1,11 +1,5 @@
 {% extends "base.html" %}{% load i18n %}
-
-{% block extra_nav %}
-    {% if active_channel %}
-        <li class="active"><a href="#">{{active_channel}} {% trans "Channel" %}</a></li>
-    {% endif %}
-{% endblock %}
-
+{% block extra_nav %}{% endblock %}
 {% block content %}
 <div class="two-column">
     <div class="panel">
@@ -19,7 +13,7 @@
         {% endif %}
     </div>
     <div class="content section">
-        <h2 class="header">Blaa...</h2>
+        <h2 class="header">{{listing}}</h2>
         <div class="body">
             {% for link in links %}
                 {% include "links/link_as_list_item.html" %}

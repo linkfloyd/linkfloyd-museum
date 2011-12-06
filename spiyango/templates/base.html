@@ -8,6 +8,7 @@
 
         <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/style.less">
 
+
 		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery-1.7.min.js"></script>
 
 		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/less-1.1.3.min.js"></script>
@@ -17,10 +18,13 @@
 		<meta name="robots" CONTENT="index, follow" />
 
 		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
-        <link href='http://fonts.googleapis.com/css?family=Aladin' rel='stylesheet' type='text/css'>
+
+        <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
 
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
 		{% block extra_head %}{% endblock extra_head %}
+
 	</head>
 	<body>
 		<div id="head">
@@ -30,34 +34,52 @@
 				    <ul class="flat-list navigation">
                         {% block extra_nav %}
                         {% endblock extra_nav %}
-					    <li{% if active_nav_item == "highest" %} class="active"{% endif %}>
-						    <a href="/">{% trans "Highest" %}</a>
+					    <li>
+                            <a href="#" {%if active_nav_item == "links"%}class="active"{%endif%}>
+                                {% trans "Links" %}
+                            </a>
+                            <ul class="sub">
+                                <li>
+						            <a href="/">{% trans "Highest" %}</a>
+                                </li>
+                                <li>
+						            <a href="/links/latest/">{% trans "Controversial" %}</a>
+                                </li>
+                                <li>
+						            <a href="/links/latest/">{% trans "Latest" %}</a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                <li>
+                                	<a href="/links/from/{{user.username}}/">{% blocktrans with user=user%}From {{user}}{% endblocktrans %}</a>
+    					        </li>
+                                {% endif %}
+                            </ul>
 					    </li>
-					    <li{% if active_nav_item == "controversial" %} class="active"{% endif %}>
-						    <a href="/links/latest/">{% trans "Controversial" %}</a>
-					    </li>
-					    <li{% if active_nav_item == "latest" %} class="active"{% endif %}>
-						    <a href="/links/latest/">{% trans "Latest" %}</a>
-					    </li>
+
                         {% if user.is_authenticated %}
-					    <li{% if active_nav_item == "from_me" %} class="active"{% endif %}>
-						    <a href="/links/from/{{user.username}}/">{% trans "From me" %}</a>
+                        <li>
+                            <a href="#">{{user}}</a>
+                            <ul class="sub">
+                                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
+                            </ul>
     					</li>
-                        {% else %}
-	    				<li{% if active_nav_item == "login" %} class="active"{% endif %}>
-		    				<a href="{% url auth_login %}">{% trans "Login" %}</a>
-			    		</li>
                         {% endif %}
+
 					    <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
 						    <a href="/links/submit/">{% trans "Submit a Link" %}</a>
 					    </li>
+                        {% if not user.is_authenticated %}
+	    				<li>
+		    				<a href="{% url auth_login %}">{% trans "Login" %}</a>
+			    		</li>
+                        {% endif %}
 				    </ul>
 			    </div>
             </div>
 		</div>
 		<div id="content">
             <div class="wrapper">
-			{%block content%}{%endblock content%}
+			    {%block content%}{%endblock content%}
             </div>
 		</div>
         <div id="footer"></div>
@@ -73,7 +95,6 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 			})();
-
 		</script>
 	</body>
 </html>

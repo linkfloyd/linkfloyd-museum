@@ -28,7 +28,9 @@ a {
 }
 a#logo {
     font-size: 48px;
-    font-family: 'Aladin', cursive;
+
+    font-family: 'Righteous', cursive;
+
     color: lighten(@pencil-grey, 20%);
 }
 div.wrapper {
@@ -38,39 +40,75 @@ div.wrapper {
 ul.flat-list {
     margin: 0;
     padding: 0;
-    li {
+    > li {
         list-style-type: none;
         float: left;
 	    margin: 0 0 0 18px;
 	    padding: 0;
     }
-    li:first-child {
+    > li:first-child {
         margin-left: 0;
     }
 }
 div#head {
-    overflow: auto;
     background: lighten(@black, 12%);
     border-bottom: 1px solid @black;
+    overflow: visible;
+    height: 50px;
     .left {
         margin: 0 0 0 200px;
     }
     ul.navigation {
         font-size: 12px;
-        li {
+        > li {
             border-right: 1px lighten(@black, 5%)  solid;
             border-left: 1px lighten(@black, 19%) solid;
-            padding: 20px 10px;
+        }
+        li {
+            padding: 0;
             margin: 0;
+            position: relative;
+            overflow: hidden;
+            &:hover {
+                overflow: visible;
+            }
             a {
+                padding: 20px;
+                height: 10px;
+                font-size: 12px;
                 font-weight: bold;
                 color: lighten(@black, 60%);
-            }
-            &.active {
-                background: lighten(@black, 6%);
-                a {
-                    color: white;
+                display: block;
+                &.active {
+                    background: lighten(@black, 6%);
                 }
+                &:hover {
+                    color: white;
+
+                }
+            }
+
+
+        }
+
+        ul.sub {
+            background: lighten(@black, 6%);
+            border-top: 1px lighten(@black, 20%) solid;
+            border-left: 1px lighten(@black, 20%) solid;
+            border-right: 1px lighten(@black, 6%) solid;
+            border-bottom: 1px lighten(@black, 6%) solid;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            position: absolute;
+            width: 200px;
+            top: 50px;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            z-index: 10;
+            list-style-type: none;
+            > li > a {
+                padding: 10px;
             }
         }
     }
@@ -128,7 +166,6 @@ div.two-column {
 }
 div#content {
 	margin: 20px 0;
-    z-index: 0;
     overflow: auto;
     min-height: 10em;
 }
@@ -136,8 +173,7 @@ a#logo {
 	display: block;
     position: absolute;
 	float: left;
-	margin: -3px 2em 0 0;
-    z-index: 10;
+	margin: -3px 0 0 0;
 }
 div.link {
 	overflow: auto;
@@ -247,6 +283,7 @@ div.link {
 }
 form {
 	display:block;
+    overflow: auto;
     margin: 10px;
 	padding: 0;
     div.fieldWrapper{
@@ -295,6 +332,102 @@ form {
 	    font-size:16px;
 	    padding:10px 0 10px 0;
 	    margin-top:10px;
-        width: 20em;
+        width: 200px;
+        float: right;
+        clear: both;
+        background: lighten(@black, 20%);
+        color: @white;
     }
 }
+
+/* -------------------- Token Style --------------------*/
+
+ul.token-input-list {
+    cursor: text;
+    clear: left;
+    li {
+        list-style-type: none;
+        input {
+            width: 350px;
+            -webkit-appearance: caret;
+        }
+    }
+}
+
+li.token-input-token {
+    overflow: hidden;
+    height: auto !important;
+    margin: 0;
+    padding: 3px 5px;
+    background-color: lighten(@pencil-grey, 10%);
+    cursor: default;
+    p {
+        float: left;
+        padding: 0;
+        margin: 0;
+    }
+    span {
+        float: right;
+        color: #777;
+        cursor: pointer;
+    }
+}
+
+li.token-input-selected-token {
+    background-color: @merry-widow;
+    color: @white;
+}
+
+li.token-input-selected-token span {
+    color: @white;
+}
+
+div.token-input-dropdown {
+    position: absolute;
+    width: 400px;
+    background-color: #fff;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    font-size: 12px;
+    font-family: Verdana, sans-serif;
+    z-index: 1;
+}
+
+div.token-input-dropdown p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #777;
+}
+
+div.token-input-dropdown ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown ul li {
+    background-color: #fff;
+    padding: 3px;
+    list-style-type: none;
+}
+
+div.token-input-dropdown ul li.token-input-dropdown-item {
+    background-color: #fafafa;
+}
+
+div.token-input-dropdown ul li.token-input-dropdown-item2 {
+    background-color: #fff;
+}
+
+div.token-input-dropdown ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown ul li.token-input-selected-dropdown-item {
+    background-color: #d0efa0;
+}
+/* ------------------------------------------------------------ */
