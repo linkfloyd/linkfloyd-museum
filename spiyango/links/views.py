@@ -129,6 +129,15 @@ class LinksListView(ListView):
             link_count=Count("link")).order_by("-link_count")
         return context
 
+class LatestLinksView(LinksListView):
+    def get_queryset(self):
+        return query_builder(self.request, order_by="-posted_at")
+
+    def get_context_data(self, **kwargs):
+        context = super(LatestLinksView, self).get_context_data(**kwargs)
+        context['listing'] = "Latest Links"
+        return context
+
 class LinksFromUserView(LinksListView):
     def get_queryset(self):
         return query_builder(self.request, user=self.kwargs["user"])
