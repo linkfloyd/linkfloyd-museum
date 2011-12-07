@@ -4,7 +4,7 @@
 	{% if account %}
 		<p class="success">
 			{% blocktrans with account=account %}Thanks {{ account }}, your activation complete!{% endblocktrans %}
-			{% blocktrans url auth_login as url%}You may now <a href='{{url}}'>login</a> using the username and password you set at registration.{% endblocktrans %}</p>
+			{% blocktrans with url auth_login as url %}You may now <a href='{{url}}'>login</a> using the username and password you set at registration.{% endblocktrans %}</p>
 	{% else %}
 		<p class="error">{% trans "Oops; it seems that your activation key is invalid.  Please check the url again." %}</p>
 	{% endif %}
