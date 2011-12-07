@@ -157,6 +157,9 @@ div.one-column {
 div.two-column {
     div.panel {
         float: right;
+        h2, h3 {
+            margin: 0;
+        }
         ul.channels {
             margin: 0;
             padding: 0;
@@ -177,6 +180,9 @@ div.two-column {
                 border-bottom: 1px dashed black;
                 &:last-child {
                     border-bottom: none;
+                }
+                &:first-child {
+                    margin-top: 0;
                 }
             }
         }
