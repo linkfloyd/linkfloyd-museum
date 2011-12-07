@@ -1,15 +1,16 @@
 {% extends "base.html" %}{% load i18n %}
-{% block extra_nav %}{% endblock %}
 {% block content %}
 <div class="two-column">
     <div class="panel">
         {% if top_channels %}
-        <ul class="channels section">
-            <h3>{% trans "Top Channels" %}</h3>
-            {% for channel in top_channels %}
-                <li><a href="{{channel.get_absolute_url}}">{{channel}} ({{channel.link_count}})</a></li>
-            {% endfor %}
-        </ul>
+        <div class="channels section">
+            <h3 class="header">{% trans "Top Channels" %}</h3>
+            <ul class="channels">
+                {% for channel in top_channels %}
+                    <li><a href="{{channel.get_absolute_url}}">{{channel}} ({{channel.link_count}})</a></li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
     </div>
     <div class="content section">
@@ -18,14 +19,13 @@
             {% for link in links %}
                 {% include "links/link_as_list_item.html" %}
             {% empty %}
-                <div class="oops">
-                    {% trans "No links shared today. Share it now!" %}
-                </div>
+                <p class="warning">
+                    {% trans "No links found." %}
+                </p>
             {% endfor %}
                 <div class="pagination">
                     <span class="page_links">
                         {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">previous</a>{% endif %}
-                        <span class="page_current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
                         {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">next</a>{% endif %}
                     </span>
                 </div>

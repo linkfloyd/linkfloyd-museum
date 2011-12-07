@@ -3,28 +3,16 @@
 
 	<head>
 		<title>{% block title %}SitePiyango{% endblock title %}</title>
-
 		<meta name="description" content="{% block description %}Site Piyango, site trafiği kazanmak için oynanan basit bir oyundur. Websitenizi kayıt ederek, çekilişe katılabilir ve sürpriz ziyaretçiler kazanabilirsiniz.{% endblock %}" />
-
         <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/style.less">
-
-
 		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery-1.7.min.js"></script>
-
 		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/less-1.1.3.min.js"></script>
-
 		<meta property="og:image" content="{% block og_image %}{{STATIC_PREFIX}}logo.png{% endblock og_image %}" />
-
 		<meta name="robots" CONTENT="index, follow" />
-
 		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
-
         <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
-
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-
 		{% block extra_head %}{% endblock extra_head %}
-
 	</head>
 	<body>
 		<div id="head">
@@ -60,6 +48,7 @@
                         <li>
                             <a href="#">{{user}}</a>
                             <ul class="sub">
+                                <li><a href="#">{% trans "Preferences" %}</a></li>
                                 <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
                             </ul>
     					</li>

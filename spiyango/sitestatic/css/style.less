@@ -28,9 +28,7 @@ a {
 }
 a#logo {
     font-size: 48px;
-
     font-family: 'Righteous', cursive;
-
     color: lighten(@pencil-grey, 20%);
 }
 div.wrapper {
@@ -49,6 +47,24 @@ ul.flat-list {
     > li:first-child {
         margin-left: 0;
     }
+}
+p.success, p.error, p.warning {
+    font-size: 16px;
+    padding: 20px;
+    text-align: center;
+}
+p.success {
+    background: green;
+    padding: 20px;
+    color: white;
+}
+p.warning {
+    background: yellow;
+    color: black;
+}
+p.error {
+    background: red;
+    color: white;
 }
 div#head {
     background: lighten(@black, 12%);
@@ -90,7 +106,6 @@ div#head {
 
 
         }
-
         ul.sub {
             background: lighten(@black, 6%);
             border-top: 1px lighten(@black, 20%) solid;
@@ -100,14 +115,14 @@ div#head {
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             position: absolute;
-            width: 200px;
+            width: 100px;
             top: 50px;
             left: 0;
             margin: 0;
             padding: 0;
             z-index: 10;
             list-style-type: none;
-            > li > a {
+             > li > a {
                 padding: 10px;
             }
         }
@@ -119,8 +134,7 @@ div.section {
     background: white;
     border-radius: 5px;
     border: 1px solid lighten(@pencil-grey, 10%);
-    > h2.header {
-        font-size: 22px;
+    > .header {
         margin: 0 0 10px 0;
         padding: 5px 10px;
         color: lighten(@pencil-grey, 20%);
@@ -128,8 +142,13 @@ div.section {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
+    h2 {
+        font-size: 22px;
+    }
+    h3 {
+        font-size: 16px;
+    }
 }
-
 div.one-column {
     div.section.narrow {
         width: 600px;
@@ -139,13 +158,15 @@ div.two-column {
     div.panel {
         float: right;
         ul.channels {
+            margin: 0;
+            padding: 0;
             li {
+                display: block;
                 list-style-type: none;
                 margin: 0;
-                padding: 5px;
+                padding: 10px;
                 a {
-                    font-size: 14px;
-                    line-height: 30px;
+                    font-size: 12px;
                 }
                 &:hover {
                     background: @threadless;

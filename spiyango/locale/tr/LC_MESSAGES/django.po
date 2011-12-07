@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-04 03:29-0600\n"
+"POT-Creation-Date: 2011-12-07 11:11-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,32 +72,33 @@ msgstr "bağlantınız hakkında bir şeyler söyleyin"
 msgid "warn people about your link"
 msgstr "bağlantınızın içeriği konusunda insanları uyarın"
 
-#: links/templates/links/edit.html:6 links/templates/links/submit.html:10
+#: links/templates/links/edit.html:13 links/templates/links/submit.html:17
 msgid "Rating"
 msgstr "Derecelendirme"
 
-#: links/templates/links/edit.html:11 links/templates/links/submit.html:16
+#: links/templates/links/edit.html:18 links/templates/links/submit.html:22
 msgid "Language"
 msgstr "Dil"
 
-#: links/templates/links/edit.html:16 links/templates/links/submit.html:21
+#: links/templates/links/edit.html:22 links/templates/links/submit.html:26
 msgid "Title"
 msgstr "Başlık"
 
-#: links/templates/links/edit.html:21 links/templates/links/submit.html:26
+#: links/templates/links/edit.html:27 links/templates/links/submit.html:31
 msgid "Description"
 msgstr "Açıklama"
 
-#: links/templates/links/edit.html:26
-msgid "Tags"
-msgstr "Etiketler"
+#: links/templates/links/edit.html:32 links/templates/links/submit.html:36
+msgid "Channel"
+msgstr "Kanal"
 
-#: links/templates/links/edit.html:31
-msgid "Update"
-msgstr "Güncelle"
+#: links/templates/links/edit.html:40 links/templates/links/submit.html:44
+#: templates/registration/registration_form.html:26
+msgid "Submit"
+msgstr "Gönder"
 
 #: links/templates/links/link_as_list_item.html:32
-#: links/templates/links/link_list.html:57
+#: links/templates/links/link_list.html:43
 msgid "Share"
 msgstr "Paylaş"
 
@@ -121,62 +122,108 @@ msgstr "Gammazla"
 msgid "Info"
 msgstr "Bilgi"
 
-#: links/templates/links/link_list.html:7 links/templates/links/submit.html:31
-msgid "Channel"
-msgstr "Kanal"
-
-#: links/templates/links/link_list.html:18
+#: links/templates/links/link_list.html:8
 msgid "Top Channels"
 msgstr "Popüler Kanallar"
 
-#: links/templates/links/link_list.html:31 templates/index.html:3
+#: links/templates/links/link_list.html:22 templates/index.html:3
 msgid "No links shared today. Share it now!"
 msgstr "Bu gün hiç bağ paylaşışmamış. Siz paylaşın :)"
 
-#: links/templates/links/link_list.html:58
+#: links/templates/links/link_list.html:44
 msgid "E-posta"
 msgstr ""
 
-#: links/templates/links/submit.html:5
+#: links/templates/links/submit.html:13
 msgid "URL"
 msgstr "URL"
 
-#: links/templates/links/submit.html:39
-#: templates/registration/registration_form.html:33
-msgid "Submit"
-msgstr "Gönder"
+#: templates/base.html:39
+msgid "Links"
+msgstr ""
 
-#: templates/base.html:33
+#: templates/base.html:43
 msgid "Highest"
 msgstr "En yüksek"
 
-#: templates/base.html:36
+#: templates/base.html:46
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: templates/base.html:39
+#: templates/base.html:49
 msgid "Latest"
 msgstr "En son"
 
-#: templates/base.html:43
-msgid "From me"
-msgstr "Benden"
+#: templates/base.html:53
+#, fuzzy, python-format
+msgid "From %(user)s"
+msgstr "%(user)s tarafından"
 
-#: templates/base.html:47
-msgid "Login"
-msgstr "Giriş Yap"
+#: templates/base.html:63
+msgid "Log out"
+msgstr "Çıkış yap"
 
-#: templates/base.html:51
+#: templates/base.html:69
 msgid "Submit a Link"
 msgstr "Bir bağ gönder"
 
-#: templates/registration/login.html:14
+#: templates/base.html:73
+msgid "Login"
+msgstr "Giriş Yap"
+
+#: templates/registration/activate.html:2
+msgid "Activation complete"
+msgstr "Aktivasyon tamamlandı"
+
+#: templates/registration/activate.html:2
+msgid "Activation problem"
+msgstr "Aktivasyon problemi"
+
+#: templates/registration/activate.html:6
+#, python-format
+msgid "Thanks %(account)s, your activation complete!"
+msgstr "Teşekkürler %(account)s, aktivasyonun tamamlandı!"
+
+#: templates/registration/activate.html:7
+#, python-format
+msgid ""
+"You may now <a href='%(url)s'>login</a> using the username and password you "
+"set at registration."
+msgstr "Şimdi belirlediğin kullanıcı adı ve şifre ile <a href='%(url)s'>giriş yap</a>abilirsin."
+
+
+#: templates/registration/activate.html:9
+msgid ""
+"Oops; it seems that your activation key is invalid.  Please check the url "
+"again."
+msgstr "Hadi ya :\ Aktivasyon anahtarın geçersiz gözüküyor. Lütfen tekra dene."
+
+#: templates/registration/login.html:6
+msgid "Log in"
+msgstr "Giriş yap"
+
+#: templates/registration/login.html:9
 msgid "Your username and password didn't match. Please try again."
 msgstr "Kullanıcı adı ve şifreniz uyuşmadı. Tekrar deneyin."
 
-#: templates/registration/password_change_done.html:13
-msgid "Password successfully changed!"
+#: templates/registration/login.html:18
+#: templates/registration/registration_form.html:19
+msgid "Password"
+msgstr "Şifre"
+
+#: templates/registration/login.html:18
+msgid ""
+"Hatırlamıyorsanız lütfen <a href=\"/accounts/password/reset/\">buraya tıkla</"
+"a>yın."
 msgstr ""
+
+#: templates/registration/password_change_done.html:2
+msgid "Password changed"
+msgstr "Tekrar Şifre"
+
+#: templates/registration/password_change_done.html:4
+msgid "Password successfully changed!"
+msgstr "Şifre başarılı bir şekilde değiştirildi"
 
 #: templates/registration/password_reset_complete.html:2
 msgid "Password reset complete"
@@ -190,25 +237,27 @@ msgstr "Şifre sıfırlama"
 msgid ""
 "We have sent you an email with a link to reset your password.  Please check "
 "your email and click the link to continue."
-msgstr "E-posta adresinize şifrenizi sıfırlayabilmeniz için bir bağlantı gönderdik. Lütfen epostanızı kontrol edip bağlantıya tıklayın."
+msgstr ""
+"E-posta adresinize şifrenizi sıfırlayabilmeniz için bir bağlantı gönderdik. "
+"Lütfen epostanızı kontrol edip bağlantıya tıklayın."
 
 #: templates/registration/password_reset_form.html:2
 msgid "Reset password"
 msgstr "Şifre sıfırla"
 
-#: templates/registration/registration_form.html:16
+#: templates/registration/registration_form.html:6
+msgid "Register"
+msgstr "Kayıt Ol"
+
+#: templates/registration/registration_form.html:10
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: templates/registration/registration_form.html:21
+#: templates/registration/registration_form.html:15
 msgid "Email"
 msgstr "E-posta"
 
-#: templates/registration/registration_form.html:25
-msgid "Password"
-msgstr "Şifre"
-
-#: templates/registration/registration_form.html:29
+#: templates/registration/registration_form.html:23
 msgid "Password Again"
 msgstr "Tekrar Şifre"
 
