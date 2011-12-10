@@ -46,3 +46,17 @@ def channels_list(request):
     return HttpResponse(
         simplejson.dumps(response, 'application/javascript')
     )
+
+def post_report(request):
+    from links.forms import SubmitReportForm
+    if request.POST:
+        print request.POST
+        form = SubmitReportForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=200)
+        else:
+            print form.errors
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)

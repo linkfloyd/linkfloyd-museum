@@ -68,6 +68,8 @@ $(function () {
 	    return false;
 	});
 });  
+
+
 function deleteLink(prompt, id, el) {
     var confirmed = confirm(prompt);
 	$.ajax(

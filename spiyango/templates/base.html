@@ -12,6 +12,17 @@
 		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
         <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        {% if not user.authenticated %}
+        <script id="loginOrRegisterTemplate" type="text/x-jquery-tmpl">
+            <div class="layerBox">
+                <div class="darkWing"></div>
+                <div class="section">
+                    <h3 class="header">Login or Register</h3>
+                    bla bla bla...
+                </div>
+            </div>
+        </script>
+        {% endif %}
 		{% block extra_head %}{% endblock extra_head %}
 	</head>
 	<body>

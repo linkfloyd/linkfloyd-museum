@@ -38,6 +38,7 @@
             <li><a href="#">{% trans "Complain" %}</a></li>
         {% endifequal %}
         <li><a href="#" onClick = '$(this).parent().parent().parent().find("p.info").toggle("slow")'>{% trans "Info" %}</a></li>
+        <li><a href="#" class="showReportForm">{% trans "Report" %}</a></li>
         {% if link.player %}<div class="embed_player">{{link.player|safe}}</div>{% endif %}
     </ul>
 </div>

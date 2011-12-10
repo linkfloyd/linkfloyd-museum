@@ -1,5 +1,5 @@
 from django import forms
-from spiyango.links.models import Link, SITE_RATINGS
+from spiyango.links.models import Link, Report, SITE_RATINGS
 
 class SubmitLinkForm(forms.ModelForm):
     thumbnail_url = forms.URLField(
@@ -28,3 +28,6 @@ class EditLinkForm(SubmitLinkForm):
         model = Link
         exclude = ['url', 'posted_by', 'is_banned', 'shown']
 
+class SubmitReportForm(forms.ModelForm):
+    class Meta:
+        model = Report

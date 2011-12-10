@@ -128,7 +128,7 @@ div#head {
         }
     }
 }
-div.section {
+.section {
     margin: 0;
     padding: 0;
     background: white;
@@ -147,6 +147,14 @@ div.section {
     }
     h3 {
         font-size: 16px;
+    }
+    h2 > i, h3 > i {
+        background: url(https://github.com/defunkt/facebox/raw/master/src/closelabel.png);
+        width: 8px;
+        height: 8px;
+        float: right;
+        margin: 4px 0 0 0;
+        cursor: pointer;
     }
 }
 div.one-column {
@@ -231,7 +239,7 @@ div.link {
         float: both;
         margin: 0 0 0 50px;
         h3.title {
-            font-size:16px;
+            font-size:13px;
             font-weight: bold;
             margin: 0 0 0 0;
             padding: 0;
@@ -239,7 +247,7 @@ div.link {
                 font-effect: outline;
             }
             span.domain {
-                font-size: 12px;
+                font-size: 10px;
                 font-weight: normal;
                 color: lighten(@merry-widow, 10%);
             }
@@ -247,7 +255,7 @@ div.link {
     }
     p.description, p.info, ul.actions {
         margin: 10px 0 0 50px;
-        font-size: 12px;
+        font-size: 11px;
     }
     p.info {
          display: none;
@@ -347,7 +355,7 @@ form {
         }
     }
     input, textarea, select, textarea, ul.token-input-list {
-        width: 99%;
+        width: 98%;
         padding: 0.5%;
         border: none;
         margin: 0;
@@ -355,7 +363,7 @@ form {
         border-radius: 5px;
         border: 1px solid darken(@pencil-grey, 0%);
     }
-    input[type='submit'] {
+    input[type='submit'], input[type='button'] {
 	    font-size:16px;
 	    padding:10px 0 10px 0;
 	    margin-top:10px;
@@ -365,6 +373,11 @@ form {
         background: lighten(@black, 20%);
         color: @white;
     }
+    input[type='submit'].small, input[type='button'].small {
+        padding: 5px 0 5px 0;
+        width: 100px;
+    }
+
 }
 
 /* -------------------- Token Style --------------------*/
@@ -380,7 +393,6 @@ ul.token-input-list {
         }
     }
 }
-
 li.token-input-token {
     overflow: hidden;
     height: auto !important;
@@ -458,3 +470,22 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
     background-color: #d0efa0;
 }
 /* ------------------------------------------------------------ */
+.layerBox > .section {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    padding: 0;
+    input[type='submit'], input[type='button'] {
+        clear: none;
+    }
+}
+div.darkWing {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background: black;
+    opacity: 0.6;
+}
