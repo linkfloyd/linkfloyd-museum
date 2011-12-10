@@ -137,5 +137,9 @@ class Report(models.Model):
     reported_at = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
 
+    def get_link_url(self):
+        # needed to show admin list
+        return self.link.get_absolute_url()
+
     def __unicode__(self):
         return "%s's report for %s" % (self.reporter, self.reason)

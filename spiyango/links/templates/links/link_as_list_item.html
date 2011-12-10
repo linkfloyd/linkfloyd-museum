@@ -8,9 +8,7 @@
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" onClick="$(this).parent().find('div.embed_player').toggle(); return false"{% else %}
        href="{{link.get_absolute_url}}"{% endif %} class="thumbnail">
-        {% thumbnail link.thumbnail_url "160x100" crop="center" as im %}
-        <img src="{{ im.url }}">
-        {% endthumbnail %}
+        {% thumbnail link.thumbnail_url "160x100" crop="center" as im %}<img src="{{ im.url }}">{% endthumbnail %}
         {% if link.player %}<i></i>{% endif %}
 	</a>
 	{% endif %}
@@ -20,11 +18,11 @@
             <span class="tag"><a href="/links/list/?tagged={{tag.slug}}">{{tag}}</a></span>
             {% endfor %}
         </div>
-	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain">{{link.get_domain}}</span></h3>
+	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain">from {{link.get_domain}}, by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></span></h3>
     </div>
 	<p class="description">{{link.description}}</p>
 	<p class="info">
-        Posted by {{link.posted_by}}, {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.
+
 	</p>
     <ul class="flat-list actions">
         <li><a href="#">Comments ({{link.comment_set.count}})</a></li>
@@ -37,9 +35,8 @@
         {% else %}
             <li><a href="#">{% trans "Complain" %}</a></li>
         {% endifequal %}
-        <li><a href="#" onClick = '$(this).parent().parent().parent().find("p.info").toggle("slow")'>{% trans "Info" %}</a></li>
         <li><a href="#" class="showReportForm">{% trans "Report" %}</a></li>
+        <li><a href="#" title="Posted at {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.">[?]</a></li>
         {% if link.player %}<div class="embed_player">{{link.player|safe}}</div>{% endif %}
     </ul>
 </div>
-
