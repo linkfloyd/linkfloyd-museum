@@ -33,9 +33,8 @@
             <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
             <li><a href="#" onClick = 'deleteLink("{% trans "Are you sure to delete this link?" %}", {{link.id}}), this'>{% trans "Delete" %}</a></li>
         {% else %}
-            <li><a href="#">{% trans "Complain" %}</a></li>
+            <li><a href="#" class="showReportForm">{% trans "Report" %}</a></li>
         {% endifequal %}
-        <li><a href="#" class="showReportForm">{% trans "Report" %}</a></li>
         <li><a href="#" title="Posted at {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.">[?]</a></li>
         {% if link.player %}<div class="embed_player">{{link.player|safe}}</div>{% endif %}
     </ul>
