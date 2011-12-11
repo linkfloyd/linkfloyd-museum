@@ -4,28 +4,45 @@
 	<head>
 		<title>{% block title %}SitePiyango{% endblock title %}</title>
 		<meta name="description" content="{% block description %}Site Piyango, site trafiği kazanmak için oynanan basit bir oyundur. Websitenizi kayıt ederek, çekilişe katılabilir ve sürpriz ziyaretçiler kazanabilirsiniz.{% endblock %}" />
-        <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/style.less">
+        <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/style.less" />
+        <link rel="stylesheet" type="text/css" href="{{STATIC_PREFIX}}css/libs/boxy.css" />
 		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery.boxy.js"></script>
 		<script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/less-1.1.3.min.js"></script>
 		<meta property="og:image" content="{% block og_image %}{{STATIC_PREFIX}}logo.png{% endblock og_image %}" />
 		<meta name="robots" CONTENT="index, follow" />
 		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
         <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        {% if not user.authenticated %}
-        <script id="loginOrRegisterTemplate" type="text/x-jquery-tmpl">
-            <div class="layerBox">
-                <div class="darkWing"></div>
-                <div class="section">
-                    <h3 class="header">Login or Register</h3>
-                    bla bla bla...
-                </div>
-            </div>
+        {% if not user.is_authenticated %}
+		<script type="text/javascript">
+            $(document).ready(function () {
+                window.loginDialog = new Boxy($("#loginDialog"), {title: "Please login", show: false});
+            })
         </script>
         {% endif %}
+
 		{% block extra_head %}{% endblock extra_head %}
 	</head>
 	<body>
+        <div id="loginDialog" style="display:none;">
+            <form action="/accounts/login/" method="post">
+                {% csrf_token %}
+                <div class="fieldWrapper">
+                    <label for="id_username">Username</label>
+                    <input type="text" maxlength="30" name="username" id="id_username">
+                </div>
+                <div class="fieldWrapper">
+                    <label for="id_password">Password <span class="desc">Hatırlamıyorsanız lütfen <a href="/accounts/password/reset/">buraya tıkla</a>yın.</span></label>
+                    <input type="password" id="id_password" name="password">
+                </div>
+                <p>
+                    <a href="/accounts/register/">Need an account</a>?
+                </p>
+                <input type="submit" value="login" />
+                <input type="hidden" value="" name="next" />
+            </form>
+        </div>
 		<div id="head">
             <div class="wrapper">
 			    <a id="logo" href="/">SitePiyango</a>

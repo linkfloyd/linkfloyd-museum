@@ -33,55 +33,86 @@ $(document).ajaxSend(function(event, xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     }
 });
-
-$(function () {
-	$(this).find('div.link .upVote, div.link .downVote').live('click', function(){
-	    var id = $(this).parent().parent().attr('id');
-	    var score_div = $(this).parent().find("div.score");
-        var value = $(this).attr('x:value');
-        var _this = this;
-	    $.ajax(
-            {
-                type:'POST',
-	            url: "/api/votes/vote/",
-	            data: {
-                    'model': "links.LinkVote",
-                    'object_id': id,
-                    'value': value
-                },
-	            success : function(data, textStatus, jqXHR) {	
-	                score_div.html(data['score']);
-                    if (data['voted_as']==1) {
-                        $(_this).parent().find("a.downVote").removeClass("voted");
-                        $(_this).parent().find("a.upVote").addClass("voted");
-                    }
-                    if (data['voted_as']==-1) {
-                        $(_this).parent().find("a.upVote").removeClass("voted");
-                        $(_this).parent().find("a.downVote").addClass("voted");
-                    }
-                    if (data['voted_as']==0) {
-                        $(_this).parent().find("a.upVote, a.downVote").removeClass("voted");
-                    }
-	            }
-            }
-        );
-	    return false;
-	});
-});  
-
-
-function deleteLink(prompt, id, el) {
-    var confirmed = confirm(prompt);
-	$.ajax(
-        {
-            type:'GET',
-	        url: "/api/links/delete/",
+$(document).ready(function() {
+    $(".vote_buttons").bind("vote", function(event, value) {
+        var vote_el = $(this);
+	    $.ajax({
+            type:'POST',
+	        url: "/api/votes/vote/",
 	        data: {
-                'object_id': id
+                'model': vote_el.attr("x:model"),
+                'object_id': vote_el.attr("x:object_id"),
+                'value': value
             },
 	        success : function(data, textStatus, jqXHR) {	
-                $("div.link#" +id).slideUp();
-	        }
+	            vote_el.find(".score").html(data['score']);
+                if (value == 1) {
+                    vote_el.find("a.downVote").removeClass("voted");
+                    vote_el.find("a.upVote").addClass("voted");
+                }
+                if (value == -1) {
+                    vote_el.find("a.upVote").removeClass("voted");
+                    vote_el..find("a.downVote").addClass("voted");
+                }
+                if (value == 0) {
+                    vote_el.find("a.upVote, a.downVote").removeClass("voted");
+                }
+	        },
+        });
+    });
+    $('.upVote, .downVote').live('click', function(){
+        if (window.loginDialog) {
+            window.loginDialog.show();
+        } else {
+            $(this).parent().trigger("vote", $(this).attr("x:value"));
         }
-    );
-}
+    });
+    $(".link").bind("delete", function(event) {
+        var link_el = $(this);
+	    $.ajax({
+            type: "GET",
+	        url: "/api/links/delete/",
+	        data: {
+                'object_id': link_el.attr("id")
+            },
+	        success : function(data, textStatus, jqXHR) {	
+                link_el.slideUp();
+	        }
+        });
+
+    });
+
+    $('.deleteLink').live('click', function(){
+        var link_el = $(this).parent().parent().parent();
+        Boxy.confirm("Are you sure to remove this link?", function(){
+            link_el.trigger("delete");
+        });
+    });
+});
+
+$("a.showReportForm").click(function(){
+    if (user_id) {
+        $.tmpl($("#submitReportTemplate"), {
+            user_id: user_id,
+            link_id: $(this).parent().parent().parent().attr("id")
+        }).appendTo("div#content");
+    } else {
+        alert("Login before");
+    };
+});
+$('#submitReportButton').live('click', function() {
+    var form = $(this).parent().parent();
+    if (form.find("#id_reason option:selected").val()) {
+     	$.ajax({
+            type:'POST',
+         	url: "/api/reports/post/",
+         	data: form.serialize(),
+        	success : function(data, textStatus, jqXHR) {
+                alert("oldu lan");
+        	}
+        });
+        console.log(form.serialize());
+    } else {
+        form.find("label[for=id_reason] > ul.errorlist").show();
+    }
+});

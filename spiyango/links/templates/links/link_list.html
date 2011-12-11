@@ -77,35 +77,4 @@
         email: "{% trans 'E-posta' %}" }
 </script>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4ec6bf7a4c4877e7"></script>
-<script type="text/javascript">
-    $("a.showReportForm").click(function(){
-        {% if user.is_authenticated %}
-            $.tmpl($("#submitReportTemplate"), {
-                user_id: {{user.id}},
-                link_id: $(this).parent().parent().parent().attr("id"),
-            }).appendTo("div#content");
-        {% else %}
-            alert("login");
-        {% endif %}
-    });
-    $('#submitReportButton').live('click', function() {
-        var form = $(this).parent().parent();
-        if (form.find("#id_reason option:selected").val()) {
-     	    $.ajax({
-                type:'POST',
-         	        url: "/api/reports/post/",
-         	        data: form.serialize(),
-        	        success : function(data, textStatus, jqXHR) {
-                        alert("oldu lan");
-
-        	        }
-                }
-        );
-
-            console.log(form.serialize());
-        } else {
-            form.find("label[for=id_reason] > ul.errorlist").show();
-        }
-    });
-</script>
 {% endblock content %}

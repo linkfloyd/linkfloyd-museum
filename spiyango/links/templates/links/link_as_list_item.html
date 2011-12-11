@@ -1,9 +1,9 @@
 {% load i18n votes thumbnail %}
 <div class="link" id="{{link.id}}">
-    <div class="vote_buttons">
-        <a href="#" class="upVote{% if link|is_up_voted_by:user %} voted{%endif%}" x:value="+1"></a>
+    <div class="vote_buttons" x:model="links.LinkVote" x:object_id="{{link.id}}">
+        <a href="#" class="upVote{% if link|is_up_voted_by:user %} voted{%endif%}" x:value="1" ></a>
         <div class="score">{% if link.vote_score %}{{link.vote_score}}{% else %}0{% endif %}</div>
-        <a href="#" class="downVote{% if link|is_down_voted_by:user %} voted{%endif%}" x:value="-1"></a>
+        <a href="#" class="downVote{% if link|is_down_voted_by:user %} voted{%endif%}" x:value="-1" x:model="links.LinkVote" x:object_id="{{link.id}}"></a>
     </div>
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" onClick="$(this).parent().find('div.embed_player').toggle(); return false"{% else %}
@@ -31,7 +31,7 @@
         </li>
         {% ifequal link.posted_by user %}
             <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
-            <li><a href="#" onClick = 'deleteLink("{% trans "Are you sure to delete this link?" %}", {{link.id}}), this'>{% trans "Delete" %}</a></li>
+            <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
         {% else %}
             <li><a href="#" class="showReportForm">{% trans "Report" %}</a></li>
         {% endifequal %}
