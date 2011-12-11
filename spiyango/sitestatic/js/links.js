@@ -52,12 +52,12 @@ $(document).ready(function() {
                 }
                 if (value == -1) {
                     vote_el.find("a.upVote").removeClass("voted");
-                    vote_el..find("a.downVote").addClass("voted");
+                    vote_el.find("a.downVote").addClass("voted");
                 }
                 if (value == 0) {
                     vote_el.find("a.upVote, a.downVote").removeClass("voted");
                 }
-	        },
+	        }
         });
     });
     $('.upVote, .downVote').live('click', function(){
@@ -79,40 +79,62 @@ $(document).ready(function() {
                 link_el.slideUp();
 	        }
         });
-
     });
-
     $('.deleteLink').live('click', function(){
         var link_el = $(this).parent().parent().parent();
         Boxy.confirm("Are you sure to remove this link?", function(){
             link_el.trigger("delete");
         });
     });
-});
+    $('.reportLink').live('click', function() {
+        if (window.loginDialog) {
+            window.loginDialog.show()
+        } else {
+            var link_el = $(this).parent().parent().parent();
+            window.submitReportDialog = new Boxy(
+                $.tmpl($("#submitReportFormTemplate"), {
+                    link_id: link_el.attr("id")
+                }), {
+                    title: "Report link",
+                    modal: true,
+                    fixed: true
+                });
+        }
+    });
+    $('#submitReportForm').live('submit', function() {
+        var form = $(this);
+        console.log(form);
+        if (form.find("#id_reason option:selected").val()) {
+            console.log("valid");
+     	    $.ajax({
+                type: 'POST',
+         	    url: "/api/reports/post/",
+         	    data: form.serialize(),
+        	    success : function(data, textStatus, jqXHR) {
+                    alert("oldu lan");
+        	    },
+                error: function(){
+                    window.submitReportDialog.hide();
+                },
+                statusCode: {
+                    403: Boxy.alert("Please login")
 
-$("a.showReportForm").click(function(){
-    if (user_id) {
-        $.tmpl($("#submitReportTemplate"), {
-            user_id: user_id,
-            link_id: $(this).parent().parent().parent().attr("id")
-        }).appendTo("div#content");
-    } else {
-        alert("Login before");
-    };
-});
-$('#submitReportButton').live('click', function() {
-    var form = $(this).parent().parent();
-    if (form.find("#id_reason option:selected").val()) {
-     	$.ajax({
-            type:'POST',
-         	url: "/api/reports/post/",
-         	data: form.serialize(),
-        	success : function(data, textStatus, jqXHR) {
-                alert("oldu lan");
-        	}
-        });
-        console.log(form.serialize());
-    } else {
-        form.find("label[for=id_reason] > ul.errorlist").show();
-    }
+                }
+            });
+
+        } else {
+            console.log("not valid");
+        }
+
+        return false;
+        /*
+        if (form.find("#id_reason option:selected").val()) {
+            console.log(form.serialize());
+        } else {
+            form.find("label[for=id_reason] > ul.errorlist").show();
+        }
+        return false;*/
+
+    });
+
 });

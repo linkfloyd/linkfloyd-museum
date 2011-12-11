@@ -31,3 +31,4 @@ class EditLinkForm(SubmitLinkForm):
 class SubmitReportForm(forms.ModelForm):
     class Meta:
         model = Report
+        exclude = ['reporter',]

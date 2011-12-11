@@ -1,38 +1,32 @@
 {% extends "base.html" %}{% load i18n %}
-{% block extra_head %}
-<script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
-<script id="submitReportTemplate" type="text/x-jquery-tmpl">x
-    <div class="layerBox">
-        <div class="darkWing"></div>
-        <div class="section">
-            <h3 class="header">Report This Link <i class="close" onClick="$(this).parent().parent().parent().remove()"></i></h3>
-            <form>
-                <div class="fieldWrapper">
-                    <label for="id_reason"><ul class="errorlist" style="display:none"><li>This field is required.</li></ul>Reason: <span class="desc">why are you reporting this?</span></label>
-                    <select name="reason" id="id_reason">
-                        <option value="" selected="selected">---------</option>
-                        <option value="hatespeech">Contains hate Speech</option>
-                        <option value="wrong_channel">Channel is not appropriate</option>
-                        <option value="wrong_rating">Rating is not appropriate</option>
-                        <option value="wrong_language">Language is not appropriate</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="fieldWrapper">
-                    <label for="id_note">Note: <span class="desc">do you have note for admins?</span></label>
-                    <input id="id_note" type="text" name="note" maxlength="255" />
-                </div>
-                <input type="hidden" name="reporter" value="${user_id}">
-                <input type="hidden" name="link" value="${link_id}">
-                <div class="fieldWrapper">
-                    <input type="button" id="submitReportButton" class="small right" value="submit" />
-                </div>
-            </form>
-        </div>
-    </div>
-</script>
-{% endblock %}
+
+{% block extra_head %}<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>{% endblock extra_head %}
+
 {% block content %}
+<script id="submitReportFormTemplate" type="text/x-jquery-tmpl">
+    <form id="submitReportForm" style="display: none" action="">
+        <div class="fieldWrapper">
+            <label for="id_reason"><ul class="errorlist" style="display:none"><li>This field is required.</li></ul>Reason: <span class="desc">why are you reporting this?</span></label>
+            <select name="reason" id="id_reason">
+                <option value="" selected="selected">Please select a reason</option>
+                <option value="hatespeech">Contains hate Speech</option>
+                <option value="wrong_channel">Channel is not appropriate</option>
+                <option value="wrong_rating">Rating is not appropriate</option>
+                <option value="wrong_language">Language is not appropriate</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="fieldWrapper">
+            <label for="id_note">Note: <span class="desc">do you have note for admins?</span></label>
+            <input id="id_note" type="input" name="note" maxlength="255" />
+        </div>
+        <input id="id_link" type="hidden" name="link" value="${link_id}" />
+        <div class="fieldWrapper">
+            <input type="submit" class="small right" value="submit" />
+        </div>
+    </form>
+</script>
+
 <div class="two-column">
     <div class="panel">
         {% if top_channels %}

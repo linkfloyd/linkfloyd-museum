@@ -49,11 +49,17 @@ def channels_list(request):
 
 def post_report(request):
     from links.forms import SubmitReportForm
+
+    if not request.user.is_authenticated():
+        return HttpResponse(status=401)
+
     if request.POST:
         print request.POST
         form = SubmitReportForm(request.POST)
         if form.is_valid():
-            form.save()
+            report = form.save(commit=False)
+            report.reporter = request.user
+            report.save()
             return HttpResponse(status=200)
         else:
             print form.errors

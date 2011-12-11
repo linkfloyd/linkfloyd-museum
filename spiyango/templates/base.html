@@ -17,9 +17,13 @@
         {% if not user.is_authenticated %}
 		<script type="text/javascript">
             $(document).ready(function () {
-                window.loginDialog = new Boxy($("#loginDialog"), {title: "Please login", show: false});
+                window.loginDialog = new Boxy($("#loginDialog"), {
+                    title: "Please login",
+                    show: false,
+                    modal: true
+                });
             })
-        </script>
+       </script>
         {% endif %}
 
 		{% block extra_head %}{% endblock extra_head %}
