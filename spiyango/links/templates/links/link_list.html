@@ -31,7 +31,7 @@
     <div class="panel">
         {% if top_channels %}
         <div class="channels section">
-            <h3 class="header">{% trans "Top Channels" %}</h3>
+            <h2 class="header">{% trans "Top Channels" %}</h2>
             <ul class="channels">
                 {% for channel in top_channels %}
                     <li><a href="{{channel.get_absolute_url}}">{{channel}} ({{channel.link_count}})</a></li>

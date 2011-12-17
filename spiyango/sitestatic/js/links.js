@@ -86,9 +86,22 @@ $(document).ready(function() {
             link_el.trigger("delete");
         });
     });
+    $("a.playble").click(function() {
+        var link_el = $(this).parent();
+        var embed_player = link_el.find("div.embed_player");
+        console.log(embed_player);
+        if (embed_player.length) {
+            embed_player.remove();
+
+        } else {
+            link_el.append('<div class="embed_player">' + $(this).attr("play") + '</div>');
+
+        }
+        return false;
+    });
     $('.reportLink').live('click', function() {
         if (window.loginDialog) {
-            window.loginDialog.show()
+            window.loginDialog.show();
         } else {
             var link_el = $(this).parent().parent().parent();
             window.submitReportDialog = new Boxy(
@@ -97,7 +110,8 @@ $(document).ready(function() {
                 }), {
                     title: "Report link",
                     modal: true,
-                    fixed: true
+                    fixed: true,
+                    hideAndUnload: true
                 });
         }
     });
@@ -105,23 +119,19 @@ $(document).ready(function() {
         var form = $(this);
         console.log(form);
         if (form.find("#id_reason option:selected").val()) {
-            console.log("valid");
      	    $.ajax({
                 type: 'POST',
          	    url: "/api/reports/post/",
          	    data: form.serialize(),
         	    success : function(data, textStatus, jqXHR) {
-                    alert("oldu lan");
+                    window.submitReportDialog.hide();
+                    Boxy.alert("We have recieved your report. Thank you for your interest.");
+                    $(".link#" + form.find("[name=link]").val()).slideUp();
         	    },
                 error: function(){
                     window.submitReportDialog.hide();
-                },
-                statusCode: {
-                    403: Boxy.alert("Please login")
-
                 }
             });
-
         } else {
             console.log("not valid");
         }
@@ -134,7 +144,5 @@ $(document).ready(function() {
             form.find("label[for=id_reason] > ul.errorlist").show();
         }
         return false;*/
-
     });
-
 });

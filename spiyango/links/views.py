@@ -10,9 +10,7 @@ from django.db.models import Sum, Count
 from datetime import datetime
 from datetime import timedelta
 
-from taggit.models import Tag
-
-from spiyango.links.models import Link, Channel
+from spiyango.links.models import Link, Channel, Report
 from spiyango.links.forms import SubmitLinkForm, EditLinkForm
 
 from django.db.models import Q
@@ -20,7 +18,6 @@ from django.db.models import Q
 @login_required
 def submit(request):
     if request.POST:
-        print request.POST
         form = SubmitLinkForm(request.POST)
         if form.is_valid():
             link = form.save(commit=False)
@@ -64,7 +61,6 @@ def edit(request, pk):
 
 
 class LinkDetail(DetailView):
-
     queryset = Link.objects.all()
 
     def get_object(self):
@@ -76,7 +72,11 @@ class LinkDetail(DetailView):
 def query_builder(request, **kwargs):
     """Builds query via requestitem, if kwargs given overrides request.
     """
+
     query = Q()
+
+    if request.user.is_authenticated():
+        query = query & ~Q(report__in = Report.objects.filter(reporter=request.user))
 
     if kwargs.has_key('user'):
         query = query & Q(posted_by__username=kwargs['user'])

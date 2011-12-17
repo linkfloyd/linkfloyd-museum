@@ -8,7 +8,7 @@ body {
     padding: 0;
     margin: 0;
     background: lighten(@pencil-grey, 20%);
-    font-size: 12px;
+    font-size: 13px;
     font-family: sans-serif;
 }
 .left {
@@ -28,7 +28,7 @@ a {
 }
 a#logo {
     font-size: 48px;
-    font-family: 'Righteous', cursive;
+    font-family: sans-serif;
     color: lighten(@pencil-grey, 20%);
 }
 div.wrapper {
@@ -100,11 +100,8 @@ div#head {
                 }
                 &:hover {
                     color: white;
-
                 }
             }
-
-
         }
         ul.sub {
             background: lighten(@black, 6%);
@@ -136,17 +133,18 @@ div#head {
     border: 1px solid lighten(@pencil-grey, 10%);
     > .header {
         margin: 0 0 10px 0;
-        padding: 5px 10px;
+        padding: 10px 8px;
         color: lighten(@pencil-grey, 20%);
         background: lighten(@black, 12%);
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        font: 23px 'Squada One', cursive;
     }
     h2 {
-        font-size: 22px;
+        font-size: 20px;
     }
     h3 {
-        font-size: 16px;
+        font-size: 14px;
     }
     h2 > i, h3 > i {
         background: url(https://github.com/defunkt/facebox/raw/master/src/closelabel.png);
@@ -239,7 +237,7 @@ div.link {
         float: both;
         margin: 0 0 0 50px;
         h3.title {
-            font-size:13px;
+            font-size:16px;
             font-weight: bold;
             margin: 0 0 0 0;
             padding: 0;
@@ -254,32 +252,38 @@ div.link {
         }
     }
     p.description, ul.actions {
-        margin: 5px 0 0 50px;
+        margin: 8px 0 0 50px;
         font-size: 11px;
     }
     ul.actions {
-        margin-top: 0px;
+        margin-top: 12px;
+        a {
+            color: lighten(@threadless, 40%);
+            &:hover {
+                color: @threadless;
+            }
+        }
     }
-    p. {
+    p {
          display: none;
          margin-top:15px;
          font-size: 10px;
          color: lighten(@merry-widow, 5%);
     }
-
     div.embed_player {
         display: block;
         clear: both;
-        display: none;
     }
     div.embed_player > * {
         display: block;
         height: 260px;
         width: 100%;
     }
+
     div.embed_player > img.embed {
         height: auto;
     }
+
     div.vote_buttons {
         border-radius: 3px;
         float: left;
@@ -332,17 +336,17 @@ form {
         padding: 0;
         label {
 	        display: block;
-	        font-size: 13x;
+	        font-size: 16px;
             font-weight: bold;
-            margin: 0;
+            margin: 0 0 5px 0;
             padding: 0;
             &:first-child {
 	            margin-top: 0;
             }
             span.desc {
-                font-size: 10px;
+                font-size: 13px;
                 font-weight: normal;
-                margin: 0 0 0 10px;
+                margin: 0 0 0 6px;
             }
         }
         ul.errorlist {
@@ -362,12 +366,13 @@ form {
     }
     input, textarea, select, textarea, ul.token-input-list {
         width: 98%;
-        padding: 0.5%;
+        padding: 5px;
         border: none;
         margin: 0;
         background: lighten(@pencil-grey, 25%);
         border-radius: 5px;
         border: 1px solid darken(@pencil-grey, 0%);
+        font-size: 16px;
     }
     input[type='submit'], input[type='button'] {
 	    font-size:16px;

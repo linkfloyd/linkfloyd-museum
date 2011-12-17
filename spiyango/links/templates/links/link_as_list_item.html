@@ -6,8 +6,7 @@
         <a href="#" class="downVote{% if link|is_down_voted_by:user %} voted{%endif%}" x:value="-1" x:model="links.LinkVote" x:object_id="{{link.id}}"></a>
     </div>
 	{% if link.thumbnail_url %}
-	<a {%if link.player %}href="#" onClick="$(this).parent().find('div.embed_player').toggle(); return false"{% else %}
-       href="{{link.get_absolute_url}}"{% endif %} class="thumbnail">
+	<a {%if link.player %}href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
         {% thumbnail link.thumbnail_url "160x100" crop="center" as im %}<img src="{{ im.url }}">{% endthumbnail %}
         {% if link.player %}<i></i>{% endif %}
 	</a>
@@ -21,9 +20,6 @@
 	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain">from {{link.get_domain}}, by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></span></h3>
     </div>
 	<p class="description">{{link.description}}</p>
-	<p class="info">
-
-	</p>
     <ul class="flat-list actions">
         <li><a href="#">Comments ({{link.comment_set.count}})</a></li>
         <li>
@@ -33,9 +29,8 @@
             <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
             <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
         {% else %}
-            <li><a href="#" class="reportLink">{% trans "Report" %}</a></li>
         {% endifequal %}
+            <li><a href="#" class="reportLink">{% trans "Report" %}</a></li>
         <li><a href="#" title="Posted at {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.">[?]</a></li>
-        {% if link.player %}<div class="embed_player">{{link.player|safe}}</div>{% endif %}
     </ul>
 </div>
