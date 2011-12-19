@@ -219,7 +219,6 @@ div.link {
         float: right;
         margin: 0 0 0 10px;
         padding: 0;
-        margin: 0;
         img {
             width: 160x;
             height: 100px;
@@ -237,7 +236,8 @@ div.link {
         float: both;
         margin: 0 0 0 50px;
         h3.title {
-            font-size:16px;
+            font-size:15px;
+            line-height: 19px;
             font-weight: bold;
             margin: 0 0 0 0;
             padding: 0;
@@ -245,14 +245,14 @@ div.link {
                 font-effect: outline;
             }
             span.domain {
-                font-size: 10px;
+                font-size: 13px;
                 font-weight: normal;
                 color: lighten(@merry-widow, 5%);
             }
         }
     }
     p.description, ul.actions {
-        margin: 8px 0 0 50px;
+        margin: 8px 10px 0 50px;
         font-size: 11px;
     }
     ul.actions {
@@ -265,10 +265,9 @@ div.link {
         }
     }
     p {
-         display: none;
          margin-top:15px;
-         font-size: 10px;
-         color: lighten(@merry-widow, 5%);
+         font-size: 13px;
+         color: darken(@pencil-grey, 10%);
     }
     div.embed_player {
         display: block;
