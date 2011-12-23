@@ -15,6 +15,14 @@ from spiyango.links.forms import SubmitLinkForm, EditLinkForm
 
 from django.db.models import Q
 
+
+def extract(dict, keys):
+    new_dict = {}
+    for key in keys:
+        if dict.has_key(key):
+            new_dict[key] = dict[key]
+    return dict
+
 @login_required
 def submit(request):
     if request.POST:
@@ -59,7 +67,6 @@ def edit(request, pk):
                     Link, pk=pk, posted_by=request.user)),
             }, context_instance=RequestContext(request))
 
-
 class LinkDetail(DetailView):
     queryset = Link.objects.all()
 
@@ -67,7 +74,6 @@ class LinkDetail(DetailView):
         object  = super(LinkDetail, self).get_object()
         object.inc_shown()
         return object
-
 
 def query_builder(request, **kwargs):
     """Builds query via requestitem, if kwargs given overrides request.
@@ -90,6 +96,12 @@ def query_builder(request, **kwargs):
         if request.GET.has_key("channel"):
             query = query & Q(channel__slug=request.GET['channel'])
 
+    if kwargs.has_key("domain"):
+        query = query & Q(url__contains=kwargs['domain'])
+    else:
+        if request.GET.has_key("domain"):
+            query = query & Q(url__contains=request.GET['domain'])
+
     if kwargs.has_key("days"):
         query = query & Q(posted_at__gte=datetime.today() - timedelta(days=kwargs['days']))
     else:
@@ -111,7 +123,7 @@ def query_builder(request, **kwargs):
                     "-comment_score", "posted_at", "-posted_at"):
         return Link.objects_with_scores.filter(query).order_by(order_by)
     else:
-        return Link.objects_with_scores.filter(query).order_by("-vote_score")
+        return Link.objects_with_scores.filter(query).order_by("-posted_at")
 
 class LinksListView(ListView):
 
@@ -121,10 +133,17 @@ class LinksListView(ListView):
     def get_queryset(self):
         return query_builder(self.request)
 
+    def listing_as_string(self, request):
+        query_dict = extract(dict(self.request.GET), ("user", "channel", "domain"))
+        postfix = ""
+        for k, v in query_dict.iteritems():
+            postfix += "%s: %s " % (k, v[0])
+            return "Listing: %s" % postfix
+
     def get_context_data(self, **kwargs):
         context = super(LinksListView, self).get_context_data(**kwargs)
         context['active_nav_item'] = "links"
-        context['listing'] = "Top Links"
+        context['listing'] = self.listing_as_string(self.request)
         context['top_channels'] = Channel.objects.all().annotate(
             link_count=Count("link")).order_by("-link_count")
         return context

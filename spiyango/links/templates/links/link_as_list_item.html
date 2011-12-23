@@ -17,9 +17,9 @@
             <span class="tag"><a href="/links/list/?tagged={{tag.slug}}">{{tag}}</a></span>
             {% endfor %}
         </div>
-	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain">from {{link.get_domain}}, by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></span></h3>
+	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain">from <a href="/?domain={{link.get_domain}}">{{link.get_domain}}</a>, by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></span></h3>
     </div>
-	<p class="description">{{link.description}}</p>
+    {% if link.description %}<p class="description">{{link.description}}</p>{% endif %}
     <ul class="flat-list actions">
         <li><a href="#">Comments ({{link.comment_set.count}})</a></li>
         <li>

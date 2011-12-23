@@ -89,7 +89,6 @@ $(document).ready(function() {
     $("a.playble").click(function() {
         var link_el = $(this).parent();
         var embed_player = link_el.find("div.embed_player");
-        console.log(embed_player);
         if (embed_player.length) {
             embed_player.remove();
 
@@ -117,7 +116,6 @@ $(document).ready(function() {
     });
     $('#submitReportForm').live('submit', function() {
         var form = $(this);
-        console.log(form);
         if (form.find("#id_reason option:selected").val()) {
      	    $.ajax({
                 type: 'POST',
@@ -133,7 +131,7 @@ $(document).ready(function() {
                 }
             });
         } else {
-            console.log("not valid");
+            alert("There was a problem with your report sorry :(");
         }
 
         return false;
