@@ -214,10 +214,15 @@ div.link {
     padding: 5px;
     margin: 0 0 5px 0;
     border-bottom: 1px dashed lighten(@pencil-grey, 10%);
-
     div.left-panel {
         float: left;
         width: 40px;
+        padding: 0 5px 0 0;
+        margin: 0 5px 0 0;
+        div.avatar {
+            margin: 0 0 20px 0;
+        }
+        border-right: 1px solid lighten(@pencil-grey, 10%);
     }
     a.thumbnail {
         position: relative;
@@ -225,8 +230,8 @@ div.link {
         margin: 0 0 0 10px;
         padding: 0;
         img {
-            width: 100x;
-            height: 60px;
+            width: 120x;
+            height: 80px;
         }
         i {
             background: top left url(https://s-static.ak.facebook.com/rsrc.php/v1/y6/r/gY6pCnDw29i.png);
@@ -243,10 +248,10 @@ div.link {
         h3.title {
             font-size:15px;
             line-height: 19px;
-            font-weight: bold;
             margin: 0 0 0 0;
             padding: 0;
             a {
+                font-weight: bold;
                 font-effect: outline;
             }
             span.domain {
@@ -295,7 +300,7 @@ div.link {
         overflow: auto;
         border-radius: 3px;
         background: #ddd;
-        margin: 0 0 10px 0;
+        margin: 0;
         padding: 0 4px 4px 4px;
         a.upVote, a.downVote, div.score {
             height: 10px;
