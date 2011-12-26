@@ -215,7 +215,7 @@ div.link {
     margin: 0 0 5px 0;
     border-bottom: 1px dashed lighten(@pencil-grey, 10%);
 
-    div.avatar {
+    div.left-panel {
         float: left;
         width: 40px;
     }
@@ -293,27 +293,26 @@ div.link {
 
     div.vote_buttons {
         border-radius: 3px;
-        float: left;
-
         a.upVote, a.downVote, div.score {
-            height: 20px;
-            display: block;
+            height: 10px;
         }
         a.upVote {
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 20px solid #888;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #888;
             margin: 0;
+            float:left;
         }
         a.downVote {
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 20px solid #888;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #888;
             margin: 0;
+            float: right;
         }
         a.upVote.voted {
             border-bottom-color: #222;
@@ -328,8 +327,10 @@ div.link {
             font-weight: bold;
             color: #888;
             border-radius: 2px;
-            margin: 3px 0;
-            padding: 2px 0 0 0;
+            margin: 0 0;
+            padding: 0 0 5px 0;
+            display: block;
+            clear: both;
         }
     }
 }
