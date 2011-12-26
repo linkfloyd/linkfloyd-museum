@@ -1,13 +1,12 @@
 {% load i18n votes thumbnail gravatar %}
 <div class="link" id="{{link.id}}">
     <div class="left-panel">
+        <div class="avatar">{% gravatar link.posted_by 40 %}</div>
         <div class="vote_buttons" x:model="links.LinkVote" x:object_id="{{link.id}}">
             <div class="score">{% if link.vote_score %}{{link.vote_score}}{% else %}0{% endif %}</div>
             <a href="#" class="upVote{% if link|is_up_voted_by:user %} voted{%endif%}" x:value="1" ></a>
             <a href="#" class="downVote{% if link|is_down_voted_by:user %} voted{%endif%}" x:value="-1" x:model="links.LinkVote" x:object_id="{{link.id}}"></a>
-
         </div>
-        <div class="avatar">{% gravatar link.posted_by 40 %}</div>
     </div>
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
@@ -15,7 +14,6 @@
         {% if link.player %}<i></i>{% endif %}
 	</a>
 	{% endif %}
-
     <div class="header">
         <div class="tags">
             {% for tag in link.tags.all %}
@@ -25,17 +23,16 @@
 	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain"><a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> » <a href="{{link.channel.get_absolute_url}}">{{link.channel}}</a></span></h3>
     </div>
     {% if link.description %}<p class="description">{{link.description}}</p>{% endif %}
-    <ul class="flat-list actions"
+    <ul class="flat-list actions">
         <li><a href="#">Comments ({{link.comment_set.count}})</a></li>
         <li>
             <a href="http://www.addthis.com/bookmark.php" addthis:url="{{link.get_full_url}}" addthis:title="{{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %} style="text-decoration:none;" class="addthis_button">{% trans "Share" %}</a>
         </li>
         {% ifequal link.posted_by user %}
-            <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
-            <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
-        {% else %}
+        <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
+        <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
         {% endifequal %}
-            <li><a href="#" class="reportLink">{% trans "Report" %}</a></li>
+        <li><a href="#" class="reportLink">{% trans "Report" %}</a></li>
         <li><a href="#" title="Posted at {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.">[?]</a></li>
     </ul>
 </div>
