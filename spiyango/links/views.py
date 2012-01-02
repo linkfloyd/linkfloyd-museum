@@ -128,7 +128,7 @@ def query_builder(request, **kwargs):
 class LinksListView(ListView):
 
     context_object_name = "links"
-    paginate_by = 10
+    paginate_by = 20
 
     def get_queryset(self):
         return query_builder(self.request)
