@@ -265,11 +265,19 @@ div.link {
     }
     p.info {
         margin-top: 12px;
+        color: lighten(@pencil-grey, 10%);
         a {
             text-decoration: underline;
+            color: lighten(@threadless, 60%);
         }
         a.channel {
             text-transform:lowercase;
+        }
+        &:hover {
+            color: darken(@pencil-grey, 20%);
+            a {
+                color: lighten(@threadless, 20%);
+            }
         }
     }
     ul.actions {
@@ -283,7 +291,7 @@ div.link {
     }
     p {
          margin-top:15px;
-         color: darken(@pencil-grey, 30%);
+         color: darken(@pencil-grey, 50%);
     }
     div.embed_player {
         display: block;
