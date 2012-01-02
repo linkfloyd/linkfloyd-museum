@@ -33,8 +33,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     }
 });
-function show_login(login_after_url) {
-    login_after_url = typeof(login_after_url) != 'undefined' ? login_after_url: "/";
+function show_login() {
     window.loginDialog = new Boxy($("#loginDialog", {
         title: "Please login",
         modal: true
