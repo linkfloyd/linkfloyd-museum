@@ -20,10 +20,10 @@
             <span class="tag"><a href="/links/list/?tagged={{tag.slug}}">{{tag}}</a></span>
             {% endfor %}
         </div>
-	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="domain"> / <a href="{{link.channel.get_absolute_url}}">{{link.channel}}</a></h3>
+	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a> <span class="channel"> / <a href="{{link.channel.get_absolute_url}}">{{link.channel}}</a></h3>
     </div>
     {% if link.description %}<p class="description">{{link.description}}</p>{% endif %}
-    <p class="info">Shared by {{link.posted_by}}</p>
+    <p class="info">Shared by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> {{link.posted_at|timesince}} ago.</p>
     <ul class="flat-list actions">
         <li><a href="#">Comments ({{link.comment_set.count}})</a></li>
         <li>
