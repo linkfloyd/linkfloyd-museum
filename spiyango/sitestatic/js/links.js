@@ -37,8 +37,8 @@ function show_login() {
     window.loginDialog = new Boxy($("#loginDialog", {
         title: "Please login",
         modal: true
-    });
-}
+    }));
+};
 $(document).ready(function() {
     $(".vote_buttons").bind("vote", function(event, value) {
         var vote_el = $(this);
