@@ -134,6 +134,14 @@ INSTALLED_APPS = (
     'registration',
     'gravatar',
     'south',
+    'devserver'
+)
+
+DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
+DEVSERVER_MODULES = (
+    'devserver.modules.profile.LineProfilerModule',
+    'devserver.modules.ajax.AjaxDumpModule',
+    'devserver.modules.sql.SQLRealTimeModule',
 )
 
 # EMAIL

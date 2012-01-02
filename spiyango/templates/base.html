@@ -15,21 +15,8 @@
 		<meta name="robots" CONTENT="index, follow" />
 		<meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
 		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        {% if not user.is_authenticated %}
-		<script type="text/javascript">
-            $(document).ready(function () {
-                window.loginDialog = new Boxy($("#loginDialog"), {
-                    title: "Please login",
-                    show: false,
-                    modal: true,
-                    x: 100,
-                    y: 100,
-                    fixed: true,
-                });
-            })
-       </script>
-        {% endif %}
 
+		<script type="text/javascript">{% if user.is_authenticated %}window.user_is_authenticated = true;{% else %}window.user_is_authenticated = false;{% endif %}</script>
 		{% block extra_head %}{% endblock extra_head %}
 	</head>
 	<body>

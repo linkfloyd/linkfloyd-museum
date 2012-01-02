@@ -33,10 +33,17 @@ $(document).ajaxSend(function(event, xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     }
 });
+function show_login(login_after_url) {
+    login_after_url = typeof(login_after_url) != 'undefined' ? login_after_url: "/";
+    window.loginDialog = new Boxy($("#loginDialog", {
+        title: "Please login",
+        modal: true
+    });
+}
 $(document).ready(function() {
     $(".vote_buttons").bind("vote", function(event, value) {
         var vote_el = $(this);
-	    $.ajax({
+ 	    $.ajax({
             type:'POST',
 	        url: "/api/votes/vote/",
 	        data: {
@@ -61,10 +68,10 @@ $(document).ready(function() {
         });
     });
     $('.upVote, .downVote').live('click', function(){
-        if (window.loginDialog) {
-            window.loginDialog.show();
-        } else {
+        if (window.user_is_authenticated) {
             $(this).parent().trigger("vote", $(this).attr("x:value"));
+        } else {
+            show_login();
         }
     });
     $(".link").bind("delete", function(event) {
