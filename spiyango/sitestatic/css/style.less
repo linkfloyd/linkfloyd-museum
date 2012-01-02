@@ -138,7 +138,7 @@ div#head {
         background: lighten(@black, 12%);
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
-        font: 23px 'Squada One', cursive;
+        font-size: 13px;
     }
     h2 {
         font-size: 20px;
@@ -254,27 +254,26 @@ div.link {
                 font-weight: bold;
                 font-effect: outline;
             }
-            span.channel {
-                font-size: 11px;
-                font-weight: normal;
-                color: lighten(@merry-widow, 5%);
-                a {
-                    color: lighten(@threadless, 40%);
-                    text-decoration: underline;
-                }
-            }
         }
     }
     p.description, p.info, ul.actions {
         margin: 4px 10px 0 50px;
+        font-size: 10px;
+    }
+    p.description {
         font-size: 13px;
     }
     p.info {
-        font-size: 10px;
         margin-top: 12px;
+        a {
+            text-decoration: underline;
+        }
+        a.channel {
+            text-transform:lowercase;
+        }
     }
     ul.actions {
-        margin-top: 5px;
+        margin-top: 10px;
         a {
             color: lighten(@threadless, 40%);
             &:hover {
