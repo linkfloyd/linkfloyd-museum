@@ -3,15 +3,20 @@ Django==1.3
 Fabric==1.3.2
 Pillow==1.7.5
 South==0.7.3
+Werkzeug==0.8.2
 distribute==0.6.19
+django-devserver==0.3.1
 django-gravatar==0.1.0
 django-registration==0.7
 django-taggit==0.9.3
 django-transmeta==0.6.3
 gravatar==0.1
+guppy==0.1.9
 ipython==0.11
+line-profiler==1.0b3
 pycrypto==2.4.1
--e git://github.com/miratcan/qhonuskan-votes.git@13b9b731ae30a96784718a2dba1f3add6e797e45#egg=qhonuskan_votes-dev
+-e git://github.com/mcbayrak/qhonuskan-votes.git@13b9b731ae30a96784718a2dba1f3add6e797e45#egg=qhonuskan_votes-dev
 sorl-thumbnail==11.09.1
+sqlparse==0.1.3
 ssh==1.7.11
 wsgiref==0.1.2
