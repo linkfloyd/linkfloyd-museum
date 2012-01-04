@@ -28,8 +28,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-    $("div#thumbnail_preview img").click(function(){
-        $(this).parent().slideUp();
+    $("div#thumbnail_preview label span a").click(function(){
+        $(this).parent().parent().parent().slideUp();
         $("#id_thumbnail_url").val("");
     });
 });
