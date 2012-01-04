@@ -16,6 +16,10 @@ $(document).ready(function() {
                 $("#id_description").val(data['description']);
                 $("#id_title, #id_description").removeAttr("disabled");
                 $("#id_title, #id_description").removeClass("busy");
+                if (data['image']) {
+                    $("div#thumbnail_preview").slideDown();
+                    $("div#thumbnail_preview img").attr("src", data['image']);
+                }
                 $("#id_thumbnail_url").val(data['image']);
                 $("#id_player").val(data['player']);
 			},
@@ -24,4 +28,8 @@ $(document).ready(function() {
 			}
 		});
 	});
+    $("div#thumbnail_preview img").click(function(){
+        $(this).parent().slideUp();
+        $("#id_thumbnail_url").val("");
+    });
 });
