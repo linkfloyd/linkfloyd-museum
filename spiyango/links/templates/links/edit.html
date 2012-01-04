@@ -18,6 +18,12 @@
                     <label fory="id_rating">{{ form.language.errors }}{% trans "Language" %}<span class="desc">{{form.language.help_text}}</label>
                     {{ form.language }}
                 </div>
+                {% if form.thumbnail_url.value %}
+                <div class="fieldWrapper" id="thumbnail_preview">
+                    <label for="id_thumbnail">{% trans "Thumbnail" %}<span class="desc">Click on it to remove</label>
+                    <img src="{{form.thumbnail_url.value}}" />
+                </div>
+                {% endif %}
                 <div class="fieldWrapper">
                     <label for="id_title">{{ form.title.errors }}{% trans "Title" %}<span class="desc">{{form.title.help_text}}</label>
                     {{ form.title }}
@@ -29,7 +35,7 @@
             </div>
 
             <div class="fieldWrapper">
-                <label for="id_tags">{{ form.channel.errors }}{% trans "Channel" %}<span class="desc">{{form.channel.help_text}}</span></label>
+                <label for="id_channel">{{ form.channel.errors }}{% trans "Channel" %}<span class="desc">{{form.channel.help_text}}</span></label>
                 {{ form.channel }}
             </div>
 
