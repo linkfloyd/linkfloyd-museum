@@ -9,14 +9,13 @@ $(document).ready(function() {
                 $("#id_title, #id_description").attr(
                     {"disabled":"disabled"});
 
-                $("#id_title, #id_description").css(
-                    {"background": "url(http://friendlybracelets.com/loader.gif no-repeat center center"});
+                $("#id_title, #id_description").addClass("busy");
             },
 			success : function(data) {
                 $("#id_title").val(data['title']);
                 $("#id_description").val(data['description']);
                 $("#id_title, #id_description").removeAttr("disabled");
-                $("#id_title, #id_description").css({"background": "white"});
+                $("#id_title, #id_description").removeClass("busy");
                 $("#id_thumbnail_url").val(data['image']);
                 $("#id_player").val(data['player']);
 			},
