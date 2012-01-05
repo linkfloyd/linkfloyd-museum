@@ -26,7 +26,6 @@ def create_preferences(sender, instance, created, **kwargs):
             preferences = UserPreferences.objects.create(
                 user=instance,
                 max_rating=1)
-            preferences.known_languages.add(
-                Language.objects.filter(code__in=("en", "tr")))
+            preferences.known_languages.add(1, 2)
 
 post_save.connect(create_preferences, sender=User)
