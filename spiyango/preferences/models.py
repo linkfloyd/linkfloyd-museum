@@ -12,7 +12,7 @@ class UserPreferences(models.Model):
         verbose_name = "Maximum Rating",
         choices=SITE_RATINGS,
         help_text="how much can you handle?",
-        default = 1
+        default=1
     )
     def __unicode__(self):
         return "Preferences of %s" % self.user
@@ -20,6 +20,6 @@ class UserPreferences(models.Model):
 
 def create_preferences(sender, instance, created, **kwargs):
     if created:
-        UserPreferences.objects.create(user=instance)
+        UserPreferences.objects.create(user=instance, max_rating=1)
 
 post_save.connect(create_preferences, sender=User)
