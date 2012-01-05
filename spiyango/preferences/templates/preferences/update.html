@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}
+<div class="one-column">
+    <div class="content section narrow">
+        <h2 class="header">Update Preferences</h2>
+        <div class="body">
+		    <form action="#" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    <label for="id_max_rating">{{ field.label }}<span class="desc">{{field.help_text}}</span></label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <input type="submit" value="Update" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
