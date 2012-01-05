@@ -1,5 +1,5 @@
 from django import forms
-from spiyango.links.models import Link, Report, SITE_RATINGS
+from links.models import Link, Report, SITE_RATINGS
 
 class SubmitLinkForm(forms.ModelForm):
     thumbnail_url = forms.URLField(

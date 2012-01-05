@@ -14,10 +14,10 @@ from taggit.managers import TaggableManager
 from transmeta import TransMeta
 
 SITE_RATINGS = (
-    ("G", _("Suitable with any audience type.")),
-    ("PG",_("Can Contain rude gestures, the lesser swear words, or mild violence")),
-    ("R", _("Can Contain such things as harsh profanity, intense violence, nudity or drug use.")),
-    ("X", _("Can Contain hardcore sexual imagery or extremely disturbing violence."))
+    (1, _("Suitable with any audience type.")),
+    (2, _("Can Contain rude gestures, the lesser swear words, or mild violence")),
+    (3, _("Can Contain such things as harsh profanity, intense violence, nudity or drug use.")),
+    (4, _("Can Contain hardcore sexual imagery or extremely disturbing violence."))
 )
 
 SITE_LANGUAGES = (
@@ -52,6 +52,12 @@ class Channel(models.Model):
     class Meta:
         translate = ("title", "description")
 
+class Language(models.Model):
+    code = models.CharField(max_length=5)
+    name = models.CharField(max_length=16)
+
+    def __unicode__(self):
+        return self.name
 
 class LinksWithScoresManager(models.Manager):
     def get_query_set(self):
@@ -72,13 +78,12 @@ class Link(models.Model):
 
     thumbnail_url = models.URLField(null=True, blank=True)
 
-    rating = models.CharField(
-        max_length=2,
+    rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
         help_text=_("warn people about your link")
     )
 
-    language = models.CharField(max_length=5, choices=SITE_LANGUAGES)
+    language = models.ForeignKey(Language)
     votes = VotesField()
 
     shown = models.PositiveIntegerField(default=0)

@@ -126,6 +126,7 @@ INSTALLED_APPS = (
 
     # sitepiyango
     'spiyango.links',
+    'spiyango.preferences',
 
     # 3th party
     'taggit',

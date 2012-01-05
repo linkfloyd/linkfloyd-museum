@@ -20,6 +20,14 @@
 		{% block extra_head %}{% endblock extra_head %}
 	</head>
 	<body>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
         <div id="loginDialog" style="display:none;">
             <form action="/accounts/login/" method="post">
                 {% csrf_token %}
@@ -71,7 +79,7 @@
                         <li>
                             <a href="#">{{user}}</a>
                             <ul class="sub">
-                                <li><a href="#">{% trans "Preferences" %}</a></li>
+                                <li><a href="{% url update_preferences %}">Preferences" %}</a></li>
                                 <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
                             </ul>
     					</li>

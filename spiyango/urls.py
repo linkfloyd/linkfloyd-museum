@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^links/', include('spiyango.links.urls')),
     url(r'^api/', include('spiyango.api.urls')),
     url(r'^accounts/', include('registration.urls')),
+    url(r'^preferences/', include('preferences.urls')),
 )
 
 if settings.DEBUG:

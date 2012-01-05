@@ -38,6 +38,14 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('links', ['Channel'])
 
+        # Adding model 'Language'
+        db.create_table('links_language', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('code', self.gf('django.db.models.fields.CharField')(max_length=5)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=16)),
+        ))
+        db.send_create_signal('links', ['Language'])
+
         # Adding model 'LinkVote'
         db.create_table('links_linkvote', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -57,7 +65,7 @@ class Migration(SchemaMigration):
             ('title', self.gf('django.db.models.fields.CharField')(max_length=2048, blank=True)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=4096, null=True, blank=True)),
             ('thumbnail_url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
-            ('rating', self.gf('django.db.models.fields.CharField')(max_length=2)),
+            ('rating', self.gf('django.db.models.fields.PositiveIntegerField')()),
             ('language', self.gf('django.db.models.fields.CharField')(max_length=5)),
             ('shown', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
             ('player', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
@@ -89,6 +97,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Channel'
         db.delete_table('links_channel')
+
+        # Deleting model 'Language'
+        db.delete_table('links_language')
 
         # Deleting model 'LinkVote'
         db.delete_table('links_linkvote')
@@ -156,6 +167,12 @@ class Migration(SchemaMigration):
             'posted_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'posted_by'", 'to': "orm['auth.User']"}),
             'reported_by': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
         },
+        'links.language': {
+            'Meta': {'object_name': 'Language'},
+            'code': ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '16'})
+        },
         'links.link': {
             'Meta': {'object_name': 'Link'},
             'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['links.Channel']"}),
@@ -166,7 +183,7 @@ class Migration(SchemaMigration):
             'player': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'posted_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'posted_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'rating': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
+            'rating': ('django.db.models.fields.PositiveIntegerField', [], {}),
             'shown': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'thumbnail_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '2048', 'blank': 'True'}),

@@ -10,9 +10,10 @@ from django.db.models import Sum, Count
 from datetime import datetime
 from datetime import timedelta
 
-from spiyango.links.models import Link, Channel, Report
-from spiyango.links.forms import SubmitLinkForm, EditLinkForm
+from links.models import Link, Channel, Report
+from links.forms import SubmitLinkForm, EditLinkForm
 
+from preferences.models import UserPreferences
 from django.db.models import Q
 
 
@@ -33,7 +34,6 @@ def submit(request):
             link.save()
             return HttpResponseRedirect(link.get_absolute_url())
         else:
-            print form.errors
             return render_to_response(
                 "links/submit.html", {
                     "form": form,
@@ -56,9 +56,8 @@ def edit(request, pk):
             link = form.save(request.POST)
             return HttpResponseRedirect(link.get_absolute_url())
         else:
-            print form.errors
             return render_to_response("links/edit.html", {
-                    "form": form
+                "form": form
             }, context_instance=RequestContext(request))
     else:
         return render_to_response("links/edit.html", {
@@ -83,6 +82,11 @@ def query_builder(request, **kwargs):
 
     if request.user.is_authenticated():
         query = query & ~Q(report__in = Report.objects.filter(reporter=request.user))
+        preferences = UserPreferences.objects.get(user=request.user)
+        query = query & \
+            Q(language__in = preferences.known_languages.all()) & \
+            Q(rating__lte  = preferences.max_rating)
+
 
     if kwargs.has_key('user'):
         query = query & Q(posted_by__username=kwargs['user'])
