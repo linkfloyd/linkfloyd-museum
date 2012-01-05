@@ -11,7 +11,8 @@ class UserPreferences(models.Model):
     max_rating = models.PositiveIntegerField(
         verbose_name = "Maximum Rating",
         choices=SITE_RATINGS,
-        help_text="how much can you handle?"
+        help_text="how much can you handle?",
+        default = 1
     )
     def __unicode__(self):
         return "Preferences of %s" % self.user
