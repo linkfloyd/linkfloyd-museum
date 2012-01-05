@@ -14,9 +14,9 @@ from taggit.managers import TaggableManager
 from transmeta import TransMeta
 
 SITE_RATINGS = (
-    (1, _("1) Safe")),
-    (2, _("2) Moderate (can contain nudity, rude gestures)")),
-    (3, _("3) Liberal (hell yeah.)")),
+    (1, _("Safe Posts (only safe content)")),
+    (2, _("Moderate (can contain nudity, rude gestures)")),
+    (3, _("Liberal (hell yeah.)")),
 )
 
 SITE_LANGUAGES = (
