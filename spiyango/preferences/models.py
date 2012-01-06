@@ -21,7 +21,7 @@ class UserPreferences(models.Model):
 def create_preferences(sender, instance, created, **kwargs):
     if created:
         try:
-            UserPreferences.objects.get(user=instance)
+            UserPreferences.objects.get(user__username=instance__username)
         except UserPreferences.DoesNotExist:
             preferences = UserPreferences.objects.create(
                 user=instance,
