@@ -19,13 +19,11 @@ class UserPreferences(models.Model):
 
 
 def create_preferences(sender, instance, created, **kwargs):
-    if created:
-        try:
-            UserPreferences.objects.get(user__username=instance__username)
-        except UserPreferences.DoesNotExist:
-            preferences = UserPreferences.objects.create(
-                user=instance,
-                max_rating=1)
-            preferences.known_languages.add(1, 2)
+    if created and UserPreferences.objects.filter(\
+        user__username=instance__username).count() == 0:
+        preferences = UserPreferences.objects.create(
+            user=instance,
+            max_rating=1)
+        preferences.known_languages.add(1, 2)
 
 post_save.connect(create_preferences, sender=User)
