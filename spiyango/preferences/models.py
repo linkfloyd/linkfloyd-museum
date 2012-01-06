@@ -20,7 +20,7 @@ class UserPreferences(models.Model):
 
 def create_preferences(sender, instance, created, **kwargs):
     if created and UserPreferences.objects.filter(\
-        user__username=instance__username).count() == 0:
+        user__username=instance.username).count() == 0:
         preferences = UserPreferences.objects.create(
             user=instance,
             max_rating=1)
