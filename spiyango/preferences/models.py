@@ -17,7 +17,6 @@ class UserPreferences(models.Model):
     def __unicode__(self):
         return "Preferences of %s" % self.user
 
-
 def create_preferences(sender, instance, created, **kwargs):
     if created and UserPreferences.objects.filter(\
         user__username=instance.username).count() == 0:

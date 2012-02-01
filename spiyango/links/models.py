@@ -6,12 +6,14 @@ from django.db.models import F
 from django.db.models import Sum
 
 from spiyango.utils import SumWithDefault
+from spiyango.channels.models import Channel
 
 from qhonuskan_votes.models import VotesField
 
 from taggit.managers import TaggableManager
 
 from transmeta import TransMeta
+
 
 SITE_RATINGS = (
     (1, _("Safe Posts (only safe content)")),
@@ -34,22 +36,6 @@ class Comment(models.Model):
     def __unicode__(self):
         return "%s's comment on %s" % (self.posted_by, self.link)
 
-class Channel(models.Model):
-    __metaclass__ = TransMeta
-
-    title = models.CharField(verbose_name=_("title"), max_length=255)
-    slug = models.SlugField(verbose_name=_("slug"), max_length=255)
-    description = models.TextField(verbose_name=_("description"))
-    is_official = models.BooleanField()
-
-    def __unicode__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return "/links/channel/%s/" % self.slug
-
-    class Meta:
-        translate = ("title", "description")
 
 class Language(models.Model):
     code = models.CharField(max_length=5)

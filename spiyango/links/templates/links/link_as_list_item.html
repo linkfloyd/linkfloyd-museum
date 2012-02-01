@@ -1,5 +1,6 @@
 {% load i18n votes thumbnail gravatar %}
-<div class="link" id="{{link.id}}">
+
+<div class="link{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
     <div class="left-panel">
         {% comment %}<div class="avatar">{% gravatar link.posted_by 40 %}</div>{% endcomment %}
         <div class="vote_buttons" x:model="links.LinkVote" x:object_id="{{link.id}}">

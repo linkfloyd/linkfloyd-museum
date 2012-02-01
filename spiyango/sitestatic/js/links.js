@@ -100,7 +100,6 @@ $(document).ready(function() {
 
         } else {
             link_el.append('<div class="embed_player">' + $(this).attr("play") + '</div>');
-
         }
         return false;
     });

@@ -7,17 +7,17 @@ from links.views import LinksListView
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'^$', LinksListView.as_view(), name='link_list'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^links/', include('spiyango.links.urls')),
+    url(r'^channels/', include('spiyango.channels.urls')),
     url(r'^api/', include('spiyango.api.urls')),
     url(r'^accounts/', include('registration.urls')),
     url(r'^preferences/', include('preferences.urls')),
+    url(r'^subscriptions/', include('follow.urls')),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),)
+        (r'^media/(?P<path>.*)$',  'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}))

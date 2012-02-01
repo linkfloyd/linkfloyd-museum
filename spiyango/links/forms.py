@@ -21,7 +21,7 @@ class SubmitLinkForm(forms.ModelForm):
 
     class Media:
         js = ("js/autofill.js", "js/libs/jquery.tokeninput.js",)
-        css = {"all": ("",)}
+        # css = {"all": ("",)}
 
 class EditLinkForm(SubmitLinkForm):
     class Meta:

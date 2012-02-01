@@ -46,9 +46,16 @@
 
             <input type="submit" value="{% trans 'Submit' %}" />
 		    </form>
+
             <script type="application/javascript">
                 $("#id_channel").tokenInput("/api/channels/list/", {
-                tokenLimit: 1
+                    tokenLimit: 1,
+                    {% if channel %}
+                        prePopulate: [{
+                            "id": "{{ channel.id }}",
+                            "name": "{{ channel.name }}"
+                        }]
+                    {% endif %}
                 });
             </script>
         </div>

@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     # sitepiyango
     'spiyango.links',
     'spiyango.preferences',
+    'spiyango.channels',
 
     # 3th party
     'taggit',
@@ -135,7 +136,8 @@ INSTALLED_APPS = (
     'registration',
     'gravatar',
     'south',
-    'devserver'
+    'devserver',
+
 )
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']

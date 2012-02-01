@@ -4,7 +4,6 @@
 {% block content %}
 <div class="section">
     <h2 class="header">{{link.title}} via <a href="#">{{link.posted_by}}</h3>
-
     {% include "links/link_as_list_item.html" %}
     {% for comment in link.comment_set.all %}
         <div class="comment" style="background:#555;">

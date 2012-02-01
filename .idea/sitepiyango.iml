@@ -3,11 +3,9 @@
   <component name="FacetManager">
     <facet type="django" name="Django">
       <configuration>
-        <option name="rootFolder" value="$MODULE_DIR$" />
-        <option name="templatesFolders" value="$MODULE_DIR$/spiyango/templates" />
+        <option name="rootFolder" value="$MODULE_DIR$/spiyango" />
         <option name="settingsModule" value="settings.py" />
         <option name="manageScript" value="manage.py" />
-        <option name="djangoInJs" value="false" />
       </configuration>
     </facet>
   </component>
@@ -15,6 +13,15 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="TemplatesService">
+    <option name="templateLanguage" value="Django" />
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/spiyango/templates" />
+      </list>
+    </option>
   </component>
 </module>
 

@@ -27,9 +27,10 @@ a {
     font-weight: normal;
 }
 a#logo {
-    font-size: 48px;
-    font-family: sans-serif;
-    color: lighten(@pencil-grey, 20%);
+    top: 15px;
+    font-size: 36px;
+    font-family: 'Lilita One', cursive;
+    color: darken(@white, 5%);
 }
 div.wrapper {
     width: 960px;
@@ -129,7 +130,7 @@ div#head {
     margin: 0;
     padding: 0;
     > .header {
-        margin: 0 0 10px 0;
+        margin: 0 0 5px 0;
         padding: 10px 8px;
         color: lighten(@black, 12%);
         border-bottom: 1px solid black;
@@ -157,9 +158,9 @@ div.one-column {
 }
 div.two-column {
     div.panel {
+        width: 200px;
         float: right;
         h2, h3 {
-            margin: 0;
         }
         ul.channels {
             margin: 0;
@@ -209,6 +210,9 @@ div.link {
     padding: 5px;
     margin: 0;
     border-bottom: 1px dashed lighten(@pencil-grey, 10%);
+    &.highlight {
+        background: #ffff88;
+    }
     &:hover {
         background: @white;
     }
@@ -545,4 +549,36 @@ div.darkWing {
     left:0;
     background: black;
     opacity: 0.6;
+}
+
+.butonized {
+	-moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+	box-shadow: inset 0px 1px 0px 0px #ffffff;
+
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background: -moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+
+	background-color: @pencil-grey;
+
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+
+	border: 1px solid darken(@pencil-grey, 15%) !important;
+
+	color: darken(@pencil-grey, 15%);
+
+	padding: 6px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #ffffff;
+    &:hover {
+	    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) ) !important;
+	    background: -moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% ) !important;
+	    background-color: #dfdfdf !important;
+    }
+    &:active {
+    	position:relative;
+    	top:1px;
+    }
 }

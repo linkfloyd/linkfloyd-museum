@@ -26,13 +26,14 @@ def extract(dict, keys):
 
 @login_required
 def submit(request):
-    if request.POST:
+    if request.method == "POST":
         form = SubmitLinkForm(request.POST)
         if form.is_valid():
             link = form.save(commit=False)
             link.posted_by = request.user
             link.save()
-            return HttpResponseRedirect(link.get_absolute_url())
+            return HttpResponseRedirect("%s?highlight=%s" % (
+                link.channel.get_absolute_url(), link.id))
         else:
             return render_to_response(
                 "links/submit.html", {
@@ -40,9 +41,15 @@ def submit(request):
                     "active_nav_item": "submit"
                 }, context_instance=RequestContext(request))
     else:
+        channel_slug = request.GET.get("channel")
+        if channel_slug:
+            channel = get_object_or_404(Channel, slug=channel_slug)
+        else:
+            channel = False
         return render_to_response(
             "links/submit.html", {
                 "form": SubmitLinkForm(),
+                "channel": channel,
                 "active_nav_item": "submit"
             }, context_instance=RequestContext(request))
 
@@ -146,8 +153,11 @@ class LinksListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LinksListView, self).get_context_data(**kwargs)
+        if "highlight" in self.request.GET:
+            context['highlight'] = int(self.request.GET['highlight'])
+
         context['active_nav_item'] = "links"
-        context['listing'] = self.listing_as_string(self.request)
+        context['listing_title'] = self.listing_as_string(self.request)
         context['top_channels'] = Channel.objects.all().annotate(
             link_count=Count("link")).order_by("-link_count")
         return context
@@ -158,7 +168,7 @@ class LatestLinksView(LinksListView):
 
     def get_context_data(self, **kwargs):
         context = super(LatestLinksView, self).get_context_data(**kwargs)
-        context['listing'] = "Latest Links"
+        context['listing_title'] = "Latest Links"
         return context
 
 class LinksFromUserView(LinksListView):
@@ -167,7 +177,7 @@ class LinksFromUserView(LinksListView):
 
     def get_context_data(self, **kwargs):
         context = super(LinksFromUserView, self).get_context_data(**kwargs)
-        context['listing'] = "Links From %s" % self.kwargs["user"]
+        context['listing_title'] = "Links From %s" % self.kwargs["user"]
         return context
 
 class LinksFromChannelView(LinksListView):
@@ -175,6 +185,10 @@ class LinksFromChannelView(LinksListView):
         return query_builder(self.request, channel=self.kwargs["channel"])
 
     def get_context_data(self, **kwargs):
+        from follow.models import Follow
+
         context = super(LinksFromChannelView, self).get_context_data(**kwargs)
-        context['listing'] = "Links From %s Channel" % get_object_or_404(Channel, slug=self.kwargs["channel"])
+        channel = get_object_or_404(Channel, slug=self.kwargs["channel"])
+        context['listing_title'] = "Links From %s Channel" % channel
+        context['channel'] = channel
         return context
