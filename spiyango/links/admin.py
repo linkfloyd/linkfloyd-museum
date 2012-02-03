@@ -24,7 +24,6 @@ class ReportAdmin(admin.ModelAdmin):
     reported_link.allow_tags = True
 
 admin.site.register(Link, LinkAdmin)
-admin.site.register(Channel)
 admin.site.register(Comment)
 admin.site.register(Language)
 admin.site.register(Report, ReportAdmin)
