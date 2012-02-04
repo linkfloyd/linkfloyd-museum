@@ -37,7 +37,6 @@
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
                 <ul class="channels">
-                    <li class="butonized"><a href="/channels/create/">Create a Channel</a></li>
                     {% for subscription in user.subscription_set.all %}
                         <li><a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a></li>
                     {% endfor %}
@@ -59,19 +58,20 @@
     </div>
     <div class="content section">
         <h2 class="header">{{listing_title}}
-            <span class="right">
+            <ul class="right flat-list">
                 {% if channel %}
-                    {% if user|is_following:channel %}
-                        <a href="#" class="unsubscribe" x:channel_id="{{channel.id}}">Unsubscribe</a>
-                    {% else %}
-                        <a href="#" class="subscribe" x:channel_id="{{channel.id}}">Subscribe</a>
-                    {% endif %}
+                    <li><a href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a></li>
+                    <li>
+                        {% if user|is_following:channel %}
+                            <a href="/channels/subscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>
+                        {% else %}
+                            <a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a>
+                        {% endif %}
+                    </li>
                 {% endif %}
-            </span></h2>
+            </ul>
+        </h2>
         <div class="body">
-            {%  if channel %}
-                <a class="butonized" style="display: block" href="/links/submit/?channel={{ channel.slug }}">Add a Link to {{ channel }}</a>
-            {% endif %}
             {% for link in links %}
                 {% include "links/link_as_list_item.html" %}
             {% empty %}

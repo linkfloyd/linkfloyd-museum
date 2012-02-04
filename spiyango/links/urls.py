@@ -1,9 +1,7 @@
 
-from django.conf.urls.defaults import patterns, include, url
-from spiyango.links.models import Link
+from django.conf.urls.defaults import patterns, url
 
 from spiyango.links.views import LinkDetail
-from spiyango.links.views import LinksListView
 from spiyango.links.views import LinksFromUserView
 from spiyango.links.views import LinksFromChannelView
 from spiyango.links.views import LatestLinksView

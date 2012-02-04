@@ -47,9 +47,9 @@
             <span class="right">
                 {% if channel %}
                     {% if user|is_following:channel %}
-                        <a href="#" class="unsubscribe" x:channel_id="{{channel.id}}">Unsubscribe</a>
+                        <a href="{% url unsubscribe_channel channel %}" class="unsubscribe">Unsubscribe</a>
                     {% else %}
-                        <a href="#" class="subscribe" x:channel_id="{{channel.id}}">Subscribe</a>
+                        <a href="{% url subscribe_channel channel %}" class="subscribe">Subscribe</a>
                     {% endif %}
                 {% endif %}
             </span></h2>
