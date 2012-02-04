@@ -54,6 +54,10 @@ def unsubscribe(request, slug):
     except Subscription.DoesNotExist:
         messages.add_message(request, messages.INFO, 'You are already unsubscribed from %s channel' % channel)
         return HttpResponseRedirect(channel.get_absolute_url())
+    except Subscription.MultipleObjectsReturned:
+        Subscription.objects.filter(user=request.user, channel=channel).delete()
+        messages.add_message(request, messages.INFO, 'You are unsubscribed to %s channel' % channel)
+        return HttpResponseRedirect(channel.get_absolute_url())
 
     subscription.delete()
     messages.add_message(request, messages.INFO, 'You are unsubscribed to %s channel' % channel)
