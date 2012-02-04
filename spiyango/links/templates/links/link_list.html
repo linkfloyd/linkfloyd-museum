@@ -63,7 +63,7 @@
                     <li><a href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a></li>
                     <li>
                         {% if user|is_following:channel %}
-                            <a href="/channels/subscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>
+                            <a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>
                         {% else %}
                             <a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a>
                         {% endif %}
