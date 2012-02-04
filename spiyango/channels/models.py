@@ -40,3 +40,6 @@ class Subscription(models.Model):
     def __unicode__(self):
         return "%s's subscription to %s as %s" % (
             self.user, self.channel, self.status)
+
+    class Meta:
+        unique_together = ("user", "channel")

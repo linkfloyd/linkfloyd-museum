@@ -25,7 +25,6 @@ def create(request):
                 "channels/create.html", {
                     "form": form
                 }, context_instance=RequestContext(request))
-
     else:
         return render_to_response(
             "channels/create.html", {
@@ -56,5 +55,6 @@ def unsubscribe(request, slug):
         messages.add_message(request, messages.INFO, 'You are already unsubscribed from %s channel' % channel)
         return HttpResponseRedirect(channel.get_absolute_url())
 
+    subscription.delete()
     messages.add_message(request, messages.INFO, 'You are unsubscribed to %s channel' % channel)
     return HttpResponseRedirect(channel.get_absolute_url())
