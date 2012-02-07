@@ -88,7 +88,8 @@ def query_builder(request, **kwargs):
     query = Q()
 
     if request.user.is_authenticated():
-        query = query & ~Q(report__in = Report.objects.filter(reporter=request.user))
+        query = query & ~Q(
+            report__in = Report.objects.filter(reporter=request.user))
         preferences = UserPreferences.objects.get(user=request.user)
         query = query & \
             Q(language__in = preferences.known_languages.all()) & \
@@ -114,7 +115,8 @@ def query_builder(request, **kwargs):
             query = query & Q(url__contains=request.GET['domain'])
 
     if kwargs.has_key("days"):
-        query = query & Q(posted_at__gte=datetime.today() - timedelta(days=kwargs['days']))
+        query = query & Q(
+            posted_at__gte=datetime.today() - timedelta(days=kwargs['days']))
     else:
         if request.GET.has_key("days"):
             try:
@@ -123,7 +125,8 @@ def query_builder(request, **kwargs):
                 days = False
 
             if days:
-                query = query & Q(posted_at__gte=datetime.today() - timedelta(days=days))
+                query = query & Q(
+                    posted_at__gte=datetime.today() - timedelta(days=days))
 
     if kwargs.has_key("order_by"):
         order_by = kwargs["order_by"]

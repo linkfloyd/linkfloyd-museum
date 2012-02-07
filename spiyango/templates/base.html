@@ -46,27 +46,19 @@
 				    <ul class="flat-list navigation">
                         {% block extra_nav %}
                         {% endblock extra_nav %}
-					    <li>
-                            <a href="#" {%if active_nav_item == "links"%}class="active"{%endif%}>
-                                {% trans "Links" %}
+                        <li>
+                            <a href="#" {%if active_nav_item == "channels"%}class="active"{%endif%}>
+                                {% trans "Channels" %}
                             </a>
                             <ul class="sub">
                                 <li>
-						            <a href="/">{% trans "Highest" %}</a>
+						            <a href="{% url browse_channels %}">{% trans "Browse" %}</a>
                                 </li>
                                 <li>
-						            <a href="/links/latest/">{% trans "Controversial" %}</a>
+						            <a href="{% url create_channel %}">{% trans "Create" %}</a>
                                 </li>
-                                <li>
-						            <a href="/links/latest/">{% trans "Latest" %}</a>
-                                </li>
-                                {% if user.is_authenticated %}
-                                <li>
-                                	<a href="/links/from/{{user.username}}/">{% blocktrans with user=user%}From {{user}}{% endblocktrans %}</a>
-    					        </li>
-                                {% endif %}
                             </ul>
-					    </li>
+                        </li>
 
                         {% if user.is_authenticated %}
                         <li>

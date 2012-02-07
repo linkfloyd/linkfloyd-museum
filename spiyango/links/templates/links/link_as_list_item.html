@@ -16,11 +16,6 @@
 	</a>
 	{% endif %}
     <div class="header">
-        <div class="tags">
-            {% for tag in link.tags.all %}
-            <span class="tag"><a href="/links/list/?tagged={{tag.slug}}">{{tag}}</a></span>
-            {% endfor %}
-        </div>
 	    <h3 class="title"><a href="{{link.url}}" target="_blank">{{link.title}}</a></h3>
     </div>
     {% if link.description %}<p class="description">{{link.description}}</p>{% endif %}

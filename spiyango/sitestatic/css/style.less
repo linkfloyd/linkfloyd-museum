@@ -27,7 +27,7 @@ a {
     font-weight: normal;
 }
 a#logo {
-    top: 15px;
+    top: 8px;
     font-size: 36px;
     font-family: 'Lilita One', cursive;
     color: darken(@white, 5%);
@@ -78,7 +78,7 @@ div#head {
     ul.navigation {
         font-size: 12px;
         > li {
-            border-right: 1px lighten(@black, 5%)  solid;
+            border-right: 1px lighten(@black, 5%) solid;
             border-left: 1px lighten(@black, 19%) solid;
         }
         li {
@@ -204,6 +204,24 @@ a#logo {
 	float: left;
 	margin: -3px 0 0 0;
 }
+div.channels {
+    div.channel {
+        overflow: auto;
+        border-bottom: 1px dashed lighten;
+        padding: 5px;
+
+        h3.name {
+            font-size:13px;
+            line-height: 16px;
+            margin: 0 0 0 0;
+            padding: 0;
+            a {
+                font-weight: bold;
+                font-effect: outline;
+            }
+        }
+    }
+}
 div.link {
 	overflow: auto;
     float:both;
@@ -221,9 +239,6 @@ div.link {
         width: 40px;
         padding: 0 5px 0 0;
         margin: 0 5px 0 0;
-        div.avatar {
-            margin: 0 0 20px 0;
-        }
         border-right: 1px solid lighten(@pencil-grey, 10%);
     }
     a.thumbnail {

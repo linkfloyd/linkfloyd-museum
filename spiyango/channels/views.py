@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from channels.forms import CreateChannelForm
 from channels.models import Subscription, Channel
 from django.contrib import messages
+from django.views.generic import DetailView, ListView
 
 
 @login_required
@@ -37,12 +38,15 @@ def subscribe(request, slug):
     channel = get_object_or_404(Channel, slug=slug)
 
     try:
-        subscription = Subscription.objects.create(user=request.user, channel=channel)
+        subscription = Subscription.objects.create(
+            user=request.user, channel=channel)
     except Subscription.IntegrityError:
-        messages.add_message(request, messages.INFO, 'You are already subscribed to %s channel' % channel)
+        messages.add_message(request, messages.INFO,
+            'You are already subscribed to %s channel' % channel)
         return HttpResponseRedirect(channel.get_absolute_url())
 
-    messages.add_message(request, messages.INFO, 'You are subscribed to %s channel' % channel)
+    messages.add_message(request, messages.INFO,
+        'You are subscribed to %s channel' % channel)
     return HttpResponseRedirect(channel.get_absolute_url())
 
 @login_required
@@ -50,15 +54,26 @@ def unsubscribe(request, slug):
     channel = get_object_or_404(Channel, slug=slug)
 
     try:
-        subscription = Subscription.objects.get(user=request.user, channel=channel)
+        subscription = Subscription.objects.get(
+            user=request.user, channel=channel)
     except Subscription.DoesNotExist:
-        messages.add_message(request, messages.INFO, 'You are already unsubscribed from %s channel' % channel)
+        messages.add_message(request, messages.INFO,
+            'You are already unsubscribed from %s channel' % channel)
         return HttpResponseRedirect(channel.get_absolute_url())
     except Subscription.MultipleObjectsReturned:
         Subscription.objects.filter(user=request.user, channel=channel).delete()
-        messages.add_message(request, messages.INFO, 'You are unsubscribed to %s channel' % channel)
+        messages.add_message(request, messages.INFO,
+            'You are unsubscribed to %s channel' % channel)
         return HttpResponseRedirect(channel.get_absolute_url())
 
     subscription.delete()
-    messages.add_message(request, messages.INFO, 'You are unsubscribed to %s channel' % channel)
+    messages.add_message(request, messages.INFO,
+        'You are unsubscribed to %s channel' % channel)
     return HttpResponseRedirect(channel.get_absolute_url())
+
+class BrowseChannelsView(ListView):
+    context_object_name = "channels"
+    paginate_by = 20
+
+    def get_queryset(self):
+        return Channel.objects.all()
