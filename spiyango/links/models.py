@@ -31,7 +31,6 @@ class Comment(models.Model):
     body = models.TextField()
     posted_by = models.ForeignKey(User, related_name="posted_by")
     posted_at = models.DateTimeField(auto_now_add=True)
-    reported_by = models.ManyToManyField(User, null=True, blank=True)
 
     def __unicode__(self):
         return "%s's comment on %s" % (self.posted_by, self.link)
@@ -89,7 +88,9 @@ class Link(models.Model):
 
     def get_full_url(self):
         from django.contrib.sites.models import Site
-        return "http://" + Site.objects.get_current().domain + self.get_absolute_url()
+        return "http://" + \
+            Site.objects.get_current().domain + \
+            self.get_absolute_url()
 
     def get_editing_url(self):
         return "/links/edit/%s/" % self.id

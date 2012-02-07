@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.urls')),
     url(r'^preferences/', include('preferences.urls')),
     url(r'^subscriptions/', include('follow.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 )
 
 if settings.DEBUG:

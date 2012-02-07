@@ -11,7 +11,7 @@ from datetime import datetime
 from datetime import timedelta
 
 from links.models import Link, Channel, Report
-from links.forms import SubmitLinkForm, EditLinkForm
+from links.forms import SubmitLinkForm, EditLinkForm, SubmitCommentForm
 
 from preferences.models import UserPreferences
 from django.db.models import Q
@@ -25,7 +25,7 @@ def extract(dict, keys):
     return dict
 
 @login_required
-def submit(request):
+def submit_link(request):
     if request.method == "POST":
         form = SubmitLinkForm(request.POST)
         if form.is_valid():
@@ -71,15 +71,28 @@ def edit(request, pk):
             "form": EditLinkForm(
                 instance=get_object_or_404(
                     Link, pk=pk, posted_by=request.user)),
-            }, context_instance=RequestContext(request))
+            }, context_instance=RequestContext(request)
+        )
 
-class LinkDetail(DetailView):
-    queryset = Link.objects.all()
+def link_detail(request, link_id):
+    link = get_object_or_404(Link, id=link_id)
+    link.inc_shown()
 
-    def get_object(self):
-        object  = super(LinkDetail, self).get_object()
-        object.inc_shown()
-        return object
+    if request.method == "POST":
+        form = SubmitCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.posted_by = request.user
+            comment.save()
+            form = SubmitCommentForm(initial={"link": link.id})
+    else:
+        form = SubmitCommentForm(initial={"link": link.id})
+
+    return render_to_response("links/link_detail.html",
+        {
+            "form": form,
+            "link": link
+        }, context_instance=RequestContext(request))
 
 def query_builder(request, **kwargs):
     """Builds query via requestitem, if kwargs given overrides request.

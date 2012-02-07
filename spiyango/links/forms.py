@@ -1,5 +1,5 @@
 from django import forms
-from links.models import Link, Report, SITE_RATINGS
+from links.models import Link, Report, Comment, SITE_RATINGS
 
 class SubmitLinkForm(forms.ModelForm):
     thumbnail_url = forms.URLField(
@@ -32,3 +32,12 @@ class SubmitReportForm(forms.ModelForm):
     class Meta:
         model = Report
         exclude = ['reporter',]
+
+class SubmitCommentForm(forms.ModelForm):
+    link = forms.ModelChoiceField(
+        queryset=Link.objects.all(),
+        widget=forms.HiddenInput())
+
+    class Meta:
+        model = Comment
+        exclude = ['posted_by',]

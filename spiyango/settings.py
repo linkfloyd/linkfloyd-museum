@@ -137,7 +137,6 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     'devserver',
-
 )
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
@@ -184,3 +183,5 @@ LOGGING = {
         },
     }
 }
+
+COMMENTS_APP = 'threadedcomments'
