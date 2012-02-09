@@ -34,10 +34,7 @@ $(document).ajaxSend(function(event, xhr, settings) {
     }
 });
 function show_login() {
-    window.loginDialog = new Boxy($("#loginDialog", {
-        title: "Please login",
-        modal: true
-    }));
+    alert("Please Login");
 };
 $(document).ready(function() {
     $(".vote_buttons").bind("vote", function(event, value) {
@@ -47,7 +44,7 @@ $(document).ready(function() {
 	        url: "/api/votes/vote/",
 	        data: {
                 'model': vote_el.attr("x:model"),
-                'object_id': vote_el.attr("x:object_id"),
+                'id': vote_el.attr("x:id"),
                 'value': value
             },
 	        success : function(data, textStatus, jqXHR) {	
@@ -63,15 +60,16 @@ $(document).ready(function() {
                 if (value == 0) {
                     vote_el.find("a.upVote, a.downVote").removeClass("voted");
                 }
-	        }
+	        },
+            statusCode: {
+                401:  function(){
+                    show_login();
+                }
+            }
         });
     });
     $('.upVote, .downVote').live('click', function(){
-        if (window.user_is_authenticated) {
-            $(this).parent().trigger("vote", $(this).attr("x:value"));
-        } else {
-            show_login();
-        }
+        $(this).parent().trigger("vote", $(this).attr("x:value"));
     });
     $(".link").bind("delete", function(event) {
         var link_el = $(this);
@@ -83,14 +81,43 @@ $(document).ready(function() {
             },
 	        success : function(data, textStatus, jqXHR) {	
                 link_el.slideUp();
-	        }
+	        },
+            statusCode: {
+                401:  function(){
+                    show_login();
+                }
+            }
+        });
+    });
+    $(".comment").bind("delete", function(event) {
+        var comment_el = $(this);
+	    $.ajax({
+            type: "GET",
+	        url: "/api/comments/delete/",
+	        data: {
+                'id': comment_el.attr("id")
+            },
+	        success : function(data, textStatus, jqXHR) {	
+                comment_el.slideUp();
+	        },
+            statusCode: {
+                401:  function(){
+                    show_login();
+                }
+            }
         });
     });
     $('.deleteLink').live('click', function(){
         var link_el = $(this).parent().parent().parent();
-        Boxy.confirm("Are you sure to remove this link?", function(){
-            link_el.trigger("delete");
-        });
+        var accepted = confirm("Are you sure to remove this link?");
+        if (accepted) { link_el.trigger("delete"); }
+        return false;
+    });
+    $('.deleteComment').live('click', function(){
+        var comment_el = $(this).parent().parent().parent();
+        var accepted = confirm("Are you sure to remove this comment?");
+        if (accepted) { comment_el.trigger("delete"); }
+        return false;
     });
     $("a.playble").click(function() {
         var link_el = $(this).parent();
@@ -99,7 +126,8 @@ $(document).ready(function() {
             embed_player.remove();
 
         } else {
-            link_el.append('<div class="embed_player">' + $(this).attr("play") + '</div>');
+            link_el.append(
+                '<div class="embed_player">' + $(this).attr("play") + '</div>');
         }
         return false;
     });
@@ -118,34 +146,5 @@ $(document).ready(function() {
                     hideAndUnload: true
                 });
         }
-    });
-    $('#submitReportForm').live('submit', function() {
-        var form = $(this);
-        if (form.find("#id_reason option:selected").val()) {
-     	    $.ajax({
-                type: 'POST',
-         	    url: "/api/reports/post/",
-         	    data: form.serialize(),
-        	    success : function(data, textStatus, jqXHR) {
-                    window.submitReportDialog.hide();
-                    Boxy.alert("We have recieved your report. Thank you for your interest.");
-                    $(".link#" + form.find("[name=link]").val()).slideUp();
-        	    },
-                error: function(){
-                    window.submitReportDialog.hide();
-                }
-            });
-        } else {
-            alert("There was a problem with your report sorry :(");
-        }
-
-        return false;
-        /*
-        if (form.find("#id_reason option:selected").val()) {
-            console.log(form.serialize());
-        } else {
-            form.find("label[for=id_reason] > ul.errorlist").show();
-        }
-        return false;*/
     });
 });

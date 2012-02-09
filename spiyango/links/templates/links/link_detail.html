@@ -14,9 +14,12 @@
     {% include "links/link_as_list_item.html" %}
 
     {% for comment in link.comment_set.all %}
-        <div class="comment">
+    <div class="comment" id="{{comment.id}}">
             <img class="avatar" src="{% gravatar_for_user link.posted_by 40 %}" />
-            <div class="body">{{ comment.body }}</p>
+            <div class="body">{{ comment.body|linebreaks }}</div>
+            <ul class="actions flat-list">
+                <li><a class="deleteComment" href="#">Delete</a></li>
+            </ul>
         </div>
     {% endfor %}
 
@@ -26,11 +29,10 @@
         <div class="fieldWrapper">
             <label for="id_comment">{{form.comment.errors}}Comment:</label>
             {{ form.link }}
-
             {{ form.body }}
         </div>
         <input type="submit">
     </form>
-
 </div>
+<script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
 {% endblock content %}

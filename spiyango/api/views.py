@@ -3,7 +3,8 @@ from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 
 from spiyango.utils import get_info
-from spiyango.links.models import Link, Channel
+from spiyango.channels.models import Channel
+from spiyango.links.models import Link, Comment
 
 from gravatar import make as gravatar
 
@@ -17,10 +18,10 @@ def fetch_info(request):
 
 @login_required
 def delete_link(request):
-    if request.GET.has_key("object_id"):
+    if request.GET.has_key("id"):
         try:
             link = Link.objects.get(
-                pk=request.GET['object_id'], posted_by=request.user)
+                pk=request.GET['id'], posted_by=request.user)
         except Link.DoesNotExist:
             return HttpResponse(status=404)
         link.delete()
@@ -29,41 +30,17 @@ def delete_link(request):
         return HttpResponse(status=400)
 
 @login_required
-def subscribe(request):
-    if request.GET.has_key("channel_id"):
+def delete_comment(request):
+    if request.GET.has_key("id"):
         try:
-            channel = Channel.objects.get(pk=request.GET['channel_id'])
-        except Channel.DoesNotExist:
+            comment = Comment.objects.get(
+                pk=request.GET['id'], posted_by=request.user)
+        except Comment.DoesNotExist:
             return HttpResponse(status=404)
-        if not channel.subscribers.filter(id=request.user.id):
-            channel.subscribers.add(request.user.id)
-            return HttpResponse(
-                simplejson.dumps({
-                    "status": "subscribed",
-                    "subscriber": {
-                        "username": request.user.username,
-                        "gravatar": gravatar(request.user.email, size=30)
-                    },
-                    "channel": {
-                        "name": channel.title
-                    }
-                }, 'application/javascript'))
-        else:
-            channel.subscribers.remove(request.user.id)
-            return HttpResponse(
-                simplejson.dumps({
-                    "status": "unsubscribed",
-                    "subscriber": {
-                        "username": request.user.username,
-                        "gravatar": gravatar(request.user.email, size=30)
-                    },
-                    "channel": {
-                        "name": channel.title
-                    }
-                }, 'application/javascript'))
+        comment.delete()
+        return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)
-
 
 def channels_list(request):
 
