@@ -130,6 +130,8 @@ INSTALLED_APPS = (
     'spiyango.channels',
 
     # 3th party
+    'tinymce',
+    'django_extensions',
     'taggit',
     'sorl.thumbnail',
     'qhonuskan_votes',
@@ -184,4 +186,3 @@ LOGGING = {
     }
 }
 
-COMMENTS_APP = 'threadedcomments'

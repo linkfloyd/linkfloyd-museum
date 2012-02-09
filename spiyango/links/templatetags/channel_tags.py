@@ -4,4 +4,7 @@ register = template.Library()
 
 @register.filter
 def is_following(user, channel):
-    return bool(Subscription.objects.filter(user=user, channel=channel).count())
+    if not user.is_authenticated():
+        return bool(Subscription.objects.filter(user=user, channel=channel).count())
+    else:
+        return False

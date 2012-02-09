@@ -21,7 +21,7 @@ class Channel(models.Model):
         return "/links/channel/%s/" % self.slug
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="channel_subscription")
     channel = models.ForeignKey(Channel)
 
     status = models.CharField(

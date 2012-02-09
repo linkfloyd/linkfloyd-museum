@@ -14,8 +14,7 @@ urlpatterns = patterns('',
     url(r'^api/', include('spiyango.api.urls')),
     url(r'^accounts/', include('registration.urls')),
     url(r'^preferences/', include('preferences.urls')),
-    url(r'^subscriptions/', include('follow.urls')),
-    url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^newsletter/', include('newsletter.urls')),
 )
 
 if settings.DEBUG:
