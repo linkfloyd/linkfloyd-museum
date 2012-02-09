@@ -1,5 +1,0 @@
-{% extends "base.html" %}{% load i18n %}
-{% block content %}
-{% for link in latest_links %}{% include "links/link_as_list_item.html" %}{% empty %}<div class="oops">{% trans "No links shared today. Share it now!" %}</div>{% endfor %}
-{% csrf_token %}
-{% endblock content %}
