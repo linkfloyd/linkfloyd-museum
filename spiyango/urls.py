@@ -14,10 +14,21 @@ urlpatterns = patterns('',
     url(r'^api/', include('spiyango.api.urls')),
     url(r'^accounts/', include('registration.urls')),
     url(r'^preferences/', include('preferences.urls')),
-    url(r'^newsletter/', include('newsletter.urls')),
+    url(r'^invite/', include('privatebeta.urls')),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$',  'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT, 'show_indexes': True}))
+        (r'^media/(?P<path>.*)$',
+         'django.views.static.serve',
+         {
+             'document_root': settings.MEDIA_ROOT,
+             'show_indexes': True
+        }),
+        (r'^static/(?P<path>.*)$',
+         'django.views.static.serve',
+         {
+             'document_root': settings.STATIC_ROOT,
+             'show_indexes': True
+        })
+    )
