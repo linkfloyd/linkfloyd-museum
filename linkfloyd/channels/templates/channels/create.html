@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% load i18n %}
+{% block extra_head %}
+    {{form.media}}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/libs/token-input.less">
+{% endblock %}
+{% block content %}
+<div class="one-column">
+    <div class="content section narrow">
+        <h2 class="header">Create a Channel</h2>
+        <div class="body">
+		    <form action="#" method="post">
+                <div class="fieldWrapper">
+
+                    <label for="id_name">{{ form.name.errors }}{% trans "Name" %}
+                        <span class="desc">{{form.name.help_text}}</label>
+                    {{ form.name }}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="id_slug">{{ form.slug.errors }}{% trans "Slug" %}
+                        <span class="desc">{{form.slug.help_text|safe}}</label>
+                    {{ form.slug }}
+                </div>
+                <div class="fieldWrapper">
+                    <label fory="id_description">{{ form.description.errors }}{% trans "Description" %}
+                        <span class="desc">{{form.description.help_text}}</label>
+                    {{ form.description }}
+                </div>
+			    {% csrf_token %}
+                <input type="submit" value="{% trans 'Submit' %}" />
+		    </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("span#slug_preview").slugify('input#id_name');
+    $("input#id_slug").slugify('input#id_name');
+</script>
+{% endblock content %}

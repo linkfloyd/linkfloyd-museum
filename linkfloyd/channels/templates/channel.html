@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block extra_head %}
+    <script type="text/javascript"
+            src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.js">
+    </script>
+{% if highlight %}<script type="text/javascript" src="{{STATIC_URL}}/js/libs/jquery.color.js"></script>
+{% endif %}
+{% endblock extra_head %}
+
