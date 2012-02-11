@@ -11,8 +11,12 @@
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
                 <ul class="channels">
-                    {% for subscription in user.subscription_set.all %}
-                        <li><a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a></li>
+                    {% for subscription in user.channel_subscriptions.all %}
+                    <li>
+                        <a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a>
+                    </li>
+                    {% empty %}
+                    <li>You don't have any subscriptions yet. You can <a href="{% url browse_channels %}">Browse channels</a> to find channels for subscribing.</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -34,7 +38,9 @@
         <h2 class="header">{{listing_title}}
             <ul class="right flat-list">
                 {% if channel %}
-                    <li><a href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a></li>
+                    <li>
+                        <a href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a>
+                    </li>
                     <li>
                         {% if user|is_following:channel %}
                             <a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>

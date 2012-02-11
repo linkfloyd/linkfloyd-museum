@@ -10,6 +10,7 @@ from datetime import datetime
 from datetime import timedelta
 
 from links.models import Link, Channel, Report
+from channels.models import Subscription
 from links.forms import SubmitLinkForm, EditLinkForm, SubmitCommentForm
 
 from preferences.models import UserPreferences
@@ -76,7 +77,6 @@ def edit(request, pk):
 def link_detail(request, link_id):
     link = get_object_or_404(Link, id=link_id)
     link.inc_shown()
-
     if request.method == "POST":
         form = SubmitCommentForm(request.POST)
         if form.is_valid():
@@ -86,7 +86,6 @@ def link_detail(request, link_id):
             form = SubmitCommentForm(initial={"link": link.id})
     else:
         form = SubmitCommentForm(initial={"link": link.id})
-
     return render_to_response("links/link_detail.html",
         {
             "form": form,
@@ -100,13 +99,21 @@ def query_builder(request, **kwargs):
     query = Q()
 
     if request.user.is_authenticated():
-        query = query & ~Q(
-            report__in = Report.objects.filter(reporter=request.user))
+
+        query = query & ~Q(report__in = \
+            Report.objects.filter(reporter=request.user))
+
         preferences = UserPreferences.objects.get(user=request.user)
+
         query = query & \
             Q(language__in = preferences.known_languages.all()) & \
             Q(rating__lte  = preferences.max_rating)
 
+        if kwargs.has_key('from_subscriptions'):
+            query = query & Q(channel__in=[\
+                subscription.channel for subscription in \
+                    Subscription.objects.filter(user=request.user)
+            ])
 
     if kwargs.has_key('user'):
         query = query & Q(posted_by__username=kwargs['user'])
@@ -160,9 +167,12 @@ class LinksListView(ListView):
         return query_builder(self.request)
 
     def listing_as_string(self, request):
-        query_dict = extract(dict(self.request.GET), ("user", "channel", "domain"))
+        query_dict = extract(dict(self.request.GET),("user",
+                                                     "channel",
+                                                     "domain"))
         postfix = ""
-        for k, v in query_dict.iteritems():
+        items = query_dict.iteritems()
+        for k, v in items:
             postfix += "%s: %s " % (k, v[0])
             return "Listing: %s" % postfix
 
@@ -176,6 +186,18 @@ class LinksListView(ListView):
         context['top_channels'] = Channel.objects.all().annotate(
             link_count=Count("link")).order_by("-link_count")
         return context
+
+
+class IndexView(LinksListView):
+    def get_queryset(self):
+        return query_builder(
+            self.request, order_by="-posted_at", from_subscriptions=True)
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['listing_title'] = "Links from your subscripted channels"
+        return context
+
 
 class LatestLinksView(LinksListView):
     def get_queryset(self):
@@ -200,7 +222,6 @@ class LinksFromChannelView(LinksListView):
         return query_builder(self.request, channel=self.kwargs["channel"])
 
     def get_context_data(self, **kwargs):
-        from follow.models import Follow
 
         context = super(LinksFromChannelView, self).get_context_data(**kwargs)
         channel = get_object_or_404(Channel, slug=self.kwargs["channel"])
