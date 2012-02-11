@@ -127,7 +127,6 @@ class Report(models.Model):
     seen = models.BooleanField(default=False)
 
     def get_link_url(self):
-        # needed to show admin list
         return self.link.get_absolute_url()
 
     def __unicode__(self):
