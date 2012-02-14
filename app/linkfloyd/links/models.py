@@ -5,6 +5,8 @@ from django.db import models
 from django.db.models import F
 from django.db.models import Sum
 
+from links.utils import query_builder
+
 from linkfloyd.utils import SumWithDefault
 from linkfloyd.channels.models import Channel
 
