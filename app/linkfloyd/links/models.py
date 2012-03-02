@@ -14,7 +14,6 @@ from qhonuskan_votes.models import VotesField
 
 from transmeta import TransMeta
 
-
 SITE_RATINGS = (
     (1, _("Safe Posts (only safe content)")),
     (2, _("Moderate (can contain nudity, rude gestures)")),
@@ -25,15 +24,6 @@ SITE_LANGUAGES = (
     ("tr", "Turkish"),
     ("en", "English"),
 )
-
-class Comment(models.Model):
-    link = models.ForeignKey("Link")
-    body = models.TextField()
-    posted_by = models.ForeignKey(User, related_name="posted_by")
-    posted_at = models.DateTimeField(auto_now_add=True)
-
-    def __unicode__(self):
-        return "%s's comment on %s" % (self.posted_by, self.link)
 
 
 class Language(models.Model):

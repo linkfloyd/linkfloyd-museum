@@ -7,7 +7,8 @@
 body {
     padding: 0;
     margin: 0;
-    background: darken(@white, 5%);
+    // background: darken(@white, 5%);
+    background: #2b1b0c url(http://tum.bz/images/interface/bg.jpg?1325729345);
     font-size: 13px;
     font-family: sans-serif;
 }
@@ -35,9 +36,20 @@ a#logo {
     font-family: 'Lilita One', cursive;
     color: darken(@white, 5%);
 }
+pre, ol, ul, blockquote  {
+    padding: 5px;
+    margin:0 0 10px 0;
+}
+blockquote {
+    margin: 0;
+    padding: 5px;
+    border: 1px @pencil-grey solid;
+    background: lighten(@pencil-grey, 20%);
+}
 div.wrapper {
     width: 960px;
     margin: 0 auto;
+    padding: 5px;
 }
 ul.flat-list {
     margin: 0;
@@ -75,6 +87,9 @@ div#head {
     border-bottom: 1px solid @black;
     overflow: visible;
     height: 50px;
+    div.wrapper {
+        padding: 0;
+    }
     .left {
         margin: 0 0 0 200px;
     }
@@ -108,19 +123,18 @@ div#head {
             }
         }
         ul.sub {
-            background: lighten(@black, 6%);
-            border-top: 1px lighten(@black, 20%) solid;
+            background: lighten(@black, 12%);
             border-left: 1px lighten(@black, 20%) solid;
             border-right: 1px lighten(@black, 6%) solid;
             border-bottom: 1px lighten(@black, 6%) solid;
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
             position: absolute;
-            width: 100px;
+            min-width: 100px;
             top: 50px;
-            left: 0;
+            left: -1px;
             margin: 0;
-            padding: 0;
+            padding: 0 10px;
             z-index: 10;
             list-style-type: none;
              > li > a {
@@ -198,6 +212,11 @@ div#content {
 	margin: 20px 0;
     overflow: auto;
     min-height: 10em;
+    div.wrapper {
+        background: white;
+        border-radius: 5px;
+        overflow: auto;
+    }
 }
 a#logo {
 	display: block;

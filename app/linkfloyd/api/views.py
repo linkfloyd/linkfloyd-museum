@@ -2,9 +2,10 @@ from django.http import HttpResponse
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 
-from linkfloyd.utils import get_info
-from linkfloyd.channels.models import Channel
-from linkfloyd.links.models import Link, Comment
+from utils import get_info
+from channels.models import Channel
+from links.models import Link
+from comments.models import Comment
 
 def fetch_info(request):
     if request.GET.has_key("url"):

@@ -95,7 +95,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'privatebeta.middleware.PrivateBetaMiddleware',
 )
 
 ROOT_URLCONF = 'linkfloyd.urls'
@@ -118,6 +117,7 @@ INSTALLED_APPS = (
     'linkfloyd.links',
     'linkfloyd.preferences',
     'linkfloyd.channels',
+    'linkfloyd.comments',
 
     # 3th party
     'django_extensions',
@@ -127,7 +127,6 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     'devserver',
-    'privatebeta'
 )
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']

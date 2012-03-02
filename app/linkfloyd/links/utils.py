@@ -3,7 +3,11 @@ from django.db.models import Q, Sum
 def query_builder(request, **kwargs):
     """Builds query via requestitem, if kwargs given overrides request.
     """
-    from links.models import Link
+    from links.models import Link, Report, Channel
+    from preferences.models import UserPreferences
+    from channels.models import Channel, Subscription
+    from datetime import datetime
+    from datetime import timedelta
 
     query = Q()
 

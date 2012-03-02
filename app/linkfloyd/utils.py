@@ -14,7 +14,8 @@ urlopen = client.open
 
 def get_info(url):
     """Fetches the contents of url and extracts (and utf-8 encodes)
-       the contents of <title>"""
+       the contents of title, description and embed data
+    """
 
     resp_dict = {} # response dict
 
@@ -59,7 +60,8 @@ def get_info(url):
             img_src_bs = bs.find("link", attrs={"rel": "image_src"})
             if img_src_bs:
                 resp_dict['image'] = img_src_bs['href']
-                resp_dict['player'] = "<img src='%s' class='embed' />" %  img_src_bs['href']
+                resp_dict['player'] = "<img src='%s' class='embed' />" \
+                    % img_src_bs['href']
             else:
                 first_img_bs = bs.find("img")
                 if first_img_bs:
@@ -71,16 +73,20 @@ def get_info(url):
             resp_dict['title'] = resp_dict['title'].strip()
 
             try:
-                resp_dict['title'] = BeautifulStoneSoup(resp_dict['title'],
-                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+                resp_dict['title'] = BeautifulStoneSoup(
+                    resp_dict['title'],
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+                ).contents[0]
             except IndexError:
                 pass
 
             if resp_dict.has_key('description'):
                 resp_dict['description'] == resp_dict['description'].strip()
             try:
-                resp_dict['description'] = BeautifulStoneSoup(resp_dict['description'],
-                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES).contents[0]
+                resp_dict['description'] = BeautifulStoneSoup(
+                    resp_dict['description'],
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+                ).contents[0]
             except KeyError:
                 pass
 
@@ -129,13 +135,67 @@ def get_info(url):
     opener.close()
     return resp_dict
 
+# -----------------------------------------------------------------------------
 
 class SumWithDefault(aggregates.Aggregate):
     name = 'SumWithDefault'
-
-
 class SQLSumWithDefault(sql_aggregates.Sum):
     sql_template = 'COALESCE(%(function)s(%(field)s), %(default)s)'
-
-
 setattr(sql_aggregates, 'SumWithDefault', SQLSumWithDefault)
+
+# -----------------------------------------------------------------------------
+
+def reduced_markdown(text):
+    """
+    Monkey patch for standart markdown library, removes heading tag support
+    and adds prettyprint to pre tags. (for google code prettyfy
+    """
+
+    from markdown import blockprocessors as bp
+    from markdown import util
+    from markdown import markdown
+
+
+    def run_with_prettify(self, parent, blocks):
+        """ Run method is overriden to render pre tag with prettify class """
+
+        sibling = self.lastChild(parent)
+        block = blocks.pop(0)
+        theRest = ''
+        if sibling and sibling.tag == "pre" and len(sibling) \
+            and sibling[0].tag == "code":
+            # The previous block was a code block. As blank lines do not start
+            # new code blocks, append this block to the previous, adding back
+            # linebreaks removed from the split into a list.
+            code = sibling[0]
+            block, theRest = self.detab(block)
+            code.text = util.AtomicString('%s\n%s\n' % \
+                (code.text, block.rstrip()))
+        else:
+            # This is a new codeblock. Create the elements and insert text.
+            pre = util.etree.SubElement(parent, 'pre')
+            pre.attrib['class'] = 'prettyprint'
+            code = util.etree.SubElement(pre, 'code')
+            block, theRest = self.detab(block)
+            code.text = util.AtomicString('%s\n' % block.rstrip())
+        if theRest:
+            # This block contained unindented line(s) after the first indented
+            # line. Insert these lines as the first block of the master blocks
+            # list for future processing.
+            blocks.insert(0, theRest)
+
+    def build_block_parser(md_instance, **kwargs):
+        """ Build reduced block parser used by Markdown. """
+        parser = bp.BlockParser(md_instance)
+        parser.blockprocessors['empty'] = bp.EmptyBlockProcessor(parser)
+        parser.blockprocessors['code'] = bp.CodeBlockProcessor(parser)
+        parser.blockprocessors['olist'] = bp.OListProcessor(parser)
+        parser.blockprocessors['ulist'] = bp.UListProcessor(parser)
+        parser.blockprocessors['quote'] = bp.BlockQuoteProcessor(parser)
+        parser.blockprocessors['paragraph'] = bp.ParagraphProcessor(parser)
+        return parser
+
+    bp.build_block_parser = build_block_parser
+    bp.CodeBlockProcessor.run = run_with_prettify
+
+    return markdown(text)

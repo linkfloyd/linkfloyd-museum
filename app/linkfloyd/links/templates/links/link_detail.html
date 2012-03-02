@@ -3,27 +3,34 @@
 
 {% block title %}{{link.title}}{% endblock title %}
 
+{% block extra_head %}
+    <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+	<link href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            prettyPrint()
+        });
+    </script>
+{% endblock %}
+
 {% if link.thumbnail_url %}
     {% block og_image %}{{link.thumbnail_url}}{% endblock %}
 {% endif %}
 
 {% block content %}
 <div class="section">
-
     <h2 class="header">{{link.title}} via <a href="#">{{link.posted_by}}</h3>
     {% include "links/link_as_list_item.html" %}
-
     {% for comment in link.comment_set.all %}
     <div class="comment" id="{{comment.id}}">
             <img class="avatar" src="{% gravatar_for_user link.posted_by 40 %}" />
-            <div class="body">{{ comment.body|linebreaks }}</div>
+            <div class="body">{{ comment.as_html|safe }}</div>
             <ul class="actions flat-list">
                 <li><a class="deleteComment" href="#">Delete</a></li>
             </ul>
         </div>
     {% endfor %}
-
-    <form action="#" method="post" style="clear: both">
+    <form action="/comments/submit/" method="post" style="clear: both">
         {% csrf_token %}
         {{ form.errors }}
         <div class="fieldWrapper">
@@ -31,7 +38,7 @@
             {{ form.link }}
             {{ form.body }}
         </div>
-        <input type="submit">
+        <input type="submit" value="Submit">
     </form>
 </div>
 <script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>

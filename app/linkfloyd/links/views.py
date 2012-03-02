@@ -3,26 +3,17 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, ListView
-from django.db.models import Sum, Count
+from django.views.generic import  ListView
 
-from datetime import datetime
-from datetime import timedelta
+from channels.models import Subscription
 
 from links.models import Link, Channel, Report
-from channels.models import Subscription
-from links.forms import SubmitLinkForm, EditLinkForm, SubmitCommentForm
+from links.utils import query_builder
+
+from links.forms import SubmitLinkForm, EditLinkForm
+from comments.forms import SubmitCommentForm
 
 from preferences.models import UserPreferences
-from django.db.models import Q
-
-
-def extract(dict, keys):
-    new_dict = {}
-    for key in keys:
-        if dict.has_key(key):
-            new_dict[key] = dict[key]
-    return dict
 
 @login_required
 def submit_link(request):
@@ -75,57 +66,37 @@ def edit(request, pk):
         )
 
 def link_detail(request, link_id):
+
     link = get_object_or_404(Link, id=link_id)
     link.inc_shown()
-    if request.method == "POST":
-        form = SubmitCommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.posted_by = request.user
-            comment.save()
-            form = SubmitCommentForm(initial={"link": link.id})
-    else:
-        form = SubmitCommentForm(initial={"link": link.id})
     return render_to_response("links/link_detail.html",
-        {
-            "form": form,
-            "link": link
-        }, context_instance=RequestContext(request))
+    {
+        "link": link,
+        "form": SubmitCommentForm(initial={"link": link})
+    }, context_instance=RequestContext(request))
+
 
 class LinksListView(ListView):
-
     context_object_name = "links"
     paginate_by = 20
 
     def get_queryset(self):
         return query_builder(self.request)
 
-    def listing_as_string(self, request):
-        query_dict = extract(dict(self.request.GET),("user",
-                                                     "channel",
-                                                     "domain"))
-        postfix = ""
-        items = query_dict.iteritems()
-        for k, v in items:
-            postfix += "%s: %s " % (k, v[0])
-            return "Listing: %s" % postfix
-
     def get_context_data(self, **kwargs):
         context = super(LinksListView, self).get_context_data(**kwargs)
+
         if "highlight" in self.request.GET:
             context['highlight'] = int(self.request.GET['highlight'])
 
         context['active_nav_item'] = "links"
-        context['listing_title'] = self.listing_as_string(self.request)
-        context['top_channels'] = Channel.objects.all().annotate(
-            link_count=Count("link")).order_by("-link_count")
         return context
 
 
 class IndexView(LinksListView):
     def get_queryset(self):
         return query_builder(
-            self.request, order_by="-posted_at", from_subscriptions=True)
+            self.request, from_subscriptions=True)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
