@@ -1,5 +1,6 @@
 from django import template
 from channels.models import Subscription
+
 register = template.Library()
 
 @register.filter

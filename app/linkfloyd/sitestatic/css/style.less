@@ -177,6 +177,7 @@ div.two-column {
     div.panel {
         width: 200px;
         float: right;
+
         ul.channels {
             margin: 0;
             padding: 0;
@@ -227,18 +228,38 @@ a#logo {
 div.channels {
     div.channel {
         overflow: auto;
-        border-bottom: 1px dashed lighten;
         padding: 5px;
+        margin: 0 0 10px 0;
+        width: 350px;
+        height: 60px;
+        background: #ddd;
+        a.subscription_status {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
 
+            background: yellow url(../img/icons/subscribe.png) no-repeat;
+
+            padding: 3px 10px 3px 25px;
+            float: right;
+            text-align: right;
+            content: 'Subscribe';
+            &.following {
+                background: green url(../img/icons/subscribed.png) no-repeat;
+                content: 'Subscripted';
+            }
+        }
         h3.name {
             font-size:13px;
             line-height: 16px;
-            margin: 0 0 0 0;
+            margin: 0 0 10px 0;
             padding: 0;
             a {
                 font-weight: bold;
                 font-effect: outline;
             }
+        }
+        div.description {
+            font-size: 10px;
         }
     }
 }

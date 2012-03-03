@@ -1,4 +1,9 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load channel_tags %}
+
+{% block extra_head %}
+     <script type="text/javascript" src="https://raw.github.com/desandro/masonry/master/jquery.masonry.min.js"></script>
+{% endblock %}
+
 {% block content %}
 <div class="two-column">
     <div class="panel">
@@ -6,15 +11,19 @@
     <div class="content section channels">
         <h2 class="header">Browsing Channels</h2>
         {% for channel in channels %}
-        <div class="channel">
-            <div class="header">
-                <h3 class="name">
-                    <a href="{{channel.get_absolute_url}}">
-                    {{channel.name}}
-                    </a>
-                </h3>
+            <div class="channel {% cycle 'left' 'right' %}">
+                <a href="#" class="subscription_status{% if user|is_following:channel %} following{% endif %}">
+                    {% if user|is_following:channel %}Subscripted{% else %}Subscribe{% endif %}
+                </a>
+                <div class="header">
+                    <h3 class="name">
+                        <a href="{{channel.get_absolute_url}}">{{channel.name}}</a>
+                    </h3>
+                </div>
+                <div class="description">
+                    {{ channel.description|truncatewords:5|linebreaks }}
+                </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </div>

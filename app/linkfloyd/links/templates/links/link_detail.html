@@ -30,6 +30,7 @@
             </ul>
         </div>
     {% endfor %}
+    {% if user.is_authenticated %}
     <form action="/comments/submit/" method="post" style="clear: both">
         {% csrf_token %}
         {{ form.errors }}
@@ -40,6 +41,10 @@
         </div>
         <input type="submit" value="Submit">
     </form>
+    {% else %}
+    <p class="warning">
+        This conversation is missing your voice. Take five seconds to <a href="{% url registration_register %}">join Linkfloyd</a> or <a href="{% url auth_login %}">log in</a>.
+    {% endif %}
 </div>
 <script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
 {% endblock content %}
