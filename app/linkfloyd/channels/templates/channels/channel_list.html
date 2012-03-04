@@ -1,30 +1,31 @@
 {% extends "base.html" %}{% load channel_tags %}
 
 {% block extra_head %}
-     <script type="text/javascript" src="https://raw.github.com/desandro/masonry/master/jquery.masonry.min.js"></script>
+     <script type="text/javascript" src="{{STATIC_PREFIX}}js/csrf_fix.js"></script>
+     <script type="text/javascript" src="{{STATIC_PREFIX}}js/subscriptions.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="two-column">
-    <div class="panel">
-    </div>
-    <div class="content section channels">
-        <h2 class="header">Browsing Channels</h2>
-        {% for channel in channels %}
-            <div class="channel {% cycle 'left' 'right' %}">
-                <a href="#" class="subscription_status{% if user|is_following:channel %} following{% endif %}">
-                    {% if user|is_following:channel %}Subscripted{% else %}Subscribe{% endif %}
-                </a>
-                <div class="header">
-                    <h3 class="name">
-                        <a href="{{channel.get_absolute_url}}">{{channel.name}}</a>
-                    </h3>
-                </div>
-                <div class="description">
-                    {{ channel.description|truncatewords:5|linebreaks }}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
+     <div class="two-column">
+         <div class="panel">
+         </div>
+         <div class="content section channels">
+             <h2 class="header">Browsing Channels</h2>
+             {% for channel in channels %}
+                 <div id="{{ channel.slug }}" class="channel {% cycle 'left' 'right' %}">
+                     <a href="#" class="subscription_status{% if user|is_following:channel %} subscribed{% endif %}">
+                         {% if user|is_following:channel %}Subscripted{% else %}Subscribe{% endif %}
+                     </a>
+                     <div class="header">
+                         <h3 class="name">
+                             <a href="{{channel.get_absolute_url}}">{{channel.name}}</a>
+                         </h3>
+                     </div>
+                     <div class="description">
+                         {{ channel.description|truncatewords:5|linebreaks }}
+                     </div>
+                 </div>
+             {% endfor %}
+         </div>
+     </div>
 {% endblock %}

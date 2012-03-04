@@ -3,7 +3,7 @@ from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 
 from utils import get_info
-from channels.models import Channel
+from channels.models import Channel, Subscription
 from links.models import Link
 from comments.models import Comment
 
@@ -40,6 +40,50 @@ def delete_comment(request):
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)
+
+@login_required
+def subscribe_channel(request):
+    if request.GET.has_key("channel_slug"):
+        try:
+            channel = Channel.objects.get(
+                slug=request.GET['channel_slug'])
+        except Channel.DoesNotExist:
+            return HttpResponse(status=404)
+
+        already_subscribed = bool(Subscription.objects.filter(
+                user=request.user,
+                channel=channel).count())
+
+        if already_subscribed:
+            return HttpResponse(status=400)
+        else:
+            Subscription.objects.create(
+                user=request.user, channel=channel)
+            return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
+
+
+@login_required
+def unsubscribe_channel(request):
+    print request.GET.get('channel_slug')
+    if request.GET.has_key("channel_slug"):
+        try:
+            channel = Channel.objects.get(
+                slug=request.GET['channel_slug'])
+        except Channel.DoesNotExist:
+            return HttpResponse(status=404)
+        try:
+            subscription = Subscription.objects.get(
+                user=request.user,
+                channel=channel)
+        except Subscription.DoesNotExist:
+            return HttpResponse(status=404)
+        subscription.delete()
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
+
 
 def channels_list(request):
 
@@ -79,3 +123,4 @@ def post_report(request):
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=400)
+

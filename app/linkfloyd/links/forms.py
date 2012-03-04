@@ -1,6 +1,5 @@
 from django import forms
 from links.models import Link, Report, SITE_RATINGS
-
 class SubmitLinkForm(forms.ModelForm):
     thumbnail_url = forms.URLField(
         widget=forms.widgets.HiddenInput,
