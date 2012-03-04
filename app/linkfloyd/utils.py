@@ -89,6 +89,8 @@ def get_info(url):
                 ).contents[0]
             except KeyError:
                 pass
+            except IndexError:
+                pass
 
         # if thumbnail url is relative, make it absolute url.
 
