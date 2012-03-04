@@ -4,6 +4,7 @@
 @threadless: #1b325f;
 @self-conscience: #fce6bf;
 @merry-widow: #8989ff;
+@positive: #339933;
 body {
     padding: 0;
     margin: 0;
@@ -227,25 +228,30 @@ a#logo {
 }
 div.channels {
     div.channel {
-        overflow: auto;
+        overflow: display;
         padding: 5px;
         margin: 0 0 10px 0;
-        width: 350px;
+        width: 360px;
         height: 60px;
-        background: #ddd;
+        background: lighten(@pencil-grey, 20%);
+        border-radius: 3px;
         a.subscription_status {
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
-
-            background: yellow url(../img/icons/subscribe.png) no-repeat;
-
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            background: @pencil-grey url(../img/icons/subscribe.png) top left no-repeat;
+            border: 1px outset lighten(@pencil-grey, 15%);
+            margin: 0 -7px 0 0;
             padding: 3px 10px 3px 25px;
             float: right;
             text-align: right;
             content: 'Subscribe';
             &.subscribed {
-                background: green url(../img/icons/subscribed.png) no-repeat;
-                content: 'Subscripted';
+                background-image: url(../img/icons/subscribed.png);
+                background-color: @positive;
+                border: 1px outset lighten(@positive, 15%);
+
             }
         }
         h3.name {
