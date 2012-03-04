@@ -14,7 +14,7 @@
              {% for channel in channels %}
                  <div id="{{ channel.slug }}" class="channel {% cycle 'left' 'right' %}">
                      <a href="#" class="subscription_status{% if user|is_following:channel %} subscribed{% endif %}">
-                         {% if user|is_following:channel %}Subscripted{% else %}Subscribe{% endif %}
+                         {% if user|is_following:channel %}Subscribed{% else %}Subscribe{% endif %}
                      </a>
                      <div class="header">
                          <h3 class="name">
