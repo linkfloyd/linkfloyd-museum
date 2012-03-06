@@ -14,10 +14,12 @@ urlpatterns = patterns('',
     url(r'^links/', include('linkfloyd.links.urls')),
     url(r'^channels/', include('linkfloyd.channels.urls')),
     url(r'^comments/', include('linkfloyd.comments.urls')),
-    url(r'^api/', include('linkfloyd.api.urls')),
     url(r'^accounts/', include('registration.urls')),
     url(r'^preferences/', include('preferences.urls')),
+    url(r'^invitations/', include('invitation.urls')),
+    url(r'^api/', include('linkfloyd.api.urls')),
     url(r'^404/$', direct_to_template, {'template': '404.html'}),
+    url(r'^500/$', direct_to_template, {'template': '500.html'}),
 
 )
 

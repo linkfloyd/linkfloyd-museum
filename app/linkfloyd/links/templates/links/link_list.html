@@ -52,13 +52,13 @@
             <ul class="right flat-list">
                 {% if channel %}
                     <li>
-                        <a href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a>
+                        <a class="buttonized" href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a>
                     </li>
                     <li>
                         {% if user|is_following:channel %}
-                            <a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>
+                            <a class="buttonized" href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>
                         {% else %}
-                            <a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a>
+                            <a class="buttonized" href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a>
                         {% endif %}
                     </li>
                 {% endif %}
@@ -72,12 +72,7 @@
                     {% trans "No links found." %}
                 </p>
             {% endfor %}
-                <div class="pagination">
-                    <span class="page_links">
-                        {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">previous</a>{% endif %}
-                        {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">next</a>{% endif %}
-                    </span>
-                </div>
+            {% include "pagination_links.html" %}
         </div>
     </div>
 </div>

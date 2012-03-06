@@ -41,6 +41,16 @@ pre, ol, ul, blockquote  {
     padding: 5px;
     margin:0 0 10px 0;
 }
+.buttonized {
+    background: lighten(@black, 12%);
+    padding: 5px 10px;
+    color: lighten(@black, 60%);
+    font-weight: bold;
+    border-radius: 3px;
+    &:hover {
+        color: white;
+    }
+}
 blockquote {
     margin: 0;
     padding: 5px;
@@ -417,11 +427,6 @@ div.link {
         }
     }
 }
-div.boxy-content {
-    form {
-        padding: 5px;
-    }
-}
 form {
 	display:block;
     overflow: auto;
@@ -478,24 +483,19 @@ form {
         background: lighten(@pencil-grey, 15%);
         border-radius: 3px;
         border: none;
-        // box-shadow: inset 0 0 6px darken(@pencil-grey, 30%);
     }
     textarea {
         height: 70px;
     }
     input[type='submit'], input[type='button'] {
-	    font-size:16px;
-	    padding: 5px 0;
 	    margin-top:10px;
-        margin-left: 40px;
-        width: 100px;
         float: right;
-        background: lighten(@black, 20%);
         color: @white;
+        width: auto;
+        .buttonized;
     }
     input[type='submit'].small, input[type='button'].small {
         padding: 5px 0 5px 0;
-        width: 100px;
     }
     .busy {
         background: url(/static/loading.gif) top right no-repeat;
@@ -613,5 +613,16 @@ div.comment {
         margin: 4px 10px 0 60px;
         font-size: 10px;
         li { float: right; }
+    }
+}
+div.pagination {
+    clear: both;
+    span.page_links {
+        a.previous {
+            float: left;
+        }
+        a.next {
+            float: right;
+        }
     }
 }

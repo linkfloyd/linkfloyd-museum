@@ -22,10 +22,11 @@
                          </h3>
                      </div>
                      <div class="description">
-                         {{ channel.description|truncatewords:5|linebreaks }}
+                         {{ channel.description|linebreaks }}
                      </div>
                  </div>
              {% endfor %}
+             {% include "pagination_links.html" %}
          </div>
      </div>
 {% endblock %}

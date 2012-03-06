@@ -113,7 +113,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
 
-    # sitepiyango
+    # linkfloyd
     'linkfloyd.links',
     'linkfloyd.preferences',
     'linkfloyd.channels',
@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     'devserver',
+    'invitation',
 )
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
