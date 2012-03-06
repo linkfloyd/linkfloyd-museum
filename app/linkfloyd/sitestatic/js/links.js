@@ -35,7 +35,6 @@ $(document).ready( function() {
             }
         });
     });
-
     $('.deleteLink').live('click', function(){
         var link_el = $(this).parent().parent().parent();
         var accepted = confirm("Are you sure to remove this link?");

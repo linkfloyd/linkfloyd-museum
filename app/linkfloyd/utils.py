@@ -42,7 +42,10 @@ def get_info(url):
             resp_dict['title'] = og_title_bs['content']
         else:
             del(og_title_bs) # i like working sooo clean :)
-            title_bs = bs.html.head.title
+            try:
+                title_bs = bs.html.head.title
+            except AttributeError:
+                title_bs = None
             if title_bs and title_bs.string:
                 resp_dict['title'] = title_bs.string
 

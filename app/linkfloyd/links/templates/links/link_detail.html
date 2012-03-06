@@ -1,16 +1,19 @@
 {% extends "base.html" %}
-{% load i18n gravatar %}
+{% load i18n gravatar qhonuskan_votes %}
 
 {% block title %}{{link.title}}{% endblock title %}
 
 {% block extra_head %}
     <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
 	<link href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             prettyPrint()
         });
     </script>
+    {% voting_script %}
 {% endblock %}
 
 {% if link.thumbnail_url %}

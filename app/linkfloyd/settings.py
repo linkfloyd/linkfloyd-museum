@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'invitation',
 )
 
+
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
 DEVSERVER_MODULES = (
     'devserver.modules.profile.LineProfilerModule',

@@ -1,9 +1,9 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags qhonuskan_votes %}
 
 {% block extra_head %}
-    {% if highlight %}<script type="text/javascript" src="{{STATIC_URL}}/js/libs/jquery.color.js"></script>{% endif %}
-    <script type="text/javascript" src="{{STATIC_URL}}/js/csrf_fix.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}/js/links.js"></script>
+    {% if highlight %}<script type="text/javascript" src="{{STATIC_URL}}js/libs/jquery.color.js"></script>{% endif %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
     {% voting_script %}
 {% endblock extra_head %}
 
