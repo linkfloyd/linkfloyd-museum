@@ -121,5 +121,5 @@ class SubscriptionsView(BrowseChannelsView):
     def get_context_data(self, **kwargs):
         context = super(SubscriptionsView, self).get_context_data(**kwargs)
         context['active_nav_item'] = "channels"
-        context['title'] = "Browsing Channels"
+        context['title'] = "Browsing Your Subscripted Channels"
         return context
