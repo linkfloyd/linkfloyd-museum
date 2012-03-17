@@ -39,14 +39,14 @@
                             </a>
                             <ul class="sub">
                                 <li>
-						            <a href="{% url browse_channels %}">{% trans "Browse" %}</a>
+						            <a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a>
                                 </li>
                                 <li>
-						            <a href="{% url create_channel %}">{% trans "Create" %}</a>
+						            <a href="{% url create_channel %}">{% trans "Create a Channel" %}</a>
                                 </li>
                                 {% if user.is_authenticated %}
                                 <li>
-						            <a href="#">{% trans "Subscriptions" %}</a>
+						            <a href="{% url browse_subscriptions %}">{% trans "Your Subscriptions" %}</a>
                                 </li>
                                 {% endif %}
 

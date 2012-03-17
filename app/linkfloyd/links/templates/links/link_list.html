@@ -17,14 +17,16 @@
             </div>
             <div class="actions section">
                 <h2 class="header">{% trans "Actions" %}</h2>
-                {% if user|is_following:channel %}
-                    <li><a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a></li>
-                {% else %}
-                    <li><a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a></li>
-                {% endif %}
-                {% if user|subscription_status:channel == 'admin' %}
-                    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
-                {% endif %}
+                    <ul>
+                    {% if user|is_following:channel %}
+                        <li><a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a></li>
+                    {% else %}
+                        <li><a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a></li>
+                    {% endif %}
+                    {% if user|subscription_status:channel == 'admin' %}
+                        <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+                    {% endif %}
+                </ul>
             </div>
 
         {% endif %}

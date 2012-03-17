@@ -10,7 +10,7 @@
          <div class="panel">
          </div>
          <div class="content section channels">
-             <h2 class="header">Browsing Channels</h2>
+             <h2 class="header">{{title}}</h2>
              {% for channel in channels %}
                  <div id="{{ channel.slug }}" class="channel {% cycle 'left' 'right' %}">
                      <a href="#" class="subscription_status{% if user|is_following:channel %} subscribed{% endif %}">

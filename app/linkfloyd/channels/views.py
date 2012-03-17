@@ -102,6 +102,24 @@ def unsubscribe(request, slug):
 class BrowseChannelsView(ListView):
     context_object_name = "channels"
     paginate_by = 20
+    template_name = "channels/channel_list.html"
 
     def get_queryset(self):
         return Channel.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(BrowseChannelsView, self).get_context_data(**kwargs)
+        context['active_nav_item'] = "channels"
+        context['title'] = "Browsing Channels"
+        return context
+
+class SubscriptionsView(BrowseChannelsView):
+    def get_queryset(self):
+        return Channel.objects.filter(
+            id__in=[s.channel.id for s in Subscription.objects.filter(user=self.request.user)])
+
+    def get_context_data(self, **kwargs):
+        context = super(SubscriptionsView, self).get_context_data(**kwargs)
+        context['active_nav_item'] = "channels"
+        context['title'] = "Browsing Channels"
+        return context
