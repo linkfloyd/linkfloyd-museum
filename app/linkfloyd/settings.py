@@ -150,6 +150,10 @@ EMAIL_HOST_PASSWORD = "kukuleta"
 ACCOUNT_ACTIVATION_DAYS = 3
 LOGIN_REDIRECT_URL = "/"
 
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda user: "/links/from/%s/" % user.username,
+}
+
 # GRAVATAR
 GRAVATAR_DEFAULT_IMAGE = "mm"
 

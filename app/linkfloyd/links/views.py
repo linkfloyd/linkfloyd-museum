@@ -120,6 +120,8 @@ class LinksFromUserView(LinksListView):
     def get_context_data(self, **kwargs):
         context = super(LinksFromUserView, self).get_context_data(**kwargs)
         context['listing_title'] = "Links From %s" % self.kwargs["user"]
+        context['profile'] = get_object_or_404(
+            UserPreferences, user__username = self.kwargs["user"])
         return context
 
 class LinksFromChannelView(LinksListView):

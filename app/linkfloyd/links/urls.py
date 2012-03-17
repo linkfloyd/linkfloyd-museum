@@ -1,6 +1,5 @@
 from django.conf.urls.defaults import patterns, url
 
-
 from linkfloyd.links.views import LinksFromUserView
 from linkfloyd.links.views import LinksFromChannelView
 from linkfloyd.links.views import LatestLinksView

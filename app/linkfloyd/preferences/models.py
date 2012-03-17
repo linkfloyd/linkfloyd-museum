@@ -7,6 +7,11 @@ from links.models import SITE_RATINGS
 
 class UserPreferences(models.Model):
     user = models.ForeignKey(User)
+    description= models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text="describe yourself")
     known_languages = models.ManyToManyField(Language)
     max_rating = models.PositiveIntegerField(
         verbose_name = "Maximum Rating",

@@ -11,11 +11,18 @@
 <div class="two-column">
     <div class="panel">
         {% if channel %}
-            <div class="about_channel section">
+            <div class="about section">
                 <h2 class="header">{% trans "About Channel" %}</h2>
                 <p class="channel_description">{{channel.description|linebreaks}}</p>
             </div>
         {% endif %}
+        {% if profile %}
+            <div class="about section">
+                <h2 class="header">{% trans "About User" %}</h2>
+                <p class="channel_description">{{profile.description}}</p>
+            </div>
+        {% endif %}
+
         {% if user.is_authenticated %}
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
