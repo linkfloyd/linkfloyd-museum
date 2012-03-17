@@ -22,6 +22,7 @@
 				    <ul class="flat-list navigation">
                         {% block extra_nav %}
                         {% endblock extra_nav %}
+                        {% if user.is_authenticated %}
                         <li>
                             <a href="#">
                                 {% trans "Links" %}
@@ -31,8 +32,8 @@
 						            <a href="{% url links_from_user user %}">{% trans "From You" %}</a>
                                 </li>
                             </ul>
-
                         </li>
+                        {% endif %}
                         <li>
                             <a href="#" {%if active_nav_item == "channels"%}class="active"{%endif%}>
                                 {% trans "Channels" %}
