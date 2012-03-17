@@ -4,7 +4,7 @@ import os
 
 ugettext = lambda s: s # dummy ugettext function, as django's docs say
 
-DEBUG = True
+from local_settings import DEBUG
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__.decode('utf-8')))
@@ -14,7 +14,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 
 DATABASES = {
     'default': {

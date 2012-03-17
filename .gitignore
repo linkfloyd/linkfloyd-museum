@@ -1,1 +1,2 @@
 *.pyc
+/app/linkfloyd/local_settings.py
