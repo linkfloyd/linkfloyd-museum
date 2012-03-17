@@ -23,6 +23,17 @@
                         {% block extra_nav %}
                         {% endblock extra_nav %}
                         <li>
+                            <a href="#">
+                                {% trans "Links" %}
+                            </a>
+                            <ul class="sub">
+                                <li>
+						            <a href="{% url links_from_user user %}">{% trans "From You" %}</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li>
                             <a href="#" {%if active_nav_item == "channels"%}class="active"{%endif%}>
                                 {% trans "Channels" %}
                             </a>
