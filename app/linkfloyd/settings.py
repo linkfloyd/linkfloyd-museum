@@ -118,9 +118,9 @@ DEVSERVER_MODULES = (
 )
 
 # EMAIL
-SERVER_EMAIL = 'noreply@sitepiyango.com'
+SERVER_EMAIL = 'server@linkfloyd.com'
 SEND_BROKEN_LINK_EMAILS=True
-DEFAULT_FROM_EMAIL = "admin@sitepiyango.com"
+DEFAULT_FROM_EMAIL = "noreply@linkfloyd.com"
 EMAIL_HOST = "smtp.webfaction.com"
 EMAIL_HOST_USER = "miratcan_automessages"
 EMAIL_HOST_PASSWORD = "kukuleta"
