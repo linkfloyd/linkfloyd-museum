@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from channels.forms import CreateChannelForm
+from channels.forms import CreateChannelForm, UpdateChannelForm
 from channels.models import Subscription, Channel
 from django.contrib import messages
 from django.views.generic import DetailView, ListView
@@ -19,7 +19,10 @@ def create(request):
                 channel=channel,
                 status="admin",
                 email_frequency="weekly")
-            messages.add_message(request, messages.INFO, 'You Created %s Channel')
+            messages.add_message(
+                request,
+                messages.INFO,
+                'You Created %s Channel' % channel)
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
             return render_to_response(
@@ -32,6 +35,31 @@ def create(request):
                 "form": CreateChannelForm()
             }, context_instance=RequestContext(request))
 
+@login_required
+def update(request, slug):
+    if request.POST:
+        channel = get_object_or_404(Channel, slug=slug)
+        subscription = get_object_or_404(
+            Subscription, user=request.user, channel=channel, status="admin")
+        form = UpdateChannelForm(request.POST,instance=channel)
+        if form.is_valid():
+            channel = form.save()
+            messages.add_message(
+                request,
+                messages.INFO,
+                'You Updated %s Channel' % channel)
+            return HttpResponseRedirect(channel.get_absolute_url())
+        else:
+            return render_to_response(
+                "channels/update.html", {
+                    "form": form
+                }, context_instance=RequestContext(request))
+    else:
+        channel = get_object_or_404(Channel, slug=slug)
+        return render_to_response(
+            "channels/update.html", {
+                "form": UpdateChannelForm(instance=channel)
+            }, context_instance=RequestContext(request))
 
 @login_required
 def subscribe(request, slug):

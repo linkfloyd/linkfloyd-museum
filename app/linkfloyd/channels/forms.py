@@ -15,3 +15,11 @@ class CreateChannelForm(forms.ModelForm):
         exclude = ["is_official",]
     class Media:
         js = ("js/libs/jquery.slugify.js",)
+
+class UpdateChannelForm(forms.ModelForm):
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'autocomplete':'off'}))
+
+    class Meta:
+        model = Channel
+        exclude = ["is_official", "slug"]

@@ -15,13 +15,28 @@
                 <h2 class="header">{% trans "About Channel" %}</h2>
                 <p class="channel_description">{{channel.description|linebreaks}}</p>
             </div>
+            <div class="actions section">
+                <h2 class="header">{% trans "Actions" %}</h2>
+                {% if user|is_following:channel %}
+                    <li><a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a></li>
+                {% else %}
+                    <li><a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a></li>
+                {% endif %}
+                {% if user|subscription_status:channel == 'admin' %}
+                    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+                {% endif %}
+            </div>
+
         {% endif %}
+
         {% if profile %}
             <div class="about section">
                 <h2 class="header">{% trans "About User" %}</h2>
                 <p class="channel_description">{{profile.description}}</p>
             </div>
         {% endif %}
+
+
 
         {% if user.is_authenticated %}
             <div class="channels section">
@@ -60,13 +75,6 @@
                 {% if channel %}
                     <li>
                         <a class="buttonized" href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a>
-                    </li>
-                    <li>
-                        {% if user|is_following:channel %}
-                            <a class="buttonized" href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a>
-                        {% else %}
-                            <a class="buttonized" href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a>
-                        {% endif %}
                     </li>
                 {% endif %}
             </ul>
