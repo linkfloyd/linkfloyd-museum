@@ -1,0 +1,5 @@
+Hi, {{user}} here's your summary:
+
+{% for link in links %}
+ * {{link.title}} ( http://{{site.domain}}{{link.get_absolute_url }} )
+{% endfor %}
