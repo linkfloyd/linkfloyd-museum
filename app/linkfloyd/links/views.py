@@ -105,7 +105,7 @@ class IndexView(LinksListView):
         return context
 
     def render_to_response(self, context):
-        if self.user.is_authenticated():
+        if self.request.user.is_authenticated():
             if not Subscription.objects.filter(user=self.request.user):
                 messages.add_message(self.request, messages.WARNING,
                     "Please subscribe channels that you are interested in")
