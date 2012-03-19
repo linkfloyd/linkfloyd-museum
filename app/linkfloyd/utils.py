@@ -150,7 +150,7 @@ setattr(sql_aggregates, 'SumWithDefault', SQLSumWithDefault)
 
 # -----------------------------------------------------------------------------
 
-def reduced_markdown(text):
+def reduced_markdown(text, *args, **kwargs):
     """
     Monkey patch for standart markdown library, removes heading tag support
     and adds prettyprint to pre tags. (for google code prettyfy
@@ -203,4 +203,4 @@ def reduced_markdown(text):
     bp.build_block_parser = build_block_parser
     bp.CodeBlockProcessor.run = run_with_prettify
 
-    return markdown(text)
+    return markdown(text, *args, **kwargs)

@@ -2,7 +2,6 @@ from django.db import models
 from links.models import Link
 from django.contrib.auth.models import User
 from utils import reduced_markdown
-from django.utils.html import strip_tags
 
 # Create your models here.
 
@@ -20,5 +19,3 @@ class Comment(models.Model):
         from utils import reduced_markdown
         self.as_html = reduced_markdown(self.body, safe_mode="remove")
         super(Comment, self).save(*args, **kwargs)
-
-
