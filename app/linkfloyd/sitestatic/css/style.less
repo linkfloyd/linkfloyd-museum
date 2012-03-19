@@ -1,7 +1,7 @@
 @black: #000000;
 @white: #ffffff;
 @pencil-grey: #aaaaaa;
-@threadless: #1b325f;
+@threadless: #2B1B0C;
 @self-conscience: #fce6bf;
 @merry-widow: #8989ff;
 @positive: #339933;
@@ -58,9 +58,9 @@ blockquote {
     background: lighten(@pencil-grey, 20%);
 }
 div.wrapper {
-    width: 960px;
+    width: 950px;
     margin: 0 auto;
-    padding: 5px;
+    padding: 10px;
 }
 ul.flat-list {
     margin: 0;
@@ -80,16 +80,19 @@ p.success, p.error, p.warning {
     padding: 20px;
     text-align: center;
 }
-p.success {
+.info {
+
+}
+.success {
     background: green;
     padding: 20px;
     color: white;
 }
-p.warning {
+.warning {
     background: yellow;
     color: black;
 }
-p.error {
+.error {
     background: red;
     color: white;
 }
@@ -220,7 +223,7 @@ div.two-column {
         }
     }
     div.content {
-        width: 750px;
+        width: 735px;
     }
 }
 div#content {
@@ -284,7 +287,7 @@ div.channels {
 div.link {
 	overflow: auto;
     float:both;
-    padding: 5px;
+    padding: 10px 0;
     margin: 0;
     border-bottom: 1px dashed lighten(@pencil-grey, 10%);
     &.highlight {

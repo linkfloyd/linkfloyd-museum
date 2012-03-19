@@ -1,12 +1,13 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.views.generic import  ListView
+from django.contrib import messages
 
 from channels.models import Subscription
-
 from links.models import Link, Channel, Report
 from links.utils import query_builder
 
@@ -92,8 +93,8 @@ class LinksListView(ListView):
         context['active_nav_item'] = "links"
         return context
 
-
 class IndexView(LinksListView):
+
     def get_queryset(self):
         return query_builder(
             self.request, from_subscriptions=True)
@@ -102,6 +103,14 @@ class IndexView(LinksListView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['listing_title'] = "Links From Your Subscripted Channels"
         return context
+
+    def render_to_response(self, context):
+        if not (Subscription.objects.filter(user=self.request.user).count() and
+                self.request.user.is_authenticated()):
+            messages.add_message(self.request, messages.WARNING,
+                "Please subscribe channels that you are interested in")
+            return HttpResponseRedirect(reverse("browse_channels"))
+        return super(IndexView, self).render_to_response(context)
 
 
 class LatestLinksView(LinksListView):
