@@ -42,4 +42,3 @@ class Command(BaseCommand):
 
                 self.stdout.write("Summary email for %s sent" % user)
                 unseen_models.delete()
-
