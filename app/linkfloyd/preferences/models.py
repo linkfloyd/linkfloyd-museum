@@ -19,6 +19,15 @@ class UserPreferences(models.Model):
         help_text="how much can you handle?",
         default=1
     )
+    summary_mails = models.CharField(
+        max_length=10,
+        choices=(("daily", "Daily"),
+                 ("weekly", "Weekly"),
+                 ("monthly", "Monthly"),
+                 ("never", "Never Send")),
+        help_text="When do you want to get summaries of "
+                  "your subscripted channels",
+    )
     def __unicode__(self):
         return "Preferences of %s" % self.user
 

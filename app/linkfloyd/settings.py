@@ -8,8 +8,6 @@ from local_settings import *
 
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__.decode('utf-8')))
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -97,6 +95,7 @@ INSTALLED_APPS = (
     'linkfloyd.preferences',
     'linkfloyd.channels',
     'linkfloyd.comments',
+    'linkfloyd.summaries',
 
     # 3th party
     'django_extensions',
@@ -121,9 +120,11 @@ DEVSERVER_MODULES = (
 SERVER_EMAIL = 'server@linkfloyd.com'
 SEND_BROKEN_LINK_EMAILS=True
 DEFAULT_FROM_EMAIL = "noreply@linkfloyd.com"
-EMAIL_HOST = "smtp.webfaction.com"
-EMAIL_HOST_USER = "miratcan_automessages"
-EMAIL_HOST_PASSWORD = "kukuleta"
+
+#EMAIL_HOST = "smtp.webfaction.com"
+#EMAIL_HOST_USER = "miratcan_automessages"
+#EMAIL_HOST_PASSWORD = "kukuleta"
+EMAIL_PORT = 1025
 
 # REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 3
