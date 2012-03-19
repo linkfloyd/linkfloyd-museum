@@ -24,9 +24,8 @@ class Command(BaseCommand):
                  UserPreferences.objects.filter(summary_mails=period)]
 
         for user in users:
-
-            unseen_links = [unseen.link for unseen in
-                            Unseen.objects.filter(user=user)]
+            unseen_models = Unseen.objects.filter(user=user)
+            unseen_links = [unseen.link for unseen in unseen_models]
 
             if unseen_links:
                 send_mail(
@@ -42,3 +41,5 @@ class Command(BaseCommand):
                 )
 
                 self.stdout.write("Summary email for %s sent" % user)
+                unseen_models.delete()
+

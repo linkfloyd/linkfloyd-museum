@@ -21,6 +21,7 @@ class UserPreferences(models.Model):
     )
     summary_mails = models.CharField(
         max_length=10,
+        default="daily",
         choices=(("daily", "Daily"),
                  ("weekly", "Weekly"),
                  ("monthly", "Monthly"),
