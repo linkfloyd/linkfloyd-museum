@@ -13,10 +13,11 @@ class Unseen(models.Model):
 
 @receiver(post_save, sender=Link)
 def link_saved(sender, **kwargs):
-    link = kwargs['instance']
-    subscriptions = Subscription.objects.filter(channel=link.channel)
-    for subscription in subscriptions:
-        Unseen.objects.get_or_create(user=subscription.user, link=link)
+    if "created" in kwargs:
+        link = kwargs['instance']
+        subscriptions = Subscription.objects.filter(channel=link.channel)
+        for subscription in subscriptions:
+            Unseen.objects.get_or_create(user=subscription.user, link=link)
 
 @receiver(pre_delete, sender=Link)
 def link_deleted(sender, **kwargs):
