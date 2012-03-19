@@ -38,8 +38,6 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = False
 
-MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 STATICFILES_DIRS = (
@@ -122,10 +120,7 @@ SERVER_EMAIL = 'server@linkfloyd.com'
 SEND_BROKEN_LINK_EMAILS=True
 DEFAULT_FROM_EMAIL = "noreply@linkfloyd.com"
 
-#EMAIL_HOST = "smtp.webfaction.com"
-#EMAIL_HOST_USER = "miratcan_automessages"
-#EMAIL_HOST_PASSWORD = "kukuleta"
-EMAIL_PORT = 1025
+
 
 # REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 3
