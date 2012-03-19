@@ -105,11 +105,11 @@ class IndexView(LinksListView):
         return context
 
     def render_to_response(self, context):
-        if (not Subscription.objects.filter(user=self.request.user).count() and
-                self.request.user.is_authenticated()):
-            messages.add_message(self.request, messages.WARNING,
-                "Please subscribe channels that you are interested in")
-            return HttpResponseRedirect(reverse("browse_channels"))
+        if self.user.is_authenticated():
+            if not Subscription.objects.filter(user=self.request.user):
+                messages.add_message(self.request, messages.WARNING,
+                    "Please subscribe channels that you are interested in")
+                return HttpResponseRedirect(reverse("browse_channels"))
         return super(IndexView, self).render_to_response(context)
 
 
