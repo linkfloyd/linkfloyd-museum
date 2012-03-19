@@ -2,6 +2,7 @@ from django.db import models
 from links.models import Link
 from django.contrib.auth.models import User
 from utils import reduced_markdown
+from django.utils.html import strip_tags
 
 # Create your models here.
 
