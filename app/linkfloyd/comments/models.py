@@ -18,7 +18,7 @@ class Comment(models.Model):
 
     def save(self, *args, **kwargs):
         from utils import reduced_markdown
-        self.as_html = reduced_markdown(self.body)
+        self.as_html = reduced_markdown(self.body, safe_mode="remove")
         super(Comment, self).save(*args, **kwargs)
 
 
