@@ -93,7 +93,7 @@ class Link(models.Model):
         self.save()
 
     def __unicode__(self):
-        return "%s by %s" % (self.title, self.posted_by)
+        return u"%s by %s" % (self.title, self.posted_by)
 
 class Report(models.Model):
     reporter = models.ForeignKey(User)
