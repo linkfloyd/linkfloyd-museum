@@ -11,9 +11,12 @@ class Unseen(models.Model):
     user = models.ForeignKey(User)
     link = models.ForeignKey(Link)
 
+    def __unicode__(self):
+        return "%s unseen by %s" % (self.link, self.user)
+
 @receiver(post_save, sender=Link)
 def link_saved(sender, **kwargs):
-    if "created" in kwargs:
+    if kwargs['created'] == True:
         link = kwargs['instance']
         subscriptions = Subscription.objects.filter(channel=link.channel)
         for subscription in subscriptions:
