@@ -28,9 +28,11 @@
     <div class="comment" id="{{comment.id}}">
             <img class="avatar" src="{% gravatar_for_user comment.posted_by 40 %}" />
             <div class="body">{{ comment.as_html|safe }}</div>
-            <ul class="actions flat-list">
-                <li><a class="deleteComment" href="#">Delete</a></li>
-            </ul>
+            {% ifequal comment.posted_by user %}
+                <ul class="actions flat-list">
+                    <li><a class="deleteComment" href="#">Delete</a></li>
+                </ul>
+            {% endifequal %}
         </div>
     {% endfor %}
     {% if user.is_authenticated %}
