@@ -13,7 +13,7 @@ class Comment(models.Model):
     posted_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return "%s's comment on %s" % (self.posted_by, self.link)
+        return u"%s's comment on %s" % (self.posted_by, self.link)
 
     def save(self, *args, **kwargs):
         from utils import reduced_markdown

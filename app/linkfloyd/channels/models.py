@@ -38,7 +38,7 @@ class Subscription(models.Model):
                  ("noemail", "No Email")))
 
     def __unicode__(self):
-        return "%s's subscription to %s as %s" % (
+        return u"%s's subscription to %s as %s" % (
             self.user, self.channel, self.status)
 
     class Meta:
