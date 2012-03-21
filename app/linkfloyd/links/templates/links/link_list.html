@@ -17,16 +17,26 @@
             </div>
             <div class="actions section">
                 <h2 class="header">{% trans "Actions" %}</h2>
-                    <ul>
+                <div class="wrapper">
                     {% if user|is_following:channel %}
-                        <li><a href="/channels/unsubscribe/{{ channel.slug }}/" class="unsubscribe">Unsubscribe</a></li>
+                    <form action="/channels/update_subscription/{{channel.slug}}/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="unsubscribe">
+                        <input type="submit" value="Unsubscibe">
+                    </form>
                     {% else %}
-                        <li><a href="/channels/subscribe/{{ channel.slug }}/" class="subscribe">Subscribe</a></li>
+                    <form action="/channels/update_subscription/{{channel.slug}}/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="subscribe">
+                        <input type="submit" value="Subscibe">
+                    </form>
                     {% endif %}
+                </div>
+                <div class="wrapper">
                     {% if user|subscription_status:channel == 'admin' %}
-                        <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+                        <a class="buttonized" href="{% url update_channel channel.slug %}">Update Channel</a>
                     {% endif %}
-                </ul>
+                </div>
             </div>
 
         {% endif %}
