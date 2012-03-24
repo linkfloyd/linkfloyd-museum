@@ -28,7 +28,7 @@ def submit_link(request):
                 link.channel.get_absolute_url(), link.id))
         else:
             return render_to_response(
-                "links/submit.html", {
+                "links/edit.html", {
                     "form": form,
                     "active_nav_item": "submit"
                 }, context_instance=RequestContext(request))
