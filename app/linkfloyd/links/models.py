@@ -89,7 +89,7 @@ class Link(models.Model):
         return "%s?site=%s" % (Site.objects.get_current().domain, self.url)
 
     def inc_shown(self):
-        self.shown = F('shown') + 1
+        self.shown += 1
         self.save()
 
     def __unicode__(self):
