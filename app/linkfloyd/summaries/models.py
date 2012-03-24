@@ -25,7 +25,7 @@ def link_saved(sender, **kwargs):
 @receiver(pre_delete, sender=Link)
 def link_deleted(sender, **kwargs):
     link = kwargs['instance']
-    unseen.objects.filter(link=link).delete()
+    Unseen.objects.filter(link=link).delete()
 
 
 
