@@ -1,0 +1,11 @@
+{% load gravatar %}
+<div class="comment" id="{{comment.id}}">
+    <img class="avatar" src="{% gravatar_for_user comment.posted_by 40 %}" />
+    <div class="body">{{ comment.as_html|safe }}</div>
+    {% ifequal comment.posted_by user %}
+    <ul class="actions flat-list">
+        <li><a class="deleteComment" href="#">delete</a></li>
+        <li><a class="getEditCommentForm" href="#">edit</a></li>
+    </ul>
+    {% endifequal %}
+</div>

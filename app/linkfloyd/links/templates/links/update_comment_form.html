@@ -1,0 +1,15 @@
+<form action="/comments/update/{{form.instance.id}}/" method="post" style="clear: both">
+    {% csrf_token %}
+    {{ form.errors }}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {% if not field.is_hidden %}
+            <label>{{ field.label }}<span class="desc">{{ field.help_text }}</span></label>
+        {% endif %}
+        {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Update">
+    <input class="cancelUpdate" type="button" value="Cancel">
+</form>
