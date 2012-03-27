@@ -7,7 +7,7 @@ from utils import reduced_markdown
 
 class Comment(models.Model):
     link = models.ForeignKey(Link)
-    body = models.TextField()
+    body = models.TextField(help_text="you can use markdown here")
     as_html = models.TextField(blank=True)
     posted_by = models.ForeignKey(User, related_name="posted_by")
     posted_at = models.DateTimeField(auto_now_add=True)

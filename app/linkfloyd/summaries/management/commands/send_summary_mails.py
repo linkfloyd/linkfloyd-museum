@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.conf import settings
+rom django.conf import settings
 
 from preferences.models import UserPreferences
 from summaries.models import Unseen

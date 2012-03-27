@@ -13,7 +13,7 @@ from links.models import Link, Channel, Report
 from links.utils import query_builder
 
 from links.forms import SubmitLinkForm, EditLinkForm
-from comments.forms import SubmitCommentForm
+from comments.forms import CommentForm
 
 from preferences.models import UserPreferences
 
@@ -47,7 +47,7 @@ def submit_link(request):
             }, context_instance=RequestContext(request))
 
 @login_required
-def edit(request, pk):
+def update(request, pk):
     if request.POST:
         form = EditLinkForm(
             request.POST,
@@ -76,7 +76,7 @@ def link_detail(request, link_id):
     return render_to_response("links/link_detail.html",
     {
         "link": link,
-        "form": SubmitCommentForm(initial={"link": link})
+        "form": CommentForm(initial={"link": link})
     }, context_instance=RequestContext(request))
 
 

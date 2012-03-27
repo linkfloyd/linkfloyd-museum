@@ -41,6 +41,10 @@ pre, ol, ul, blockquote  {
     padding: 5px;
     margin:0 0 10px 0;
 }
+ol, ul {
+    padding: 0 0 0 40px;
+}
+
 .buttonized {
     background: lighten(@black, 12%);
     padding: 5px 10px;
@@ -51,12 +55,7 @@ pre, ol, ul, blockquote  {
         color: white;
     }
 }
-blockquote {
-    margin: 0;
-    padding: 5px;
-    border: 1px @pencil-grey solid;
-    background: lighten(@pencil-grey, 20%);
-}
+
 div.wrapper {
     width: 950px;
     margin: 0 auto;
@@ -472,6 +471,9 @@ form {
                 font-size: 10px;
                 font-weight: normal;
                 margin: 0 0 0 6px;
+                a {
+                    text-decoration: underline;
+                }
             }
         }
         ul.errorlist {
@@ -513,14 +515,14 @@ form {
         height: 70px;
     }
     input[type='submit'], input[type='button'] {
-	    margin-top:10px;
+	    margin:10px 10px 0 0;
         float: right;
         color: @white;
         width: auto;
         .buttonized;
-    }
-    input[type='submit'].small, input[type='button'].small {
-        padding: 5px 0 5px 0;
+        &:first-child {
+            margin-right: 0;
+        }
     }
     .busy {
         background: url(/static/loading.gif) top right no-repeat;
@@ -622,7 +624,6 @@ div.comment {
     clear: both;
     margin: 5px 0;
     border-bottom: 1px dashed lighten(@pencil-grey, 10%);
-
     img.avatar {
         float: left;
         border-radius: 3px;
@@ -637,7 +638,22 @@ div.comment {
     ul.actions {
         margin: 4px 10px 0 60px;
         font-size: 10px;
-        li { float: right; }
+        li {
+            float: right;
+            margin: 0 10px 0 0;
+        }
+    }
+    blockquote {
+        margin: 0 0 10px 0;
+        padding: 5px;
+        border: 1px @pencil-grey solid;
+        background: lighten(@pencil-grey, 20%);
+        p {
+            margin: 5px 0;
+        }
+    }
+    a {
+        text-decoration: underline;
     }
 }
 div.pagination {

@@ -2,7 +2,7 @@ from django import forms
 from comments.models import Comment
 from links.models import Link
 
-class SubmitCommentForm(forms.ModelForm):
+class CommentForm(forms.ModelForm):
 
     link = forms.ModelChoiceField(
         queryset=Link.objects.all(),
@@ -10,4 +10,4 @@ class SubmitCommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        exclude = ['posted_by',]
+        exclude = ['posted_by', 'as_html']

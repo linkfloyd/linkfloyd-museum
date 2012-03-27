@@ -9,6 +9,6 @@ urlpatterns = patterns('',
     url(r'^channel/(?P<channel>[-\w+]+)/$', LinksFromChannelView.as_view(), name='links_from_channel'),
     url(r'^latest/$', LatestLinksView.as_view(), name='latest_links'),
     url(r'^submit/$', 'linkfloyd.links.views.submit_link', name='submit_link'),
-    url(r'^edit/(?P<pk>\d+)/$', 'linkfloyd.links.views.edit', name='edit_link'),
+    url(r'^update/(?P<pk>\d+)/$', 'linkfloyd.links.views.update', name='update_link'),
     url(r'^(?P<link_id>\d+)/$', 'linkfloyd.links.views.link_detail', name='show_link'),
 )

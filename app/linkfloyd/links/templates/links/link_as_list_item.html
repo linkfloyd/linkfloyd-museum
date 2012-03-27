@@ -18,7 +18,7 @@
     <ul class="flat-list actions">
         <li><a href="{{link.get_absolute_url}}">Comments ({{link.comment_set.count}})</a></li>
         {% ifequal link.posted_by user %}
-        <li><a href="{{link.get_editing_url}}">{% trans "Edit" %}</a></li>
+        <li><a href="{% url update_link link.id %}">{% trans "Update" %}</a></li>
         <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
         {% endifequal %}
         <li>

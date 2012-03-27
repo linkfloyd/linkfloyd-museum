@@ -1,13 +1,14 @@
 # Create your views here.
 from links.models import Link
-from comments.forms import SubmitCommentForm
+from comments.models import Comment
+from comments.forms import CommentForm
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 
 def submit(request):
     if request.method == "POST":
-        form = SubmitCommentForm(request.POST)
+        form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.posted_by = request.user
@@ -22,4 +23,15 @@ def submit(request):
         return HttpResponseRedirect(link.get_absolute_url())
     #----------
     return HttpResponseRedirect("/")
+
+def update(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("%s#%s" % (
+                comment.link.get_absolute_url(), comment.id))
+        else:
+            print form.errors
 

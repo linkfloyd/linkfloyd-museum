@@ -47,6 +47,12 @@ $(document).ready( function() {
         if (accepted) { comment_el.trigger("delete"); }
         return false;
     });
+    $('.getEditCommentForm').live('click', function(){
+        var comment_el = $(this).parent().parent().parent();
+        comment_el.addClass("busy");
+        comment_el.load('/api/comments/get_form/?id=' + comment_el.attr("id"));
+        return false;
+    });
     $("a.playble").click(function() {
         var link_el = $(this).parent();
         console.log(link_el);

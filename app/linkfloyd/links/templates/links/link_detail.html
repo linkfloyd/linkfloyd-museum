@@ -24,31 +24,20 @@
 <div class="section">
     <h2 class="header">{{link.title}} via <a href="#">{{link.posted_by}}</h3>
     {% include "links/link_as_list_item.html" %}
+
     {% for comment in link.comment_set.all %}
-    <div class="comment" id="{{comment.id}}">
-            <img class="avatar" src="{% gravatar_for_user comment.posted_by 40 %}" />
-            <div class="body">{{ comment.as_html|safe }}</div>
-            {% ifequal comment.posted_by user %}
-                <ul class="actions flat-list">
-                    <li><a class="deleteComment" href="#">Delete</a></li>
-                </ul>
-            {% endifequal %}
-        </div>
+        {% include "links/comment.html" %}
     {% endfor %}
+
     {% if user.is_authenticated %}
-    <form action="/comments/submit/" method="post" style="clear: both">
-        {% csrf_token %}
-        {{ form.errors }}
-        <div class="fieldWrapper">
-            <label for="id_comment">{{form.comment.errors}}Comment:</label>
-            {{ form.link }}
-            {{ form.body }}
-        </div>
-        <input type="submit" value="Submit">
-    </form>
+        {% include "links/comment_form.html" %}
     {% else %}
     <p class="warning">
-        This conversation is missing your voice. Take five seconds to <a href="{% url registration_register %}">join Linkfloyd</a> or <a href="{% url auth_login %}">log in</a>.
+        This conversation is missing your voice.
+        Take five seconds to
+        <a href="{% url registration_register %}">join Linkfloyd</a>
+        or
+        <a href="{% url auth_login %}">log in</a>.
     {% endif %}
 </div>
 {% endblock content %}

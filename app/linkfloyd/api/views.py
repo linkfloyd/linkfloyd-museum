@@ -1,11 +1,14 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render_to_response
 
 from utils import get_info
 from channels.models import Channel, Subscription
 from links.models import Link
 from comments.models import Comment
+from comments.forms import CommentForm
+from django.template import RequestContext
 
 def fetch_info(request):
     if request.GET.has_key("url"):
@@ -40,6 +43,22 @@ def delete_comment(request):
         return HttpResponse(status=200)
     else:
         return HttpResponse(status=400)
+
+
+@login_required
+def get_update_comment_form(request):
+    if request.GET.has_key("id"):
+        try:
+            comment = Comment.objects.get(
+                pk=request.GET['id'], posted_by=request.user)
+        except Comment.DoesNotExist:
+            return HttpResponse(status=404)
+        return render_to_response("links/update_comment_form.html", {
+            "form": CommentForm(instance=comment)
+            }, context_instance=RequestContext(request))
+    else:
+        return HttpResponse(status=400)
+
 
 @login_required
 def subscribe_channel(request):
@@ -94,9 +113,7 @@ def channels_list(request):
         channels = Channel.objects.filter(name__contains=query_string)
     else:
         channels = Channel.objects.all()
-
     response = []
-
     for c in channels:
         response.append({"id": c.id, "name": c.name })
 
