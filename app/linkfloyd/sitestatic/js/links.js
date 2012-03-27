@@ -49,10 +49,13 @@ $(document).ready( function() {
     });
     $("a.playble").click(function() {
         var link_el = $(this).parent();
+        console.log(link_el);
         var embed_player = link_el.find("div.embed_player");
         if (embed_player.length) {
+            console.log("player removed");
             embed_player.remove();
         } else {
+            console.log("player appended");
             link_el.append(
                 '<div class="embed_player">' + $(this).attr("play") + '</div>');
         }

@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -67,8 +68,10 @@ def edit(request, pk):
         )
 
 def link_detail(request, link_id):
-
-    link = get_object_or_404(Link, id=link_id)
+    try:
+        link = Link.objects_with_scores.get(id=link_id)
+    except Link.DoesNotExist:
+        return HttpResponse(status=404)
     link.inc_shown()
     return render_to_response("links/link_detail.html",
     {
