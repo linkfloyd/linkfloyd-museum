@@ -44,7 +44,6 @@ pre, ol, ul, blockquote  {
 ol, ul {
     padding: 0 0 0 40px;
 }
-
 .buttonized {
     background: lighten(@black, 12%);
     padding: 5px 10px;
@@ -161,10 +160,26 @@ div#head {
     padding: 0;
     > .header {
         margin: 0 0 5px 0;
-        padding: 10px 8px;
+        padding: 10px 6px 0 6px;
         color: lighten(@black, 12%);
         border-bottom: 1px solid black;
-        font-size: 13px;
+        font-size: 14px;
+        span.ordering {
+            font-size: 10px;
+            float: right;
+            margin: 0 5px 0 0;
+            padding: 3px 5px 0 3px;
+            font-weight: normal;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            &:firts-child {
+                margin-right: 0;
+            }
+            &.active {
+                background: black;
+            }
+        }
     }
     h2 {
         font-size: 20px;
@@ -651,6 +666,9 @@ div.comment {
         p {
             margin: 5px 0;
         }
+    }
+    pre {
+        background: black;
     }
     a {
         text-decoration: underline;
