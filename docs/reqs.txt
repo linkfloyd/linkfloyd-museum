@@ -1,5 +1,5 @@
 BeautifulSoup==3.2.0
-Django==1.3.1
+Django==1.4
 Markdown==2.1.1
 Pillow==1.7.6
 South==0.7.3
@@ -11,6 +11,6 @@ django-registration==0.7
 django-transmeta==0.6.6
 ipython==0.12
 line-profiler==1.0b3
-qhonuskan-votes==0.1.1
+qhonuskan-votes==0.1.2
 sorl-thumbnail==11.12
 wsgiref==0.1.2

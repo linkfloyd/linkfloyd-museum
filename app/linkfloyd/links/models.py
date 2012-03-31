@@ -5,14 +5,13 @@ from django.db import models
 from django.db.models import F
 from django.db.models import Sum
 
-from links.utils import query_builder
-
 from linkfloyd.utils import SumWithDefault
 from linkfloyd.channels.models import Channel
 
 from qhonuskan_votes.models import VotesField
 
 from transmeta import TransMeta
+from django.db.models import Count
 
 SITE_RATINGS = (
     (1, _("Safe Posts (only safe content)")),
@@ -37,7 +36,8 @@ class LinksWithScoresManager(models.Manager):
     def get_query_set(self):
         return super(LinksWithScoresManager, self).get_query_set().filter(\
             is_banned=False).annotate(
-                vote_score=SumWithDefault('linkvote__value', default=0))
+                vote_score=SumWithDefault('linkvote__value', default=0)
+            ).annotate(comment_score=Count('comment'))
 
 class Link(models.Model):
     posted_by = models.ForeignKey(User)
@@ -63,7 +63,7 @@ class Link(models.Model):
     shown = models.PositiveIntegerField(default=0)
     player = models.TextField(null=True, blank=True)
     is_banned = models.BooleanField(default=False)
-
+    is_sponsored = models.BooleanField(default=False)
     channel = models.ForeignKey(Channel)
 
     objects = models.Manager()

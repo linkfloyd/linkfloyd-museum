@@ -5,12 +5,13 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.views.generic import  ListView
+from django.views.generic import ListView
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 from channels.models import Subscription
 from links.models import Link, Channel, Report
-from links.utils import query_builder
+from links.utils import context_builder
 
 from links.forms import SubmitLinkForm, EditLinkForm
 from comments.forms import CommentForm
@@ -80,70 +81,75 @@ def link_detail(request, link_id):
     }, context_instance=RequestContext(request))
 
 
-class LinksListView(ListView):
+def index(request):
+    if request.user.is_authenticated():
+        if not Subscription.objects.filter(user=request.user):
+            messages.add_message(self.request, messages.WARNING,
+                "Please subscribe channels that you are interested in")
+            return HttpResponseRedirect(reverse("browse_channels"))
+    return render_to_response(
+        "links/link_list.html",
+        context_builder(request, links_from="subscriptions"),
+        context_instance=RequestContext(request)
+    )
+
+def links_from_user(request, user):
+    user = get_object_or_404(User, username=user)
+    context = context_builder(request, links_from="user", instance=user)
+
+    context.update({
+        "about_user": UserPreferences.objects.get(user=user).description})
+
+    return render_to_response(
+        "links/link_list.html", context,
+        context_instance=RequestContext(request)
+    )
+
+def links_from_channel(request, channel):
+    return render_to_response(
+        "links/link_list.html",
+        context_builder(request, links_from="channel",
+            instance=get_object_or_404(Channel, slug=channel)),
+        context_instance=RequestContext(request)
+    )
+
+"""
+class BaseLinkListView(ListView):
     context_object_name = "links"
     paginate_by = 20
 
+    def __init__(self, *args, **kwargs):
+        print args, kwargs
+        self.context = self.build_context(kwargs['request'])
+
+    def build_context(self):
+        return context_builder(self.request)
+
     def get_queryset(self):
-        return query_builder(self.request)
+        return self.context.pop('links')
 
     def get_context_data(self, **kwargs):
         context = super(LinksListView, self).get_context_data(**kwargs)
-
+        context.update(self.context)
         if "highlight" in self.request.GET:
             context['highlight'] = int(self.request.GET['highlight'])
-
-        context['active_nav_item'] = "links"
         return context
 
-class IndexView(LinksListView):
+class IndexView(BaseLinkListView):
 
-    def get_queryset(self):
-        return query_builder(
-            self.request, from_subscriptions=True)
-
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['listing_title'] = "Links From Your Subscripted Channels"
-        return context
+    def build_context(self):
+        return context_builder(self.request, links_from="subscriptions")
 
     def render_to_response(self, context):
-        if self.request.user.is_authenticated():
-            if not Subscription.objects.filter(user=self.request.user):
-                messages.add_message(self.request, messages.WARNING,
-                    "Please subscribe channels that you are interested in")
-                return HttpResponseRedirect(reverse("browse_channels"))
         return super(IndexView, self).render_to_response(context)
 
+class LinksFromUserView(BaseLinkListView):
+    def build_context(self):
+        return context_builder(self.request, links_from="user",
+            instance=get_object_or_404(User, username=self.kwargs['user']))
 
-class LatestLinksView(LinksListView):
-    def get_queryset(self):
-        return query_builder(self.request, order_by="-posted_at")
-
-    def get_context_data(self, **kwargs):
-        context = super(LatestLinksView, self).get_context_data(**kwargs)
-        context['listing_title'] = "Latest Links"
-        return context
-
-class LinksFromUserView(LinksListView):
-    def get_queryset(self):
-        return query_builder(self.request, user=self.kwargs["user"])
-
-    def get_context_data(self, **kwargs):
-        context = super(LinksFromUserView, self).get_context_data(**kwargs)
-        context['listing_title'] = "Links From %s" % self.kwargs["user"]
-        context['profile'] = get_object_or_404(
-            UserPreferences, user__username = self.kwargs["user"])
-        return context
-
-class LinksFromChannelView(LinksListView):
-    def get_queryset(self):
-        return query_builder(self.request, channel=self.kwargs["channel"])
-
-    def get_context_data(self, **kwargs):
-
-        context = super(LinksFromChannelView, self).get_context_data(**kwargs)
-        channel = get_object_or_404(Channel, slug=self.kwargs["channel"])
-        context['listing_title'] = "Links From %s Channel" % channel
-        context['channel'] = channel
-        return context
+class LinksFromChannelView(BaseLinkListView):
+    def build_context(self):
+        return context_builder(self.request, links_from="channel",
+            instance=get_object_or_404(Channel, slug=self.kwargs['channel']))
+"""

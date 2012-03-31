@@ -10,7 +10,8 @@
 {% block content %}
 <div class="two-column">
     <div class="panel">
-        {% if channel %}
+        {% if links_from == 'channel' %}
+            {% with channel=instance %}
             <div class="about section">
                 <h2 class="header">{% trans "About Channel" %}</h2>
                 <p class="channel_description">{{channel.description|linebreaks}}</p>
@@ -38,13 +39,12 @@
                     {% endif %}
                 </div>
             </div>
-
+            {% endwith %}
         {% endif %}
-
-        {% if profile %}
+        {% if links_from == 'user' %}
             <div class="about section">
                 <h2 class="header">{% trans "About User" %}</h2>
-                <p class="channel_description">{{profile.description}}</p>
+                <p class="channel_description">{{about_user}}</p>
             </div>
         {% endif %}
         {% if user.is_authenticated %}
@@ -59,38 +59,45 @@
                 </ul>
             </div>
         {% endif %}
-        {% if channel %}
-         <div class="subscribers section">
-            <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
-            <div class="followers">
-                {% for subscription in channel.subscription_set.all %}
-                <a href="{{subscription.user.get_absolute_url}}" id="{{subscription.user.username}}">
-                    <img src="{% gravatar_for_user subscription.user 30 %}" alt="{{subscription.user.username}}">
-                </a>
-                {% endfor %}
+        {% if links_from == 'channel' %}
+            {% with channel=instance %}
+            <div class="subscribers section">
+                <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
+                <div class="followers">
+                    {% for subscription in channel.subscription_set.all %}
+                    <a href="{{subscription.user.get_absolute_url}}" id="{{subscription.user.username}}">
+                        <img src="{% gravatar_for_user subscription.user 30 %}" alt="{{subscription.user.username}}">
+                    </a>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+            {% endwith %}
        {% endif %}
     </div>
     <div class="content section">
-        <h2 class="header">{{listing_title}}
-            <ul class="right flat-list">
-                {% if channel %}
-                    <li>
-                        <a class="buttonized" href="/links/submit/?channel={{ channel.slug }}">Submit a Link to {{ channel }}</a>
-                    </li>
-                {% endif %}
-            </ul>
+        <h2 class="header">{{title}}
+            <span class="ordering{% if ordering == 'top' %} active{% endif %}">
+                <a href="?ordering=top">top voted</a>
+            </span>
+            <span class="ordering{% if ordering == 'contraversal' %} active{% endif %}">
+                <a href="?ordering=contraversal">contraversal</a>
+            </span>
+            <span class="ordering{% if ordering == 'latest' %} active{% endif %}">
+                <a href="?ordering=latest">
+                    Latest
+                </a>
+            </span>
         </h2>
+        </ul>
         <div class="body">
             {% for link in links %}
                 {% include "links/link_as_list_item.html" %}
             {% empty %}
-                <p class="warning">
-                    {% trans "No links found." %}
-                </p>
+                <p class="warning">{% trans "No links found." %}</p>
             {% endfor %}
-            {% include "pagination_links.html" %}
+            {% with page_obj=links %}
+                {% include "pagination_links.html" %}
+            {% endwith %}
         </div>
     </div>
 </div>
