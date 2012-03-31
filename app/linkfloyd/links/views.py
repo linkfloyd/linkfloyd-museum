@@ -84,7 +84,7 @@ def link_detail(request, link_id):
 def index(request):
     if request.user.is_authenticated():
         if not Subscription.objects.filter(user=request.user):
-            messages.add_message(self.request, messages.WARNING,
+            messages.add_message(request, messages.WARNING,
                 "Please subscribe channels that you are interested in")
             return HttpResponseRedirect(reverse("browse_channels"))
     return render_to_response(
