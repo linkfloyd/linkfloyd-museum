@@ -60,7 +60,7 @@ def context_builder(request, **kwargs):
                 Q(rating__lte  = preferences.max_rating)
 
     links = Link.objects_with_scores.filter(query).order_by({
-        "contraversal": "-comment_score",
+        "controversial": "-comment_score",
         "top": "-vote_score",
         "latest": "-posted_at"
     }[response['ordering']])
