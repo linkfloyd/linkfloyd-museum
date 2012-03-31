@@ -22,7 +22,7 @@ def context_builder(request, **kwargs):
         "days": kwargs.get("days"),
         "ordering": get_in(
             request.GET, "ordering", [
-                "contraversial", "top", "latest"], "latest")
+                "controversial", "top", "latest"], "latest")
     }
 
     response['title'] = {
