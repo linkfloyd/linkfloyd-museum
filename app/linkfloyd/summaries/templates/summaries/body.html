@@ -1,8 +1,8 @@
 {% load thumbnail %}
 <div style="background:#2b1b0c; padding: 10px 0;">
-    <div style="width:750px;margin:5px auto;padding-top: 20px;">
+    <div style="width:750px;margin:5px auto;">
         <div style="background:white;border-radius:5px">
-            <p style="margin:20px 5px;font-size:16px;color:#2a2a2a">Hi {{user|lower}}, here's your summary:</p>
+            <p style="margin:5px;font-size:16px;color:#2a2a2a;padding:35px 0 20px 0">Hi {{user|lower}}, here's your summary:</p>
             {% regroup links by channel as channels %}
             {% for channel in channels %}
                 <h2 style="margin: 0 0 5px 0;padding: 10px 6px 0 6px;color: #1F1F1F;border-bottom:1px solid black;font-size: 14px;">
