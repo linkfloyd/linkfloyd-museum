@@ -1,12 +1,12 @@
 {% load i18n qhonuskan_votes thumbnail gravatar %}
 <div class="link{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
     <div class="left-panel">
-        {% comment %}<div class="avatar">{% gravatar link.posted_by 40 %}</div>{% endcomment %}
+        <div class="avatar">{% gravatar_img_for_user link.posted_by 38 %}</div>
         {% vote_buttons_for link %}
         {% comment %}
         <g:plusone annotation="none" href="http://linkfloyd.com{{link.get_absolute_url}}"></g:plusone>
         {% endcomment %}
-        <img src="{% gravatar_for_user link.posted_by 38 %}">
+
     </div>
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
