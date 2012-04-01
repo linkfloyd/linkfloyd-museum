@@ -32,7 +32,6 @@ class Command(BaseCommand):
 
         users = [preference.user for preference in
                  UserPreferences.objects.filter(summary_mails=period)]
-        self.stdout.write(str(users))
 
         for user in users:
 
