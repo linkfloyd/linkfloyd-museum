@@ -52,13 +52,13 @@ class Command(BaseCommand):
                     "site": Site.objects.get_current()
                 })
 
-            email = EmailMultiAlternatives(
-                email_title,
-                email_body_txt,
-                "Linkfloyd %s" %settings.DEFAULT_FROM_EMAIL,
-                [user.email,])
-            email.attach_alternative(email_body_html, "text/html")
-            email.send()
-            self.stdout.write("Summary email for %s sent\n" % user)
-            if not options['dry']:
-                unseen_models.delete()
+                email = EmailMultiAlternatives(
+                    email_title,
+                    email_body_txt,
+                    "Linkfloyd %s" %settings.DEFAULT_FROM_EMAIL,
+                    [user.email,])
+                email.attach_alternative(email_body_html, "text/html")
+                email.send()
+                self.stdout.write("Summary email for %s sent\n" % user)
+                if not options['dry']:
+                    unseen_models.delete()
