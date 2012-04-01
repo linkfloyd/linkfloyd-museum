@@ -334,7 +334,7 @@ div.link {
     }
     div.left-panel {
         float: left;
-        width: 40px;
+        width: 38px;
         padding: 0 5px 0 0;
         margin: 0 5px 0 0;
         border-right: 1px solid lighten(@pencil-grey, 10%);
@@ -421,33 +421,34 @@ div.link {
     div.embed_player > img.embed {
         height: auto;
     }
-
     div.vote_buttons {
         overflow: auto;
         border-radius: 3px;
         background: #ddd;
-        margin: 0;
-        padding: 0 4px 4px 4px;
+        margin: 0 0 5px 0;
+        padding: 0 0 5px 0;
         a.upVote, a.downVote, div.score {
             height: 10px;
         }
         a.upVote {
             width: 0;
             height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid #888;
-            margin: 0;
-            float:left;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 12px solid #888;
+            margin: 0 0 2px 7px;
+            clear: both;
+            float: left;
         }
         a.downVote {
             width: 0;
             height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid #888;
-            margin: 0;
-            float: right;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #888;
+            margin: 2px 0 0 7px;
+            clear: both;
+            float: left;
         }
         a.upVote.voted {
             border-bottom-color: #222;
