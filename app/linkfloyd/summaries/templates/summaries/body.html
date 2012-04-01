@@ -1,6 +1,6 @@
 {% load thumbnail %}
-<body style="background:#2B1B0C;">
-    <div style="width:750px;background:white;padding: 5px;border-radius:5px">
+<div style="background:#2b1b0c">
+    <div style="width:750px;margin:5px auto;background:white;padding: 5px;border-radius:5px">
         <p style="margin:20px 5px;font-size:16px;color:#2a2a2a">Hi {{user|lower}}, here's your summary:</p>
         {% regroup links by channel as channels %}
         {% for channel in channels %}
@@ -10,7 +10,7 @@
             {% for link in channel.list %}
                 <div class="link" style="overflow:auto;float:both;padding:10px 5px;margin:0;">
                     {% if link.thumbnail_url %}
-                        {% thumbnail link.thumbnail_url "120x80" crop="center" as im %}<img src="http://{{site.domain}}{{ im.url }}" style="width:120px;height:80px;position:relative;float:right;margin:0 0 0 10px;padding:0">{% endthumbnail %}
+                        {% thumbnail link.thumbnail_url "120x80" crop="center" as im %}<a href="http://{{site.domain}}{{link.get_absolute_url}}"><img src="http://{{site.domain}}{{ im.url }}" style="width:120px;height:80px;position:relative;float:right;margin:0 0 0 10px;padding:0"></a>{% endthumbnail %}
                     {% endif %}
                     <div class="header" style="float:both;margin:0;font-weight:bold;font-effect:outline">
                         <h3 class="title" style="font-size:13px;line-height:16px;margin:0;padding:0;">
@@ -24,4 +24,4 @@
         {% endfor %}
     </div>
     <p style="margin:5px 10px 0 0;font-size:13px;color:#ddd">Do you think that getting too much emails? You can change your summary options from <a style="color:#fff" href="http://linkfloyd.compreferences/update">preferences</a> page.</p>
-</body>
+</div>
