@@ -3,7 +3,7 @@
     <div class="left-panel">
         {% comment %}<div class="avatar">{% gravatar link.posted_by 40 %}</div>{% endcomment %}
         {% vote_buttons_for link %}
-        <g:plusone annotation="none" href=" http://linkfloyd.com/{{link.get_absolute_url}}"></g:plusone>
+        <g:plusone annotation="none" href="http://linkfloyd.com{{link.get_absolute_url}}"></g:plusone>
     </div>
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
