@@ -1,0 +1,27 @@
+{% load thumbnail %}
+<body style="background:#2B1B0C;">
+    <div style="width:750px;background:white;padding: 5px;border-radius:5px">
+        <p style="margin:20px 5px;font-size:16px;color:#2a2a2a">Hi {{user|lower}}, here's your summary:</p>
+        {% regroup links by channel as channels %}
+        {% for channel in channels %}
+            <h2 style="margin: 0 0 5px 0;padding: 10px 6px 0 6px;color: #1F1F1F;border-bottom:1px solid black;font-size: 14px;">
+                From {{channel.grouper|lower}} channel:
+            </h2>
+            {% for link in channel.list %}
+                <div class="link" style="overflow:auto;float:both;padding:10px 5px;margin:0;">
+                    {% if link.thumbnail_url %}
+                        {% thumbnail link.thumbnail_url "120x80" crop="center" as im %}<img src="http://{{site.domain}}{{ im.url }}" style="width:120px;height:80px;position:relative;float:right;margin:0 0 0 10px;padding:0">{% endthumbnail %}
+                    {% endif %}
+                    <div class="header" style="float:both;margin:0;font-weight:bold;font-effect:outline">
+                        <h3 class="title" style="font-size:13px;line-height:16px;margin:0;padding:0;">
+                            <a href="http://{{site.domain}}{{link.get_absolute_url}}" style="text-decoration:none;color:#2b1b0c;" target="_blank">{{link.title}}</a>
+                        </h3>
+                    </div>
+                    {% if link.description %}<p class="description" style="margin:5px 10px 0 0;font-size:13px;color:#2a2a2a">{{link.description}}</p>{% endif %}
+                    <p class="info" style="margin:4px 10px 0 0;font-size:10px;margin-top:12px;color:#777777">Posted by <a style="text-decoration:underline;color:#7b4d22" href="/links/from/miratcan/">miratcan</a> channel {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.</p>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <p style="margin:5px 10px 0 0;font-size:13px;color:#ddd">Do you think that getting too much emails? You can change your summary options from <a style="color:#fff" href="http://linkfloyd.compreferences/update">preferences</a> page.</p>
+</body>

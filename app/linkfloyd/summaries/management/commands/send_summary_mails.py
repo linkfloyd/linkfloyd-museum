@@ -1,15 +1,25 @@
 from django.core.management.base import BaseCommand, CommandError
 from optparse import make_option
-from django.core.mail import send_mail
 from django.template.loader import render_to_string
-rom django.conf import settings
+from django.conf import settings
 
 from preferences.models import UserPreferences
 from summaries.models import Unseen
 from django.contrib.sites.models import Site
+from optparse import make_option
+
+from django.core.mail import EmailMultiAlternatives
+
 class Command(BaseCommand):
     args = 'daily | weekly | monthly'
     help = 'Builds and sends summary mails for given period'
+    option_list = BaseCommand.option_list + (
+        make_option('--dry-run',
+            action='store_true',
+            dest='dry',
+            default=False,
+            help='Run without posting emails and writing them on stdout'),
+        )
 
     def handle(self, *args, **options):
         if not len(args) == 1:
@@ -22,23 +32,33 @@ class Command(BaseCommand):
 
         users = [preference.user for preference in
                  UserPreferences.objects.filter(summary_mails=period)]
+        self.stdout.write(str(users))
 
         for user in users:
+
             unseen_models = Unseen.objects.filter(user=user)
             unseen_links = [unseen.link for unseen in unseen_models]
 
             if unseen_links:
-                send_mail(
-                    "%s new links for you:" % len(unseen_links),
-                    render_to_string("summaries/body.txt", {
-                        "user": user,
-                        "links": unseen_links,
-                        "site": Site.objects.get_current()
-                    }),
-                    settings.DEFAULT_FROM_EMAIL,
-                    [user.email,],
-                    fail_silently=False
-                )
+                email_title = "%s new links for you:" % len(unseen_links)
+                email_body_txt = render_to_string("summaries/body.txt", {
+                    "user": user,
+                    "links": unseen_links,
+                    "site": Site.objects.get_current()
+                })
+                email_body_html = render_to_string("summaries/body.html", {
+                    "user": user,
+                    "links": unseen_links,
+                    "site": Site.objects.get_current()
+                })
 
-                self.stdout.write("Summary email for %s sent\n" % user)
-            unseen_models.delete()
+            email = EmailMultiAlternatives(
+                email_title,
+                email_body_txt,
+                "Linkfloyd %s" %settings.DEFAULT_FROM_EMAIL,
+                [user.email,])
+            email.attach_alternative(email_body_html, "text/html")
+            email.send()
+            self.stdout.write("Summary email for %s sent\n" % user)
+            if not options['dry']:
+                unseen_models.delete()
