@@ -35,14 +35,14 @@ def context_builder(request, **kwargs):
     user_is_authenticated = request.user.is_authenticated()
 
     query = Q()
-
     if response['links_from'] == "subscriptions" and user_is_authenticated:
         query = query & Q(channel__in=[subscription.channel for \
             subscription in Subscription.objects.filter(user=request.user)])
     elif response['links_from'] == "channel":
         query = query & Q(channel=response['instance'])
     elif response['links_from'] == "user":
-        query = query & Q(channel=response['instance'])
+        query = query & Q(posted_by=response['instance'])
+        print query
 
     if response['days']:
         query = query & Q(

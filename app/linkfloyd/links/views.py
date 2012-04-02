@@ -93,8 +93,8 @@ def index(request):
         context_instance=RequestContext(request)
     )
 
-def links_from_user(request, user):
-    user = get_object_or_404(User, username=user)
+def links_from_user(request, username):
+    user = get_object_or_404(User, username=username)
     context = context_builder(request, links_from="user", instance=user)
 
     context.update({
