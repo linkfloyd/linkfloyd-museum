@@ -4,7 +4,6 @@
 {% block title %}{{link.title}}{% endblock title %}
 {% if link.description %}{% block description %}{{link.description}}{% endblock %}{% endif %}
 {% block extra_head %}
-    
     <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
     <script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
