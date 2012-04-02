@@ -30,7 +30,7 @@ def submit_link(request):
                 link.channel.get_absolute_url(), link.id))
         else:
             return render_to_response(
-                "links/edit.html", {
+                "links/submit.html", {
                     "form": form,
                     "active_nav_item": "submit"
                 }, context_instance=RequestContext(request))
@@ -105,11 +105,11 @@ def links_from_user(request, username):
         context_instance=RequestContext(request)
     )
 
-def links_from_channel(request, channel):
+def links_from_channel(request, channel_slug):
     return render_to_response(
         "links/link_list.html",
         context_builder(request, links_from="channel",
-            instance=get_object_or_404(Channel, slug=channel)),
+            instance=get_object_or_404(Channel, slug=channel_slug)),
         context_instance=RequestContext(request)
     )
 

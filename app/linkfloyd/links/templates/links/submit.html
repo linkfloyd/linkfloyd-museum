@@ -46,14 +46,14 @@
 
             <input type="submit" value="{% trans 'Submit' %}" />
 		    </form>
-
+            {{form.channel}}
             <script type="application/javascript">
                 $("#id_channel").tokenInput("/api/channels/list/", {
                     tokenLimit: 1,
-                    {% if channel %}
+                    {% if form.channel %}
                         prePopulate: [{
-                            "id": "{{ channel.id }}",
-                            "name": "{{ channel.name }}"
+                            "id": "{{ form.channel.id }}",
+                            "name": "{{ form.channel.name }}"
                         }]
                     {% endif %}
                 });
@@ -61,4 +61,6 @@
         </div>
     </div>
 </div>
+</script>
+
 {% endblock content %}
