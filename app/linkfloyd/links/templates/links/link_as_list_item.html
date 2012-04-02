@@ -3,10 +3,6 @@
     <div class="left-panel">
         {% vote_buttons_for link %}
         <div class="avatar">{% gravatar_img_for_user link.posted_by 38 %}</div>
-        {% comment %}
-        <g:plusone annotation="none" href="http://linkfloyd.com{{link.get_absolute_url}}"></g:plusone>
-        {% endcomment %}
-
     </div>
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
@@ -26,7 +22,12 @@
         <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
         {% endifequal %}
         <li>
-            <a href="http://www.addthis.com/bookmark.php" addthis:url="{{link.get_full_url}}" addthis:title="{{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %} style="text-decoration:none;" class="addthis_button">{% trans "Share" %}</a>
+            <a href="http://www.addthis.com/bookmark.php"
+               class="addthis_button"
+               addthis:url="{{link.get_full_url}}"
+               addthis:title="{{link.title}}"
+               {% if link.description %}addthis:description="{{link.description}}"{% endif %}
+               >{% trans "Share" %}</a>
         </li>
     </ul>
 </div>
