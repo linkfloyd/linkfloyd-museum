@@ -43,9 +43,6 @@ def comment_saved(sender, **kwargs):
             "comments/subject.txt",{"comment": comment})
         body = render_to_string(
             "comments/body.txt", {"comment": comment})
-        print title
-        print "---"
-        print body
         messages = []
         for recipient in recipients:
             messages.append(
