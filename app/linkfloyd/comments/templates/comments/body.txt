@@ -1,0 +1,13 @@
+{% load i18n %}{% blocktrans with username=comment.posted_by.username link_title=comment.link.title %}{{username}} has made a comment on {{link_title}}{% endblocktrans %}:
+
+----
+
+{{comment.body}}
+
+----
+
+{% trans "To reply to this comment or to see all comments on this link click here" %}:
+
+{{comment.link.get_full_url}}
+
+
