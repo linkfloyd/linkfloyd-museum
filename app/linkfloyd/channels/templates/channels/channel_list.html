@@ -13,9 +13,11 @@
              <h2 class="header">{{title}}</h2>
              {% for channel in channels %}
                  <div id="{{ channel.slug }}" class="channel {% cycle 'left' 'right' %}">
-                     <a href="#" class="subscription_status{% if user|is_following:channel %} subscribed{% endif %}">
-                         {% if user|is_following:channel %}Subscribed{% else %}Subscribe{% endif %}
+                     {% with subscription_status=user|channel_subscription_status:channel %}
+                     <a href="#" class="subscription_status{% if subscription_status %} subscribed{% endif %}">
+                         {% if subscription_status %}Subscribed{% else %}Subscribe{% endif %}
                      </a>
+                     {% endwith %}
                      <div class="header">
                          <h3 class="name">
                              <a href="{{channel.get_absolute_url}}">{{channel.name}}</a>

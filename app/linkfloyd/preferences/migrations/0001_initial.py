@@ -12,8 +12,9 @@ class Migration(SchemaMigration):
         db.create_table('preferences_userpreferences', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('description', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('max_rating', self.gf('django.db.models.fields.PositiveIntegerField')(default=1)),
+            ('summary_mails', self.gf('django.db.models.fields.CharField')(default='daily', max_length=10)),
         ))
         db.send_create_signal('preferences', ['UserPreferences'])
 
@@ -51,7 +52,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 4, 13, 8, 44, 99685)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -59,7 +60,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 4, 13, 8, 44, 99565)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -80,10 +81,11 @@ class Migration(SchemaMigration):
         },
         'preferences.userpreferences': {
             'Meta': {'object_name': 'UserPreferences'},
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'known_languages': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['links.Language']", 'symmetrical': 'False'}),
             'max_rating': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
+            'summary_mails': ('django.db.models.fields.CharField', [], {'default': "'daily'", 'max_length': '10'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         }
     }

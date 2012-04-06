@@ -8,36 +8,6 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Comment'
-        db.create_table('links_comment', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('link', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['links.Link'])),
-            ('body', self.gf('django.db.models.fields.TextField')()),
-            ('posted_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='posted_by', to=orm['auth.User'])),
-            ('posted_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal('links', ['Comment'])
-
-        # Adding M2M table for field reported_by on 'Comment'
-        db.create_table('links_comment_reported_by', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('comment', models.ForeignKey(orm['links.comment'], null=False)),
-            ('user', models.ForeignKey(orm['auth.user'], null=False))
-        ))
-        db.create_unique('links_comment_reported_by', ['comment_id', 'user_id'])
-
-        # Adding model 'Channel'
-        db.create_table('links_channel', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title_en', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('title_tr', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255, db_index=True)),
-            ('description_en', self.gf('django.db.models.fields.TextField')()),
-            ('description_tr', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('is_official', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('links', ['Channel'])
-
         # Adding model 'Language'
         db.create_table('links_language', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -66,13 +36,22 @@ class Migration(SchemaMigration):
             ('description', self.gf('django.db.models.fields.CharField')(max_length=4096, null=True, blank=True)),
             ('thumbnail_url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
             ('rating', self.gf('django.db.models.fields.PositiveIntegerField')()),
-            ('language', self.gf('django.db.models.fields.CharField')(max_length=5)),
+            ('language', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['links.Language'])),
             ('shown', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
             ('player', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('is_banned', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('channel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['links.Channel'])),
+            ('is_sponsored', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('channel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['channels.Channel'])),
         ))
         db.send_create_signal('links', ['Link'])
+
+        # Adding model 'Subscription'
+        db.create_table('links_subscription', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='link_subscriptions', to=orm['auth.User'])),
+            ('link', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['links.Link'])),
+        ))
+        db.send_create_signal('links', ['Subscription'])
 
         # Adding model 'Report'
         db.create_table('links_report', (
@@ -89,15 +68,6 @@ class Migration(SchemaMigration):
 
     def backwards(self, orm):
         
-        # Deleting model 'Comment'
-        db.delete_table('links_comment')
-
-        # Removing M2M table for field reported_by on 'Comment'
-        db.delete_table('links_comment_reported_by')
-
-        # Deleting model 'Channel'
-        db.delete_table('links_channel')
-
         # Deleting model 'Language'
         db.delete_table('links_language')
 
@@ -106,6 +76,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'Link'
         db.delete_table('links_link')
+
+        # Deleting model 'Subscription'
+        db.delete_table('links_subscription')
 
         # Deleting model 'Report'
         db.delete_table('links_report')
@@ -127,7 +100,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 4, 13, 7, 46, 746762)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -135,11 +108,19 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 4, 13, 7, 46, 746632)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+        },
+        'channels.channel': {
+            'Meta': {'object_name': 'Channel'},
+            'description': ('django.db.models.fields.TextField', [], {}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_official': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255', 'db_index': 'True'})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
@@ -147,25 +128,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
-        },
-        'links.channel': {
-            'Meta': {'object_name': 'Channel'},
-            'description_en': ('django.db.models.fields.TextField', [], {}),
-            'description_tr': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_official': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'db_index': 'True'}),
-            'title_en': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'title_tr': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
-        },
-        'links.comment': {
-            'Meta': {'object_name': 'Comment'},
-            'body': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'link': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['links.Link']"}),
-            'posted_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'posted_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'posted_by'", 'to': "orm['auth.User']"}),
-            'reported_by': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'})
         },
         'links.language': {
             'Meta': {'object_name': 'Language'},
@@ -175,11 +137,12 @@ class Migration(SchemaMigration):
         },
         'links.link': {
             'Meta': {'object_name': 'Link'},
-            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['links.Channel']"}),
+            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['channels.Channel']"}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '4096', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_banned': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'language': ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'is_sponsored': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'language': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['links.Language']"}),
             'player': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'posted_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'posted_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
@@ -206,6 +169,12 @@ class Migration(SchemaMigration):
             'reported_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'reporter': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'seen': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+        },
+        'links.subscription': {
+            'Meta': {'object_name': 'Subscription'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'link': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['links.Link']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'link_subscriptions'", 'to': "orm['auth.User']"})
         }
     }
 

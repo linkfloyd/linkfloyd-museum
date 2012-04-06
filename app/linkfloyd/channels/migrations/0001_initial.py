@@ -11,30 +11,37 @@ class Migration(SchemaMigration):
         # Adding model 'Channel'
         db.create_table('channels_channel', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255, db_index=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=255, db_index=True)),
             ('description', self.gf('django.db.models.fields.TextField')()),
-            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('is_official', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
         db.send_create_signal('channels', ['Channel'])
 
-        # Adding M2M table for field subscribers on 'Channel'
-        db.create_table('channels_channel_subscribers', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('channel', models.ForeignKey(orm['channels.channel'], null=False)),
-            ('user', models.ForeignKey(orm['auth.user'], null=False))
+        # Adding model 'Subscription'
+        db.create_table('channels_subscription', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='channel_subscriptions', to=orm['auth.User'])),
+            ('channel', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['channels.Channel'])),
+            ('status', self.gf('django.db.models.fields.CharField')(default='member', max_length=12)),
+            ('email_frequency', self.gf('django.db.models.fields.CharField')(default='daily', max_length=12)),
         ))
-        db.create_unique('channels_channel_subscribers', ['channel_id', 'user_id'])
+        db.send_create_signal('channels', ['Subscription'])
+
+        # Adding unique constraint on 'Subscription', fields ['user', 'channel']
+        db.create_unique('channels_subscription', ['user_id', 'channel_id'])
 
 
     def backwards(self, orm):
         
+        # Removing unique constraint on 'Subscription', fields ['user', 'channel']
+        db.delete_unique('channels_subscription', ['user_id', 'channel_id'])
+
         # Deleting model 'Channel'
         db.delete_table('channels_channel')
 
-        # Removing M2M table for field subscribers on 'Channel'
-        db.delete_table('channels_channel_subscribers')
+        # Deleting model 'Subscription'
+        db.delete_table('channels_subscription')
 
 
     models = {
@@ -53,7 +60,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 4, 13, 15, 22, 602419)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -61,7 +68,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 4, 13, 15, 22, 602309)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -71,11 +78,17 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Channel'},
             'description': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'is_official': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255', 'db_index': 'True'}),
-            'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '255', 'db_index': 'True'})
+        },
+        'channels.subscription': {
+            'Meta': {'unique_together': "(('user', 'channel'),)", 'object_name': 'Subscription'},
+            'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['channels.Channel']"}),
+            'email_frequency': ('django.db.models.fields.CharField', [], {'default': "'daily'", 'max_length': '12'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'status': ('django.db.models.fields.CharField', [], {'default': "'member'", 'max_length': '12'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'channel_subscriptions'", 'to': "orm['auth.User']"})
         },
         'contenttypes.contenttype': {
             'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},

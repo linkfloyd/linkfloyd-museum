@@ -4,7 +4,7 @@ $(document).ready(function(){
         var button_el = $(this);
         if (button_el.hasClass("subscribed")) {
 	 	    $.ajax({
-	            type:'GET',
+	            type:'POST',
 		        url: '/api/channels/unsubscribe/',
 		        data: {
 	                'channel_slug': channel_el.attr("id")
@@ -21,7 +21,7 @@ $(document).ready(function(){
 	        });
         } else {
 	 	    $.ajax({
-	            type:'GET',
+	            type:'POST',
 		        url: '/api/channels/subscribe/',
 		        data: {
 	                'channel_slug': channel_el.attr("id")

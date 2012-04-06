@@ -1,6 +1,6 @@
 {% load gravatar %}
 <div class="comment" id="{{comment.id}}">
-    <img class="avatar" src="{% gravatar_for_user comment.posted_by 40 %}" />
+    <img class="avatar" alt={{comment.posted_by.username}} src="{% gravatar_for_user comment.posted_by 38 %}" />
     <div class="body">{{ comment.as_html|safe }}</div>
     {% ifequal comment.posted_by user %}
     <ul class="actions flat-list">

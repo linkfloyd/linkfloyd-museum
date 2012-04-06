@@ -1,28 +1,37 @@
 from django import template
-from channels.models import Subscription
+from channels.models import Subscription as ChannelSubscription
+from links.models import Subscription as LinkSubscription
 
 register = template.Library()
 
 @register.filter
-def is_following(user, channel):
-    if user.is_authenticated():
-        return bool(
-            Subscription.objects.filter(user=user, channel=channel).count()
-        )
-    else:
-        return False
-
-@register.filter
-def subscription_status(user, channel):
+def channel_subscription_status(user, channel):
     if user.is_authenticated():
         try:
-            subscription = Subscription.objects.get(
+            subscription = ChannelSubscription.objects.get(
                 user=user,
                 channel=channel)
-        except Subscription.DoesNotExists:
+        except ChannelSubscription.DoesNotExist:
             subscription = None
         if subscription:
             return subscription.status
+        else:
+            return None
+    else:
+        return None
+
+@register.filter
+def link_subscription_status(user, link):
+    if user.is_authenticated():
+        try:
+            subscription = LinkSubscription.objects.get(
+                user=user,
+                link=link)
+        except LinkSubscription.DoesNotExist:
+            subscription = None
+
+        if subscription:
+            return True
         else:
             return None
     else:

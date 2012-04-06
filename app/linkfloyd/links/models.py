@@ -6,12 +6,18 @@ from django.db.models import F
 from django.db.models import Sum
 
 from linkfloyd.utils import SumWithDefault
-from linkfloyd.channels.models import Channel
+from channels.models import Channel
+from channels.models import Subscription as ChannelSubscription
 
 from qhonuskan_votes.models import VotesField
 
-from transmeta import TransMeta
+from django.db.models.signals import pre_delete
+from django.db.models.signals import post_save
+from django.db.models.signals import pre_delete
+
 from django.db.models import Count
+
+from django.dispatch import receiver
 
 SITE_RATINGS = (
     (1, _("Safe Posts (only safe content)")),
@@ -23,7 +29,6 @@ SITE_LANGUAGES = (
     ("tr", "Turkish"),
     ("en", "English"),
 )
-
 
 class Language(models.Model):
     code = models.CharField(max_length=5)
@@ -95,6 +100,10 @@ class Link(models.Model):
     def __unicode__(self):
         return u"%s by %s" % (self.title, self.posted_by)
 
+class Subscription(models.Model):
+    user = models.ForeignKey(User, related_name="link_subscriptions")
+    link = models.ForeignKey(Link)
+
 class Report(models.Model):
     reporter = models.ForeignKey(User)
     link = models.ForeignKey(Link)
@@ -123,3 +132,26 @@ class Report(models.Model):
 
     def __unicode__(self):
         return "%s's report for %s" % (self.reporter, self.reason)
+
+@receiver(post_save, sender=Link, dispatch_uid="link_saved")
+def link_saved(sender, **kwargs):
+
+    from summaries.models import Unseen
+
+    if kwargs['created'] == True:
+        link = kwargs['instance']
+        subscriptions = ChannelSubscription.objects.filter(channel=link.channel)
+        for subscription in subscriptions:
+            Unseen.objects.get_or_create(user=subscription.user, link=link)
+        del(subscriptions)
+
+        LinkSubscription = Subscription
+        LinkSubscription.objects.get_or_create(link=link, user=link.posted_by)
+
+@receiver(pre_delete, sender=Link, dispatch_uid="link_deleted")
+def link_deleted(sender, **kwargs):
+
+    from summaries.models import Unseen
+
+    link = kwargs['instance']
+    Unseen.objects.filter(link=link).delete()

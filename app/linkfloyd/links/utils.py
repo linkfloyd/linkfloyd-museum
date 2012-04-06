@@ -22,8 +22,13 @@ def context_builder(request, **kwargs):
         "days": kwargs.get("days"),
         "ordering": get_in(
             request.GET, "ordering", [
-                "controversial", "top", "latest"], "latest")
+                "controversial", "top", "latest"], "latest"),
     }
+    if 'highlight' in request.GET:
+        try:
+            response['highlight'] = int(request.GET['highlight'])
+        except ValueError:
+            pass
 
     response['title'] = {
         "subscriptions": "Links From Your Subscripted Channels",

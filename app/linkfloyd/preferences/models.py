@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 
 from links.models import Language
 from links.models import SITE_RATINGS
+from django.db.utils import DatabaseError
 
 class UserPreferences(models.Model):
     user = models.ForeignKey(User)
@@ -35,9 +36,13 @@ class UserPreferences(models.Model):
 def create_preferences(sender, instance, created, **kwargs):
     if created and UserPreferences.objects.filter(\
         user__username=instance.username).count() == 0:
-        preferences = UserPreferences.objects.create(
-            user=instance,
-            max_rating=1)
-        preferences.known_languages.add(1, 2)
+        try:
+            preferences = UserPreferences.objects.create(
+                user=instance,
+                max_rating=1)
+        except DatabaseError:
+            preferences = None
+        if preferences:
+            preferences.known_languages.add(1, 2)
 
 post_save.connect(create_preferences, sender=User)

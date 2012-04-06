@@ -4,7 +4,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 
 from utils import get_info
-from channels.models import Channel, Subscription
+
+from channels.models import Channel
+from links.models import Link
+
+from channels.models import Subscription as ChannelSubscription
+from links.models import Subscription as LinkSubscription
+
 from links.models import Link
 from comments.models import Comment
 from comments.forms import CommentForm
@@ -59,24 +65,23 @@ def get_update_comment_form(request):
     else:
         return HttpResponse(status=400)
 
-
 @login_required
 def subscribe_channel(request):
-    if request.GET.has_key("channel_slug"):
+    if request.POST.has_key("channel_slug"):
         try:
             channel = Channel.objects.get(
-                slug=request.GET['channel_slug'])
+                slug=request.POST['channel_slug'])
         except Channel.DoesNotExist:
             return HttpResponse(status=404)
 
-        already_subscribed = bool(Subscription.objects.filter(
+        already_subscribed = bool(ChannelSubscription.objects.filter(
                 user=request.user,
                 channel=channel).count())
 
         if already_subscribed:
             return HttpResponse(status=400)
         else:
-            Subscription.objects.create(
+            ChannelSubscription.objects.create(
                 user=request.user, channel=channel)
             return HttpResponse(status=200)
     else:
@@ -85,18 +90,75 @@ def subscribe_channel(request):
 
 @login_required
 def unsubscribe_channel(request):
-    print request.GET.get('channel_slug')
-    if request.GET.has_key("channel_slug"):
+    if request.POST.has_key("channel_slug"):
         try:
             channel = Channel.objects.get(
-                slug=request.GET['channel_slug'])
+                slug=request.POST['channel_slug'])
         except Channel.DoesNotExist:
             return HttpResponse(status=404)
         try:
-            subscription = Subscription.objects.get(
+            subscription = ChannelSubscription.objects.get(
                 user=request.user,
                 channel=channel)
-        except Subscription.DoesNotExist:
+        except ChannelSubscription.DoesNotExist:
+            return HttpResponse(status=404)
+        subscription.delete()
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
+
+@login_required
+def switch_link_subscription(request):
+    if request.POST.has_key("link_id"):
+        try:
+            link = Link.objects.get(id=request.POST['link_id'])
+        except Link.DoesNotExist:
+            return HttpResponse(status=404)
+
+        try:
+            subscription = LinkSubscription.objects.filter(
+                user=request.user, link=link)
+        except:
+            subscription = None
+
+        if subscription:
+            subscription.delete()
+            return HttpResponse(
+                simplejson.dumps({
+                    "status": "unsubscripted",
+                    "update_text": "Subscribe",
+                    "update_title": "Email me when somebody comments on "
+                                    "that link"
+                }, 'application/javascript')
+            )
+        else:
+            LinkSubscription.objects.create(
+                user=request.user, link=link)
+            return HttpResponse(
+                simplejson.dumps({
+                    "status": "subscripted",
+                    "update_text": "Unsubscribe",
+                    "update_title": "Do not send emails about that "
+                                    "link anymore"
+                }, 'application/javascript')
+            )
+    else:
+        return HttpResponse(status=400)
+
+
+@login_required
+def unsubscribe_link(request):
+    if request.POST.has_key("link_id"):
+        try:
+            link = Link.objects.get(
+                slug=request.POST['link_id'])
+        except Link.DoesNotExist:
+            return HttpResponse(status=404)
+        try:
+            subscription = LinkSubscription.objects.get(
+                user=request.user,
+                link=link)
+        except LinkSubscription.DoesNotExist:
             return HttpResponse(status=404)
         subscription.delete()
         return HttpResponse(status=200)

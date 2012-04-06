@@ -26,6 +26,3 @@ def link_saved(sender, **kwargs):
 def link_deleted(sender, **kwargs):
     link = kwargs['instance']
     Unseen.objects.filter(link=link).delete()
-
-
-

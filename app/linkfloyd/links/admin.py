@@ -2,6 +2,7 @@ from django.contrib import admin
 from links.models import Link
 from links.models import Language
 from links.models import Channel
+from links.models import Subscription
 from links.models import Report
 
 class LinkAdmin(admin.ModelAdmin):
@@ -22,7 +23,11 @@ class ReportAdmin(admin.ModelAdmin):
 
     reported_link.allow_tags = True
 
+class LinkSubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('link', 'user')
+
 admin.site.register(Link, LinkAdmin)
+admin.site.register(Subscription, LinkSubscriptionAdmin)
 
 admin.site.register(Language)
 admin.site.register(Report, ReportAdmin)

@@ -19,7 +19,7 @@
             <div class="actions section">
                 <h2 class="header">{% trans "Actions" %}</h2>
                 <div class="wrapper">
-                    {% if user|is_following:channel %}
+                    {% if user|channel_subscription_status:channel %}
                     <form action="/channels/update_subscription/{{channel.slug}}/" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="action" value="unsubscribe">
@@ -34,7 +34,7 @@
                     {% endif %}
                 </div>
                 <div class="wrapper">
-                    {% if user|subscription_status:channel == 'admin' %}
+                    {% if user|channel_subscription_status:channel == 'admin' %}
                         <a class="buttonized" href="{% url update_channel channel.slug %}">Update Channel</a>
                     {% endif %}
                 </div>
@@ -101,24 +101,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    var addthis_share =  { 
-        templates: {
-            twitter: '{' + '{title}' + '} {' + '{url}' + '}'
-        }
-    };
-
-    var addthis_config = {
-        "ui_click": true,
-        "ui_header_color": "#333",
-        "ui_header_background": "#fff",
-        "ui_use_css": true,
-        "ui_use_addressbook": true,
-        "data_ga_property": "UA-6315603-13",
-        "data_ga_social": true,
-        "services_expanded": "friendfeed,reddit,twitter"
-    }
-</script>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=miratcan"></script>
 {% if highlight %}
     <script type="text/javascript">
