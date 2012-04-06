@@ -53,5 +53,7 @@ def comment_saved(sender, **kwargs):
                     [recipient,]
                 )
             )
-        print messages
+
         send_mass_mail(messages, fail_silently=False)
+        LinkSubscription.objects.get_or_create(
+            user=comment.posted_by, link=comment.link)
