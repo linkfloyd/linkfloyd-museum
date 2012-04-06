@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans %}Comment posted on: {{comment.link}}{% endblocktrans %}
+{% load i18n %}{% blocktrans with link_title=comment.link.title %}Comment posted on: {{link_title}}{% endblocktrans %}
