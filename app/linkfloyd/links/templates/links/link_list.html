@@ -48,9 +48,20 @@
             </div>
         {% endif %}
         {% if user.is_authenticated %}
+            <div class="tips section">
+                <h2 class="header">{% trans "Use Your Votes" %}</h2>
+                <p>Remember that linkfloyd tries to put forward high quality posts. You can help us to do this via using your votes.</p>
+                <p>Please vote up, if a post satisfies these:</p>
+                <ul>
+                    <li>Is it original? Do you find it helpful?</li>
+                    <li>Is it on suitable channel?</li>
+                    <li>Is title and description grammatically correct and clean?</li>
+                </ul>
+            </div>
+
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
-                <ul class="channels">
+                <ul class="channels navigation">
                     {% for subscription in user.channel_subscriptions.all %}
                     <li>
                         <a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a>
