@@ -70,7 +70,7 @@ def update(request, pk):
 
 def link_detail(request, link_id):
     try:
-        link = Link.objects_with_scores.get(id=link_id)
+        link = Link.objects.get(id=link_id)
     except Link.DoesNotExist:
         return HttpResponse(status=404)
     link.inc_shown()

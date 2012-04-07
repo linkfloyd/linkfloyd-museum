@@ -14,11 +14,24 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        "USER": "postgres",
+        "PASSWORD": "320240",
+        "HOST": "localhost",
+        "NAME": "test_linkfloyd",
+        'OPTIONS': {'autocommit': True,}
 
+    }
+}
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(PROJECT_ROOT, 'sqlite.db'),
+
     }
 }
 
@@ -110,15 +123,14 @@ INSTALLED_APPS = (
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
 DEVSERVER_MODULES = (
     'devserver.modules.profile.LineProfilerModule',
-    'devserver.modules.ajax.AjaxDumpModule',
+    'devserver.modules.sql.SQLRealTimeModule',
 )
+DEVSERVER_TRUNCATE_SQL = False
 
 # EMAIL
 SERVER_EMAIL = 'server@linkfloyd.com'
 SEND_BROKEN_LINK_EMAILS=True
 DEFAULT_FROM_EMAIL = "noreply@linkfloyd.com"
-
-
 
 # REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 3

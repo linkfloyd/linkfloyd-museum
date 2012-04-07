@@ -13,7 +13,6 @@ from qhonuskan_votes.models import VotesField
 
 from django.db.models.signals import pre_delete
 from django.db.models.signals import post_save
-from django.db.models.signals import pre_delete
 
 from django.db.models import Count
 
@@ -39,10 +38,12 @@ class Language(models.Model):
 
 class LinksWithScoresManager(models.Manager):
     def get_query_set(self):
-        return super(LinksWithScoresManager, self).get_query_set().filter(\
-            is_banned=False).annotate(
-                vote_score=SumWithDefault('linkvote__value', default=0)
-            ).annotate(comment_score=Count('comment'))
+        return super(LinksWithScoresManager, self).get_query_set().extra({
+            "comment_score": 'SELECT COUNT(*) FROM comments_comment WHERE '
+                             'comments_comment.link_id = links_link.id',
+            "vote_score": 'SELECT Sum(value) or 0 FROM links_linkvote WHERE '
+                          'links_linkvote.object_id = links_link.id'
+        })
 
 class Link(models.Model):
     posted_by = models.ForeignKey(User)
@@ -71,8 +72,7 @@ class Link(models.Model):
     is_sponsored = models.BooleanField(default=False)
     channel = models.ForeignKey(Channel)
 
-    objects = models.Manager()
-    objects_with_scores = LinksWithScoresManager()
+    objects = LinksWithScoresManager()
 
     def get_domain(self):
         from urllib2 import urlparse

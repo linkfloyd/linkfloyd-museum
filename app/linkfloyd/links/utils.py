@@ -53,6 +53,7 @@ def context_builder(request, **kwargs):
         query = query & Q(
             posted_at__gte=datetime.today() - timedelta(days=response['days']))
 
+    """
     if user_is_authenticated:
 
         query = query & ~Q(report__in =\
@@ -63,8 +64,8 @@ def context_builder(request, **kwargs):
         query = query & \
                 Q(language__in = preferences.known_languages.all()) &\
                 Q(rating__lte  = preferences.max_rating)
-
-    links = Link.objects_with_scores.filter(query).order_by({
+    """
+    links = Link.objects.filter(query).order_by({
         "controversial": "-comment_score",
         "top": "-vote_score",
         "latest": "-posted_at"
@@ -82,4 +83,3 @@ def context_builder(request, **kwargs):
         response['links'] = paginator.page(paginator.num_pages)
 
     return response
-
