@@ -40,7 +40,7 @@ p {
     margin: 0 0 10px 30px;
 }
 a {
-    text-decoration: none;
+    text-decoration: underline;
     color: @threadless;
     font-weight: normal;
 }
@@ -49,6 +49,7 @@ a#logo {
     font-size: 36px;
     font-family: 'Lilita One', cursive;
     color: darken(@white, 5%);
+    text-decoration: none;
 }
 pre, ol, ul, blockquote  {
     padding: 5px;
@@ -144,6 +145,7 @@ div#head {
                 font-weight: bold;
                 color: lighten(@black, 60%);
                 display: block;
+                text-decoration: none;
                 &.active {
                     background: lighten(@black, 6%);
                 }
@@ -178,6 +180,7 @@ div#head {
     padding: 0;
     > .header {
         span.ordering {
+            a { text-decoration: none; }
             font-size: 10px;
             float: right;
             margin: 0 5px 0 0;
@@ -218,7 +221,6 @@ div.two-column {
         p {
             margin-left: 0;
             margin-right: 0;
-            a {text-decoration: underline}
         }
         div.actions {
             div.wrapper {
@@ -372,9 +374,10 @@ div.link {
         float: both;
         margin: 0 0 0 50px;
         h3.title {
-            margin: 0 0 0 0;
+            margin: 0;
             padding: 0;
             a {
+                text-decoration: none;
                 font-weight: bold;
                 font-effect: outline;
             }
@@ -391,7 +394,6 @@ div.link {
         margin-top: 12px;
         color: lighten(@pencil-grey, 10%);
         a {
-            text-decoration: underline;
             color: lighten(@threadless, 60%);
         }
         a.channel {
@@ -501,9 +503,6 @@ form {
                 font-size: 10px;
                 font-weight: normal;
                 margin: 0 0 0 6px;
-                a {
-                    text-decoration: underline;
-                }
             }
         }
         ul.errorlist {
@@ -683,9 +682,6 @@ div.comment {
     }
     pre {
         background: black;
-    }
-    a {
-        text-decoration: underline;
     }
 }
 div.pagination {
