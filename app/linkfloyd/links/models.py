@@ -50,10 +50,9 @@ class Link(models.Model):
     posted_at = models.DateTimeField(auto_now_add=True)
     url = models.URLField(help_text=_("paste url of your link here"))
 
-    title = models.CharField(max_length=2048, blank=True,
-        help_text=_("title of your link"))
+    title = models.CharField(max_length=144, help_text=_("title of your link"))
 
-    description = models.CharField(max_length=4096, null=True, blank=True,
+    description = models.CharField(max_length=255, null=True, blank=True,
         help_text=_("say something about that link"))
 
     thumbnail_url = models.URLField(null=True, blank=True)

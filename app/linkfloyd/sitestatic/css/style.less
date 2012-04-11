@@ -19,12 +19,25 @@ body {
 .right {
     float: right;
 }
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 10px 0;
+    padding: 10px 6px 0 0;
+    color: lighten(@black, 12%);
+}
+h2 {
+    font-size:15px;
+    line-height: 18px;
+    border-bottom: 1px solid lighten(@black, 12%);
+}
 h3 {
-    margin: 0 5px;
-    padding: 0;
+    font-size: 13px;
+    line-height: 16px;
+}
+img.bordered {
+    border: 1px solid lighten(@black, 12%);
 }
 p {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px 30px;
 }
 a {
     text-decoration: none;
@@ -39,11 +52,16 @@ a#logo {
 }
 pre, ol, ul, blockquote  {
     padding: 5px;
-    margin:0 0 10px 0;
+    margin:0 0 5px 0;
 }
 ol, ul {
-    padding: 0 0 0 40px;
+    padding: 0 0 0 20px;
     li {margin: 0 0 10px 0;}
+}
+.flatpage {
+    ol, ul {
+        padding: 0 0 0 60px;
+    }
 }
 .buttonized {
     background: lighten(@black, 12%);
@@ -55,7 +73,6 @@ ol, ul {
         color: white;
     }
 }
-
 div.wrapper {
     width: 950px;
     margin: 0 auto;
@@ -160,16 +177,11 @@ div#head {
     margin: 0;
     padding: 0;
     > .header {
-        margin: 0 0 5px 0;
-        padding: 10px 6px 0 6px;
-        color: lighten(@black, 12%);
-        border-bottom: 1px solid black;
-        font-size: 14px;
         span.ordering {
             font-size: 10px;
             float: right;
             margin: 0 5px 0 0;
-            padding: 3px 5px 0 3px;
+            padding: 0 5px 0 3px;
             font-weight: normal;
             border-top: 1px solid black;
             border-left: 1px solid black;
@@ -184,12 +196,6 @@ div#head {
                 }
             }
         }
-    }
-    h2 {
-        font-size: 20px;
-    }
-    h3 {
-        font-size: 14px;
     }
     h2 > i, h3 > i {
         background: url(https://github.com/defunkt/facebox/raw/master/src/closelabel.png);
@@ -210,8 +216,8 @@ div.two-column {
         width: 200px;
         float: right;
         p {
-            margin-left: 10px;
-            margin-right: 10px;
+            margin-left: 0;
+            margin-right: 0;
             a {text-decoration: underline}
         }
         div.actions {
@@ -328,6 +334,9 @@ div.link {
     padding: 10px 0;
     margin: 0;
     // border-bottom: 1px dashed lighten(@pencil-grey, 10%);
+    &:first-child {
+        padding-top: 0;
+    }
     &.highlight {
         background: #ffff88;
     }
@@ -363,8 +372,6 @@ div.link {
         float: both;
         margin: 0 0 0 50px;
         h3.title {
-            font-size:13px;
-            line-height: 16px;
             margin: 0 0 0 0;
             padding: 0;
             a {

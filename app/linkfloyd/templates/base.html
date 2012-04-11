@@ -42,7 +42,7 @@
 				    <ul class="flat-list navigation">
                         {% block extra_nav %}
                         {% endblock extra_nav %}
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticoated %}
                         <li>
                             <a href="#">
                                 {% trans "Links" %}
@@ -92,6 +92,7 @@
 		    				<a href="{% url auth_login %}">{% trans "Login" %}</a>
 			    		</li>
                         {% endif %}
+                        <li><a href="/about/">About</a></li>
 				    </ul>
 			    </div>
             </div>

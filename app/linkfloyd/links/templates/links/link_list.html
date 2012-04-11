@@ -10,6 +10,23 @@
 {% block content %}
 <div class="two-column">
     <div class="panel">
+        {% if user.is_authenticated %}
+            <div class="tips section">
+                <h2>{% trans "Post Links" %}</h2>
+                <p>Did you wrote a blog post? Or found something interesting on the web? <a href="{% url submit_link %}">Submit your link.</a></p>
+            </div>
+            <div class="tips section">
+                <h2 class="header">{% trans "Reminder" %}</h2>
+                <p>Remember that linkfloyd puts forward high quality posts. You can help us to do this via voting.</p>
+
+                <p>Please vote up, if a post satisfies these:</p>
+                <ul>
+                    <li>Is it original? Do you find it helpful?</li>
+                    <li>Is it on suitable channel?</li>
+                    <li>Is title and description grammatically correct and clean?</li>
+                </ul>
+            </div>
+        {% endif %}
         {% if links_from == 'channel' %}
             {% with channel=instance %}
             <div class="about section">
@@ -48,22 +65,6 @@
             </div>
         {% endif %}
         {% if user.is_authenticated %}
-            <div class="tips section">
-                <h2 class="header">{% trans "Post Links" %}</h2>
-                <p>Did you wrote a blog post? Or found something interesting on the web? <a href="{% url submit_link %}">Submit your link.</a></p>
-            </div>
-            <div class="tips section">
-                <h2 class="header">{% trans "Use Your Votes" %}</h2>
-                <p>Remember that linkfloyd tries to put forward high quality posts. You can help us to do this via using your votes.</p>
-                <p>Please vote up, if a post satisfies these:</p>
-                <ul>
-                    <li>Is it original? Do you find it helpful?</li>
-                    <li>Is it on suitable channel?</li>
-                    <li>Is title and description grammatically correct and clean?</li>
-                </ul>
-            </div>
-
-
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
                 <ul class="channels navigation">

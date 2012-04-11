@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^preferences/', include('preferences.urls')),
     url(r'^invitations/', include('invitation.urls')),
     url(r'^api/', include('linkfloyd.api.urls')),
+    url(r'^about/$', direct_to_template, {'template': 'about.html'}),
     url(r'^404/$', direct_to_template, {'template': '404.html'}),
     url(r'^500/$', direct_to_template, {'template': '500.html'}),
 
