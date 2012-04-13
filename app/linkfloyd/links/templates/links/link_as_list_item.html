@@ -6,7 +6,7 @@
     </div>
 	{% if link.thumbnail_url %}
 	<a {%if link.player %}href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
-        {% thumbnail link.thumbnail_url "120x80" crop="center" as im %}<img src="{{ im.url }}">{% endthumbnail %}
+        {% thumbnail link.thumbnail_url "120x80" as im %}<img src="{{ im.url }}">{% endthumbnail %}
         {% if link.player %}<i></i>{% endif %}
 	</a>
 	{% endif %}
