@@ -61,11 +61,11 @@ def context_builder(request, **kwargs):
         # Filter links that not in known languages and rating higer than users.
         preferences = UserPreferences.objects.get(user=request.user)
         query = query & \
-                Q(language__in = preferences.known_languages.all()) &\
+                Q(language__in = preferences.known_languages.all()) & \
                 Q(rating__lte  = preferences.max_rating)
 
-   links = Link.objects.filter(query).order_by({
-	"hot": "-updated_at",
+    links = Link.objects.filter(query).order_by({
+    "hot": "-updated_at",
         "controversial": "-comment_score",
         "top": "-vote_score",
         "latest": "-posted_at",
