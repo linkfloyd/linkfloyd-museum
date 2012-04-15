@@ -3,6 +3,12 @@
 
 {% block title %}{{link.title}}{% endblock title %}
 {% if link.description %}{% block description %}{{link.description}}{% endblock %}{% endif %}
+{% block ogtags %}
+    <meta property="og:image" content="{% if link.thumbnail_url %}{{link.thumbnail_url}}{% else %}{{STATIC_PREFIX}}logo.png{% endif %}" />
+    <meta property="og:title" content="{{link.title}}" />
+    <meta property="og:url" content="http://linkfloyd.com" />
+    <meta property="og:description" content="{{link.description}}" />
+{% endblock %}
 {% block extra_head %}
     <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
@@ -15,10 +21,6 @@
 	<link href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css" rel="stylesheet" type="text/css">
     {% voting_script %}
 {% endblock %}
-
-{% if link.thumbnail_url %}
-    {% block og_image %}{{link.thumbnail_url}}{% endblock %}
-{% endif %}
 
 {% block content %}
 <div class="section">
