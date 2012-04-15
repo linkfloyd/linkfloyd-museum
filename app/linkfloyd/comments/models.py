@@ -33,9 +33,15 @@ class Comment(models.Model):
 
 @receiver(post_save, sender=Comment, dispatch_uid="comment_saved")
 def comment_saved(sender, **kwargs):
-
     if kwargs['created'] == True:
+
         comment = kwargs['instance']
+
+	# update links updated_at
+	comment.link.updated_at = comment.posted_at
+	comment.link.save()
+	
+	# send mail to followers
         recipients = [subscription.user.email for subscription in \
                       LinkSubscription.objects.filter(
                           link=comment.link).exclude(user=comment.posted_by)]

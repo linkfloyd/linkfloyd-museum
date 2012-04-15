@@ -16,7 +16,7 @@ class SubmitLinkForm(forms.ModelForm):
 
     class Meta:
         model = Link
-        exclude = ['posted_by', 'is_banned', 'shown']
+        exclude = ['posted_by', 'is_banned', 'shown', 'gravity']
 
     class Media:
         js = ("js/autofill.js", "js/libs/jquery.tokeninput.js",)

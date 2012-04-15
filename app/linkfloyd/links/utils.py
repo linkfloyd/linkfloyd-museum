@@ -22,7 +22,7 @@ def context_builder(request, **kwargs):
         "days": kwargs.get("days"),
         "ordering": get_in(
             request.GET, "ordering", [
-                "controversial", "top", "latest"], "latest"),
+                "controversial", "top", "latest"], "hot"),
     }
     if 'highlight' in request.GET:
         try:
@@ -66,9 +66,10 @@ def context_builder(request, **kwargs):
                 Q(rating__lte  = preferences.max_rating)
     """
     links = Link.objects.filter(query).order_by({
+	"hot": "-updated_at",
         "controversial": "-comment_score",
         "top": "-vote_score",
-        "latest": "-posted_at"
+        "latest": "-posted_at",
     }[response['ordering']])
 
     paginator = Paginator(links, 25)

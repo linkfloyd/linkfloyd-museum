@@ -10,6 +10,7 @@ from channels.models import Channel
 from channels.models import Subscription as ChannelSubscription
 
 from qhonuskan_votes.models import VotesField
+from qhonuskan_votes.models import ObjectsWithScoresManager
 
 from django.db.models.signals import pre_delete
 from django.db.models.signals import post_save
@@ -48,30 +49,25 @@ class LinksWithScoresManager(models.Manager):
 class Link(models.Model):
     posted_by = models.ForeignKey(User)
     posted_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     url = models.URLField(help_text=_("paste url of your link here"))
-
     title = models.CharField(max_length=144, help_text=_("title of your link"))
-
     description = models.CharField(max_length=255, null=True, blank=True,
         help_text=_("say something about that link"))
-
     thumbnail_url = models.URLField(null=True, blank=True)
-
     rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
         help_text=_("warn people about your link")
     )
-
     language = models.ForeignKey(Language)
     votes = VotesField()
-
     shown = models.PositiveIntegerField(default=0)
     player = models.TextField(null=True, blank=True)
     is_banned = models.BooleanField(default=False)
     is_sponsored = models.BooleanField(default=False)
     channel = models.ForeignKey(Channel)
 
-    objects = LinksWithScoresManager()
+    objects = ObjectsWithScoresManager()
 
     def get_domain(self):
         from urllib2 import urlparse
