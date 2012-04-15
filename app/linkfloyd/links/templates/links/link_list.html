@@ -96,15 +96,17 @@
             <span class="ordering{% if ordering == 'top' %} active{% endif %}">
                 <a href="?ordering=top">top voted</a>
             </span>
-            <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
-                <a href="?ordering=controversial">controversial</a>
-            </span>
             <span class="ordering{% if ordering == 'latest' %} active{% endif %}">
                 <a href="?ordering=latest">
                     Latest
                 </a>
             </span>
-        </h2>
+            <span class="ordering{% if ordering == 'hot' %} active{% endif %}">
+                <a href="?">
+                    Hot
+                </a>
+            </span>
+         </h2>
         </ul>
         <div class="body">
             {% for link in links %}
