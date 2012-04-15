@@ -6,8 +6,9 @@
 {% block ogtags %}
     <meta property="og:image" content="{% if link.thumbnail_url %}{{link.thumbnail_url}}{% else %}{{STATIC_PREFIX}}logo.png{% endif %}" />
     <meta property="og:title" content="{{link.title}}" />
-    <meta property="og:url" content="http://linkfloyd.com" />
+    <meta property="og:url" content="http://linkfloyd.com{{link.get_absolute_url}}" />
     <meta property="og:description" content="{{link.description}}" />
+    <link rel="canonical" href="http://linkfloyd.com{{link.get_absolute_url}}" />
 {% endblock %}
 {% block extra_head %}
     <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
