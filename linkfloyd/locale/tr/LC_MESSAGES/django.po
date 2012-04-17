@@ -1,0 +1,269 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-07 11:11-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settings.py:39
+msgid "English"
+msgstr ""
+
+#: settings.py:40
+msgid "Türkçe"
+msgstr ""
+
+#: links/models.py:17
+msgid "Suitable with any audience type."
+msgstr "Herkes için uygun."
+
+#: links/models.py:18
+msgid "Can Contain rude gestures, the lesser swear words, or mild violence"
+msgstr "Kaba hareketler ya da sözler, saldırganlık içerebilir."
+
+#: links/models.py:19
+msgid ""
+"Can Contain such things as harsh profanity, intense violence, nudity or drug "
+"use."
+msgstr ""
+"Sert küfürler, saldırganlık, çıplaklık ve uyuşturucu kullanımı içerebilir."
+
+#: links/models.py:20
+msgid "Can Contain hardcore sexual imagery or extremely disturbing violence."
+msgstr "Hardcore seks sahneleri ve aşırı şiddet görüntüleri içerebilir."
+
+#: links/models.py:41
+msgid "title"
+msgstr "başlık"
+
+#: links/models.py:42
+msgid "slug"
+msgstr "takoz"
+
+#: links/models.py:43
+msgid "description"
+msgstr "açıklama"
+
+#: links/models.py:65
+msgid "paste url of your link here"
+msgstr "bağlantınızın adresini buraya yapıştırın"
+
+#: links/models.py:68
+msgid "title of your link"
+msgstr "bağlantınızın başlığı"
+
+#: links/models.py:71
+msgid "say something about that link"
+msgstr "bağlantınız hakkında bir şeyler söyleyin"
+
+#: links/models.py:78
+msgid "warn people about your link"
+msgstr "bağlantınızın içeriği konusunda insanları uyarın"
+
+#: links/templates/links/edit.html:13 links/templates/links/submit.html:17
+msgid "Rating"
+msgstr "Derecelendirme"
+
+#: links/templates/links/edit.html:18 links/templates/links/submit.html:22
+msgid "Language"
+msgstr "Dil"
+
+#: links/templates/links/edit.html:22 links/templates/links/submit.html:26
+msgid "Title"
+msgstr "Başlık"
+
+#: links/templates/links/edit.html:27 links/templates/links/submit.html:31
+msgid "Description"
+msgstr "Açıklama"
+
+#: links/templates/links/edit.html:32 links/templates/links/submit.html:36
+msgid "Channel"
+msgstr "Kanal"
+
+#: links/templates/links/edit.html:40 links/templates/links/submit.html:44
+#: templates/registration/registration_form.html:26
+msgid "Submit"
+msgstr "Gönder"
+
+#: links/templates/links/link_as_list_item.html:32
+#: links/templates/links/link_list.html:43
+msgid "Share"
+msgstr "Paylaş"
+
+#: links/templates/links/link_as_list_item.html:35
+msgid "Edit"
+msgstr "Düzenle"
+
+#: links/templates/links/link_as_list_item.html:36
+msgid "Are you sure to delete this link?"
+msgstr "Bu bağlantıyı silmek istediğinizden emin misiniz?"
+
+#: links/templates/links/link_as_list_item.html:36
+msgid "Delete"
+msgstr "Sil"
+
+#: links/templates/links/link_as_list_item.html:38
+msgid "Complain"
+msgstr "Gammazla"
+
+#: links/templates/links/link_as_list_item.html:40
+msgid "Info"
+msgstr "Bilgi"
+
+#: links/templates/links/link_list.html:8
+msgid "Top Channels"
+msgstr "Popüler Kanallar"
+
+#: links/templates/links/link_list.html:22 templates/index.html:3
+msgid "No links shared today. Share it now!"
+msgstr "Bu gün hiç bağ paylaşışmamış. Siz paylaşın :)"
+
+#: links/templates/links/link_list.html:44
+msgid "E-posta"
+msgstr ""
+
+#: links/templates/links/submit.html:13
+msgid "URL"
+msgstr "URL"
+
+#: templates/base.html:39
+msgid "Links"
+msgstr ""
+
+#: templates/base.html:43
+msgid "Highest"
+msgstr "En yüksek"
+
+#: templates/base.html:46
+msgid "Controversial"
+msgstr "Tartışmalı"
+
+#: templates/base.html:49
+msgid "Latest"
+msgstr "En son"
+
+#: templates/base.html:53
+#, fuzzy, python-format
+msgid "From %(user)s"
+msgstr "%(user)s tarafından"
+
+#: templates/base.html:63
+msgid "Log out"
+msgstr "Çıkış yap"
+
+#: templates/base.html:69
+msgid "Submit a Link"
+msgstr "Bir bağ gönder"
+
+#: templates/base.html:73
+msgid "Login"
+msgstr "Giriş Yap"
+
+#: templates/registration/activate.html:2
+msgid "Activation complete"
+msgstr "Aktivasyon tamamlandı"
+
+#: templates/registration/activate.html:2
+msgid "Activation problem"
+msgstr "Aktivasyon problemi"
+
+#: templates/registration/activate.html:6
+#, python-format
+msgid "Thanks %(account)s, your activation complete!"
+msgstr "Teşekkürler %(account)s, aktivasyonun tamamlandı!"
+
+#: templates/registration/activate.html:7
+#, python-format
+msgid ""
+"You may now <a href='%(url)s'>login</a> using the username and password you "
+"set at registration."
+msgstr "Şimdi belirlediğin kullanıcı adı ve şifre ile <a href='%(url)s'>giriş yap</a>abilirsin."
+
+
+#: templates/registration/activate.html:9
+msgid ""
+"Oops; it seems that your activation key is invalid.  Please check the url "
+"again."
+msgstr "Hadi ya :\ Aktivasyon anahtarın geçersiz gözüküyor. Lütfen tekra dene."
+
+#: templates/registration/login.html:6
+msgid "Log in"
+msgstr "Giriş yap"
+
+#: templates/registration/login.html:9
+msgid "Your username and password didn't match. Please try again."
+msgstr "Kullanıcı adı ve şifreniz uyuşmadı. Tekrar deneyin."
+
+#: templates/registration/login.html:18
+#: templates/registration/registration_form.html:19
+msgid "Password"
+msgstr "Şifre"
+
+#: templates/registration/login.html:18
+msgid ""
+"Hatırlamıyorsanız lütfen <a href=\"/accounts/password/reset/\">buraya tıkla</"
+"a>yın."
+msgstr ""
+
+#: templates/registration/password_change_done.html:2
+msgid "Password changed"
+msgstr "Tekrar Şifre"
+
+#: templates/registration/password_change_done.html:4
+msgid "Password successfully changed!"
+msgstr "Şifre başarılı bir şekilde değiştirildi"
+
+#: templates/registration/password_reset_complete.html:2
+msgid "Password reset complete"
+msgstr "Şifre sıfırlama tamamlandı"
+
+#: templates/registration/password_reset_done.html:2
+msgid "Password reset"
+msgstr "Şifre sıfırlama"
+
+#: templates/registration/password_reset_done.html:13
+msgid ""
+"We have sent you an email with a link to reset your password.  Please check "
+"your email and click the link to continue."
+msgstr ""
+"E-posta adresinize şifrenizi sıfırlayabilmeniz için bir bağlantı gönderdik. "
+"Lütfen epostanızı kontrol edip bağlantıya tıklayın."
+
+#: templates/registration/password_reset_form.html:2
+msgid "Reset password"
+msgstr "Şifre sıfırla"
+
+#: templates/registration/registration_form.html:6
+msgid "Register"
+msgstr "Kayıt Ol"
+
+#: templates/registration/registration_form.html:10
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: templates/registration/registration_form.html:15
+msgid "Email"
+msgstr "E-posta"
+
+#: templates/registration/registration_form.html:23
+msgid "Password Again"
+msgstr "Tekrar Şifre"
+
+#, fuzzy
+#~ msgid "Posted by %(poster)s, %(posted_at)s ago."
+#~ msgstr "%(poster)s tarafından %(posted_at|timesince)s önce gönderildi."
+
+#~ msgid "Displayed %(shown)s times."
+#~ msgstr "%(shown)s kere gösterldi."

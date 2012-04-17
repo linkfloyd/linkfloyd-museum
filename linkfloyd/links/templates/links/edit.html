@@ -1,0 +1,60 @@
+{% extends "base.html" %}{% load i18n %}
+{% block extra_head %}
+    {{form.media}}
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/libs/token-input.less">
+{% endblock %}
+{% block content %}
+<div class="one-column">
+    <div class="content section narrow">
+        <h2 class="header">Edit Link</h2>
+        <div class="body">
+		    <form action="#" method="post">
+                <div class="fieldWrapper">
+                    <label fory="id_rating">{{ form.rating.errors }}{% trans "Rating" %}<span class="desc">{{form.rating.help_text}}</label>
+                    {{ form.rating }}
+                </div>
+
+                <div class="fieldWrapper">
+                    <label fory="id_rating">{{ form.language.errors }}{% trans "Language" %}<span class="desc">{{form.language.help_text}}</label>
+                    {{ form.language }}
+                </div>
+                {% if form.thumbnail_url.value %}
+                <div class="fieldWrapper" id="thumbnail_preview">
+                    <label for="id_thumbnail">{% trans "Thumbnail" %}<span class="desc"><a href="#">Click here</a> to remove</label>
+                    <img src="{{form.thumbnail_url.value}}" />
+                </div>
+                {% endif %}
+                <div class="fieldWrapper">
+                    <label for="id_title">{{ form.title.errors }}{% trans "Title" %}<span class="desc">{{form.title.help_text}}</label>
+                    {{ form.title }}
+                </div>
+
+            <div class="fieldWrapper">
+                <label for="id_description">{{ form.description.errors }}{% trans "Description" %}<span class="desc">{{form.description.help_text}}</label>
+                {{ form.description }}
+            </div>
+
+            <div class="fieldWrapper">
+                <label for="id_channel">{{ form.channel.errors }}{% trans "Channel" %}<span class="desc">{{form.channel.help_text}}</span></label>
+                {{ form.channel }}
+            </div>
+
+			{% csrf_token %}
+            {{form.thumbnail_url}}
+            {{form.player}}
+
+            <input type="submit" value="{% trans 'Submit' %}" />
+		    </form>
+            <script type="application/javascript">
+                $("#id_channel").tokenInput("/api/channels/list/", {
+                    tokenLimit: 1,
+                    prePopulate: [{
+                        "id": {{form.instance.channel.id}},
+                        "name": "{{form.instance.channel}}"
+                    }]
+                });
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock content %}

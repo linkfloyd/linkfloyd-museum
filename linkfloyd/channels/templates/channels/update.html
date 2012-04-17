@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% load i18n %}
+{% block content %}
+<div class="one-column">
+    <div class="content section narrow">
+        <h2 class="header">Update Channel</h2>
+        <div class="body">
+		    <form action="#" method="post">
+                <div class="fieldWrapper">
+                    <label for="id_name">
+                        {{ form.name.errors }}{% trans "Name" %}
+                        <span class="desc">{{ form.name.help_text }}
+                    </label>
+                    {{ form.name }}
+                </div>
+                <div class="fieldWrapper">
+                    <label fory="id_description">
+                        {{ form.description.errors }}{% trans "Description" %}
+                        <span class="desc">{{form.description.help_text}}
+                    </label>
+                    {{ form.description }}
+                </div>
+			    {% csrf_token %}
+                <input type="submit" value="{% trans 'Submit' %}" />
+		    </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
