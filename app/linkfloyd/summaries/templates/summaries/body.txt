@@ -1,6 +1,0 @@
-Hi {{user|lower}}, here's your summary:{% regroup links by channel as channels %}
-{% for channel in channels %}
-From {{channel.grouper|lower}} channel:
-{% for link in channel.list %}
-    * {{link.title}} ( http://{{site.domain}}{{link.get_absolute_url }} ){% endfor %}
-{% endfor %}

@@ -1,2 +1,4 @@
 *.pyc
-/app/linkfloyd/local_settings.py
+/linkfloyd/local_settings.py
+/linkfloyd/static/
+/venv/
