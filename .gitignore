@@ -1,4 +1,5 @@
 *.pyc
 /linkfloyd/local_settings.py
 /linkfloyd/static/
+/linkfloyd/media/
 /venv/
