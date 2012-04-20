@@ -17,10 +17,11 @@ $(document).ready(function() {
                 $("#id_title, #id_description").removeAttr("disabled");
                 $("#id_title, #id_description").removeClass("busy");
                 if (data['image']) {
-                    $("div#thumbnail_preview").slideDown();
-                    $("div#thumbnail_preview img").attr("src", data['image']);
+                    var preview_el = $("div#thumbnail_preview");
+                    preview_el.parent().slideDown();        
+                    preview_el.find("img").attr("src", data['image']);
+                    $("#id_thumbnail_url").val(data['image']);
                 }
-                $("#id_thumbnail_url").val(data['image']);
                 $("#id_player").val(data['player']);
 			},
 			error : function(data) {
@@ -28,8 +29,9 @@ $(document).ready(function() {
 			}
 		});
 	});
-    $("div#thumbnail_preview label span a").click(function(){
+    $("a#remove_thumbnail").click(function(){
         $(this).parent().parent().parent().slideUp();
         $("#id_thumbnail_url").val("");
+        return false;
     });
 });

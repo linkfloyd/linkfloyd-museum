@@ -57,11 +57,11 @@ def update(request, pk):
             link = form.save(request.POST)
             return HttpResponseRedirect(link.get_absolute_url())
         else:
-            return render_to_response("links/edit.html", {
+            return render_to_response("links/submit.html", {
                 "form": form
             }, context_instance=RequestContext(request))
     else:
-        return render_to_response("links/edit.html", {
+        return render_to_response("links/submit.html", {
             "form": EditLinkForm(
                 instance=get_object_or_404(
                     Link, pk=pk, posted_by=request.user)),
