@@ -9,12 +9,8 @@
     	<h2 class="header">Post a Link</h2>
             <div class="body">
 	            <form action="#" method="post">
-                    {% for field in form%}
-
-                    <div class="fieldWrapper"{% if field.is_hidden %}style="display:none"{% endif%}>
-                        <label for="{{field.html_name}}">{{field.label}}<span class="desc">{{field.help_text}}</label>
-                        {{field}}
-                    </div>
+                    {% for field in form %}
+                        {% include "forms/form_field.html" %}
                     {% endfor %}
                     {% csrf_token %}
                     <input type="submit" value="{% trans 'Submit' %}" />

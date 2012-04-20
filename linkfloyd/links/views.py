@@ -9,11 +9,14 @@ from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+from qhonuskan_votes.models import vote_changed
+
 from channels.models import Subscription
+
 from links.models import Link, Channel, Report
 from links.utils import context_builder
-
 from links.forms import SubmitLinkForm, EditLinkForm
+
 from comments.forms import CommentForm
 
 from preferences.models import UserPreferences
@@ -112,3 +115,5 @@ def links_from_channel(request, channel_slug):
             instance=get_object_or_404(Channel, slug=channel_slug)),
         context_instance=RequestContext(request)
     )
+
+

@@ -10,14 +10,9 @@
             {% endif %}
             <form method="post" action="{% url django.contrib.auth.views.login %}">
                 {% csrf_token %}
-                <div class="fieldWrapper">
-                    {{ form.username.label_tag }}
-                    {{ form.username }}
-                </div>
-                <div class="fieldWrapper">
-                    <label for="id_password">{%trans "Password"%}</label>
-                    {{ form.password }}
-                </div>
+                {% for field in form %}
+                {% include "forms/form_field.html" %}
+                {% endfor %}
                 <p><a href="{% url registration_register %}">Do you need an account</a>?</p>
                 <p><a href="/accounts/password/reset/">Don't you remember your password</a>?</p>
                 <input type="submit" value="login" />

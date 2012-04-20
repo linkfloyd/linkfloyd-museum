@@ -125,7 +125,7 @@ DEVSERVER_MODULES = (
     'devserver.modules.profile.LineProfilerModule',
     'devserver.modules.sql.SQLRealTimeModule',
 )
-DEVSERVER_TRUNCATE_SQL = False
+DEVSERVER_TRUNCATE_SQL = True
 
 # EMAIL
 SERVER_EMAIL = 'server@linkfloyd.com'

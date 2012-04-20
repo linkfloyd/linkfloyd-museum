@@ -93,6 +93,11 @@
     </div>
     <div class="content section">
         <h2 class="header">{{title}}
+            <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
+                <a href="?ordering=controversial">
+                    Controversial
+                </a>
+            </span>
             <span class="ordering{% if ordering == 'top' %} active{% endif %}">
                 <a href="?ordering=top">top voted</a>
             </span>

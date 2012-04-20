@@ -48,20 +48,15 @@ class SubmitLinkForm(forms.ModelForm):
 
     class Meta:
         model = Link
-        exclude = ['posted_by', 'is_banned', 'is_sponsored', 'shown']
+        exclude = ['posted_by', 'is_banned', 'is_sponsored', 'shown',
+                   'vote_score', 'comment_score']
 
     class Media:
         js = ("js/autofill.js", "js/libs/jquery.tokeninput.js",)
 
     def __init__(self, *args, **kwargs):
-        instance = kwargs.get('instance')
-        print instance
-        print "---"
-        print self.base_fields['thumbnail_url']
-        print "---"
-
         super(SubmitLinkForm, self).__init__(*args, **kwargs)
-
+        instance = kwargs.get('instance')
         if not instance:
             self.fields['thumbnail_url'].widget.is_hidden=True
         else:
@@ -74,7 +69,8 @@ class SubmitLinkForm(forms.ModelForm):
 class EditLinkForm(SubmitLinkForm):
     class Meta:
         model = Link
-        exclude = ['url', 'posted_by', 'is_banned', 'shown', 'is_sponsored']
+        exclude = ['posted_by', 'is_banned', 'is_sponsored', 'shown',
+                   'vote_score', 'comment_score', 'url']
 
 class SubmitReportForm(forms.ModelForm):
     class Meta:

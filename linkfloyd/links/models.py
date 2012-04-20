@@ -10,10 +10,10 @@ from channels.models import Channel
 from channels.models import Subscription as ChannelSubscription
 
 from qhonuskan_votes.models import VotesField
-from qhonuskan_votes.models import ObjectsWithScoresManager
 
 from django.db.models.signals import pre_delete
 from django.db.models.signals import post_save
+from qhonuskan_votes.models import vote_changed
 
 from django.db.models import Count
 
@@ -37,15 +37,6 @@ class Language(models.Model):
     def __unicode__(self):
         return self.name
 
-class LinksWithScoresManager(models.Manager):
-    def get_query_set(self):
-        return super(LinksWithScoresManager, self).get_query_set().extra({
-            "comment_score": 'SELECT COUNT(*) FROM comments_comment WHERE '
-                             'comments_comment.link_id = links_link.id',
-            "vote_score": 'SELECT Sum(value) or 0 FROM links_linkvote WHERE '
-                          'links_linkvote.object_id = links_link.id'
-        })
-
 class Link(models.Model):
     posted_by = models.ForeignKey(User)
     posted_at = models.DateTimeField(auto_now_add=True)
@@ -66,8 +57,8 @@ class Link(models.Model):
     is_banned = models.BooleanField(default=False)
     is_sponsored = models.BooleanField(default=False)
     channel = models.ForeignKey(Channel)
-
-    objects = ObjectsWithScoresManager()
+    vote_score = models.PositiveIntegerField(default=0)
+    comment_score = models.PositiveIntegerField(default=0)
 
     def get_domain(self):
         from urllib2 import urlparse
@@ -128,6 +119,7 @@ class Report(models.Model):
     def __unicode__(self):
         return "%s's report for %s" % (self.reporter, self.reason)
 
+
 @receiver(post_save, sender=Link, dispatch_uid="link_saved")
 def link_saved(sender, **kwargs):
 
@@ -143,10 +135,17 @@ def link_saved(sender, **kwargs):
         LinkSubscription = Subscription
         LinkSubscription.objects.get_or_create(link=link, user=link.posted_by)
 
+
 @receiver(pre_delete, sender=Link, dispatch_uid="link_deleted")
 def link_deleted(sender, **kwargs):
-
     from summaries.models import Unseen
-
     link = kwargs['instance']
     Unseen.objects.filter(link=link).delete()
+
+@receiver(vote_changed)
+def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
+    from qhonuskan_votes.utils import get_vote_model
+    link = sender.object
+    link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
+    link.save()
+

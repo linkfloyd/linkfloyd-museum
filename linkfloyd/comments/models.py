@@ -1,6 +1,8 @@
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+
+from django.db.models import Count
 
 from links.models import Link
 from links.models import Subscription as LinkSubscription
@@ -37,10 +39,11 @@ def comment_saved(sender, **kwargs):
 
         comment = kwargs['instance']
 
-	# update links updated_at
-	comment.link.updated_at = comment.posted_at
-	comment.link.save()
-	
+        # update links updated_at
+        comment.link.updated_at = comment.posted_at
+        comment.link.comment_score = comment.link.comment_set.all().count()
+        comment.link.save()
+
 	# send mail to followers
         recipients = [subscription.user.email for subscription in \
                       LinkSubscription.objects.filter(
@@ -63,3 +66,11 @@ def comment_saved(sender, **kwargs):
         send_mass_mail(messages, fail_silently=False)
         LinkSubscription.objects.get_or_create(
             user=comment.posted_by, link=comment.link)
+
+
+@receiver(post_delete, sender=Comment, dispatch_uid="comment_deleted")
+def comment_saved(sender, **kwargs):
+    comment = kwargs['instance']
+    comment.link.comment_score = comment.link.comment_set.all().count()
+    comment.link.save()
+
