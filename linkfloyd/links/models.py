@@ -87,7 +87,9 @@ class Link(models.Model):
         return u"%s by %s" % (self.title, self.posted_by)
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User, related_name="link_subscriptions")
+    """We're holding unsubscriptions instead of subscriptions.
+    """
+    user = models.ForeignKey(User, related_name="link_unsubscriptions")
     link = models.ForeignKey(Link)
 
 class Report(models.Model):

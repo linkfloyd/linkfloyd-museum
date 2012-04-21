@@ -13,4 +13,3 @@ class Command(BaseCommand):
             link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
             link.comment_score = link.comment_set.all().count()
             link.save()
-

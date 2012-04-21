@@ -16,10 +16,11 @@
                         <div class="header" style="float:both;margin:0;font-weight:bold;font-effect:outline">
                             <h3 class="title" style="font-size:13px;line-height:16px;margin:0;padding:0;">
                                 <a href="http://{{site.domain}}{{link.get_absolute_url}}" style="text-decoration:none;color:#2b1b0c;" target="_blank">{{link.title}}</a>
+                                (<a href="{{link.url}}">direct</a>)
                             </h3>
                         </div>
                         {% if link.description %}<p class="description" style="margin:5px 10px 0 0;font-size:13px;color:#2a2a2a">{{link.description}}</p>{% endif %}
-                        <p class="info" style="margin:4px 10px 0 0;font-size:10px;margin-top:12px;color:#777777">Posted by <a style="text-decoration:underline;color:#7b4d22" href="http://{{site.domain}}/links/from/miratcan/">miratcan</a> channel {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.</p>
+                        <p class="info" style="margin:4px 10px 0 0;font-size:10px;margin-top:12px;color:#777777">Posted by <a style="text-decoration:underline;color:#7b4d22" href="http://{{site.domain}}{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> channel {{link.posted_at|timesince}} ago. Displayed {{link.shown}} times.</p>
                     </div>
                 {% endfor %}
             {% endfor %}

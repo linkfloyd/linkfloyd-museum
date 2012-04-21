@@ -127,8 +127,8 @@ def switch_link_subscription(request):
                 simplejson.dumps({
                     "status": "unsubscripted",
                     "update_text": "Subscribe",
-                    "update_title": "Email me when somebody comments on "
-                                    "that link"
+                    "update_title": "Email me when somebody comments " \
+                                    "on that link"
                 }, 'application/javascript')
             )
         else:
@@ -136,35 +136,14 @@ def switch_link_subscription(request):
                 user=request.user, link=link)
             return HttpResponse(
                 simplejson.dumps({
-                    "status": "subscripted",
+                    "status": "subscribed",
                     "update_text": "Unsubscribe",
-                    "update_title": "Do not send emails about that "
-                                    "link anymore"
+                    "update_title": "Do not email me when somebody comments " \
+                                    "on that link"
                 }, 'application/javascript')
             )
     else:
         return HttpResponse(status=400)
-
-
-@login_required
-def unsubscribe_link(request):
-    if request.POST.has_key("link_id"):
-        try:
-            link = Link.objects.get(
-                slug=request.POST['link_id'])
-        except Link.DoesNotExist:
-            return HttpResponse(status=404)
-        try:
-            subscription = LinkSubscription.objects.get(
-                user=request.user,
-                link=link)
-        except LinkSubscription.DoesNotExist:
-            return HttpResponse(status=404)
-        subscription.delete()
-        return HttpResponse(status=200)
-    else:
-        return HttpResponse(status=400)
-
 
 def channels_list(request):
 

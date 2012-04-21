@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.db.models import Count
 
 from links.models import Link
-from links.models import Subscription as LinkSubscription
+from links.models import Subscription as Linksubscription
 
 from django.contrib.auth.models import User
 
@@ -44,24 +44,15 @@ def comment_saved(sender, **kwargs):
         comment.link.comment_score = comment.link.comment_set.all().count()
         comment.link.save()
 
-	# send mail to followers
-        recipients = [subscription.user.email for subscription in \
-                      LinkSubscription.objects.filter(
-                          link=comment.link).exclude(user=comment.posted_by)]
-        title = render_to_string(
-            "comments/subject.txt",{"comment": comment})
-        body = render_to_string(
-            "comments/body.txt", {"comment": comment})
+        # send mail to followers
+        title = render_to_string("comments/subject.txt",{"comment": comment})
+        body = render_to_string("comments/body.txt", {"comment": comment})
         messages = []
-        for recipient in recipients:
-            messages.append(
-                (
-                    title,
-                    body,
-                    "Linkfloyd %s" % settings.DEFAULT_FROM_EMAIL,
-                    [recipient,]
-                )
-            )
+        for email in [subscription.user.email for subscription in \
+            Subscription.objects.filter(link=comment.link).exclude(user=comment.posted_by)]:
+
+            messages.append((title, body, "%s" % settings.DEFAULT_FROM_EMAIL,
+                             [email,]))
 
         send_mass_mail(messages, fail_silently=False)
         LinkSubscription.objects.get_or_create(

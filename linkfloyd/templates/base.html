@@ -40,7 +40,7 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
             })();
         </script>
-        {% block extra_head %} {% endblock %}
+        {% block extra_head %}{% endblock %}
 	</head>
 	<body {% block class_body %}{% endblock %}>
 		<div id="head">
@@ -97,7 +97,7 @@
 					    </li>
                         {% if not user.is_authenticated %}
 	    				<li>
-		    				<a href="{% url auth_login %}">{% trans "Login" %}</a>
+		    				<a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
 			    		</li>
                         {% endif %}
                         <li><a href="/about/">About</a></li>
