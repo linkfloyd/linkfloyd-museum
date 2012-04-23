@@ -1,6 +1,5 @@
 {% load static i18n %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
-
 	<head>
 		<title>{% block title %}LinkFloyd{% endblock title %}</title>
 		<meta name="description" content="{% block description %}Simply archive, share and comment on links{% endblock %}" />
@@ -43,7 +42,7 @@
         {% block extra_head %}{% endblock %}
 	</head>
 	<body {% block class_body %}{% endblock %}>
-		<div id="head">
+		<div id="header">
             <div class="wrapper">
 			    <a id="logo" href="/">LinkFloyd</a>
 			    <div class="right">

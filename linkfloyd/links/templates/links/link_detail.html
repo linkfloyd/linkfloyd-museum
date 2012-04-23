@@ -24,7 +24,8 @@
 {% endblock %}
 {% block class_body %}class="detail link{{link.id}}"{% endblock %}
 {% block content %}
-<div class="section">
+<div class="two-column">
+<div class="content section">
     <h2 class="header">{{link.title}} via <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></h2>
     {% include "links/link_as_list_item.html" %}
 
@@ -42,6 +43,7 @@
         or
         <a href="{% url auth_login %}">log in</a>.
     {% endif %}
+</div>
 </div>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=miratcan"></script>
 {% endblock content %}
