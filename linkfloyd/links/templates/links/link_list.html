@@ -51,7 +51,6 @@
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
 		<ul class="channels navigation">
-			{{instance}}
                     {% for subscription in user.channel_subscriptions.all %}
 		    <li {% ifequal subscription instance %}class="active"{% endifequal %}>
                         <a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a>
