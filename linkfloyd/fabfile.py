@@ -20,7 +20,7 @@ def pull():
 def update_libs():
     with prefix(env.activate_env):
         with cd(env.webapp):
-            run('pip install -r ../../docs/requirements.txt')
+            run('pip install -r ../requirements.txt')
             run('python manage.py collectstatic --noinput')
             run('python manage.py syncdb --noinput')
             run('../../../apache2/bin/restart')
