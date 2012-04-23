@@ -5,7 +5,7 @@ def testing():
     env.host_string = "web77.webfaction.com"
     env.user = "miratcan"
     env.password = "kukuleta"
-    env.webapp = "/home/miratcan/webapps/linkfloyd/linkfloyd/"
+    env.webapp = "/home/miratcan/webapps/linkfloyd/linkfloyd/linkfloyd/"
 
     env.activate_env = 'source /home/miratcan/envs/linkfloyd/bin/activate'
 
