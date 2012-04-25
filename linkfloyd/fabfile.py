@@ -23,7 +23,7 @@ def update_libs():
             run('pip install -r ../requirements.txt')
             run('python manage.py collectstatic --noinput')
             run('python manage.py syncdb --noinput')
-            run('../../../apache2/bin/restart')
+            run('../../apache2/bin/restart')
 
 def deploy():
     pull()
