@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import login_required
 from channels.forms import CreateChannelForm, UpdateChannelForm
 from channels.models import Subscription, Channel
 from django.contrib import messages
-from django.views.generic import DetailView, ListView
+from django.views.generic import ListView
 from django.views.decorators.csrf import csrf_protect
+from django.db.models import Count
 
 @login_required
 def create(request):
@@ -22,7 +23,7 @@ def create(request):
             messages.add_message(
                 request,
                 messages.INFO,
-                'You Created %s Channel' % channel)
+		'You Created %s Channel' % channel)
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
             return render_to_response(
@@ -108,7 +109,9 @@ class BrowseChannelsView(ListView):
     template_name = "channels/channel_list.html"
 
     def get_queryset(self):
-        return Channel.objects.all()
+        return Channel.objects.annotate(
+	    num_of_subscribers=Count("subscription")).order_by(
+                "-is_official", "-num_of_subscribers")
 
     def get_context_data(self, **kwargs):
         context = super(BrowseChannelsView, self).get_context_data(**kwargs)

@@ -42,7 +42,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 7, 13, 22, 35, 533604)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 11, 1, 44, 10500)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -50,7 +50,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 7, 13, 22, 35, 533492)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 11, 1, 44, 10389)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -89,7 +89,8 @@ class Migration(SchemaMigration):
         'links.link': {
             'Meta': {'object_name': 'Link'},
             'channel': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['channels.Channel']"}),
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '4096', 'null': 'True', 'blank': 'True'}),
+            'comment_score': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_banned': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_sponsored': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -100,8 +101,10 @@ class Migration(SchemaMigration):
             'rating': ('django.db.models.fields.PositiveIntegerField', [], {}),
             'shown': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
             'thumbnail_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '2048', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '144'}),
+            'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'vote_score': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
         }
     }
 

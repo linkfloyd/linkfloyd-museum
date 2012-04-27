@@ -82,7 +82,7 @@ dl {
 div.wrapper {
     width: 950px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 5px 15px;
 }
 ul.flat-list {
     margin: 0;
@@ -123,9 +123,11 @@ div#header {
         padding: 0;
     }
     ul.navigation {
-        li {
+	> li {
             border-right: 1px lighten(@black, 5%) solid;
             border-left: 1px lighten(@black, 19%) solid;
+        }
+        li {
             padding: 0;
             margin: 0;
             position: relative;
@@ -217,25 +219,6 @@ div.two-column {
             margin-left: 0;
             margin-right: 0;
         }
-        div.actions {
-            div.wrapper {
-                margin: 0 0 5px 0;
-                padding: 0;
-                width: auto;
-                display: block;
-                overflow: auto;
-                form {
-                    margin: 0;
-                    input {
-                        width: 100%
-                    }
-                }
-                a.buttonized {
-                    text-align: center;
-                    display: block;
-                }
-            }
-        }
 	div.subscribers {
 	    a.subscriber {
                 width: 30px;
@@ -245,6 +228,11 @@ div.two-column {
 		margin: 5px;
 	    }
         }
+	dl {
+	    dd {
+		margin: 0 0 0 10px;
+	    }
+	}
         ul.navigation {
             margin: 0;
             padding: 0;
@@ -261,8 +249,10 @@ div.two-column {
                 border-right: 1px solid darken(@blue, 15%);
  		a {
                     font-size: 12px;
+		    text-decoration: none;
                 }
                 &:hover {
+		    background: darken(@blue, 15%);
                     a {
                         color: white;
                     }
@@ -305,18 +295,18 @@ a#logo {
 }
 div.channels {
     div.channel {
+	background: darken(@blue, 10%);
         overflow: display;
         padding: 5px;
         margin: 0 0 10px 0;
-        width: 340px;
-        height: 60px;
         border-radius: 3px;
         a.subscription_status {
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
             border-top-right-radius: 2px;
             border-bottom-right-radius: 2px;
-            background: url(../img/icons/subscribe.png) top left no-repeat;
+            background: darken(@green, 10%) url(../img/icons/subscribe.png) top left no-repeat;
+            border: 1px outset @green;
             margin: 0 -7px 0 0;
             padding: 3px 10px 3px 25px;
             float: right;
@@ -324,12 +314,10 @@ div.channels {
             &.subscribed {
                 background-image: url(../img/icons/subscribed.png);
                 background-color: @green;
-                border: 1px outset lighten(@green, 15%);
+                border: 1px inset lighten(@green, 15%);
             }
         }
         h3.name {
-            font-size:13px;
-            line-height: 16px;
             margin: 0 0 10px 0;
             padding: 0;
             a {
@@ -338,7 +326,6 @@ div.channels {
             }
         }
         div.description {
-            font-size: 10px;
         }
     }
 }
@@ -527,6 +514,7 @@ form {
             }
         }
         ul.errorlist {
+	    float: right;
             margin: 0;
             padding: 0;
             display: block;
@@ -534,7 +522,7 @@ form {
                 list-style-type: none;
                 margin: 6px 0 0 0;
                 padding: 0;
-                color: red;
+                color: @white;
                 float:right;
                 font-weight: normal;
                 font-size: 10px;
@@ -557,7 +545,10 @@ form {
         margin: 0;
         border-radius: 3px;
         border: none;
+	background: @white;
+	color: darken(@grey, 40%);
     }
+
     textarea {
         height: 70px;
     }
@@ -580,87 +571,81 @@ form {
 
 ul.token-input-list {
     cursor: text;
-    clear: left;
+    background: darken(@grey, 20%);
+    padding: 0;
+    margin: 0;
     li {
+	margin: 0;
+	padding: 0;
         list-style-type: none;
         input {
-            width: 300px;
+            width: 200px;
             -webkit-appearance: caret;
         }
-    }
-}
-li.token-input-token {
-    overflow: hidden;
-    height: auto !important;
-    margin: 0;
-    padding: 3px 5px;
-    cursor: default;
-    p {
-        float: left;
-        padding: 0;
-        margin: 0;
-    }
-    span {
-        float: right;
-        color: #777;
-        cursor: pointer;
-    }
-}
 
-li.token-input-selected-token {
-}
-
-li.token-input-selected-token span {
+        &.token-input-token {
+            overflow: hidden;
+            margin: 0;
+            padding: 3px 5px;
+            cursor: default;
+            p {
+                float: left;
+                padding: 0;
+                margin: 0;
+            }
+            span {
+                float: right;
+                color: #777;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 div.token-input-dropdown {
     position: absolute;
-    width: 400px;
-    background-color: #fff;
+    background-color: darken(@blue, 20%);
     overflow: hidden;
     cursor: default;
-    font-size: 12px;
-    font-family: Verdana, sans-serif;
     z-index: 1;
-}
-
-div.token-input-dropdown p {
-    margin: 0;
-    padding: 5px;
-    font-weight: bold;
-    color: #777;
-}
-
-div.token-input-dropdown ul {
-    margin: 0;
-    padding: 0;
-}
-
-div.token-input-dropdown ul li {
     padding: 3px;
-    list-style-type: none;
+    p {
+        margin: 0;
+        padding: 5px;
+        font-weight: bold;
+    }
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            margin: 0;
+            padding: 5px;
+            list-style-type: none;
+            &:hover {
+                background: @grey;
+            }
+	}
+    }
 }
 
-div.token-input-dropdown ul li.token-input-dropdown-item {
-}
-
-div.token-input-dropdown ul li.token-input-dropdown-item2 {
-}
 
 div.token-input-dropdown ul li em {
     font-weight: bold;
     font-style: normal;
 }
-
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
+    background: @purple;
 }
+
 /* ------------------------------------------------------------ */
 div.comment {
     overflow: auto;
     clear: both;
     margin: 5px 0;
     div.content {
-    	background: lighten(@blue, 70%);
+    	background: lighten(@blue, 69%);
 	color: @blue;
     }
 
@@ -696,7 +681,6 @@ div.pagination {
 
 .detail {
     .section {
-        clear:both;
         h1.header
         {
         font-size:28px;

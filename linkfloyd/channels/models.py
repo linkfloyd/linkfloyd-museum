@@ -10,7 +10,8 @@ class Channel(models.Model):
 
     name = models.CharField(verbose_name=_("title"), max_length=255, unique=True)
     slug = models.SlugField(verbose_name=_("slug"), max_length=255, unique=True)
-    description = models.TextField(verbose_name=_("description"))
+    description = models.CharField(max_length=512, verbose_name=_("description"),
+        help_text=_("explain this channel"))
     is_official = models.BooleanField(default=False)
 
     def __unicode__(self):

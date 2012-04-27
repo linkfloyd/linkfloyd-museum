@@ -10,9 +10,9 @@
          <div class="panel">
          </div>
          <div class="content section channels">
-             <h2 class="header">{{title}}</h2>
+		 <h2 class="header">{{title}}</h2>
              {% for channel in channels %}
-                 <div id="{{ channel.slug }}" class="channel {% cycle 'left' 'right' %}">
+                 <div id="{{ channel.slug }}" class="channel">
                      {% with subscription_status=user|channel_subscription_status:channel %}
                      <a href="#" class="subscription_status{% if subscription_status %} subscribed{% endif %}">
                          {% if subscription_status %}Subscribed{% else %}Subscribe{% endif %}
@@ -20,7 +20,7 @@
                      {% endwith %}
                      <div class="header">
                          <h3 class="name">
-                             <a href="{{channel.get_absolute_url}}">{{channel.name}}</a>
+				 <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({{channel.num_of_subscribers}} subscribers)
                          </h3>
                      </div>
                      <div class="description">

@@ -1,5 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
-from optparse import make_option
+from django.core.management.base import BaseCommand
 
 from django.db.models import Sum
 
@@ -10,6 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for link in Link.objects.all():
-            link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
+            link.vote_score = \
+                link.votes.aggregate(score=Sum('value'))['score'] or 0
             link.comment_score = link.comment_set.all().count()
             link.save()

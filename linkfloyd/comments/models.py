@@ -2,8 +2,6 @@ from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
-from django.db.models import Count
-
 from links.models import Link
 from links.models import Subscription as LinkSubscription
 
@@ -29,13 +27,11 @@ class Comment(models.Model):
         return u"%s's comment on %s" % (self.posted_by, self.link)
 
     def save(self, *args, **kwargs):
-        from utils import reduced_markdown
         self.as_html = reduced_markdown(self.body, safe_mode="remove")
         super(Comment, self).save(*args, **kwargs)
 
 @receiver(post_save, sender=Comment, dispatch_uid="comment_saved")
 def comment_saved(sender, **kwargs):
-    print "comment saved"
     if kwargs['created'] == True:
 
         comment = kwargs['instance']
@@ -52,10 +48,10 @@ def comment_saved(sender, **kwargs):
         for email in [subscription.user.email for subscription in \
             LinkSubscription.objects.filter(link=comment.link).exclude(user=comment.posted_by)]:
 
-            messages.append((title, body, "%s" % settings.DEFAULT_FROM_EMAIL,
+            messages.append((title, body, settings.DEFAULT_FROM_EMAIL,
                              [email,]))
 
-        send_mass_mail(messages, fail_silently=False)
+        send_mass_mail(messages, fail_silently=True)
 
         LinkSubscription.objects.get_or_create(
             user=comment.posted_by, link=comment.link)

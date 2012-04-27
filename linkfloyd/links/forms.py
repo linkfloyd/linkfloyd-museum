@@ -1,9 +1,10 @@
 from django import forms
-from links.models import Link, Report, SITE_RATINGS
+from links.models import Link, Report 
 
-from django.forms.util import flatatt
 from django.forms.widgets import Input
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
+
 
 class ThumbnailInput(Input):
     input_type = 'thumbnail'
@@ -28,6 +29,15 @@ class ThumbnailInput(Input):
         )
 
 class SubmitLinkForm(forms.ModelForm):
+    url = forms.CharField(
+        widget=forms.TextInput(attrs={'autocomplete':'off'}),
+	help_text=_("paste url of your link here"),
+	required=False)
+
+    title = forms.CharField(
+	widget=forms.TextInput(attrs={'autocomplete':'off'}),
+	max_length=144,
+	help_text=_("give a descriptive title to your link"))
 
     thumbnail_url = forms.URLField(
         label='Thumbnail',
@@ -42,9 +52,8 @@ class SubmitLinkForm(forms.ModelForm):
         required=False)
 
     description = forms.CharField(
-        max_length=4096,
         widget=forms.widgets.Textarea,
-        required=False)
+	help_text=_("say something about that link, use your words."))
 
     class Meta:
         model = Link
@@ -62,17 +71,36 @@ class SubmitLinkForm(forms.ModelForm):
         else:
             if not instance.thumbnail_url:
                 self.fields['thumbnail_url'].widget.is_hidden=True
-            else:
-                self.fields['thumbnail_url'].widget.is_hidden=False
 
+        self.fields.keyOrder = [
+	    'url',
+            'channel',
+            'title',
+            'description',
+            'language',
+            'rating',
+            'thumbnail_url',
+            'player']
 
 class EditLinkForm(SubmitLinkForm):
+    def __init__(self, *args, **kwargs):
+        super(EditLinkForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = [\
+            'channel',
+            'title',
+            'description',
+            'language',
+            'rating',
+	    'thumbnail_url',
+            'player']
+
     class Meta:
         model = Link
         exclude = ['posted_by', 'is_banned', 'is_sponsored', 'shown',
                    'vote_score', 'comment_score', 'url']
 
 class SubmitReportForm(forms.ModelForm):
+
     class Meta:
         model = Report
         exclude = ['reporter',]

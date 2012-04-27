@@ -18,26 +18,16 @@
             </div>
             <div class="actions section">
                 <h2 class="header">{% trans "Actions" %}</h2>
-                <div class="wrapper">
-                    {% if user|channel_subscription_status:channel %}
-                    <form action="/channels/update_subscription/{{channel.slug}}/" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="action" value="unsubscribe">
-                        <input type="submit" value="Unsubscibe">
-                    </form>
-                    {% else %}
-                    <form action="/channels/update_subscription/{{channel.slug}}/" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="action" value="subscribe">
-                        <input type="submit" value="Subscibe">
-                    </form>
-                    {% endif %}
-                </div>
-                <div class="wrapper">
+		<ul class="navigation">
                     {% if user|channel_subscription_status:channel == 'admin' %}
-                        <a class="buttonized" href="{% url update_channel channel.slug %}">Update Channel</a>
+		    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+		    {% endif %}
+		    {% if user|channel_subscription_status:channel %}
+             		    <li><a href="#">Unsubscribe</a></li>
+                    {% else %}
+              		    <li><a href="#">Subscribe</a></li>
                     {% endif %}
-                </div>
+		</ul>
             </div>
             {% endwith %}
         {% endif %}

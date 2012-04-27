@@ -25,6 +25,17 @@
 {% block class_body %}class="detail link{{link.id}}"{% endblock %}
 {% block content %}
 <div class="two-column">
+
+<div class="panel">
+    <div class="section">
+	    <dl>
+		    <dt>Posted at:</dt>
+		    <dd>{{link.posted_at|timesince}} ago</dd>
+		    <dt>Displayed:</dt>
+		    <dd>{{link.shown}} times</dd>
+	    </dl>	
+    </div>
+</div>
 <div class="content section">
     <h2 class="header">{{link.title}} via <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></h2>
     {% include "links/link_as_list_item.html" %}

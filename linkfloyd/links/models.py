@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+
 from django.utils.translation import ugettext as _
 
 from django.db import models
-from django.db.models import F
 from django.db.models import Sum
 
-from linkfloyd.utils import SumWithDefault
 from channels.models import Channel
 from channels.models import Subscription as ChannelSubscription
 
@@ -14,8 +14,6 @@ from qhonuskan_votes.models import VotesField
 from django.db.models.signals import pre_delete
 from django.db.models.signals import post_save
 from qhonuskan_votes.models import vote_changed
-
-from django.db.models import Count
 
 from django.dispatch import receiver
 
@@ -28,10 +26,12 @@ SITE_RATINGS = (
 SITE_LANGUAGES = (
     ("tr", "Turkish"),
     ("en", "English"),
+    ("en", "Espaniol"),
+    ("NotImp", "Not Important")
 )
 
 class Language(models.Model):
-    code = models.CharField(max_length=5)
+    code = models.CharField(max_length=5, null=True)
     name = models.CharField(max_length=16)
 
     def __unicode__(self):
@@ -41,10 +41,9 @@ class Link(models.Model):
     posted_by = models.ForeignKey(User)
     posted_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    url = models.URLField(help_text=_("paste url of your link here"))
-    title = models.CharField(max_length=144, help_text=_("title of your link"))
-    description = models.CharField(max_length=255, null=True, blank=True,
-        help_text=_("say something about that link"))
+    url = models.URLField(null=True)
+    title = models.CharField(max_length=144)
+    description = models.CharField(max_length=512, null=True, blank=False)
     thumbnail_url = models.URLField(null=True, blank=True)
     rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
@@ -68,7 +67,6 @@ class Link(models.Model):
         return "/links/%s/" % self.id
 
     def get_full_url(self):
-        from django.contrib.sites.models import Site
         return "http://" + \
             Site.objects.get_current().domain + \
             self.get_absolute_url()
@@ -146,7 +144,6 @@ def link_deleted(sender, **kwargs):
 
 @receiver(vote_changed)
 def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
-    from qhonuskan_votes.utils import get_vote_model
     link = sender.object
     link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
     link.save()

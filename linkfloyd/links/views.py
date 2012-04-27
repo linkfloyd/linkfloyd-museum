@@ -5,15 +5,13 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from qhonuskan_votes.models import vote_changed
 
 from channels.models import Subscription
 
-from links.models import Link, Channel, Report
+from links.models import Link, Channel
 from links.utils import context_builder
 from links.forms import SubmitLinkForm, EditLinkForm
 
