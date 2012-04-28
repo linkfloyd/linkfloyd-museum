@@ -17,7 +17,7 @@
                 <p class="channel_description">{{channel.description|linebreaks}}</p>
             </div>
             <div class="actions section">
-                <h2 class="header">{% trans "Actions" %}</h2>
+               <h2 class="header">{% trans "Actions" %}</h2>
 		<ul class="navigation">
                     {% if user|channel_subscription_status:channel == 'admin' %}
 		    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>

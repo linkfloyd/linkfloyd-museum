@@ -6,29 +6,10 @@
 {% block content %}
 <div class="one-column">
     <div class="content section narrow">
-    	<h2 class="header">Post a Link</h2>
-            <div class="body">
-	            <form action="#" method="post">
-                    {% for field in form %}
-                        {% include "forms/form_field.html" %}
-                    {% endfor %}
-                    {% csrf_token %}
-                    <input type="submit" value="{% trans 'Submit' %}" />
-		    </form>
-            <script type="application/javascript">
-                $("#id_channel").tokenInput("/api/channels/list/", {
-                    tokenLimit: 1,
-                    {% if form.instance.channel %}
-                        prePopulate: [{
-                            "id": "{{ form.instance.channel.id }}",
-                            "name": "{{ form.instance.channel.name }}"
-                        }]
-                    {% endif %}
-                });
-            </script>
+        <h2 class="header">Post a Link</h2>
+        <div class="body">
+            {% include "links/submit_form.html" %}
         </div>
     </div>
 </div>
-</script>
-
 {% endblock content %}

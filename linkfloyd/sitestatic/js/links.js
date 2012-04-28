@@ -78,17 +78,28 @@ $(document).ready( function() {
         return false;
     });
     $('.deleteComment').live('click', function(){
-        var comment_el = $(this).parent().parent().parent();
+        var comment_el = $(this).parent().parent().parent().parent();
         var accepted = confirm("Are you sure to remove this comment?");
         if (accepted) { comment_el.trigger("delete"); }
         return false;
     });
-    $('.getEditCommentForm').live('click', function(){
-        var comment_el = $(this).parent().parent().parent();
+    $('.getUpdateCommentForm').live('click', function(){
+        var comment_el = $(this).parent().parent().parent().parent();
         comment_el.addClass("busy");
-        comment_el.load('/api/comments/get_form/?id=' + comment_el.attr("id"));
+        comment_el.find("div.content").hide();
+        $.get('/api/comments/get_form/?id=' + comment_el.attr("id"),
+            function(data) {
+              comment_el.append(data);
+        });
         return false;
     });
+    $('.cancelUpdateComment').live('click', function(){
+        var comment_el = $(this).parent().parent();
+        comment_el.find("div.content").show();
+        comment_el.find("form.comment").remove();
+        return false;
+    });
+
 
     $('.deleteLink').live('click', function(){
         var link_el = $(this).parent().parent().parent();

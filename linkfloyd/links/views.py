@@ -20,7 +20,13 @@ from comments.forms import CommentForm
 from preferences.models import UserPreferences
 
 @login_required
-def submit_link(request):
+def submit_link(request, bookmarklet=False):
+
+    if bookmarklet:
+        template = "links/bookmarklet.html"
+    else:
+        template = "links/submit.html"
+
     if request.method == "POST":
         form = SubmitLinkForm(request.POST)
         if form.is_valid():
@@ -31,7 +37,7 @@ def submit_link(request):
                 link.channel.get_absolute_url(), link.id))
         else:
             return render_to_response(
-                "links/submit.html", {
+                template, {
                     "form": form,
                     "active_nav_item": "submit"
                 }, context_instance=RequestContext(request))
@@ -42,8 +48,11 @@ def submit_link(request):
         else:
             channel = False
         return render_to_response(
-            "links/submit.html", {
-                "form": SubmitLinkForm(),
+            template, {
+                "form": SubmitLinkForm(initial={
+                    "url": request.GET.get("url"),
+                    "channel": channel
+                }),
                 "channel": channel,
                 "active_nav_item": "submit"
             }, context_instance=RequestContext(request))
