@@ -1,0 +1,20 @@
+{% load i18n %}<form action="#" method="post">
+    {% for field in form %}
+        {% include "forms/form_field.html" %}
+    {% endfor %}
+    {% csrf_token %}
+    <input type="submit" value="{% trans 'Submit' %}" />
+</form>
+
+<script type="application/javascript">
+    $("#id_channel").tokenInput("/api/channels/list/", {
+         tokenLimit: 1,
+         {% if form.instance.channel %}
+             prePopulate: [{
+                 "id": "{{ form.instance.channel.id }}",
+                 "name": "{{ form.instance.channel.name }}"
+             }]
+         {% endif %}
+    });
+</script>
+
