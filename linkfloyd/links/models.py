@@ -86,9 +86,14 @@ class Link(models.Model):
 
 class Subscription(models.Model):
     """We're holding unsubscriptions instead of subscriptions.
+    * if subscription exists and subscripted=True, user subscripted
+    * if subscription does not exists, user not subscripted
+    * if subscription exists and subscripted=False, user unsubsubscripted
     """
     user = models.ForeignKey(User, related_name="link_unsubscriptions")
     link = models.ForeignKey(Link)
+    status = models.PositiveSmallIntegerField(null=True, blank=True, choices=(
+        (0, "unsubscribed"), (1, "subscribed")))
 
 class Report(models.Model):
     reporter = models.ForeignKey(User)
@@ -130,10 +135,10 @@ def link_saved(sender, **kwargs):
         subscriptions = ChannelSubscription.objects.filter(channel=link.channel)
         for subscription in subscriptions:
             Unseen.objects.get_or_create(user=subscription.user, link=link)
-        del(subscriptions)
 
         LinkSubscription = Subscription
-        LinkSubscription.objects.get_or_create(link=link, user=link.posted_by)
+        LinkSubscription.objects.get_or_create(link=link, user=link.posted_by,
+            status=1)
 
 
 @receiver(pre_delete, sender=Link, dispatch_uid="link_deleted")

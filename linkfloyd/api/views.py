@@ -11,7 +11,6 @@ from links.models import Link
 from channels.models import Subscription as ChannelSubscription
 from links.models import Subscription as LinkSubscription
 
-from links.models import Link
 from comments.models import Comment
 from comments.forms import CommentForm
 from django.template import RequestContext
@@ -100,7 +99,7 @@ def unsubscribe_channel(request):
             subscription = ChannelSubscription.objects.get(
                 user=request.user,
                 channel=channel)
-        except ChannelSubscription.DoesNotExist:
+        except ChannelSubscription.DoesNotExit:
             return HttpResponse(status=404)
         subscription.delete()
         return HttpResponse(status=200)
@@ -110,35 +109,50 @@ def unsubscribe_channel(request):
 @login_required
 def switch_link_subscription(request):
     if request.POST.has_key("link_id"):
+        # try to get link, or return 404
         try:
             link = Link.objects.get(id=request.POST['link_id'])
         except Link.DoesNotExist:
             return HttpResponse(status=404)
 
+        # subscription = from database or false
         try:
-            subscription = LinkSubscription.objects.filter(
+            subscription = LinkSubscription.objects.get(
                 user=request.user, link=link)
         except:
-            subscription = None
-
+            subscription = False
+ 
         if subscription:
-            subscription.delete()
-            return HttpResponse(
-                simplejson.dumps({
-                    "status": "unsubscripted",
-                    "update_text": "Subscribe",
-                    "update_title": "Email me when somebody comments " \
-                                    "on that link"
-                }, 'application/javascript')
-            )
+            if subscription.status == 0:
+                subscription.status = 1
+                subscription.save()
+                return HttpResponse(
+                    simplejson.dumps({
+                        "status": "subscribed",
+                        "update_text": "Unsubscribe",
+                        "update_title": "Do not email me when somebody comments "\
+                                        "on that link"
+                    }, 'application/javascript')
+                )
+            elif subscription.status == 1:
+                subscription.status = 0
+                subscription.save()
+                return HttpResponse(
+                    simplejson.dumps({
+                        "status": "unsubscribed",
+                        "update_text": "Subscribe",
+                        "update_title": "Email me when somebody comments "\
+                                        "on that link"
+                    }, 'application/javascript')
+                )
         else:
-            LinkSubscription.objects.create(
-                user=request.user, link=link)
+            LinkSubscription.objects.create(user=request.user, link=link,
+                status=1)
             return HttpResponse(
                 simplejson.dumps({
                     "status": "subscribed",
                     "update_text": "Unsubscribe",
-                    "update_title": "Do not email me when somebody comments " \
+                    "update_title": "Do not email me when somebody comments "\
                                     "on that link"
                 }, 'application/javascript')
             )
@@ -146,8 +160,6 @@ def switch_link_subscription(request):
         return HttpResponse(status=400)
 
 def channels_list(request):
-
-    from django.utils.translation import get_language as langcode
 
     query_string = request.GET.get("q", False)
     if query_string:

@@ -77,7 +77,6 @@
 						            <a href="{% url browse_subscriptions %}">{% trans "Your Subscriptions" %}</a>
                                 </li>
                                 {% endif %}
-
                             </ul>
                         </li>
 
@@ -99,7 +98,13 @@
 		    				<a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
 			    		</li>
                         {% endif %}
-                        <li><a href="/about/">About</a></li>
+                        <li>
+                            <a href="/about/">{% trans "About" %}</a>
+                            <ul class="sub">
+                                <li><a href="/about_en/">English</a></li>
+                                <li><a href="/about_tr/">Türkçe</a></li>
+                            </ul>
+                        </li>
 				    </ul>
 			    </div>
             </div>

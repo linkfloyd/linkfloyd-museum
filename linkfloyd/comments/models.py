@@ -36,25 +36,27 @@ def comment_saved(sender, **kwargs):
 
         comment = kwargs['instance']
 
-        # update links updated_at
-        comment.link.updated_at = comment.posted_at
-        comment.link.comment_score = comment.link.comment_set.all().count()
-        comment.link.save()
-
         # send mail to followers
         title = render_to_string("comments/subject.txt",{"comment": comment})
         body = render_to_string("comments/body.txt", {"comment": comment})
         messages = []
+
         for email in [subscription.user.email for subscription in \
-            LinkSubscription.objects.filter(link=comment.link).exclude(user=comment.posted_by)]:
+            LinkSubscription.objects.filter(link=comment.link).exclude(
+                user=comment.posted_by)]:
 
             messages.append((title, body, settings.DEFAULT_FROM_EMAIL,
                              [email,]))
 
         send_mass_mail(messages, fail_silently=True)
 
-        LinkSubscription.objects.get_or_create(
+        # create subscription
+        subscription, created = LinkSubscription.objects.get_or_create(
             user=comment.posted_by, link=comment.link)
+
+        if created:
+            subscription.status = 1
+            subscription.save()
 
 
 @receiver(post_delete, sender=Comment, dispatch_uid="comment_deleted")

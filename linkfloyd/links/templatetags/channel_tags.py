@@ -31,8 +31,8 @@ def link_subscription_status(user, link):
             subscription = None
 
         if subscription:
-            return True
+            return subscription.status
         else:
-            return None
+            return False
     else:
-        return None
+        return False

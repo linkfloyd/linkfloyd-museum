@@ -5,11 +5,66 @@
         <link href='http://fonts.googleapis.com/css?family=Lilita+One' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery-1.7.min.js"></script>
         <script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/less-1.1.3.min.js"></script>
-    {{form.media}}
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/libs/token-input.less">
+        {{form.media}}
+        <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/libs/token-input.less">
     </head>
     <body>
+        <a href="#" onclick="sendToParent('close'); return false"><img src="https://github.com/keremtiryaki/linkfloydBookmarklet/raw/master/close-white.png" alt="Close" title="Close" width="13" height="13" /></a>
         {% include "links/submit_form.html" %}
+        <form name="temp-store"><input type="hidden" name="parenturl"/></form>
+        <script type="application/javascript">
+            $(function() {
+                checkHash();
+                setInterval(checkHash, 100);
+            });
+            function parseParams(s) {
+                var r = {};
+                var a = s.split("&");
+                for(var i in a) {
+                    var kv = a[i].split("=");
+                    r[decodeURIComponent(kv[0])] = decodeURIComponent(kv[1]);
+                }
+                return r;
+            }
+            function checkHash() {
+                var hash = location.href.split("#")[1];
+                // don't use location.hash
+                if(!hash || !hash.length)
+                    return;
+                var p = parseParams(hash);
+                location.replace(location.href.split("#")[0] + "#");
+                for(var i in p) {
+                    var v = p[i];
+                    switch (i) {
+                        case "parenturl":
+                            $("input[name=parenturl]").val(v);
+                            break;
+                        case "url":
+                            $("input[name=url]").val(v);
+                            break;
+                        case "title":
+                            $("input[name=title]").val(v);
+                            break;
+                        case "image":
+                            $("input[name=thumbnail_url]").val(v);
+                            break;
+                        case "selection":
+                            v = $.trim(v);
+                            if(v)
+                                $("textarea[name=description]").val(('"' + v + '"').replace(/\n/g, " ")).removeClass("blur").keypress();
+                            break;
+                    }
+                }
+            }
+            function sendToParent(msg) {
+                var url = $('input[name=parenturl]').val().split('#')[0] + "#LFSHARE-" + msg;
+                try {
+                    top.location.replace(url);
+                } catch (e) {
+                    top.location = url;
+                }
+            }
+        </script>
     </body>
 </html>
 
