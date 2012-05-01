@@ -126,7 +126,6 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     'devserver',
-    'invitation',
 )
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']

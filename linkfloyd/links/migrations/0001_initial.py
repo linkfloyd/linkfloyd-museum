@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'Language'
         db.create_table('links_language', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('code', self.gf('django.db.models.fields.CharField')(max_length=5)),
+            ('code', self.gf('django.db.models.fields.CharField')(max_length=5, null=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=16)),
         ))
         db.send_create_signal('links', ['Language'])
@@ -32,7 +32,7 @@ class Migration(SchemaMigration):
             ('posted_by', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('posted_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
+            ('url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=144)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=512, null=True)),
             ('thumbnail_url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
@@ -53,6 +53,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='link_unsubscriptions', to=orm['auth.User'])),
             ('link', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['links.Link'])),
+            ('status', self.gf('django.db.models.fields.PositiveSmallIntegerField')(null=True, blank=True)),
         ))
         db.send_create_signal('links', ['Subscription'])
 
@@ -103,7 +104,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 10, 58, 14, 712357)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 1, 10, 17, 20, 947132)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -111,7 +112,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 4, 27, 10, 58, 14, 712240)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 5, 1, 10, 17, 20, 947017)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -119,7 +120,7 @@ class Migration(SchemaMigration):
         },
         'channels.channel': {
             'Meta': {'object_name': 'Channel'},
-            'description': ('django.db.models.fields.TextField', [], {}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_official': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'}),
@@ -134,7 +135,7 @@ class Migration(SchemaMigration):
         },
         'links.language': {
             'Meta': {'object_name': 'Language'},
-            'code': ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'code': ('django.db.models.fields.CharField', [], {'max_length': '5', 'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '16'})
         },
@@ -155,7 +156,7 @@ class Migration(SchemaMigration):
             'thumbnail_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '144'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True'}),
             'vote_score': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'})
         },
         'links.linkvote': {
@@ -180,6 +181,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Subscription'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['links.Link']"}),
+            'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'link_unsubscriptions'", 'to': "orm['auth.User']"})
         }
     }
