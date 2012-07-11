@@ -32,7 +32,7 @@ $(document).ready( function() {
             }
         });
     });
-    $(".post").bind("delete", function(event) {
+    $(".link").bind("delete", function(event) {
         var link_el = $(this);
 	    $.ajax({
             type: "GET",

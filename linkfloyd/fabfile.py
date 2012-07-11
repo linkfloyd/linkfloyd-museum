@@ -2,7 +2,7 @@ from fabric.api import run, env, cd, local, sudo, prefix
 
 
 def testing():
-    env.host_string = "web77.webfaction.com"
+    env.host_string = "linkfloyd.com"
     env.user = "miratcan"
     env.password = "kukuleta"
     env.webapp = "/home/miratcan/webapps/linkfloyd/linkfloyd/linkfloyd/"

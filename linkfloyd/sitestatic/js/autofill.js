@@ -14,12 +14,13 @@ $(document).ready(function() {
                 $('#id_url').addClass("busy");
             },
             success: function(data) {
+                console.log(data);
                 $("#attachment_preview").html(data.html);
                 $("input[name='url']").val(data.info.url);
                 $("input[name='title']").val(data.info.title);
                 $("input[name='description']").val(data.info.description);
                 $("input[name='thumbnail_url']").val(data.info.image);
-                $("input[name='player']").val(data.player);
+                $("input[name='player']").val(data.info.player);
                 $("#remove_link").show();
                 $("#link_input").hide();
             },
