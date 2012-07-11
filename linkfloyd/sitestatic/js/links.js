@@ -32,7 +32,7 @@ $(document).ready( function() {
             }
         });
     });
-    $(".link").bind("delete", function(event) {
+    $(".post").bind("delete", function(event) {
         var link_el = $(this);
 	    $.ajax({
             type: "GET",
@@ -50,7 +50,7 @@ $(document).ready( function() {
             }
         });
     });
-    $(".link").bind("switch_follow", function(event) {
+    $(".post").bind("switch_follow", function(event) {
         var link_el = $(this);
 	    $.ajax({
             type: "POST",
@@ -61,8 +61,8 @@ $(document).ready( function() {
             dataType: "json",
 	        success : function(data, textStatus, jqXHR) {
                 var switch_el = link_el.find(".switchFollowLink");
-                switch_el.html(data["update_text"]);
-                switch_el.attr("title", data["update_title"]);
+                switch_el.html(data.update_text);
+                switch_el.attr("title", data.update_title);
 	        },
             statusCode: {
                 401:  function(){
@@ -99,8 +99,6 @@ $(document).ready( function() {
         comment_el.find("form.comment").remove();
         return false;
     });
-
-
     $('.deleteLink').live('click', function(){
         var link_el = $(this).parent().parent().parent();
         var accepted = confirm("Are you sure to remove this link?");

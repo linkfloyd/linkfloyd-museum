@@ -3,10 +3,11 @@
     {{ form.non_field_errors }}
     <div id="add_link" class="fieldWrapper">
         <label>Link <span id="remove_link">(<a href="#">Click here to remove</a>)</span><ul class="errorlist"><li>{% trans "This link is not reachable" %}</li></ul></label>
-        <div id="link_input">
-            {{ form.url }}
+        <div id="attachment_preview" class="fieldWrapper">
+            {% with form.instance as link %}
+                {% include "links/attachment.html" %}
+            {% endwith %}
         </div>
-        <div id="attachment_preview" class="fieldWrapper"></div>
     </div>
     <div class="fieldWrapper">
         <label>Comment</label>
@@ -23,10 +24,6 @@
         </div>
     </div>
     {% csrf_token %}
-    <input type="hidden" name="title" value="" />
-    <input type="hidden" name="description" value="" />
-    <input type="hidden" name="thumbnail_url" value = "" />
-    <input type="hidden" name="player" value="" />
     <div class="fieldWrapper">
         <input type="submit" value="{% trans 'Submit' %}" />
     </div>

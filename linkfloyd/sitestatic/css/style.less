@@ -14,12 +14,16 @@ body {
     background: darken(@blue, 5%);
     font-size: 13px;
     font-family: sans-serif;
-    color: lighten(@blue, 40%);
+    color: lighten(@blue, 50%);
+}
+body.bookmarklet {
+    background: darken(@blue, 10%);
+    form { background: transparent }
 }
 h1, h2, h3, h4, h5, h6, dt {
     margin: 0 0 10px 0;
     padding: 10px 6px 0 0;
-    color: lighten(@blue, 50%);
+    color: lighten(@blue, 60%);
 }
 h2 {
    font-size:15px;
@@ -46,8 +50,7 @@ a {
 .right {
     float: right;
 }
-img.bordered {
-}
+
 a#logo {
     top: 8px;
     font-size: 36px;
@@ -70,19 +73,24 @@ dl {
 }
 .buttonized {
     background: lighten(@black, 12%);
-    padding: 5px 10px;
-    color: lighten(@black, 60%);
+    padding: 4px 15px;
+    color: lighten(@black, 80%);
     font-weight: bold;
     border-radius: 3px;
+	border: 1px outset lighten(@black, 20%);
     &:hover {
         color: @white;
+    }
+    &:active {
+        background: lighten(@black, 6%);
+        border-style: inset;
     }
 }
 /* Layout */
 div.wrapper {
     width: 950px;
     margin: 0 auto;
-    padding: 5px 15px;
+    padding: 15px;
 }
 ul.flat-list {
     margin: 0;
@@ -330,28 +338,26 @@ div.channels {
     }
 }
  
-div.link a.avatar, div.comment a.avatar {
-        width: 42px;
-        height: 42px;
-        border-radius: 6px;
-        display: block;
-        background: top left no-repeat;
-        box-shadow: 0 1px 5px rgba(0,0,0,.46);
-        float: left;
+div.post a.avatar, div.comment a.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    display: block;
+    background: top left no-repeat;
+    box-shadow: 0 1px 5px rgba(0,0,0,.46);
+    float: left;
 }
-div.link div.content, div.comment div.content {
-        padding: 10px;
-        background: white;
-        float: right;
-        width: 660px;
-        border-radius: 6px;
+div.post div.content, div.comment div.content {
+    padding: 10px;
+    float: right;
+    width: 660px;
+    border-radius: 6px;
 }
-
-div.link {
+div.post {
     overflow: auto;
     float:both;
     padding: 10px 0;
-    margin: 0 0 10px 0;
+    margin: 0;
     &:first-child {
         padding-top: 0;
     }
@@ -360,57 +366,21 @@ div.link {
     }
     div.content {
         padding: 10px;
-        background: white;
         float: right;
         width: 660px;
         border-radius: 6px;
-        a.thumbnail {
-            position: relative;
-            display: block;
-            float: right;
-            margin: 0 0 0 10px;
-            padding: 0;
-            width: 120px;
-            height: 80px;
-            i {
-                background: top left url(https://s-static.ak.facebook.com/rsrc.php/v1/y6/r/gY6pCnDw29i.png);
-                width: 35px;
-                height: 26px;
-                position: absolute;
-                bottom: 4px;
-                left: 2px;
-            }
-        }
-        h3 {
-            margin: 0;
-            padding: 0;
-            a {
-                color: black;
-                text-decoration: none;
-                font-weight: bold;
-                font-effect: outline;
-            }
-        }
-        p.description, div.info, ul.actions {
-            margin: 4px 10px 0 0;
+        background: @white;
+        p.body, p.description, a.title, div.info, ul.actions {
+            margin: 4px 10px 10px 0;
             font-size: 13px;
-	    color: @grey;
-        }
-        p.description {
-            font-size: 13px;
+	        color: darken(@grey, 20%);
         }
         div.info {
             margin-bottom: 10px;
             margin-top: 0;
             font-weight: bold;
-            a {
-            }
             a.channel {
                 text-transform:lowercase;
-            }
-            &:hover {
-                a {
-                }
             }
         }
         ul.actions {
@@ -424,7 +394,8 @@ div.link {
             margin-top:15px;
         }
         div.embed_player {
-	    margin: 5px 0 0 0;
+	        margin: 0 0 0 0;
+            padding: 5px 0 0 0;
             display: block;
             clear: both;
         }
@@ -433,7 +404,6 @@ div.link {
             height: 260px;
             width: 100%;
         }
-
         div.embed_player > img.embed {
             height: auto;
         }
@@ -488,18 +458,54 @@ div.link {
         }
     }
 }
+div.attachment {
+    border: 1px solid lighten(@grey, 40%);
+    margin: 0 0 0 0;
+    padding: 5px;
+    background: lighten(@blue, 65%);
+    overflow: auto;
+    color: @black;
+    a.title { 
+        font-weight: bold;
+    }
+    p.description {
+        padding-top: 10px;
+        color: inherit;
+    }
+    a.thumbnail {
+        position: relative;
+        display: block;
+        float: right;
+        margin: 0 0 0 10px;
+        padding: 0;
+        width: 120px;
+        height: 70px;
+        i {
+            background: top left url(https://s-static.ak.facebook.com/rsrc.php/v1/y6/r/gY6pCnDw29i.png);
+            width: 35px;
+            height: 26px;
+            position: absolute;
+            bottom: 4px;
+            left: 2px;
+        }
+    }
+}
 form {
     display:block;
     overflow: auto;
     margin: 0;
     padding: 0;
-    background: darken(@blue, 10%);
     padding: 10px;
     border-radius: 5px;
     div.fieldWrapper{
-        margin: 0 0 10px 0;
+       .left, .right {
+            width: 49%;
+        }
+        margin: 0 0 5px 0;
         padding: 0;
+		overflow: auto;
         label {
+            color: @white;
 	        display: block;
             font-weight: bold;
             margin: 0 0 5px 0;
@@ -507,14 +513,17 @@ form {
             &:first-child {
 	            margin-top: 0;
             }
-            span.desc {
+            span {
                 font-size: 10px;
                 font-weight: normal;
                 margin: 0 0 0 6px;
+                &#remove_link {
+                    display: none;
+                }
             }
         }
         ul.errorlist {
-	    float: right;
+	        float: right;
             margin: 0;
             padding: 0;
             display: block;
@@ -528,13 +537,9 @@ form {
                 font-size: 10px;
             }
         }
-        div#thumbnail_preview img{
-            margin: 0 auto;
-            max-height: 80px;
-            cursor: crosshair;
-        }
     }
-    input, textarea, select, textarea, ul.token-input-list {
+
+    input[type=text], textarea, select, textarea, ul.token-input-list {
         box-sizing: border-box; /* css3 rec */
         -moz-box-sizing: border-box; /* ff2 */
         -ms-box-sizing: border-box; /* ie8 */
@@ -544,26 +549,26 @@ form {
         padding: 3px;
         margin: 0;
         border-radius: 3px;
-        border: none;
-	background: @white;
-	color: darken(@grey, 40%);
+        border: 1px inset darken(@white, 20%);
+        background: darken(@white, 10%);
+        color: darken(@grey, 40%);
+        &:disabled {
+            background: #ccc;
+            color: #666;
+        }
     }
-
     textarea {
-        height: 70px;
+        height: 24px;
     }
     input[type='submit'], input[type='button'] {
-	margin:10px 10px 0 0;
+	    margin:10px 10px 0 0;
         float: right;
-        color: @white;
         width: auto;
         .buttonized;
+        color: @white;
         &:first-child {
             margin-right: 0;
         }
-    }
-    .busy {
-        background: url(/static/loading.gif) top right no-repeat;
     }
 }
 
@@ -572,21 +577,20 @@ form {
 ul.token-input-list {
     cursor: text;
     background: darken(@grey, 20%);
-    padding: 0;
+    padding: 4px 3px !important;
     margin: 0;
     li {
-	margin: 0;
-	padding: 0;
+        margin: 0;
+        padding: 0;
         list-style-type: none;
         input {
             width: 200px;
             -webkit-appearance: caret;
         }
-
         &.token-input-token {
-            overflow: hidden;
+           overflow: hidden;
             margin: 0;
-            padding: 3px 5px;
+            padding: 0 5px;
             cursor: default;
             p {
                 float: left;
@@ -597,6 +601,13 @@ ul.token-input-list {
                 float: right;
                 color: #777;
                 cursor: pointer;
+            }
+        }
+        &.token-input-input-token {
+            margin: 0;
+            padding: 0;
+            input {
+                padding: 0;
             }
         }
     }
@@ -626,7 +637,7 @@ div.token-input-dropdown {
             &:hover {
                 background: @grey;
             }
-	}
+	    }
     }
 }
 
@@ -646,7 +657,7 @@ div.comment {
     margin: 5px 0;
     div.content {
     	background: lighten(@blue, 69%);
-	color: @blue;
+	    color: @blue;
     }
 
     ul.actions {
@@ -690,11 +701,19 @@ div.pagination {
     .section {
         h1.header
         {
-        font-size:28px;
-        padding:10px 10px 5px 5px;
-        display:inline;
-        clear:both;
+           font-size: 28px;
+            padding: 10px 10px 5px 5px;
+            display: inline;
+            clear: both;
         }
-
     }
 }
+div#add_link.fieldWrapper {
+    #id_url.busy {
+        background: url(/static/img/loading.gif) center right no-repeat #ccc;
+    }
+    ul.errorlist {
+        display: none;
+    }
+}
+ 

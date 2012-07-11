@@ -2,16 +2,48 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
+class Language(models.Model):
+    code = models.CharField(
+        max_length=5,
+        null=True
+    )
+    name = models.CharField(max_length=16)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Channel(models.Model):
     """Channel model for linkfloyd.
 
-    Users can be members or admins of channels. If an user is admin of channel
+    Users can be members or admins of channels.
     """
 
-    name = models.CharField(verbose_name=_("title"), max_length=255, unique=True)
-    slug = models.SlugField(verbose_name=_("slug"), max_length=255, unique=True)
-    description = models.CharField(max_length=512, verbose_name=_("description"),
-        help_text=_("explain this channel"))
+    name = models.CharField(
+        verbose_name=_("title"),
+        max_length=255,
+        unique=True
+    )
+    slug = models.SlugField(
+        verbose_name=_("slug"),
+        max_length=255,
+        unique=True
+    )
+    description = models.CharField(
+        max_length="255",
+        verbose_name=_("description"),
+        help_text=_("describe this channel in 255 chars")
+    )
+    notes = models.TextField(
+        help_text=_("notes and rules about that channel"),
+        blank = True,
+        null = True
+    )
+    language = models.ForeignKey(
+        Language,
+        help_text=_("which language do you expect to be spoken in that channel")
+    )
+
     is_official = models.BooleanField(default=False)
 
     def __unicode__(self):
@@ -21,7 +53,10 @@ class Channel(models.Model):
         return "/links/channel/%s/" % self.slug
 
 class Subscription(models.Model):
-    user = models.ForeignKey(User, related_name="channel_subscriptions")
+    user = models.ForeignKey(
+        User,
+        related_name="channel_subscriptions"
+    )
     channel = models.ForeignKey(Channel)
 
     status = models.CharField(

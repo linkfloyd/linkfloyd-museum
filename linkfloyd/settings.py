@@ -14,19 +14,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        "USER": "postgres",
-        "PASSWORD": "320240",
-        "HOST": "localhost",
-        "NAME": "test_linkfloyd",
-        'OPTIONS': {'autocommit': True,}
 
-    }
-}
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -65,7 +53,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.

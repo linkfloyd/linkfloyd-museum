@@ -10,22 +10,38 @@
         <div class="body">
 		    <form action="#" method="post">
                 <div class="fieldWrapper">
-
                     <label for="id_name">{{ form.name.errors }}{% trans "Name" %}
-                        <span class="desc">{{form.name.help_text}}</label>
+                        <span class="desc">{{form.name.help_text}}
+                     </label>
                     {{ form.name }}
                 </div>
                 <div class="fieldWrapper">
                     <label for="id_slug">{{ form.slug.errors }}{% trans "Slug" %}
-                        <span class="desc">{{form.slug.help_text|safe}}</label>
+                        <span class="desc">{{form.slug.help_text|safe}}
+                     </label>
                     {{ form.slug }}
                 </div>
-                <div class="fieldWrapper">
+               <div class="fieldWrapper">
+                   <label fory="id_language">{{ form.language.errors }}
+                       {% trans "Language" %}
+                       <span class="desc">{{ form.language.help_text }}
+                    </label>
+                    {{ form.language }}
+                </div>
+	
+	            <div class="fieldWrapper">
                     <label fory="id_description">{{ form.description.errors }}{% trans "Description" %}
                         <span class="desc">{{form.description.help_text}}</label>
                     {{ form.description }}
                 </div>
-			    {% csrf_token %}
+                <div class="fieldWrapper">
+                   <label fory="id_notes">{{ form.notes.errors }}
+                       {% trans "Notes" %}
+                       <span class="desc">{{ form.notes.help_text }}
+                    </label>
+                    {{ form.notes }}
+                </div>
+	   	    {% csrf_token %}
                 <input type="submit" value="{% trans 'Submit' %}" />
 		    </form>
         </div>

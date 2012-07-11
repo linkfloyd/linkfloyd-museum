@@ -19,22 +19,27 @@ def create(request):
                 user=request.user,
                 channel=channel,
                 status="admin",
-                email_frequency="weekly")
+                email_frequency="weekly"
+            )
             messages.add_message(
                 request,
                 messages.INFO,
-		'You Created %s Channel' % channel)
+	        	'You Created %s Channel' % channel
+            )
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
+            print form.errors
             return render_to_response(
                 "channels/create.html", {
                     "form": form
-                }, context_instance=RequestContext(request))
+                }, context_instance=RequestContext(request)
+            )
     else:
         return render_to_response(
             "channels/create.html", {
                 "form": CreateChannelForm()
-            }, context_instance=RequestContext(request))
+            }, context_instance=RequestContext(request)
+        )
 
 @login_required
 def update(request, slug):

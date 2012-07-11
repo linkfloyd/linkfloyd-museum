@@ -1,34 +1,51 @@
+function attach() {
+}
 $(document).ready(function() {
-	$('#id_url').change(function() {
-		$.ajax({
-			url: "/api/fetch_info",
-            method: "GET",
+    $("#id_url").change(function() {
+        $.ajax({
+            url: "/api/fetch_info/",
+            type: "get",
             dataType: "json",
-            data: {"url": $('#id_url').val()},
-            beforeSend: function(xhr) {
-                $("#id_title").attr({"disabled":"disabled"});
-                $("#id_title").addClass("busy");
+            data: {
+                url: $('#id_url').val(),
             },
-            success : function(data) {
-                $("#id_title").val(data['title']);
-                $("#id_title").removeAttr("disabled");
-                $("#id_title").removeClass("busy");
-                if (data['image']) {
-                    var preview_el = $("div#thumbnail_preview");
-                    preview_el.parent().slideDown();        
-                    preview_el.find("img").attr("src", data['image']);
-                    $("#id_thumbnail_url").val(data['image']);
-                }
-                $("#id_player").val(data['player']);
+            beforeSend: function() {
+                $('#id_url').prop('disabled', true);
+                $('#id_url').addClass("busy");
             },
-	    error : function(data) {
-                $("#id_title").removeAttr("disabled");
-	    }
+            success: function(data) {
+                $("#attachment_preview").html(data.html);
+                $("input[name='url']").val(data.info.url);
+                $("input[name='title']").val(data.info.title);
+                $("input[name='description']").val(data.info.description);
+                $("input[name='thumbnail_url']").val(data.info.image);
+                $("input[name='player']").val(data.player);
+                $("#remove_link").show();
+                $("#link_input").hide();
+            },
+            statusCode: {
+                404: function() {
+                    $("#add_link ul.errorlist").show();
+               }
+            },
+            complete: function(data) {
+                $("#id_url").removeClass("busy");
+                $("#id_url").prop('disabled', false);
+            }
         });
     });
-    $("a#remove_thumbnail").click(function(){
-        $(this).parent().parent().parent().slideUp();
-        $("#id_thumbnail_url").val("");
-        return false;
+    $("#remove_link a").click(function() {
+        $("input[name='url']").val("");
+        $("input[name='title']").val("");
+        $("input[name='description']").val("");
+        $("input[name='thumbnail_url']").val("");
+        $("input[name='player']").val("");
+        $("#attachment_preview").empty();
+        $("#remove_link").hide();
+        $("#id_url").prop('disabled', false);
+        $("#link_input").show();
     });
+    if ($("#id_url").val()) {
+        $("#id_url").trigger("change");
+    }
 });

@@ -21,11 +21,14 @@ def get_info(url):
 
     if not url or not (url.startswith('http://') or url.startswith('https://')):
         return resp_dict
-
+    
     try:
         opener = urlopen(url, None, timeout=15)
     except URLError:
         return resp_dict
+
+    resp_dict = {"url": url}
+
 
     if "text/html" in opener.info().getheaders('content-type')[0]:
         data = opener.read()
@@ -120,11 +123,11 @@ def get_info(url):
                 except ValueError:
                     embed_data = None
 
-            if embed_data:
-                try:
-                    resp_dict['player'] = embed_data['html']
-                except IndexError:
-                    exit
+                if embed_data:
+                    try:
+                        resp_dict['player'] = embed_data['html']
+                    except IndexError:
+                        exit
         else: # there is no oembed
 
             og_video_bs = bs.find("meta", attrs={"property": "og:video"})

@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
-from links.models import Language
 from links.models import SITE_RATINGS
 from django.db.utils import DatabaseError
 
@@ -13,7 +12,7 @@ class UserPreferences(models.Model):
         blank=True,
         null=True,
         help_text="describe yourself")
-    known_languages = models.ManyToManyField(Language)
+    # known_languages = models.ManyToManyField(Language)
     max_rating = models.PositiveIntegerField(
         verbose_name = "Maximum Rating",
         choices=SITE_RATINGS,

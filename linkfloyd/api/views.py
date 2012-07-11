@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 
 from utils import get_info
 
@@ -17,9 +18,27 @@ from django.template import RequestContext
 
 def fetch_info(request):
     if request.GET.has_key("url"):
+        info = get_info(request.GET['url'])
+        if not info:
+            return HttpResponse(status=404)
+        dummy_link = {
+            "url": info['url'],
+            "thumbnail_url": info.get("image"),
+            "title": info.get("title"),
+            "description": info.get("description"),
+            "player": info.get("player")
+        }
         return HttpResponse(
-            simplejson.dumps(get_info(request.GET['url'])),
-            'application/javascript')
+            simplejson.dumps({
+                "html": render_to_string(
+                    "links/attachment.html",
+                    {
+                        "link": dummy_link
+                    }
+                ),
+                "info": info
+            }), 'application/javascript'
+        )
     else:
         return HttpResponse(status=400)
 
@@ -130,8 +149,8 @@ def switch_link_subscription(request):
                     simplejson.dumps({
                         "status": "subscribed",
                         "update_text": "Unsubscribe",
-                        "update_title": "Do not email me when somebody comments "\
-                                        "on that link"
+                        "update_title": "Do not email me when somebody" \
+                                        "comments on that link"
                     }, 'application/javascript')
                 )
             elif subscription.status == 1:
@@ -152,8 +171,8 @@ def switch_link_subscription(request):
                 simplejson.dumps({
                     "status": "subscribed",
                     "update_text": "Unsubscribe",
-                    "update_title": "Do not email me when somebody comments "\
-                                    "on that link"
+                    "update_title": "Do not email me when somebody " \
+                                    "comments on that link"
                 }, 'application/javascript')
             )
     else:

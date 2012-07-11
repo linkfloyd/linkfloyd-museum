@@ -23,33 +23,19 @@ SITE_RATINGS = (
     (3, _("Liberal (hell yeah.)")),
 )
 
-SITE_LANGUAGES = (
-    ("tr", "Turkish"),
-    ("en", "English"),
-    ("en", "Espaniol"),
-    ("NotImp", "Not Important")
-)
-
-class Language(models.Model):
-    code = models.CharField(max_length=5, null=True)
-    name = models.CharField(max_length=16)
-
-    def __unicode__(self):
-        return self.name
-
 class Link(models.Model):
     posted_by = models.ForeignKey(User)
     posted_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    url = models.URLField(null=True)
-    title = models.CharField(max_length=144)
-    description = models.CharField(max_length=512, null=True, blank=False)
+    body = models.CharField(max_length=512, null=True, blank=True)
+    url = models.URLField(null=True, blank=True)
+    title = models.CharField(max_length=144, null=True, blank=True)
+    description = models.CharField(max_length=512, null=True, blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
     rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
         help_text=_("warn people about your link")
     )
-    language = models.ForeignKey(Language)
     votes = VotesField()
     shown = models.PositiveIntegerField(default=0)
     player = models.TextField(null=True, blank=True)
@@ -84,6 +70,7 @@ class Link(models.Model):
     def __unicode__(self):
         return u"%s by %s" % (self.title, self.posted_by)
 
+
 class Subscription(models.Model):
     """We're holding unsubscriptions instead of subscriptions.
     * if subscription exists and subscripted=True, user subscripted
@@ -94,6 +81,7 @@ class Subscription(models.Model):
     link = models.ForeignKey(Link)
     status = models.PositiveSmallIntegerField(null=True, blank=True, choices=(
         (0, "unsubscribed"), (1, "subscribed")))
+
 
 class Report(models.Model):
     reporter = models.ForeignKey(User)
