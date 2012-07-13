@@ -41,7 +41,5 @@ def create_preferences(sender, instance, created, **kwargs):
                 max_rating=1)
         except DatabaseError:
             preferences = None
-        if preferences:
-            preferences.known_languages.add(1, 2)
 
 post_save.connect(create_preferences, sender=User)
