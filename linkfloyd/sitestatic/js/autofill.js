@@ -12,9 +12,9 @@ $(document).ready(function() {
             beforeSend: function() {
                 $('#id_url').prop('disabled', true);
                 $('#id_url').addClass("busy");
+                $('#id_submit').prop('disabled', true);
             },
             success: function(data) {
-                console.log(data);
                 $("#attachment_preview").html(data.html);
                 $("input[name='url']").val(data.info.url);
                 $("input[name='title']").val(data.info.title);
@@ -32,6 +32,7 @@ $(document).ready(function() {
             complete: function(data) {
                 $("#id_url").removeClass("busy");
                 $("#id_url").prop('disabled', false);
+                $("#id_submit").prop('disabled', false);
             }
         });
     });

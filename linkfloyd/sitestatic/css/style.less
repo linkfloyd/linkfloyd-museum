@@ -85,6 +85,10 @@ dl {
         background: lighten(@black, 6%);
         border-style: inset;
     }
+    &:disabled {
+        color: darken(@white, 30%);
+        background: lighten(@black, 24%);
+    }
 }
 /* Layout */
 div.wrapper {
@@ -293,6 +297,9 @@ div#content {
         background: @blue;
         border-radius: 5px;
         overflow: auto;
+        &.white {
+            background: @white;
+        }
     }
 }
 a#logo {
@@ -549,10 +556,10 @@ form {
         -webkit-box-sizing: border-box; /* safari3 */
         -khtml-box-sizing: border-box; /* konqueror */
         width: 100%;
-        padding: 3px;
+        padding: 6px;
         margin: 0;
         border-radius: 3px;
-        border: 1px inset darken(@white, 20%);
+        border: 1px inset darken(@white, 30%);
         background: darken(@white, 10%);
         color: darken(@grey, 40%);
         &:disabled {
@@ -561,10 +568,13 @@ form {
         }
     }
     textarea {
-        height: 24px;
+        height: 30px;
         &#id_notes {
-            height: 96px;
+            height: 102px;
         }
+    }
+    select {
+        padding: 4px;
     }
     input[type='submit'], input[type='button'] {
 	    margin:10px 10px 0 0;
@@ -722,4 +732,11 @@ div#add_link.fieldWrapper {
         display: none;
     }
 }
- 
+div.light {
+    background: @white;
+    padding: 10px;
+    color: @black;
+    h1, h2, h3, h4, h5, dt {
+        color: @black;
+    }
+}
