@@ -97,6 +97,7 @@ def link_detail(request, link_id):
     return render_to_response("links/link_detail.html",
     {
         "link": link,
+        "expanded_attachments": True,
         "form": CommentForm(initial={"link": link})
     }, context_instance=RequestContext(request))
 

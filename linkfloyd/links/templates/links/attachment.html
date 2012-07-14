@@ -7,4 +7,5 @@
     {% if link.description %}
         <p class="description">{{link.description}}</p>
     {% endif %}
+    {% if expanded_attachments %}<div class="embed_player">{{link.player|safe}}</div>{% endif %}
 </div>{% endspaceless %}
