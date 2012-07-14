@@ -10,6 +10,13 @@
 {% block content %}
 <div class="two-column">
     <div class="panel">
+        {% if not user.is_authenticated %}
+            <h2 class="header">Linkfloyd Nedir?</h2>
+            <p>
+            Aynı ilgi alanına sahip insanları bir araya getirme niyetinde olan, paylaşım ve yer imleme servisidir.
+            <a href="/about/tr/">Devamı...</a>
+            </p>
+        {% endif %}
         {% if links_from == 'channel' %}
             {% with channel=instance %}
             <div class="about section">
@@ -17,17 +24,17 @@
                 <p class="channel_description">{{channel.description|linebreaks}}</p>
             </div>
             <div class="actions section">
-               <h2 class="header">{% trans "Actions" %}</h2>
-		<ul class="navigation">
+                <h2 class="header">{% trans "Actions" %}</h2>
+	        	<ul class="navigation">
                     {% if user|channel_subscription_status:channel == 'admin' %}
-		    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
-		    {% endif %}
-		    {% if user|channel_subscription_status:channel %}
+            		    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+		            {% endif %}
+        		    {% if user|channel_subscription_status:channel %}
              		    <li><a href="#">Unsubscribe</a></li>
                     {% else %}
               		    <li><a href="#">Subscribe</a></li>
                     {% endif %}
-		</ul>
+		        </ul>
             </div>
             {% endwith %}
         {% endif %}
@@ -55,11 +62,11 @@
                 <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
                 <div class="avatars">
                     {% for subscription in channel.subscription_set.all %}
-		    <a class="subscriber"
-		       href="{{subscription.user.get_absolute_url}}"
-		       style="background: url({% gravatar_for_user subscription.user 30 %})"
-		       title="{{subscription.user.username}}" 
-		   ></a>
+	            	    <a class="subscriber"
+            		       href="{{subscription.user.get_absolute_url}}"
+		                   style="background: url({% gravatar_for_user subscription.user 30 %})"
+            		       title="{{subscription.user.username}}" 
+            		   ></a>
                     {% endfor %}
                 </div>
             </div>
@@ -69,16 +76,16 @@
     <div class="content section">
         <h2 class="header">{{title}}
             <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
-                <a href="?ordering=controversial">Controversial</a>
+                <a href="?ordering=controversial">{% trans "Controversial" %}</a>
             </span>
             <span class="ordering{% if ordering == 'top' %} active{% endif %}">
-                <a href="?ordering=top">Top voted</a>
+                <a href="?ordering=top">{% trans "Top Voted" %}</a>
             </span>
             <span class="ordering{% if ordering == 'latest' %} active{% endif %}">
-                <a href="?ordering=latest">Latest</a>
+                <a href="?ordering=latest">{% trans "Latest" %}</a>
             </span>
             <span class="ordering{% if ordering == 'hot' %} active{% endif %}">
-                <a href="?">Hot</a>
+                <a href="?">{% trans "Hot" %}</a>
             </span>
          </h2>
         </ul>

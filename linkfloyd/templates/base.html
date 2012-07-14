@@ -1,4 +1,4 @@
-{% load static i18n %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
+{% load static i18n gravatar %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
     <title>{% block title %}LinkFloyd{% endblock title %}</title>
@@ -41,15 +41,12 @@
                 <div class="right">
                     <ul class="flat-list navigation">
                         {% block extra_nav %}{% endblock extra_nav %}
-                        {% if user.is_authenticoated %}
+                        {% if user.is_authenticated %}
                         <li>
-                            <a href="#">
-                                {% trans "Links" %}
-                            </a>
-                            <ul class="sub">
-                                <li>
-                                    <a href="{% url links_from_user user %}">{% trans "From You" %}</a>
-                                </li>
+                           <a class="avatar" href="{{user.get_absolute_url}}" style="background: url({% gravatar_for_user user 50 %})"></a>
+                           <ul class="sub">
+                                <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
+                                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
                             </ul>
                         </li>
                         {% endif %}
@@ -72,17 +69,7 @@
                             </ul>
                         </li>
 
-                        {% if user.is_authenticated %}
-                        <li>
-                            <a href="#">{{user}}</a>
-                            <ul class="sub">
-                                <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
-                                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-                            </ul>
-                        </li>
-                        {% endif %}
-
-                        <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
+                       <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
                             <a href="/links/submit/">{% trans "Submit a Link" %}</a>
                         </li>
                         {% if not user.is_authenticated %}
@@ -90,17 +77,6 @@
                             <a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
                         </li>
                         {% endif %}
-                        <li>
-                            <a href="/about/en/">{% trans "About" %}</a>
-                            <ul class="sub">
-                                <li><a href="/about/en/">English</a></li>
-                                <li><a href="/about/tr/">Türkçe</a></li>
-                            </ul>
-                            </li>
-                                <li>
-                                    <a href="/about/tr/tools/">Bookmarklet</a>
-                                </li>
-
                     </ul>
                 </div>
             </div>

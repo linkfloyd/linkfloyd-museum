@@ -13,9 +13,9 @@
                 {% for field in form %}
                 {% include "forms/form_field.html" %}
                 {% endfor %}
-                <p><a href="{% url registration_register %}">Do you need an account</a>?</p>
-                <p><a href="/accounts/password/reset/">Don't you remember your password</a>?</p>
-                <input type="submit" value="login" />
+                <p><a href="{% url registration_register %}">{% trans "Do you need an account" %}</a>?</p>
+                <p><a href="/accounts/password/reset/">{% trans "Don't you remember your password" %}</a>?</p>
+                <input type="submit" value="{% trans "Log in" %}" />
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>

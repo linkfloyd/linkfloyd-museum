@@ -14,7 +14,11 @@ def context_builder(request, **kwargs):
     from channels.models import Channel, Subscription
     from datetime import datetime
     from datetime import timedelta
-    from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+    from django.core.paginator import Paginator
+    from django.core.paginator import EmptyPage
+    from django.core.paginator import PageNotAnInteger
+    from django.utils.translation import ugettext as _
+
 
     response = {
         "links_from": kwargs.get("links_from"),
@@ -31,9 +35,9 @@ def context_builder(request, **kwargs):
             pass
 
     response['title'] = {
-        "subscriptions": "Links From Your Subscripted Channels",
-        "user": "Links From %s" % response['instance'],
-        "channel": "Links From %s Channel" % response['instance']\
+        "subscriptions": _("Posts From Your Subscripted Channels"),
+        "user": _("Posts From %s") % response['instance'],
+        "channel": _("Posts From %s Channel") % response['instance']\
     }[response['links_from']]
 
     # is_authenticated method hits db on every call, so i cached it with this.
