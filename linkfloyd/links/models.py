@@ -41,7 +41,10 @@ class Link(models.Model):
     player = models.TextField(null=True, blank=True)
     is_banned = models.BooleanField(default=False)
     is_sponsored = models.BooleanField(default=False)
-    channel = models.ForeignKey(Channel)
+    channel = models.ForeignKey(
+        Channel,
+        verbose_name=_("Channel")
+    )
     vote_score = models.PositiveIntegerField(default=0)
     comment_score = models.PositiveIntegerField(default=0)
 
