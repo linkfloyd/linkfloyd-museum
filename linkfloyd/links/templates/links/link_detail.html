@@ -37,13 +37,10 @@
     </div>
 </div>
 <div class="content section">
-    <h2 class="header">{{link.title}} via <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a></h2>
     {% include "links/link_as_list_item.html" %}
-
     {% for comment in link.comment_set.all %}
         {% include "links/comment.html" %}
     {% endfor %}
-
     {% if user.is_authenticated %}
         {% include "links/comment_form.html" %}
     {% else %}
