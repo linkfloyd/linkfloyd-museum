@@ -17,7 +17,6 @@ from comments.models import Comment
 from comments.forms import CommentForm
 
 from django.utils.translation import ugettext as _
-from django.core import serializers
 
 def fetch_info(request):
     if "url" in request.GET:
@@ -172,7 +171,7 @@ def switch_channel_subscription(request):
         
         if  request.POST.get("requested_status") == "admin":
             if request.POST.get("sure") == True:
-                subscription = Subscription.objects.create(
+                subscription = ChannelSubscription.objects.create(
                     channel=channel,
                     user=request.user,
                     status="admin"

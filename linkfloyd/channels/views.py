@@ -6,7 +6,6 @@ from channels.forms import CreateChannelForm, UpdateChannelForm
 from channels.models import Subscription, Channel
 from django.contrib import messages
 from django.views.generic import ListView
-from django.views.decorators.csrf import csrf_protect
 from django.db.models import Count
 
 @login_required
@@ -15,7 +14,7 @@ def create(request):
         form = CreateChannelForm(request.POST)
         if form.is_valid():
             channel = form.save()
-            subscription = Subscription.objects.create(
+            Subscription.objects.create(
                 user=request.user,
                 channel=channel,
                 status="admin",
@@ -28,7 +27,6 @@ def create(request):
             )
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
-            print form.errors
             return render_to_response(
                 "channels/create.html", {
                     "form": form
@@ -46,7 +44,7 @@ def update(request, slug):
     if request.POST:
         channel = get_object_or_404(Channel, slug=slug)
         
-        subscription = get_object_or_404(
+        get_object_or_404(
             Subscription,
             user=request.user,
             channel=channel,
@@ -59,7 +57,8 @@ def update(request, slug):
             messages.add_message(
                 request,
                 messages.INFO,
-                'You Updated %s Channel' % channel)
+                'You Updated %s Channel' % channel
+            )
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
             return render_to_response(
@@ -68,7 +67,7 @@ def update(request, slug):
                 }, context_instance=RequestContext(request))
     else:
         channel = get_object_or_404(Channel, slug=slug)
-        subscription = get_object_or_404(
+        get_object_or_404(
             Subscription,
             user=request.user,
             channel=channel,
@@ -89,7 +88,7 @@ class BrowseChannelsView(ListView):
     def get_queryset(self):
         return Channel.objects.annotate(
 	    num_of_subscribers=Count("subscription")).order_by(
-                "-is_official", "-num_of_subscribers")
+            "-is_official", "-num_of_subscribers")
 
     def get_context_data(self, **kwargs):
         context = super(BrowseChannelsView, self).get_context_data(**kwargs)
