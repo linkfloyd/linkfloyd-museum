@@ -62,15 +62,21 @@ class Subscription(models.Model):
     status = models.CharField(
         max_length=12,
         default="member",
-        choices=(("member", "Member"),
-                 ("admin", "Admin")))
-
+        choices=(        
+            ("admin", _("Admin")),
+            ("moderator", _("Moderator")),
+            ("subscriber", _("Subscriber"))
+        )
+    )
     email_frequency = models.CharField(
         max_length=12,
         default="daily",
-        choices=(("daily", "daily"),
-                 ("weekly", "Weekly"),
-                 ("noemail", "No Email")))
+        choices=(
+            ("daily", "daily"),
+            ("weekly", "Weekly"),
+            ("noemail", "No Email")
+        )
+    )
 
     def __unicode__(self):
         return u"%s's subscription to %s as %s" % (

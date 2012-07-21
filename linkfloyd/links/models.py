@@ -17,11 +17,13 @@ from qhonuskan_votes.models import vote_changed
 
 from django.dispatch import receiver
 
+
 SITE_RATINGS = (
-    (1, _("Safe Posts (only safe content)")),
+    (1, _("Safe Posts")),
     (2, _("Moderate (can contain nudity, rude gestures)")),
-    (3, _("Liberal (hell yeah.)")),
+    (3, _("Liberal (can contain anything)")),
 )
+
 
 class Link(models.Model):
     posted_by = models.ForeignKey(User)
@@ -91,7 +93,7 @@ class Report(models.Model):
     link = models.ForeignKey(Link)
     reason = models.CharField(
         max_length=16,
-        help_text = "why are you reporting this?",
+        help_text="why are you reporting this?",
         choices=(
             ("hatespeech", "Contains hate Speech"),
             ("wrong_channel", "Channel is not appropriate"),
@@ -123,13 +125,16 @@ def link_saved(sender, **kwargs):
 
     if kwargs['created'] == True:
         link = kwargs['instance']
-        subscriptions = ChannelSubscription.objects.filter(channel=link.channel)
+        subscriptions = \
+            ChannelSubscription.objects.filter(channel=link.channel)
         for subscription in subscriptions:
             Unseen.objects.get_or_create(user=subscription.user, link=link)
-
         LinkSubscription = Subscription
-        LinkSubscription.objects.get_or_create(link=link, user=link.posted_by,
-            status=1)
+        LinkSubscription.objects.get_or_create(
+            link=link,
+            user=link.posted_by,
+            status=1
+        )
 
 
 @receiver(pre_delete, sender=Link, dispatch_uid="link_deleted")
@@ -138,9 +143,9 @@ def link_deleted(sender, **kwargs):
     link = kwargs['instance']
     Unseen.objects.filter(link=link).delete()
 
+
 @receiver(vote_changed)
 def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
     link = sender.object
     link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
     link.save()
-

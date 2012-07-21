@@ -45,8 +45,14 @@ def create(request):
 def update(request, slug):
     if request.POST:
         channel = get_object_or_404(Channel, slug=slug)
+        
         subscription = get_object_or_404(
-            Subscription, user=request.user, channel=channel, status="admin")
+            Subscription,
+            user=request.user,
+            channel=channel,
+            status="admin"
+        )
+
         form = UpdateChannelForm(request.POST,instance=channel)
         if form.is_valid():
             channel = form.save()
@@ -62,50 +68,17 @@ def update(request, slug):
                 }, context_instance=RequestContext(request))
     else:
         channel = get_object_or_404(Channel, slug=slug)
+        subscription = get_object_or_404(
+            Subscription,
+            user=request.user,
+            channel=channel,
+            status="admin"
+        )
+
         return render_to_response(
-            "channels/update.html", {
+           "channels/update.html", {
                 "form": UpdateChannelForm(instance=channel)
             }, context_instance=RequestContext(request))
-
-@login_required
-@csrf_protect
-def update_subscription(request, slug):
-    channel = get_object_or_404(Channel, slug=slug)
-    action = request.POST.get("action", False)
-
-    if not update:
-        return HttpResponseRedirect(channel.get_absolute_url())
-
-    if action == "subscribe":
-        try:
-            subscription = Subscription.objects.create(
-                user=request.user, channel=channel)
-        except Subscription.IntegrityError:
-            messages.add_message(request, messages.INFO,
-                'You are already subscribed to %s channel' % channel)
-            return HttpResponseRedirect(channel.get_absolute_url())
-
-        messages.add_message(request, messages.INFO,
-        'You are subscribed to %s channel' % channel)
-        return HttpResponseRedirect(channel.get_absolute_url())
-    elif action == "unsubscribe":
-        try:
-            subscription = Subscription.objects.get(
-                user=request.user, channel=channel)
-        except Subscription.DoesNotExist:
-            messages.add_message(request, messages.INFO,
-                'You are already unsubscribed from %s channel' % channel)
-            return HttpResponseRedirect(channel.get_absolute_url())
-        except Subscription.MultipleObjectsReturned:
-            Subscription.objects.filter(
-                user=request.user, channel=channel).delete()
-            return HttpResponseRedirect(channel.get_absolute_url())
-        subscription.delete()
-        messages.add_message(request, messages.INFO,
-            'You are unsubscribed to %s channel' % channel)
-        return HttpResponseRedirect(channel.get_absolute_url())
-    else:
-        return HttpResponseRedirect(channel.get_absolute_url())
 
 
 class BrowseChannelsView(ListView):

@@ -209,3 +209,11 @@ def reduced_markdown(text, *args, **kwargs):
     bp.CodeBlockProcessor.run = run_with_prettify
 
     return markdown(text, *args, **kwargs)
+
+def get_object_or_403(klass, *args, **kwargs):
+    from django.shortcuts import _get_queryset
+    queryset = _get_queryset(klass)
+    try:
+        return queryset.get(*args, **kwargs)
+    except queryset.model.DoesNotExist:
+        return HttpResponse(status=403)

@@ -1,39 +1,49 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags qhonuskan_votes %}
 
 {% block extra_head %}
-    {% if highlight %}<script type="text/javascript" src="{{STATIC_URL}}js/libs/jquery.color.js"></script>{% endif %}
-    <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
-    {% voting_script %}
-{% endblock extra_head %}
+<script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
+{% if highlight %}
+    <script type="text/javascript"
+            src="{{STATIC_URL}}js/libs/jquery.color.js">
+    </script>
+{% endif %}
+{% if links_from == "channel" %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/subscriptions.js"></script>
+{% endif %}
 
+{% endblock extra_head %}
 {% block content %}
 <div class="two-column">
     <div class="panel">
         {% if not user.is_authenticated %}
             <h2 class="header">Linkfloyd Nedir?</h2>
             <p>
-            Aynı ilgi alanına sahip insanları bir araya getirme niyetinde olan, paylaşım ve yer imleme servisidir.
-            <a href="/about/tr/">Devamı...</a>
+                Aynı ilgi alanına sahip insanları bir araya getirme
+                niyetinde olan, paylaşım ve yer imleme servisidir. 
+                <a href="/about/tr/">Devamı...</a>
             </p>
         {% endif %}
         {% if links_from == 'channel' %}
             {% with channel=instance %}
             <div class="about section">
                 <h2 class="header">{% trans "About Channel" %}</h2>
-                <p class="channel_description">{{channel.description|linebreaks}}</p>
+                <p class="channel_description">
+                    {{channel.description|linebreaks}}
+                </p>
             </div>
             <div class="actions section">
                 <h2 class="header">{% trans "Actions" %}</h2>
-	        	<ul class="navigation">
-                    {% if user|channel_subscription_status:channel == 'admin' %}
-            		    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
-		            {% endif %}
-        		    {% if user|channel_subscription_status:channel %}
-             		    <li><a href="#">Unsubscribe</a></li>
-                    {% else %}
-              		    <li><a href="#">Subscribe</a></li>
-                    {% endif %}
+                <ul class="navigation">
+
+                    {% with subscription_status=user|channel_subscription_status:channel %}
+                        {% if subscription_status == 'admin' %}
+            	    	    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+                        {% endif %}
+                        <li>
+                        <a href="#" data-slug="{{channel.slug}}" class="subscription_status {% if subscription_status %} subscribed{% endif %}">{% if subscription_status %}{% trans "Unsubscribe" %}{% else %}{% trans "Subscribe" %}{% endif %}</a>
+                        </li>
+                    {% endwith %}
 		        </ul>
             </div>
             {% endwith %}

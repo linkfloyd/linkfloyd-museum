@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-14 04:06-0500\n"
+"POT-Creation-Date: 2012-07-17 11:59-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+
+#: api/views.py:168 links/templates/links/link_list.html:44
+msgid "Unsubscribe"
+msgstr "Takibi Bırak"
+
+#: api/views.py:181
+msgid "Are you sure that you want to be admin of this channel?"
+msgstr "Bu kanalın yöneticisi olmak istediğinizden emin misiniz?"
+
+#: api/views.py:194 api/views.py:207 links/templates/links/link_list.html:44
+msgid "Subscribe"
+msgstr "Takip Et"
+
+#: api/views.py:199
+msgid ""
+"You will loose your adminstration rights from this channel. Are you sure?"
+msgstr "Kanaldaki yönetim haklarınızı kaybedeceksiniz. Emin misiniz?"
 
 #: channels/models.py:23
 msgid "title"
@@ -42,6 +59,19 @@ msgstr "kanal hakkında notlar ve kurallar"
 msgid "which language do you expect to be spoken in that channel"
 msgstr "bu kanalda hangi dilde konuşulacak?"
 
+#: channels/models.py:66
+msgid "Admin"
+msgstr ""
+
+#: channels/models.py:67
+msgid "Moderator"
+msgstr ""
+
+#: channels/models.py:68
+#, fuzzy
+msgid "Subscriber"
+msgstr "Takipçiler"
+
 #: channels/templates/channels/channel.html:13
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
@@ -51,12 +81,12 @@ msgid "Your Subcriptions"
 msgstr "Takip Ettikleriniz"
 
 #: channels/templates/channels/channel.html:34
-#: links/templates/links/link_list.html:55
+#: links/templates/links/link_list.html:72
 msgid "Subscribers"
 msgstr "Takipçiler"
 
 #: channels/templates/channels/channel.html:61
-#: links/templates/links/link_list.html:89
+#: links/templates/links/link_list.html:106
 msgid "No links found."
 msgstr "Hiç link bulunamadı."
 
@@ -115,21 +145,26 @@ msgstr ""
 msgid "Comment posted on: %(link_title)s"
 msgstr "Şu gönderiye yorum yapıldı: %(link_title)s"
 
-#: links/models.py:21
-msgid "Safe Posts (only safe content)"
-msgstr "Güvenli Gönderiler (sadece güvenli içerik)"
-
 #: links/models.py:22
+msgid "Safe Posts"
+msgstr ""
+
+#: links/models.py:23
 msgid "Moderate (can contain nudity, rude gestures)"
 msgstr "Orta (Çıplaklık ya da kaba hareketler içerebilir)"
 
-#: links/models.py:23
-msgid "Liberal (hell yeah.)"
-msgstr "Liberal"
+#: links/models.py:24
+msgid "Liberal (can contain anything)"
+msgstr ""
 
-#: links/models.py:37
+#: links/models.py:39
 msgid "warn people about your link"
 msgstr "insanları gönderiniz hakkında uyarın"
+
+#: links/models.py:48
+#, fuzzy
+msgid "Channel"
+msgstr "Kanallar"
 
 #: links/utils.py:38
 msgid "Posts From Your Subscripted Channels"
@@ -153,90 +188,83 @@ msgstr "Güncelle"
 msgid "Delete"
 msgstr "Sil"
 
-#: links/templates/links/link_list.html:16
+#: links/templates/links/link_list.html:30
 msgid "About Channel"
 msgstr "Kanal Hakkında"
 
-#: links/templates/links/link_list.html:20
+#: links/templates/links/link_list.html:36
 msgid "Actions"
 msgstr "Aksiyonlar"
 
-#: links/templates/links/link_list.html:36
+#: links/templates/links/link_list.html:53
 msgid "About User"
 msgstr "Kullanıcı Hakında"
 
-#: links/templates/links/link_list.html:42
+#: links/templates/links/link_list.html:59
 msgid "Subscripted Channels"
 msgstr "Takip Edilen Kanallar"
 
-#: links/templates/links/link_list.html:72
+#: links/templates/links/link_list.html:89
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: links/templates/links/link_list.html:75
+#: links/templates/links/link_list.html:92
 msgid "Top Voted"
 msgstr "Yüksek Puanlı"
 
-#: links/templates/links/link_list.html:78
+#: links/templates/links/link_list.html:95
 msgid "Latest"
 msgstr "En Son"
 
-#: links/templates/links/link_list.html:81
+#: links/templates/links/link_list.html:98
 msgid "Hot"
 msgstr "Sıcak"
+
+#: links/templates/links/submit.html:9
+#, fuzzy
+msgid "Post a Link"
+msgstr "Bağ Gönder"
 
 #: links/templates/links/submit_form.html:5
 #: links/templates/links/update_form.html:5
 msgid "This link is not reachable"
 msgstr "Bu bağlantı erişilemez"
 
-#: templates/base.html:47
-msgid "Links"
-msgstr "Bağlar"
+#: links/templates/links/submit_form.html:12
+msgid "Comment"
+msgstr ""
 
-#: templates/base.html:51
-msgid "From You"
-msgstr "Sizden"
-
-#: templates/base.html:58
-msgid "Channels"
-msgstr "Kanallar"
-
-#: templates/base.html:62
-msgid "Browse Channels"
-msgstr "Kanallara Bak"
-
-#: templates/base.html:65
-msgid "Create a Channel"
-msgstr "Kanal Oluştur"
-
-#: templates/base.html:69
-msgid "Your Subscriptions"
-msgstr "Takip Ettikleriniz"
-
-#: templates/base.html:77
-msgid "Profile"
-msgstr "Profil"
-
-#: templates/base.html:79
+#: templates/base.html:48
 msgid "Preferences"
 msgstr "Seçenekler"
 
-#: templates/base.html:80
+#: templates/base.html:49
 msgid "Log out"
 msgstr "Çıkış Yap"
 
-#: templates/base.html:86
+#: templates/base.html:55
+msgid "Channels"
+msgstr "Kanallar"
+
+#: templates/base.html:59
+msgid "Browse Channels"
+msgstr "Kanallara Bak"
+
+#: templates/base.html:62
+msgid "Create a Channel"
+msgstr "Kanal Oluştur"
+
+#: templates/base.html:66
+msgid "Your Subscriptions"
+msgstr "Takip Ettikleriniz"
+
+#: templates/base.html:73
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
-#: templates/base.html:90 templates/registration/login.html:2
+#: templates/base.html:77 templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
-
-#: templates/base.html:94
-msgid "About"
-msgstr "Hakkında"
 
 #: templates/index.html:3
 msgid "No links shared today. Share it now!"
@@ -377,3 +405,21 @@ msgstr "Şifre"
 #: templates/registration/registration_form.html:23
 msgid "Password Again"
 msgstr "Şifre Tekrar"
+
+#~ msgid "Safe Posts (only safe content)"
+#~ msgstr "Güvenli Gönderiler (sadece güvenli içerik)"
+
+#~ msgid "Liberal (hell yeah.)"
+#~ msgstr "Liberal"
+
+#~ msgid "Links"
+#~ msgstr "Bağlar"
+
+#~ msgid "From You"
+#~ msgstr "Sizden"
+
+#~ msgid "Profile"
+#~ msgstr "Profil"
+
+#~ msgid "About"
+#~ msgstr "Hakkında"
