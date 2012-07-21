@@ -1,6 +1,6 @@
 *.pyc
 /linkfloyd/local_settings.py
+/linkfloyd/secret_key.py
 /linkfloyd/static/
 /linkfloyd/media/
-/venv/
 /linkfloyd/fabfile.py
