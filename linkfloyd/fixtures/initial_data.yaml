@@ -1,9 +1,4 @@
 - fields: {
-      name: "Not Important"
-  }
-  model: links.language
-  pk: 1
-- fields: {
       code: tr, name: "Türkçe"
   }
   model: links.language
@@ -12,4 +7,4 @@
       code: en, name: "English"
   }
   model: links.language
-  pk: 3
+  pk: 1
