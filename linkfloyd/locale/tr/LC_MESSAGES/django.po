@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-21 16:14-0500\n"
+"POT-Creation-Date: 2012-07-21 17:25-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,7 @@ msgid "Subscriber"
 msgstr "Takipçiler"
 
 #: channels/views.py:61
+#, python-format
 msgid "You Updated %s Channel"
 msgstr "%s Kanalını Güncellediniz"
 
@@ -114,6 +115,10 @@ msgstr "Paylaş"
 msgid "E-posta"
 msgstr ""
 
+#: channels/templates/channels/create.html:9 templates/base.html:62
+msgid "Create a Channel"
+msgstr "Kanal Oluştur"
+
 #: channels/templates/channels/create.html:13
 #: channels/templates/channels/update.html:10
 msgid "Name"
@@ -128,7 +133,7 @@ msgid "Language"
 msgstr "Dil"
 
 #: channels/templates/channels/create.html:33
-#: channels/templates/channels/update.html:17
+#: channels/templates/channels/update.html:17 preferences/models.py:16
 msgid "Description"
 msgstr "Açıklama"
 
@@ -174,7 +179,7 @@ msgstr "Liberal (her şey çıkabilir)"
 
 #: links/models.py:40
 msgid "warn people about your link"
-msgstr "insanları gönderiniz hakkında uyarın"
+msgstr "insanları gönderin hakkında uyar"
 
 #: links/models.py:46
 msgid "Channel"
@@ -247,9 +252,49 @@ msgstr "Bu bağlantı erişilemez"
 msgid "Comment"
 msgstr "Yorum"
 
+#: preferences/models.py:17
+msgid "describe yourself"
+msgstr "kendinizi tanıtın"
+
+#: preferences/models.py:20
+msgid "Maximum Rating"
+msgstr "En Yüksek Derece"
+
+#: preferences/models.py:22
+msgid "how much can you handle?"
+msgstr "ne kadar sert içeriğe katlanabilirsin?"
+
+#: preferences/models.py:28
+msgid "Daily"
+msgstr "Günlük"
+
+#: preferences/models.py:29
+msgid "Weekly"
+msgstr "Haftalık"
+
+#: preferences/models.py:30
+msgid "Monthly"
+msgstr "Aylık"
+
+#: preferences/models.py:31
+msgid "Never Send"
+msgstr "Hiç Gönderme"
+
+#: preferences/models.py:32
+msgid "Summary Emails"
+msgstr "Özet Postalar"
+
+#: preferences/models.py:33
+msgid "When do you want to get summaries of your subscripted channels"
+msgstr "Takibe aldığın kanalların özetini ne sıklıkla almak istersin?"
+
 #: preferences/views.py:23
 msgid "You successfuly updated your preferences."
 msgstr "Seçenekleriniz güncellendi."
+
+#: preferences/templates/preferences/update.html:5
+msgid "Update Preferences"
+msgstr "Seçenekleri Güncelle"
 
 #: templates/base.html:48
 msgid "Preferences"
@@ -266,10 +311,6 @@ msgstr "Kanallar"
 #: templates/base.html:59
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
-
-#: templates/base.html:62
-msgid "Create a Channel"
-msgstr "Kanal Oluştur"
 
 #: templates/base.html:66
 msgid "Your Subscriptions"

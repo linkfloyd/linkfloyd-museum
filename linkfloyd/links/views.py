@@ -8,7 +8,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-
 from channels.models import Subscription
 
 from links.models import Link, Channel

@@ -6,7 +6,7 @@
 {% block content %}
 <div class="one-column">
     <div class="content section narrow">
-        <h2 class="header">Create a Channel</h2>
+        <h2 class="header">{% trans "Create a Channel" %}</h2>
         <div class="body">
 		    <form action="#" method="post">
                 <div class="fieldWrapper">
@@ -32,7 +32,7 @@
 	            <div class="fieldWrapper">
                     <label fory="id_description">{{ form.description.errors }}{% trans "Description" %}
                         <span class="desc">{{form.description.help_text}}</label>
-                    {{ form.description }}
+                        {{ form.description }}
                 </div>
                 <div class="fieldWrapper">
                    <label fory="id_notes">{{ form.notes.errors }}
@@ -41,7 +41,7 @@
                     </label>
                     {{ form.notes }}
                 </div>
-	   	    {% csrf_token %}
+	       	    {% csrf_token %}
                 <input type="submit" value="{% trans 'Submit' %}" />
 		    </form>
         </div>
