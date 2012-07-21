@@ -32,21 +32,18 @@ class Link(models.Model):
     body = models.CharField(max_length=512, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     title = models.CharField(max_length=144, null=True, blank=True)
-    description = models.CharField(max_length=512, null=True, blank=True)
+    description = models.CharField(max_length=512, null=True,
+        blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
     rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
-        help_text=_("warn people about your link")
-    )
+        help_text=_("warn people about your link"))
     votes = VotesField()
     shown = models.PositiveIntegerField(default=0)
     player = models.TextField(null=True, blank=True)
     is_banned = models.BooleanField(default=False)
     is_sponsored = models.BooleanField(default=False)
-    channel = models.ForeignKey(
-        Channel,
-        verbose_name=_("Channel")
-    )
+    channel = models.ForeignKey(Channel, verbose_name=_("Channel"))
     vote_score = models.PositiveIntegerField(default=0)
     comment_score = models.PositiveIntegerField(default=0)
 
@@ -66,7 +63,8 @@ class Link(models.Model):
         return "/links/edit/%s/" % self.id
 
     def get_sharing_url(self):
-        return "%s?site=%s" % (Site.objects.get_current().domain, self.url)
+        return "%s?site=%s" % (\
+           Site.objects.get_current().domain, self.url)
 
     def inc_shown(self):
         self.shown += 1

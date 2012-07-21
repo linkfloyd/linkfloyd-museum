@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 11:59-0500\n"
+"POT-Creation-Date: 2012-07-21 16:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: api/views.py:168 links/templates/links/link_list.html:44
+#: api/views.py:139
+msgid "You have to be logged in to complete this action"
+msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmanız gerekmekte"
+
+#: api/views.py:170 links/templates/links/link_list.html:44
 msgid "Unsubscribe"
 msgstr "Takibi Bırak"
 
-#: api/views.py:181
+#: api/views.py:183
 msgid "Are you sure that you want to be admin of this channel?"
 msgstr "Bu kanalın yöneticisi olmak istediğinizden emin misiniz?"
 
-#: api/views.py:194 api/views.py:207 links/templates/links/link_list.html:44
+#: api/views.py:196 api/views.py:209 links/templates/links/link_list.html:44
 msgid "Subscribe"
 msgstr "Takip Et"
 
-#: api/views.py:199
+#: api/views.py:201
 msgid ""
 "You will loose your adminstration rights from this channel. Are you sure?"
 msgstr "Kanaldaki yönetim haklarınızı kaybedeceksiniz. Emin misiniz?"
@@ -59,18 +63,29 @@ msgstr "kanal hakkında notlar ve kurallar"
 msgid "which language do you expect to be spoken in that channel"
 msgstr "bu kanalda hangi dilde konuşulacak?"
 
-#: channels/models.py:66
-msgid "Admin"
-msgstr ""
-
 #: channels/models.py:67
-msgid "Moderator"
-msgstr ""
+msgid "Admin"
+msgstr "Sahip"
 
 #: channels/models.py:68
-#, fuzzy
+msgid "Moderator"
+msgstr "Yönetici"
+
+#: channels/models.py:69
 msgid "Subscriber"
 msgstr "Takipçiler"
+
+#: channels/views.py:61
+msgid "You Updated %s Channel"
+msgstr "%s Kanalını Güncellediniz"
+
+#: channels/views.py:97
+msgid "Browsing Channels"
+msgstr "Kanallar Görüntüleniyor"
+
+#: channels/views.py:108
+msgid "Browsing Your Subscripted Channels"
+msgstr "Takip Ettiğiniz Kanallar Görüntüleniyor"
 
 #: channels/templates/channels/channel.html:13
 msgid "Top Channels"
@@ -147,7 +162,7 @@ msgstr "Şu gönderiye yorum yapıldı: %(link_title)s"
 
 #: links/models.py:22
 msgid "Safe Posts"
-msgstr ""
+msgstr "Güvenli Gönderiler"
 
 #: links/models.py:23
 msgid "Moderate (can contain nudity, rude gestures)"
@@ -155,14 +170,13 @@ msgstr "Orta (Çıplaklık ya da kaba hareketler içerebilir)"
 
 #: links/models.py:24
 msgid "Liberal (can contain anything)"
-msgstr ""
+msgstr "Liberal (her şey çıkabilir)"
 
-#: links/models.py:39
+#: links/models.py:40
 msgid "warn people about your link"
 msgstr "insanları gönderiniz hakkında uyarın"
 
-#: links/models.py:48
-#, fuzzy
+#: links/models.py:46
 msgid "Channel"
 msgstr "Kanallar"
 
@@ -221,7 +235,6 @@ msgid "Hot"
 msgstr "Sıcak"
 
 #: links/templates/links/submit.html:9
-#, fuzzy
 msgid "Post a Link"
 msgstr "Bağ Gönder"
 
@@ -232,7 +245,11 @@ msgstr "Bu bağlantı erişilemez"
 
 #: links/templates/links/submit_form.html:12
 msgid "Comment"
-msgstr ""
+msgstr "Yorum"
+
+#: preferences/views.py:23
+msgid "You successfuly updated your preferences."
+msgstr "Seçenekleriniz güncellendi."
 
 #: templates/base.html:48
 msgid "Preferences"
@@ -269,15 +286,6 @@ msgstr "Giriş Yap"
 #: templates/index.html:3
 msgid "No links shared today. Share it now!"
 msgstr "Bu gün hiç bağ gönderilmemiş. Siz gönderin!"
-
-#: templates/privatebeta/invite.html:6
-msgid "Request invitation for closed beta"
-msgstr ""
-
-#: templates/privatebeta/invite.html:10
-#: templates/registration/registration_form.html:15
-msgid "Email"
-msgstr "Eposta"
 
 #: templates/registration/activate.html:2
 #: templates/registration/activation_complete.html:2
@@ -397,6 +405,10 @@ msgstr "Kayıt"
 #: templates/registration/registration_form.html:10
 msgid "Username"
 msgstr "Kullanıcı Adı"
+
+#: templates/registration/registration_form.html:15
+msgid "Email"
+msgstr "Eposta"
 
 #: templates/registration/registration_form.html:19
 msgid "Password"

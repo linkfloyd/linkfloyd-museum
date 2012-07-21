@@ -58,7 +58,7 @@ def update(request, slug):
             messages.add_message(
                 request,
                 messages.INFO,
-                'You Updated %s Channel' % channel
+                _('You Updated %s Channel' % channel)
             )
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
