@@ -41,7 +41,8 @@ class Channel(models.Model):
     )
     language = models.ForeignKey(
         Language,
-        help_text=_("which language do you expect to be spoken in that channel")
+        help_text=_("which language do you expect to be spoken "\
+                    "in that channel")
     )
 
     is_official = models.BooleanField(default=False)

@@ -7,6 +7,7 @@ from channels.models import Subscription, Channel
 from django.contrib import messages
 from django.views.generic import ListView
 from django.db.models import Count
+from django.utils.translation import ugettext as _
 
 @login_required
 def create(request):
@@ -73,11 +74,11 @@ def update(request, slug):
             channel=channel,
             status="admin"
         )
-
         return render_to_response(
            "channels/update.html", {
                 "form": UpdateChannelForm(instance=channel)
-            }, context_instance=RequestContext(request))
+            }, context_instance=RequestContext(request)
+        )
 
 
 class BrowseChannelsView(ListView):
@@ -93,7 +94,7 @@ class BrowseChannelsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(BrowseChannelsView, self).get_context_data(**kwargs)
         context['active_nav_item'] = "channels"
-        context['title'] = "Browsing Channels"
+        context['title'] = _("Browsing Channels")
         return context
 
 class SubscriptionsView(BrowseChannelsView):
@@ -104,5 +105,5 @@ class SubscriptionsView(BrowseChannelsView):
     def get_context_data(self, **kwargs):
         context = super(SubscriptionsView, self).get_context_data(**kwargs)
         context['active_nav_item'] = "channels"
-        context['title'] = "Browsing Your Subscripted Channels"
+        context['title'] = _("Browsing Your Subscripted Channels")
         return context
