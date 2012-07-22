@@ -4,3 +4,4 @@
 /linkfloyd/static/
 /linkfloyd/media/
 /linkfloyd/fabfile.py
+/linkfloyd/sqlite3.db
