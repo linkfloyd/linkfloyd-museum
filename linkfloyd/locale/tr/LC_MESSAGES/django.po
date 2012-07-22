@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 04:36-0500\n"
+"POT-Creation-Date: 2012-07-22 05:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,6 +42,10 @@ msgstr "Takip Et"
 msgid ""
 "You will loose your adminstration rights from this channel. Are you sure?"
 msgstr "Kanaldaki yönetim haklarınızı kaybedeceksiniz. Emin misiniz?"
+
+#: channels/forms.py:18
+msgid "Notes & Rules about that channel (optional)"
+msgstr "Kanal hakkında notlar ve kurallar (opsiyonel)"
 
 #: channels/models.py:23
 msgid "title"
@@ -222,6 +226,22 @@ msgstr "Güncelle"
 #: links/templates/links/link_as_list_item.html:21
 msgid "Delete"
 msgstr "Sil"
+
+#: links/templates/links/link_detail.html:28
+msgid "Posted at"
+msgstr "Gönderim Zamanı"
+
+#: links/templates/links/link_detail.html:29
+msgid "ago"
+msgstr "önce"
+
+#: links/templates/links/link_detail.html:30
+msgid "Displayed"
+msgstr "Gösterim Sayısı"
+
+#: links/templates/links/link_detail.html:31
+msgid "times"
+msgstr "defa"
 
 #: links/templates/links/link_list.html:30
 msgid "About Channel"

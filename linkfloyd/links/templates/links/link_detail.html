@@ -14,11 +14,7 @@
     <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
     <script type="text/javascript" src="{{STATIC_PREFIX}}js/links.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            prettyPrint()
-        });
-    </script>
+    <script type="text/javascript">$(document).ready(function() {prettyPrint() });</script>
 	<link href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css" rel="stylesheet" type="text/css">
     {% voting_script %}
 {% endblock %}
@@ -29,10 +25,10 @@
 <div class="panel">
     <div class="section">
 	    <dl>
-		    <dt>Posted at:</dt>
-		    <dd>{{link.posted_at|timesince}} ago</dd>
-		    <dt>Displayed:</dt>
-		    <dd>{{link.shown}} times</dd>
+            <dt>{% trans "Posted at" %}:</dt>
+            <dd>{{link.posted_at|timesince}} {% trans "ago" %}</dd>
+            <dt>{% trans "Displayed" %}:</dt>
+            <dd>{{link.shown}} {% trans "times" %}</dd>
 	    </dl>	
     </div>
 </div>
