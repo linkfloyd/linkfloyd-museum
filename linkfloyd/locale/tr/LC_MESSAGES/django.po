@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 05:13-0500\n"
+"POT-Creation-Date: 2012-07-22 05:20-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,11 +155,21 @@ msgstr "Notlar"
 
 #: channels/templates/channels/create.html:45
 #: channels/templates/channels/update.html:23
+#: links/templates/links/comment_form.html:13
 #: links/templates/links/submit_form.html:31
 #: links/templates/links/update_form.html:28
 #: templates/registration/registration_form.html:26
 msgid "Submit"
 msgstr "Gönder"
+
+#: comments/models.py:25 links/templates/links/submit_form.html:12
+#: links/templates/links/update_form.html:13
+msgid "Comment"
+msgstr "Yorum"
+
+#: comments/models.py:26
+msgid "you can use markdown here"
+msgstr "bu alanda markdown kullanabilirsin"
 
 #: comments/templates/comments/body.txt:1
 #, python-format
@@ -283,11 +293,6 @@ msgstr "Bağ Gönder"
 #: links/templates/links/update_form.html:5
 msgid "This link is not reachable"
 msgstr "Bu bağlantı erişilemez"
-
-#: links/templates/links/submit_form.html:12
-#: links/templates/links/update_form.html:13
-msgid "Comment"
-msgstr "Yorum"
 
 #: preferences/models.py:17
 msgid "describe yourself"

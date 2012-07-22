@@ -14,11 +14,16 @@ from django.conf import settings
 
 from django.core.mail import send_mass_mail
 
+from django.utils.translation import ugettext as _
+
+
 # Create your models here.
 
 class Comment(models.Model):
     link = models.ForeignKey(Link)
-    body = models.TextField(help_text="you can use markdown here")
+    body = models.TextField(
+        verbose_name=_("Comment"),
+        help_text=_("you can use markdown here"))
     as_html = models.TextField(blank=True)
     posted_by = models.ForeignKey(User, related_name="posted_by")
     posted_at = models.DateTimeField(auto_now_add=True)
