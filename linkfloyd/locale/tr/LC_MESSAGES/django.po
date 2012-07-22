@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-21 17:25-0500\n"
+"POT-Creation-Date: 2012-07-22 03:55-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,8 @@ msgstr ""
 msgid "You have to be logged in to complete this action"
 msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmanız gerekmekte"
 
-#: api/views.py:170 links/templates/links/link_list.html:44
+#: api/views.py:170 links/templates/links/link_as_list_item.html:27
+#: links/templates/links/link_list.html:44
 msgid "Unsubscribe"
 msgstr "Takibi Bırak"
 
@@ -30,7 +31,9 @@ msgstr "Takibi Bırak"
 msgid "Are you sure that you want to be admin of this channel?"
 msgstr "Bu kanalın yöneticisi olmak istediğinizden emin misiniz?"
 
-#: api/views.py:196 api/views.py:209 links/templates/links/link_list.html:44
+#: api/views.py:196 api/views.py:209
+#: links/templates/links/link_as_list_item.html:29
+#: links/templates/links/link_list.html:44
 msgid "Subscribe"
 msgstr "Takip Et"
 
@@ -94,7 +97,7 @@ msgstr "En İyi Kanallar"
 
 #: channels/templates/channels/channel.html:23
 msgid "Your Subcriptions"
-msgstr "Takip Ettikleriniz"
+msgstr "Takip Ettiklerin"
 
 #: channels/templates/channels/channel.html:34
 #: links/templates/links/link_list.html:72
@@ -178,12 +181,16 @@ msgid "Liberal (can contain anything)"
 msgstr "Liberal (her şey çıkabilir)"
 
 #: links/models.py:40
+msgid "Rating"
+msgstr "Derece"
+
+#: links/models.py:41
 msgid "warn people about your link"
 msgstr "insanları gönderin hakkında uyar"
 
-#: links/models.py:46
+#: links/models.py:47
 msgid "Channel"
-msgstr "Kanallar"
+msgstr "Kanal"
 
 #: links/utils.py:38
 msgid "Posts From Your Subscripted Channels"
@@ -198,6 +205,10 @@ msgstr "%s Kullanıcısından Gönderiler"
 #, python-format
 msgid "Posts From %s Channel"
 msgstr "%s Kanalına Yapılmış Gönderiler"
+
+#: links/templates/links/link_as_list_item.html:18
+msgid "Comments"
+msgstr "Yorumlar"
 
 #: links/templates/links/link_as_list_item.html:20
 msgid "Update"
@@ -249,6 +260,7 @@ msgid "This link is not reachable"
 msgstr "Bu bağlantı erişilemez"
 
 #: links/templates/links/submit_form.html:12
+#: links/templates/links/update_form.html:13
 msgid "Comment"
 msgstr "Yorum"
 

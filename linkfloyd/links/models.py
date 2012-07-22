@@ -37,6 +37,7 @@ class Link(models.Model):
     thumbnail_url = models.URLField(null=True, blank=True)
     rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
+        verbose_name=_("Rating"),
         help_text=_("warn people about your link"))
     votes = VotesField()
     shown = models.PositiveIntegerField(default=0)
