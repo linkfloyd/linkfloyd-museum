@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load channel_tags %}
+{% extends "base.html" %}{% load channel_tags i18n %}
 {% block extra_head %}
      <script type="text/javascript" src="{{STATIC_PREFIX}}js/csrf_fix.js"></script>
      <script type="text/javascript" src="{{STATIC_PREFIX}}js/subscriptions.js"></script>
@@ -13,12 +13,12 @@
                  <div id="{{ channel.slug }}" class="channel">
                      {% with subscription_status=user|channel_subscription_status:channel %}
                      <a href="#" data-slug= "{{channel.slug}}" class="subscription_status{% if subscription_status %} subscribed{% endif %}">
-                         {% if subscription_status %}Subscribed{% else %}Subscribe{% endif %}
+                         {% if subscription_status %}{% trans "Subscribed" %}{% else %}{% trans "Subscribe" %}{% endif %}
                      </a>
                      {% endwith %}
                      <div class="header">
                          <h3 class="name">
-	           			 <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({{channel.num_of_subscribers}} subscribers)
+	               			 <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({{channel.num_of_subscribers}} subscribers)
                          </h3>
                      </div>
                      <div class="description">

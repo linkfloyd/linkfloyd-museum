@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 03:55-0500\n"
+"POT-Creation-Date: 2012-07-22 04:36-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,9 +29,10 @@ msgstr "Takibi Bırak"
 
 #: api/views.py:183
 msgid "Are you sure that you want to be admin of this channel?"
-msgstr "Bu kanalın yöneticisi olmak istediğinizden emin misiniz?"
+msgstr "Bu kanalın yöneticisi olmak istediğinden emin misin?"
 
 #: api/views.py:196 api/views.py:209
+#: channels/templates/channels/channel_list.html:16
 #: links/templates/links/link_as_list_item.html:29
 #: links/templates/links/link_list.html:44
 msgid "Subscribe"
@@ -89,14 +90,14 @@ msgstr "Kanallar Görüntüleniyor"
 
 #: channels/views.py:108
 msgid "Browsing Your Subscripted Channels"
-msgstr "Takip Ettiğiniz Kanallar Görüntüleniyor"
+msgstr "Takip Ettiğin Kanallar Görüntüleniyor"
 
 #: channels/templates/channels/channel.html:13
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
-#: channels/templates/channels/channel.html:23
-msgid "Your Subcriptions"
+#: channels/templates/channels/channel.html:23 templates/base.html:66
+msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
 #: channels/templates/channels/channel.html:34
@@ -117,6 +118,10 @@ msgstr "Paylaş"
 #: channels/templates/channels/channel.html:88
 msgid "E-posta"
 msgstr ""
+
+#: channels/templates/channels/channel_list.html:16
+msgid "Subscribed"
+msgstr "Takip Ediliyor"
 
 #: channels/templates/channels/create.html:9 templates/base.html:62
 msgid "Create a Channel"
@@ -194,7 +199,7 @@ msgstr "Kanal"
 
 #: links/utils.py:38
 msgid "Posts From Your Subscripted Channels"
-msgstr "Takip Edilen Kanallardan Gönderiler"
+msgstr "Takip Ettiğin Kanallardan Gönderiler"
 
 #: links/utils.py:39
 #, python-format
@@ -232,7 +237,7 @@ msgstr "Kullanıcı Hakında"
 
 #: links/templates/links/link_list.html:59
 msgid "Subscripted Channels"
-msgstr "Takip Edilen Kanallar"
+msgstr "Takip Ettiğin Kanallar"
 
 #: links/templates/links/link_list.html:89
 msgid "Controversial"
@@ -266,7 +271,7 @@ msgstr "Yorum"
 
 #: preferences/models.py:17
 msgid "describe yourself"
-msgstr "kendinizi tanıtın"
+msgstr "kendini tanıt"
 
 #: preferences/models.py:20
 msgid "Maximum Rating"
@@ -302,7 +307,7 @@ msgstr "Takibe aldığın kanalların özetini ne sıklıkla almak istersin?"
 
 #: preferences/views.py:23
 msgid "You successfuly updated your preferences."
-msgstr "Seçenekleriniz güncellendi."
+msgstr "Seçeneklerin güncellendi."
 
 #: preferences/templates/preferences/update.html:5
 msgid "Update Preferences"
@@ -323,10 +328,6 @@ msgstr "Kanallar"
 #: templates/base.html:59
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
-
-#: templates/base.html:66
-msgid "Your Subscriptions"
-msgstr "Takip Ettikleriniz"
 
 #: templates/base.html:73
 msgid "Submit a Link"
@@ -470,6 +471,9 @@ msgstr "Şifre"
 #: templates/registration/registration_form.html:23
 msgid "Password Again"
 msgstr "Şifre Tekrar"
+
+#~ msgid "Your Subcriptions"
+#~ msgstr "Takip Ettiklerin"
 
 #~ msgid "Safe Posts (only safe content)"
 #~ msgstr "Güvenli Gönderiler (sadece güvenli içerik)"

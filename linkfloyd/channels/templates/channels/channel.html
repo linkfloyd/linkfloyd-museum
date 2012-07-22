@@ -20,7 +20,7 @@
         {% endif %}
         {% if user.is_authenticated %}
             <div class="channels section">
-                <h2 class="header">{% trans "Your Subcriptions" %}</h2>
+                <h2 class="header">{% trans "Your Subscriptions" %}</h2>
                 <ul class="channels">
                     <li id="create_channel"><a href="/channels/create/">Create a Channel</a></li>
                     {% for subscription in user.subscription_set.all %}
