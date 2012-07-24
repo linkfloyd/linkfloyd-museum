@@ -1,17 +1,21 @@
-@blue: #3E4957;
-@purple: #34155c;
-@green: #166b1b;
-@gold: #885f1c;
-@grey: #666;
-@black: #000;
+@base: #333D48;
 @white: #fff;
+@black: #000;
+@yellow   :#b58900; 
+@orange   :#cb4b16; 
+@red      :#dc322f; 
+@magenta  :#d33682; 
+@violet   :#6c71c4; 
+@blue     :#268bd2; 
+@cyan     :#2aa198; 
+@green    :#859900;
 
 /* Basics */
 
 body {
     padding: 0;
     margin: 0;
-    background: darken(@blue, 5%);
+    background: @base;
     font-size: 13px;
     font-family: sans-serif;
     color: lighten(@blue, 50%);
@@ -57,7 +61,7 @@ a#logo {
     top: 8px;
     font-size: 36px;
     font-family: 'Lilita One', cursive;
-    color: darken(@white, 5%);
+    color: @white;
     text-decoration: none;
 }
 pre, ol, ul, blockquote  {
@@ -121,11 +125,11 @@ p.success, p.error, p.warning {
     color: white;
 }
 .warning {
-    background: @gold;
+    background: @yellow;
     color: black;
 }
 .error {
-    background: @purple;
+    background: @red;
     color: white;
 }
 div#header {
@@ -193,17 +197,14 @@ div#header {
     > .header {
         span.ordering {
             a {
-	        color: lighten(@blue, 30%);
-	        text-decoration: none;
-	    }
+	            color: lighten(@blue, 30%);
+    	        text-decoration: none;
+	        }
             font-size: 10px;
             float: right;
             margin: 0 5px 0 0;
             padding: 0 5px 0 3px;
             font-weight: normal;
-            &:firts-child {
-                margin-right: 0;
-            }
             &.active {
                 a {
                     color: white;
@@ -227,7 +228,7 @@ div.one-column {
 }
 div.two-column {
     div.panel {
-        width: 200px;
+        width: 230px;
         float: right;
         p {
             margin-left: 0;
@@ -244,51 +245,50 @@ div.two-column {
         }
 	dl {
 	    dd {
-		margin: 0 0 0 10px;
+	    	margin: 0 0 0 10px;
 	    }
 	}
-        ul.navigation {
+    ul.navigation {
+        margin: 0;
+        padding: 0;
+        li {
+            display: block;
+            list-style-type: none;
             margin: 0;
-            padding: 0;
-            li {
-                display: block;
-                list-style-type: none;
-                margin: 0;
-                padding: 10px;
+            padding: 10px;
 	        background: darken(@blue, 10%);
-		//box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
-		border-top: 1px solid darken(@blue, 5%);
-		border-bottom: 1px solid darken(@blue, 15%);
-		border-left: 1px solid darken(@blue, 5%);
-                border-right: 1px solid darken(@blue, 15%);
- 		a {
-                    font-size: 12px;
-		    text-decoration: none;
+            //box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
+    		border-top: 1px solid darken(@blue, 5%);
+	    	border-bottom: 1px solid darken(@blue, 15%);
+    		border-left: 1px solid darken(@blue, 5%);
+            border-right: 1px solid darken(@blue, 15%);
+ 	    	a {
+                font-size: 12px;
+		        text-decoration: none;
+            }
+            &:hover {
+    		    background: darken(@blue, 15%);
+                a {
+                    color: white;
                 }
-                &:hover {
-		    background: darken(@blue, 15%);
-                    a {
-                        color: white;
-                    }
-                }
-		&.active {
-		    background: black;
-		}
-                &:last-child {
-                	border-bottom-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-		}
-
-                &:first-child {
-  	             	border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-	                margin-top: 0;
+            }
+	    	&.active {
+		        background: black;
+    		}
+            &:last-child {
+              	border-bottom-left-radius: 5px;
+		        border-bottom-right-radius: 5px;
+    		}
+            &:first-child {
+            	border-top-left-radius: 5px;
+    			border-top-right-radius: 5px;
+                margin-top: 0;
                 }
             }
         }
     }
     div.content {
-        width: 735px;
+        width: 705px;
     }
 }
 div#content {
@@ -296,7 +296,7 @@ div#content {
     overflow: auto;
     min-height: 10em;
     div.wrapper {
-        background: @blue;
+        background: lighten(@base, 10%);
         border-radius: 5px;
         overflow: auto;
         &.white {
@@ -376,13 +376,13 @@ div.post {
     div.content {
         padding: 10px;
         float: right;
-        width: 660px;
+        width: 630px;
         border-radius: 6px;
         background: @white;
         p.body, p.description, a.title, div.info, ul.actions {
             margin: 4px 10px 10px 0;
             font-size: 13px;
-	        color: darken(@grey, 20%);
+	        color: darken(@white, 20%);
         }
         div.info {
             margin-bottom: 10px;
@@ -468,18 +468,13 @@ div.post {
     }
 }
 div.attachment {
-    border: 1px solid lighten(@grey, 40%);
     margin: 0 0 0 0;
     padding: 5px;
-    background: lighten(@blue, 65%);
+    background: ;
     overflow: auto;
     color: @black;
     a.title { 
         font-weight: bold;
-    }
-    p.description {
-        padding-top: 10px;
-        color: inherit;
     }
     a.thumbnail {
         position: relative;
@@ -563,7 +558,7 @@ form {
         border-radius: 3px;
         border: 1px inset darken(@white, 30%);
         background: darken(@white, 10%);
-        color: darken(@grey, 40%);
+        color: darken(@white, 40%);
         &:disabled {
             background: #ccc;
             color: #666;
@@ -594,7 +589,7 @@ form {
 
 ul.token-input-list {
     cursor: text;
-    background: darken(@grey, 20%);
+    background: darken(@white, 20%);
     padding: 4px 3px !important;
     margin: 0;
     li {
@@ -653,7 +648,7 @@ div.token-input-dropdown {
             padding: 5px;
             list-style-type: none;
             &:hover {
-                background: @grey;
+                background: @white;
             }
 	    }
     }
@@ -665,7 +660,7 @@ div.token-input-dropdown ul li em {
     font-style: normal;
 }
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
-    background: @purple;
+    background: @white;
 }
 
 /* ------------------------------------------------------------ */
