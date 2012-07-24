@@ -100,6 +100,7 @@ def link_detail(request, link_id):
     {
         "link": link,
         "expanded_attachments": True,
+        "expanded_comments": True,
         "form": CommentForm(initial={"link": link})
     }, context_instance=RequestContext(request))
 
