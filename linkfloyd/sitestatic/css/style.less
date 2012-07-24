@@ -230,59 +230,59 @@ div.two-column {
             margin-left: 0;
             margin-right: 0;
         }
-	div.subscribers {
-	    a.subscriber {
+	    div.subscribers {
+	        a.subscriber {
                 width: 30px;
-		height: 30px;
-		float: left;
-		display: block;
-		margin: 5px;
-	    }
+	        	height: 30px;
+        		float: left;
+    		    display: block;
+        		margin: 5px;
+    	    }
         }
-	dl {
-	    dd {
-	    	margin: 0 0 0 10px;
-	    }
-	}
-    ul.navigation {
-        margin: 0;
-        padding: 0;
-        li {
-            display: block;
-            list-style-type: none;
+	    dl {
+	        dd {
+    	    	margin: 0 0 0 10px;
+	        }
+    	}
+        ul.navigation {
             margin: 0;
-            padding: 10px;
-	        background: darken(@blue, 10%);
-            //box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
-    		border-top: 1px solid darken(@blue, 5%);
-	    	border-bottom: 1px solid darken(@blue, 15%);
-    		border-left: 1px solid darken(@blue, 5%);
-            border-right: 1px solid darken(@blue, 15%);
- 	    	a {
-                font-size: 12px;
-		        text-decoration: none;
-            }
-            &:hover {
-    		    background: darken(@blue, 15%);
-                a {
-                    color: white;
+            padding: 0;
+            li {
+                display: block;
+                list-style-type: none;
+                margin: 0;
+                padding: 10px;
+    	        background: darken(@base, 10%);
+                //box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
+        		border-top: 1px solid darken(@base, 5%);
+    	    	border-bottom: 1px solid darken(@base, 15%);
+        		border-left: 1px solid darken(@base, 5%);
+                border-right: 1px solid darken(@base, 15%);
+ 	    	    a {
+                    font-size: 12px;
+    		        text-decoration: none;
                 }
-            }
-	    	&.active {
-		        background: black;
-    		}
-            &:last-child {
-              	border-bottom-left-radius: 5px;
-		        border-bottom-right-radius: 5px;
-    		}
-            &:first-child {
-            	border-top-left-radius: 5px;
-    			border-top-right-radius: 5px;
-                margin-top: 0;
+                &:hover {
+        		    background: darken(@blue, 15%);
+                    a {
+                        color: white;
+                    }
+                }
+    	    	&.active {
+    		        background: black;
+        		}
+                &:last-child {
+                  	border-bottom-left-radius: 5px;
+    		        border-bottom-right-radius: 5px;
+        		}
+                &:first-child {
+                	border-top-left-radius: 5px;
+        			border-top-right-radius: 5px;
+                    margin-top: 0;
+                    }
                 }
             }
         }
-    }
     > div.content {
         width: 705px;
     }
@@ -534,7 +534,7 @@ form {
         }
     }
 
-    input[type=text], input[type=password], textarea, select, textarea, ul.token-input-list {
+ input[type=text], input[type=password], textarea, select, textarea, ul.token-input-list {
         box-sizing: border-box; /* css3 rec */
         -moz-box-sizing: border-box; /* ff2 */
         -ms-box-sizing: border-box; /* ie8 */
@@ -546,7 +546,7 @@ form {
         border-radius: 3px;
         border: 1px inset darken(@white, 30%);
         background: darken(@white, 10%);
-        color: darken(@white, 40%);
+        color: lighten(@black, 10%);
         &:disabled {
             background: #ccc;
             color: #666;
@@ -659,12 +659,31 @@ div.comments {
         clear: both;
         margin: 0 0 10px 0;
         padding: 5px;
+        form {
+            padding: 0;
+            textarea {
+                height: 90px;
+            }
+            label {
+                font-weight: bold;
+                color: lighten(@black, 35);
+            }
+        }
         div.content {
-            background: darken(@white, 10%);
-            color: @black;
+            background: #eee;
+            border:1px solid #ddd;
+            color: lighten(@base, 5%);
             padding: 5px;
             p {
                 margin: 0 0 10px 0;
+            }
+            p.info {
+                a.posted_by {
+                    font-weight: bold;
+                }
+                span.date {
+                    font-size: 10px;
+                }
             }
        }
        blockquote {

@@ -1,10 +1,11 @@
 {% load i18n %}
 <div class="comment" id="{{comment.id}}">
     <div class="content">
-       <a href="#">{{comment.posted_by}}</a>
- 
-       {{ comment.as_html|safe }}
-       {% ifequal comment.posted_by user %}
+         <p class="info">
+         <a class="posted_by">{{comment.posted_by}}</a>: <span class="date">{{ comment.posted_at|timesince}} {% trans "ago" %}</span>
+        </p>
+        {{ comment.as_html|safe }}
+      {% ifequal comment.posted_by user %}
            <ul class="actions flat-list">
                 <li><a class="getUpdateCommentForm" href="#">
                    {% trans "Update" %}
