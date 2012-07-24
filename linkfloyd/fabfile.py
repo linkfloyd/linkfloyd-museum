@@ -22,7 +22,7 @@ def update_libs():
         with cd(env.webapp):
             run('pip install -r ../requirements.txt')
             run('python manage.py collectstatic --noinput')
-            run('python manage.py syncdb --noinput')
+            run('python manage.py syncdb --noinput --migrate')
             run('../../apache2/bin/restart')
 
 def deploy():

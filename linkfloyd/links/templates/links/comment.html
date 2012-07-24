@@ -2,7 +2,7 @@
 <div class="comment" id="{{comment.id}}">
     <div class="content">
          <p class="info">
-         <a class="posted_by">{{comment.posted_by}}</a>: <span class="date">{{ comment.posted_at|timesince}} {% trans "ago" %}</span>
+            <a class="posted_by">{{comment.posted_by}}</a>: <span class="date">{{ comment.posted_at|timesince}} {% trans "ago" %}</span>
         </p>
         {{ comment.as_html|safe }}
       {% ifequal comment.posted_by user %}
