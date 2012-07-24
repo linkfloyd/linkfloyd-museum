@@ -27,11 +27,10 @@ class CreateChannelForm(forms.ModelForm):
         js = ("js/libs/jquery.slugify.js",)
 
     def __init__(self, *args, **kwargs):
-        super(CreateChannelForm, self).__init__(*args, **kwargs)
-        self.base_fields["parent"] = ModelChoiceField(
-            queryset=Channel.objects.filter(parent=None)
-        )
-
+       self.base_fields["parent"] = ModelChoiceField(
+           queryset=Channel.objects.filter(parent=False))
+       super(CreateChannelForm, self).__init__(*args, **kwargs)
+ 
 class UpdateChannelForm(forms.ModelForm):
 
     name = forms.CharField(
