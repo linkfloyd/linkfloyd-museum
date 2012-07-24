@@ -1,14 +1,17 @@
-{% load i18n %}<form action="/comments/submit/" method="post" class="comment">
-    {% csrf_token %}
-    {{ form.errors }}
-    {% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {% if not field.is_hidden %}
-            <label>{{ field.label }}<span class="desc">{{ field.help_text }}</span></label>
-        {% endif %}
-        {{ field }}
-    </div>
-    {% endfor %}
-    <input type="submit" value="{% trans "Submit" %}">
-</form>
+{% load i18n %}
+<div class="comment">
+    <form action="/comments/submit/" method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+        {% for field in form %}
+            <div class="fieldWrapper">
+            {{ field.errors }}
+            {% if not field.is_hidden %}
+                <label>{{ field.label }}<span class="desc">{{ field.help_text }}</span></label>
+            {% endif %}
+            {{ field }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="{% trans "Submit" %}">
+    </form>
+</div>
