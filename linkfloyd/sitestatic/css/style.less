@@ -1,4 +1,4 @@
-@base: #333D48;
+@base: #333d48;
 @white: #fff;
 @black: #000;
 @yellow   :#b58900; 
@@ -15,14 +15,10 @@
 body {
     padding: 0;
     margin: 0;
-    background: @base;
+    background: lighten(@base, 10%) url(http://i.imgur.com/gIctw.png) repeat-x top left;
     font-size: 13px;
     font-family: sans-serif;
     color: lighten(@blue, 50%);
-}
-body.bookmarklet {
-    background: darken(@blue, 10%);
-    form { background: transparent }
 }
 h1, h2, h3, h4, h5, h6, dt {
     margin: 0 0 10px 0;
@@ -56,7 +52,6 @@ a {
 .right {
     float: right;
 }
-
 a#logo {
     top: 8px;
     font-size: 36px;
@@ -382,7 +377,7 @@ div.post {
         p.body, p.description, a.title, div.info, ul.actions {
             margin: 4px 10px 10px 0;
             font-size: 13px;
-	        color: darken(@white, 20%);
+	        color: lighten(@black, 15%);
         }
         div.info {
             margin-bottom: 10px;
@@ -473,6 +468,8 @@ div.attachment {
     background: ;
     overflow: auto;
     color: @black;
+    background: #eee;
+    border:1px solid #ddd;
     a.title { 
         font-weight: bold;
     }
