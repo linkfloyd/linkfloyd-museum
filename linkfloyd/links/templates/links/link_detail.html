@@ -41,11 +41,9 @@
         {% include "links/comment_form.html" %}
     {% else %}
     <p class="warning">
-        This conversation is missing your voice.
-        Take five seconds to
-        <a href="{% url registration_register %}">join Linkfloyd</a>
-        or
-        <a href="{% url auth_login %}">log in</a>.
+    {% url auth_login as login_url %}
+    {% blocktrans %} <a href="{{ login_url }}">Log in</a> to leave comment {% endblocktrans %}
+        
     {% endif %}
 </div>
 </div>
