@@ -100,6 +100,7 @@ div.wrapper {
 ul.flat-list {
     margin: 0;
     padding: 0;
+    overflow: auto;
     > li {
         list-style-type: none;
         float: left;
@@ -651,9 +652,8 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 }
 
 /* ------------------------------------------------------------ */
-div comments {
+div.comments {
     padding-top: 5px;
-    border-top: 1px solid black;
     div.comment {
         overflow: auto;
         clear: both;
@@ -661,20 +661,13 @@ div comments {
         padding: 5px;
         div.content {
             background: darken(@white, 10%);
-            color: black;
+            color: @black;
+            padding: 5px;
             p {
-                margin: 0 0 5px 0;
+                margin: 0 0 10px 0;
             }
        }
-       ul.actions {
-            margin: 4px 10px 0 60px;
-            font-size: 10px;
-            li {
-                float: right;
-                margin: 0 10px 0 0;
-            }
-        }
-        blockquote {
+       blockquote {
             padding: 5px;
             p {
                 margin: 5px 0;
@@ -684,7 +677,7 @@ div comments {
             background: black;
         }
         img {
-            width: 650px;
+            width: 610px;
         }
     }
 }   
