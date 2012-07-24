@@ -282,7 +282,7 @@ div.two-column {
             }
         }
     }
-    div.content {
+    > div.content {
         width: 705px;
     }
 }
@@ -342,7 +342,7 @@ div.channels {
     }
 }
  
-div.post a.avatar, div.comment a.avatar {
+div.post a.avatar {
     width: 42px;
     height: 42px;
     border-radius: 6px;
@@ -350,12 +350,6 @@ div.post a.avatar, div.comment a.avatar {
     background: top left no-repeat;
     box-shadow: 0 1px 5px rgba(0,0,0,.46);
     float: left;
-}
-div.post div.content, div.comment div.content {
-    padding: 10px;
-    float: right;
-    width: 660px;
-    border-radius: 6px;
 }
 div.post {
     overflow: auto;
@@ -368,13 +362,13 @@ div.post {
     &.highlight {
         background: #ffff88;
     }
-    div.content {
+    > div.content {
+        width: 630px;
         padding: 10px;
         float: right;
-        width: 630px;
         border-radius: 6px;
         background: @white;
-        p.body, p.description, a.title, div.info, ul.actions {
+        > p.body, p.description, a.title, div.info, ul.actions {
             margin: 4px 10px 10px 0;
             font-size: 13px;
 	        color: lighten(@black, 15%);
@@ -393,9 +387,6 @@ div.post {
                 &:hover {
                 }
             }
-        }
-        p {
-            margin-top:15px;
         }
         div.embed_player {
 	        margin: 0 0 0 0;
@@ -465,7 +456,6 @@ div.post {
 div.attachment {
     margin: 0 0 0 0;
     padding: 5px;
-    background: ;
     overflow: auto;
     color: @black;
     background: #eee;
@@ -661,41 +651,43 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 }
 
 /* ------------------------------------------------------------ */
-div.comment {
-    overflow: auto;
-    clear: both;
-    margin: 5px 0;
-    div.content {
-    	background: lighten(@blue, 69%);
-	    color: @blue;
-    }
-
-    ul.actions {
-        margin: 4px 10px 0 60px;
-        font-size: 10px;
-        li {
-            float: right;
-            margin: 0 10px 0 0;
-        }
-    }
-    blockquote {
+div comments {
+    padding-top: 5px;
+    border-top: 1px solid black;
+    div.comment {
+        overflow: auto;
+        clear: both;
+        margin: 0 0 10px 0;
         padding: 5px;
-        p {
-            margin: 5px 0;
+        div.content {
+            background: darken(@white, 10%);
+            color: black;
+            p {
+                margin: 0 0 5px 0;
+            }
+       }
+       ul.actions {
+            margin: 4px 10px 0 60px;
+            font-size: 10px;
+            li {
+                float: right;
+                margin: 0 10px 0 0;
+            }
+        }
+        blockquote {
+            padding: 5px;
+            p {
+                margin: 5px 0;
+            }
+        }
+        pre {
+            background: black;
+        }
+        img {
+            width: 650px;
         }
     }
-    pre {
-        background: black;
-    }
-    img {
-        width: 650px;
-    }
-}
-form.comment {
-    width: 660px;
-    float: right;
-}
-
+}   
 div.pagination {
     clear: both;
     span.page_links {

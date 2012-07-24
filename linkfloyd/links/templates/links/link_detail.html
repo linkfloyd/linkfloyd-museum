@@ -34,17 +34,6 @@
 </div>
 <div class="content section">
     {% include "links/link_as_list_item.html" %}
-    {% for comment in link.comment_set.all %}
-        {% include "links/comment.html" %}
-    {% endfor %}
-    {% if user.is_authenticated %}
-        {% include "links/comment_form.html" %}
-    {% else %}
-    <p class="warning">
-    {% url auth_login as login_url %}
-    {% blocktrans %} <a href="{{ login_url }}">Log in</a> to leave comment {% endblocktrans %}
-        
-    {% endif %}
 </div>
 </div>
 <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=miratcan"></script>

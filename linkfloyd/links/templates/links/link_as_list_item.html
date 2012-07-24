@@ -34,5 +34,22 @@
             <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "Share" %}</a>
             </li>
         </ul>
+        {% if expanded_comments %}
+            <div class="comments">
+                {% for comment in link.comment_set.all %}
+                    {% include "links/comment.html" %}
+                {% endfor %}
+                {% if user.is_authenticated %}
+                    {% include "links/comment_form.html" %}
+                {% else %}
+                    <div class="comment">
+                        <p class="warning">
+                            {% url auth_login as login_url %}
+                            {% blocktrans %} <a href="{{ login_url }}">Log in</a> to leave comment {% endblocktrans %}
+                        </p>
+                    </div>
+               {% endif %}
+            </div>
+        {% endif %}
     </div>
 </div>
