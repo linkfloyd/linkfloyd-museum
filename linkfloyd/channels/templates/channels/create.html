@@ -41,6 +41,13 @@
                     </label>
                     {{ form.notes }}
                 </div>
+	            <div class="fieldWrapper">
+                   <label for="id_parent">{{ form.parent.errors }}
+                       {% trans "Parent" %}
+                       <span class="desc">{{ form.parent.help_text }}
+                    </label>
+                    {{ form.parent }}
+                </div>
 	       	    {% csrf_token %}
                 <input type="submit" value="{% trans 'Submit' %}" />
 		    </form>

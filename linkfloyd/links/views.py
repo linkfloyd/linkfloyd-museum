@@ -18,6 +18,9 @@ from comments.forms import CommentForm
 
 from preferences.models import UserPreferences
 
+from django.utils.translation import ugettext as _
+
+
 @login_required
 def submit_link(request, bookmarklet=False):
 
@@ -105,7 +108,7 @@ def index(request):
     if request.user.is_authenticated():
         if not Subscription.objects.filter(user=request.user):
             messages.add_message(request, messages.WARNING,
-                "Please subscribe channels that you are interested in")
+                _("Please subscribe channels that you are interested in"))
             return HttpResponseRedirect(reverse("browse_channels"))
     return render_to_response(
         "links/link_list.html",

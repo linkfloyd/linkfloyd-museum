@@ -47,6 +47,13 @@ class Channel(models.Model):
 
     is_official = models.BooleanField(default=False)
 
+    parent = models.ForeignKey(
+        "self",
+        verbose_name=_("parent channel"),
+        blank=True,
+        null=True
+    )
+
     def __unicode__(self):
         return self.name
 

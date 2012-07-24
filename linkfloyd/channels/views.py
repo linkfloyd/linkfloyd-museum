@@ -87,9 +87,11 @@ class BrowseChannelsView(ListView):
     template_name = "channels/channel_list.html"
 
     def get_queryset(self):
-        return Channel.objects.annotate(
+        return Channel.objects.filter(parent=None)
+        """.annotate(
 	    num_of_subscribers=Count("subscription")).order_by(
             "-is_official", "-num_of_subscribers")
+            """
 
     def get_context_data(self, **kwargs):
         context = super(BrowseChannelsView, self).get_context_data(**kwargs)
