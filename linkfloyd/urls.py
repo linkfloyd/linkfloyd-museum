@@ -1,11 +1,12 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.autodiscover()
 
 from django.views.generic.simple import direct_to_template
-
+print settings.DEBUG
 urlpatterns = patterns('',
     url(r'^$', 'links.views.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),
@@ -20,6 +21,9 @@ urlpatterns = patterns('',
     (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
 )
 
+urlpatterns += staticfiles_urlpatterns()
+
+"""
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$',
@@ -35,3 +39,4 @@ if settings.DEBUG:
              'show_indexes': True
         })
     )
+"""

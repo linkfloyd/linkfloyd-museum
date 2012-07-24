@@ -42,7 +42,7 @@ USE_L10N = False
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "sitestatic"),
+    os.path.join(PROJECT_ROOT, "sitestatic/"),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
