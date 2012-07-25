@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'sorl.thumbnail',
     'qhonuskan_votes',
+    'django_ogp',
     'registration',
     'gravatar',
     'south',

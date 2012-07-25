@@ -1,38 +1,31 @@
 {% load static i18n gravatar %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>{% block title %}LinkFloyd{% endblock title %}</title>
-    <meta name="description" content="{% block description %}Simply archive, share and comment on links{% endblock %}" />
-    <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/style.less" />
-    <link href='http://fonts.googleapis.com/css?family=Lilita+One' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery-1.7.min.js"></script>
-    <script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/less-1.1.3.min.js"></script>
+    {% block meta_tags %}
+        <title>{% block title %}LinkFloyd{% endblock title %}</title>
+        <meta name="description" content="{% block description %}Simply archive, share and comment on links{% endblock %}" />
+        <meta property="og:image" content="http://linkfloyd.com/{{STATIC_PREFIX}}logo.png" />
+        <meta property="og:title" content="LinkFloyd" />
+        <meta property="og:description" content="Simply archive, share and comment on links." />
+        <link rel="canonical" href="http://linkfloyd.com" />
+    {% endblock %}
+
     <meta property="og:site_name" content="LinkFloyd" />
     <meta property="fb:app_id" content="272205239538842" />
     <meta property="fb:admins" content="649222888" />
     <meta property="og:type" content="website" />
-    {% block ogtags %}
-        <meta property="og:image" content="{% block og_image %}http://linkfloyd.com/{{STATIC_PREFIX}}logo.png{% endblock og_image %}" />
-        <meta property="og:title" content="{% block og_title %}LinkFloyd{% endblock %}" />
-        <meta property="og:description" content="{% block og_description %}Simply archive, share and comment on links.{% endblock %}" />
-        <link rel="canonical" href="http://linkfloyd.com" />
-    {% endblock %}
+
     <meta name="robots" CONTENT="index, follow" />
     <meta name="google-site-verification" content="nWyMcBnjRMa4oApMUNBZwWFo080k7E7RdLh_sb2B9GQ" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-6315603-13']);
-        _gaq.push(['_trackPageview']);
-        (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_PREFIX}}css/style.less" />
+    <link href='http://fonts.googleapis.com/css?family=Lilita+One' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_PREFIX}}js/libs/less-1.1.3.min.js"></script>
+
+    {% include "includes/google_analytics.html" %}
+
     {% block extra_head %}{% endblock %}
 </head>
 <body {% block class_body %}{% endblock %}>

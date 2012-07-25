@@ -54,6 +54,14 @@ class Channel(models.Model):
         null=True
     )
 
+    ogp_enabled = True
+
+    def ogp_title(self):
+        return _("%s channel on Linkfloyd" % self.name)
+
+    def ogp_description(self):
+        return self.description
+ 
     def __unicode__(self):
         return self.name
 
