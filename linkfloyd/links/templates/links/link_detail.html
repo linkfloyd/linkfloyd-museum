@@ -1,15 +1,9 @@
-{% extends "base.html" %}
-{% load i18n gravatar qhonuskan_votes %}
+{% extends "base.html" %}{% load i18n gravatar qhonuskan_votes ogp_tags %}
 
-{% block title %}{% if link.body %}{{ link.body }}{% else %}{{link.title}}{% endif %}{% endblock title %}
-{% if link.description %}{% block description %}{{link.description}}{% endblock %}{% endif %}
-{% block ogtags %}
-    <meta property="og:image" content="{% if link.thumbnail_url %}{{link.thumbnail_url}}{% else %}{{STATIC_PREFIX}}logo.png{% endif %}" />
-    <meta property="og:title" content="{{link.title}}" />
-    <meta property="og:url" content="http://linkfloyd.com{{link.get_absolute_url}}" />
-    <meta property="og:description" content="{{link.description}}" />
-    <link rel="canonical" href="http://linkfloyd.com{{link.get_absolute_url}}" />
+{% block meta_tags %}
+    {% render_ogp link %}
 {% endblock %}
+
 {% block extra_head %}
     <script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
@@ -18,7 +12,9 @@
 	<link href="http://google-code-prettify.googlecode.com/svn/trunk/styles/desert.css" rel="stylesheet" type="text/css">
     {% voting_script %}
 {% endblock %}
+
 {% block class_body %}class="detail link{{link.id}}"{% endblock %}
+
 {% block content %}
 <div class="two-column">
 

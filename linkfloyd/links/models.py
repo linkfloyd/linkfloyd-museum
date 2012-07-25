@@ -71,6 +71,17 @@ class Link(models.Model):
         self.shown += 1
         self.save()
 
+    ogp_enabled = True
+
+    def ogp_title(self):
+        return self.body if self.body else self.title
+
+    def ogp_description(self):
+        return self.description
+
+    def ogp_image(self):
+        return self.thumbnail_url
+
     def __unicode__(self):
         return u"%s by %s" % (self.title, self.posted_by)
 
