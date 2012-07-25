@@ -7,6 +7,7 @@ django-devserver==0.3.1
 django-extensions==0.7.1
 django-gravatar==0.1.0
 -e git+https://github.com/mkai/django-inviting.git@7e2bfce8cbd9379652263b79a551a838c5bb0d53#egg=django_inviting-dev
+-e git+https://github.com/miratcan/django-ogp.git#egg=django_ogp
 django-registration==0.7
 django-transmeta==0.6.6
 ipython==0.12
