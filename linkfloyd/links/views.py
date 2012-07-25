@@ -109,7 +109,7 @@ def index(request):
     if request.user.is_authenticated():
         if not Subscription.objects.filter(user=request.user):
             messages.add_message(request, messages.WARNING,
-                _("Please subscribe channels that you are interested in"))
+                _("Subscribe channels that you are interested in"))
             return HttpResponseRedirect(reverse("browse_channels"))
     return render_to_response(
         "links/link_list.html",
