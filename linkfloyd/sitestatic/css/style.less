@@ -137,12 +137,13 @@ div#header {
         padding: 0;
     }
     ul.navigation {
-	> li {
+        overflow: visible;
+    	> li {
             border-right: 1px lighten(@black, 5%) solid;
             border-left: 1px lighten(@black, 19%) solid;
         }
         li {
-            padding: 0;
+            padding: 0 5px;
             margin: 0;
             position: relative;
             overflow: hidden;
@@ -176,7 +177,7 @@ div#header {
             top: 50px;
             left: -1px;
             margin: 0;
-            padding: 0 10px;
+            padding: 0;
             z-index: 10;
             list-style-type: none;
              > li > a {
