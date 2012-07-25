@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-22 05:20-0500\n"
+"POT-Creation-Date: 2012-07-25 12:56-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgid "You have to be logged in to complete this action"
 msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmanız gerekmekte"
 
 #: api/views.py:170 links/templates/links/link_as_list_item.html:27
-#: links/templates/links/link_list.html:44
+#: links/templates/links/link_list.html:49
 msgid "Unsubscribe"
 msgstr "Takibi Bırak"
 
@@ -34,7 +34,7 @@ msgstr "Bu kanalın yöneticisi olmak istediğinden emin misin?"
 #: api/views.py:196 api/views.py:209
 #: channels/templates/channels/channel_list.html:16
 #: links/templates/links/link_as_list_item.html:29
-#: links/templates/links/link_list.html:44
+#: links/templates/links/link_list.html:49
 msgid "Subscribe"
 msgstr "Takip Et"
 
@@ -71,22 +71,31 @@ msgstr "kanal hakkında notlar ve kurallar"
 msgid "which language do you expect to be spoken in that channel"
 msgstr "bu kanalda hangi dilde konuşulacak?"
 
-#: channels/models.py:67
+#: channels/models.py:52
+msgid "parent channel"
+msgstr "ana kanal"
+
+#: channels/models.py:60
+#, python-format
+msgid "%s channel on Linkfloyd"
+msgstr "Linkfloyd üzerinde %s kanalı"
+
+#: channels/models.py:82
 msgid "Admin"
 msgstr "Sahip"
 
-#: channels/models.py:68
+#: channels/models.py:83
 msgid "Moderator"
 msgstr "Yönetici"
 
-#: channels/models.py:69
+#: channels/models.py:84
 msgid "Subscriber"
 msgstr "Takipçiler"
 
 #: channels/views.py:61
 #, python-format
 msgid "You Updated %s Channel"
-msgstr "%s Kanalını Güncellediniz"
+msgstr "%s Kanalını Güncelledin"
 
 #: channels/views.py:97
 msgid "Browsing Channels"
@@ -100,17 +109,17 @@ msgstr "Takip Ettiğin Kanallar Görüntüleniyor"
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
-#: channels/templates/channels/channel.html:23 templates/base.html:66
+#: channels/templates/channels/channel.html:23 templates/base.html:58
 msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
 #: channels/templates/channels/channel.html:34
-#: links/templates/links/link_list.html:72
+#: links/templates/links/link_list.html:77
 msgid "Subscribers"
 msgstr "Takipçiler"
 
 #: channels/templates/channels/channel.html:61
-#: links/templates/links/link_list.html:106
+#: links/templates/links/link_list.html:111
 msgid "No links found."
 msgstr "Hiç link bulunamadı."
 
@@ -127,7 +136,7 @@ msgstr ""
 msgid "Subscribed"
 msgstr "Takip Ediliyor"
 
-#: channels/templates/channels/create.html:9 templates/base.html:62
+#: channels/templates/channels/create.html:9 templates/base.html:54
 msgid "Create a Channel"
 msgstr "Kanal Oluştur"
 
@@ -153,9 +162,13 @@ msgstr "Açıklama"
 msgid "Notes"
 msgstr "Notlar"
 
-#: channels/templates/channels/create.html:45
+#: channels/templates/channels/create.html:46
+msgid "Parent"
+msgstr ""
+
+#: channels/templates/channels/create.html:52
 #: channels/templates/channels/update.html:23
-#: links/templates/links/comment_form.html:13
+#: links/templates/links/comment_form.html:15
 #: links/templates/links/submit_form.html:31
 #: links/templates/links/update_form.html:28
 #: templates/registration/registration_form.html:26
@@ -225,63 +238,80 @@ msgstr "%s Kullanıcısından Gönderiler"
 msgid "Posts From %s Channel"
 msgstr "%s Kanalına Yapılmış Gönderiler"
 
-#: links/templates/links/link_as_list_item.html:18
-msgid "Comments"
-msgstr "Yorumlar"
+#: links/views.py:112
+msgid "Please subscribe channels that you are interested in"
+msgstr "İlgi alanına giren kanalları takibe al"
 
+#: links/views.py:128
+#, python-format
+msgid "%s on Linkfloyd"
+msgstr "Linkfloyd üzerinde %s"
+
+#: links/templates/links/comment.html:5
+#: links/templates/links/link_detail.html:25
+msgid "ago"
+msgstr "önce"
+
+#: links/templates/links/comment.html:11
 #: links/templates/links/link_as_list_item.html:20
 msgid "Update"
 msgstr "Güncelle"
 
+#: links/templates/links/comment.html:14
 #: links/templates/links/link_as_list_item.html:21
 msgid "Delete"
 msgstr "Sil"
 
-#: links/templates/links/link_detail.html:28
+#: links/templates/links/link_as_list_item.html:18
+msgid "Comments"
+msgstr "Yorumlar"
+
+#: links/templates/links/link_as_list_item.html:50
+#, python-format
+msgid " <a href=\"%(login_url)s\">Log in</a> to leave comment "
+msgstr "Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yap</a>"
+
+#: links/templates/links/link_detail.html:24
 msgid "Posted at"
 msgstr "Gönderim Zamanı"
 
-#: links/templates/links/link_detail.html:29
-msgid "ago"
-msgstr "önce"
-
-#: links/templates/links/link_detail.html:30
+#: links/templates/links/link_detail.html:26
 msgid "Displayed"
 msgstr "Gösterim Sayısı"
 
-#: links/templates/links/link_detail.html:31
+#: links/templates/links/link_detail.html:27
 msgid "times"
 msgstr "defa"
 
-#: links/templates/links/link_list.html:30
+#: links/templates/links/link_list.html:38
 msgid "About Channel"
 msgstr "Kanal Hakkında"
 
-#: links/templates/links/link_list.html:36
+#: links/templates/links/link_list.html:42
 msgid "Actions"
 msgstr "Aksiyonlar"
 
-#: links/templates/links/link_list.html:53
+#: links/templates/links/link_list.html:58
 msgid "About User"
 msgstr "Kullanıcı Hakında"
 
-#: links/templates/links/link_list.html:59
+#: links/templates/links/link_list.html:64
 msgid "Subscripted Channels"
 msgstr "Takip Ettiğin Kanallar"
 
-#: links/templates/links/link_list.html:89
+#: links/templates/links/link_list.html:94
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: links/templates/links/link_list.html:92
+#: links/templates/links/link_list.html:97
 msgid "Top Voted"
 msgstr "Yüksek Puanlı"
 
-#: links/templates/links/link_list.html:95
+#: links/templates/links/link_list.html:100
 msgid "Latest"
 msgstr "En Son"
 
-#: links/templates/links/link_list.html:98
+#: links/templates/links/link_list.html:103
 msgid "Hot"
 msgstr "Sıcak"
 
@@ -338,27 +368,27 @@ msgstr "Seçeneklerin güncellendi."
 msgid "Update Preferences"
 msgstr "Seçenekleri Güncelle"
 
-#: templates/base.html:48
+#: templates/base.html:40
 msgid "Preferences"
 msgstr "Seçenekler"
 
-#: templates/base.html:49
+#: templates/base.html:41
 msgid "Log out"
 msgstr "Çıkış Yap"
 
-#: templates/base.html:55
+#: templates/base.html:47
 msgid "Channels"
 msgstr "Kanallar"
 
-#: templates/base.html:59
+#: templates/base.html:51
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
 
-#: templates/base.html:73
+#: templates/base.html:65
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
-#: templates/base.html:77 templates/registration/login.html:2
+#: templates/base.html:69 templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
 
@@ -415,6 +445,10 @@ msgstr "Şifreni hatırlamıyor musun?"
 #: templates/registration/logout.html:2
 msgid "Logged out"
 msgstr "Çıkış yapıldı"
+
+#: templates/registration/logout.html:3
+msgid "Successfully logged out"
+msgstr "Çıkış yaptın"
 
 #: templates/registration/password_change_done.html:2
 msgid "Password changed"
