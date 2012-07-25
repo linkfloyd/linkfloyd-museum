@@ -1,11 +1,13 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags qhonuskan_votes %}
 {% if links_from == "channel" %}
     {% block title %}
-    {% blocktrans with channel_name=instance.name %}
-       {{ channel_name }} on linkfloyd
-    {% endblocktrans %}
+        {% blocktrans with channel_name=instance.name %}{{ channel_name }} on linkfloyd{% endblocktrans %}
+    {% endblock %}
+    {% block og_title %}
+        {% blocktrans with channel_name=instance.name %}{{ channel_name }} on linkfloyd{% endblocktrans %}
     {% endblock %}
     {% block description %}{{ instance.description }}{% endblock %}
+    {% block og_description %}{{ instance.description }}{% endblock %}
 {% endif %}
 
 {% block extra_head %}
