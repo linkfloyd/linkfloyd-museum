@@ -653,12 +653,16 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 
 /* ------------------------------------------------------------ */
 div.comments {
-    padding-top: 5px;
+    padding: 5px 5px 10px 5px;
+    width:640px;
+    float: right;
     div.comment {
         overflow: auto;
+        background:  desaturate(lighten(@base, 15), 5);
+        border: 1px solid desaturate(lighten(@base, 15), 30);
         clear: both;
-        margin: 0 0 10px 55px;
-        padding: 5px;
+        margin: 0 0 10px 0;
+        padding: 0;
         form {
             padding: 0;
             textarea {
@@ -668,9 +672,6 @@ div.comments {
             }
         }
         div.content {
-            background: #ddd;
-            border:1px solid #ddd;
-            color: lighten(@base, 5%);
             padding: 5px;
             p {
                 margin: 0 0 10px 0;
@@ -683,6 +684,14 @@ div.comments {
                     font-size: 10px;
                 }
             }
+            ul.actions {
+                display: none;
+           }
+            &:hover {
+                ul.actions {
+                   display: block;
+                }
+           }
        }
        blockquote {
             padding: 5px;
@@ -694,7 +703,7 @@ div.comments {
             background: black;
         }
         img {
-            width: 620px;
+            width: 630px;
         }
     }
 }   
