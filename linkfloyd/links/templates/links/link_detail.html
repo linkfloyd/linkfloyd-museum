@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n gravatar qhonuskan_votes %}
 
-{% block title %}{{link.title}}{% endblock title %}
+{% block title %}{% if link.body %}{{ link.body }}{% else %}{{link.title}}{% endif %}{% endblock title %}
 {% if link.description %}{% block description %}{{link.description}}{% endblock %}{% endif %}
 {% block ogtags %}
     <meta property="og:image" content="{% if link.thumbnail_url %}{{link.thumbnail_url}}{% else %}{{STATIC_PREFIX}}logo.png{% endif %}" />

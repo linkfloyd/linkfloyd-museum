@@ -1,17 +1,25 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags qhonuskan_votes %}
+{% if links_from == "channel" %}
+    {% block title %}
+    {% blocktrans with channel_name=instance.name %}
+       {{ channel_name }} on linkfloyd
+    {% endblocktrans %}
+    {% endblock %}
+    {% block description %}{{ instance.description }}{% endblock %}
+{% endif %}
 
 {% block extra_head %}
-<script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
-<script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
-{% if highlight %}
-    <script type="text/javascript"
-            src="{{STATIC_URL}}js/libs/jquery.color.js">
-    </script>
-{% endif %}
-{% if links_from == "channel" %}
-    <script type="text/javascript" src="{{STATIC_URL}}js/subscriptions.js"></script>
-{% endif %}
-
+    <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
+    {% if highlight %}
+        <script type="text/javascript"
+                src="{{STATIC_URL}}js/libs/jquery.color.js">
+        </script>
+    {% endif %}
+    
+    {% if links_from == "channel" %}
+        <script type="text/javascript" src="{{STATIC_URL}}js/subscriptions.js"></script>
+    {% endif %}
 {% endblock extra_head %}
 {% block content %}
 <div class="two-column">

@@ -67,7 +67,6 @@ def comment_saved(sender, **kwargs):
            subscription.save()
 
 
-
 @receiver(post_delete, sender=Comment, dispatch_uid="comment_deleted")
 def comment_deleted(sender, **kwargs):
     comment = kwargs['instance']

@@ -6,7 +6,6 @@ def testing():
     env.user = "miratcan"
     env.password = "kurukasap"
     env.webapp = "/home/miratcan/webapps/linkfloyd/linkfloyd/linkfloyd/"
-
     env.activate_env = 'source /home/miratcan/envs/linkfloyd/bin/activate'
 
 def _virtualenv(command):
@@ -14,20 +13,30 @@ def _virtualenv(command):
         sudo(env.activate + '&&' + command)
 
 def pull():
-    with cd(env.webapp):
-        run('git pull')
+    run('git pull')
 
 def update_libs():
+    run('pip install -r ../requirements.txt')
+
+def syncdb():
+    run('python manage.py syncdb --noinput --migrate')
+
+def restart_server():
+    run('../../apache2/bin/restart')
+
+def collect_static():
+    run('python manage.py collectstatic --noinput')
+
+def update_scores():
+    run('python manage.py update_scores')
+ 
+def deploy():
     with prefix(env.activate_env):
         with cd(env.webapp):
-            run('pip install -r ../requirements.txt')
-            run('python manage.py collectstatic --noinput')
-            run('python manage.py syncdb --noinput --migrate')
-            run('../../apache2/bin/restart')
-
-def deploy():
-    pull()
-    update_libs()
-
+           pull()
+           update_libs()
+           syncdb()
+           collect_static()
+           restart_server()
 
 
