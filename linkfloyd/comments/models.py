@@ -55,13 +55,17 @@ def comment_saved(sender, **kwargs):
 
         send_mass_mail(messages, fail_silently=True)
 
+        comment.link.comment_score = comment.link.comment_set.all().count()
+        comment.link.save()
+ 
         # create subscription
         subscription, created = LinkSubscription.objects.get_or_create(
             user=comment.posted_by, link=comment.link)
 
         if created:
-            subscription.status = 1
-            subscription.save()
+           subscription.status = 1
+           subscription.save()
+
 
 
 @receiver(post_delete, sender=Comment, dispatch_uid="comment_deleted")
