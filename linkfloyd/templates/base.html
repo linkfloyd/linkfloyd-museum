@@ -1,15 +1,13 @@
 {% load static i18n gravatar %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
-<head>
+    <head>
+
     {% block meta_tags %}
-        <title>{% block title %}LinkFloyd{% endblock title %}</title>
-        <meta name="description" content="{% block description %}Simply archive, share and comment on links{% endblock %}" />
-        <meta property="og:image" content="http://linkfloyd.com/{{STATIC_PREFIX}}logo.png" />
-        <meta property="og:title" content="LinkFloyd" />
-        <meta property="og:description" content="Simply archive, share and comment on links." />
-        <link rel="canonical" href="http://linkfloyd.com" />
+        {% include "includes/meta_tags.html" %}
     {% endblock %}
 
+    <link rel="canonical" href="http://linkfloyd.com" />
+ 
     <meta property="og:site_name" content="LinkFloyd" />
     <meta property="fb:app_id" content="272205239538842" />
     <meta property="fb:admins" content="649222888" />

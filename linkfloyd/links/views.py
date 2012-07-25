@@ -118,11 +118,18 @@ def index(request):
     )
 
 def links_from_user(request, username):
-    user = get_object_or_404(User, username=username)
-    context = context_builder(request, links_from="user", instance=user)
 
-    context.update({
-        "about_user": UserPreferences.objects.get(user=user).description})
+    # Here were monkeypatching user instance to make it work with django_ogp
+
+    user = get_object_or_404(User, username=username)
+    description = UserPreferences.objects.get(user=user).description
+
+    user.ogp_enabled = True
+    user.ogp_title = _("%s on Linkfloyd" % user.username)
+    user.ogp_description = description or ""
+
+    context = context_builder(request, links_from="user", instance=user)
+    context.update({"description": description})
 
     return render_to_response(
         "links/link_list.html", context,

@@ -1,9 +1,13 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags ogp_tags qhonuskan_votes %}
-{% if intance.ogp_enabled %}
-    {% block meta_tags %}
-       {% render_ogp instance %}
-    {% endblock %}
-{% endif %}
+
+{% block meta_tags %}
+    {% if instance.ogp_enabled %}
+        {% render_ogp instance %}
+    {% else %}
+        {% include "includes/meta_tags.html" %}
+    {% endif %}
+{% endblock %}
+    
 {% block extra_head %}
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
@@ -52,7 +56,7 @@
         {% if links_from == 'user' %}
             <div class="about section">
                 <h2 class="header">{% trans "About User" %}</h2>
-                <p class="channel_description">{{about_user}}</p>
+                <p class="channel_description">{{description}}</p>
             </div>
         {% endif %}
         {% if user.is_authenticated %}
