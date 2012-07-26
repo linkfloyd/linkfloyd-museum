@@ -138,13 +138,11 @@ def links_from_user(request, username):
 
 def links_from_channel(request, channel_slug):
     channel = get_object_or_404(Channel, slug=channel_slug)
-    print channel.parent
-    recommended_channels = Channel.objects.filter(
-        parent=channel.parent) if channel.parent else None
-    print recommended_channels 
-    context = context_builder(request, links_from="channel",
-        instance=channel)
-    context.update({"recommended_channels": recommended_channels})
+    context = context_builder(request, links_from="channel", instance=channel)
+    context.update({
+        "sibling_channels": Channel.objects.filter(
+            parent=channel.parent) if channel.parent else None,
+        "child_channels": Channel.objects.filter(parent=channel)})
     return render_to_response(
         "links/link_list.html", context,
         context_instance=RequestContext(request)

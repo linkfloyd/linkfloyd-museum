@@ -73,18 +73,28 @@
                 </ul>
             </div>
         {% endif %}
-        {% if recommended_channels %}
+        {% if sibling_channels %}
             <div class="section">
-                <h2>{% trans "Recommended Channels" %}</h2>
+                <h2>{% trans "Sibling Channels" %}</h2>
                 <ul class="navigation">
-                   {% for recommended_channel in recommended_channels %}
-                      <li><a href="{{recommended_channel.get_absolute_url}}">{{recommended_channel}}</a></li>
+                   {% for sibling_channel in sibling_channels %}
+                      <li><a href="{{ sibling_channel.get_absolute_url }}">{{ sibling_channel }}</a></li>
                    {% endfor %}                
                 </ul>
             </div>
-       {% endif %}
-       {% if links_from == 'channel' %}
-            {% with channel=instance %}
+        {% endif %}
+        {% if child_channels %}
+            <div class="section">
+                <h2>{% trans "Child Channels" %}</h2>
+                <ul class="navigation">
+                   {% for child_channel in child_channels %}
+                      <li><a href="{{ child_channel.get_absolute_url }}">{{ child_channel }}</a></li>
+                   {% endfor %}                
+                </ul>
+            </div>
+        {% endif %}
+        {% if links_from == 'channel' %}
+        {% with channel=instance %}
             <div class="subscribers section">
                 <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
                 <div class="avatars">
