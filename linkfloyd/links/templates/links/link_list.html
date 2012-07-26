@@ -43,7 +43,7 @@
                     <ul class="navigation">
                         {% with subscription_status=user|channel_subscription_status:channel %}
                             {% if subscription_status == 'admin' %}
-                	    	    <li><a href="{% url update_channel channel.slug %}">Update Channel</a></li>
+                                <li><a href="{% url update_channel channel.slug %}">{% trans "Update Channel" %}</a></li>
                             {% endif %}
                             <li>
                             <a href="#" data-slug="{{channel.slug}}" class="subscription_status {% if subscription_status %} subscribed{% endif %}">{% if subscription_status %}{% trans "Unsubscribe" %}{% else %}{% trans "Subscribe" %}{% endif %}</a>

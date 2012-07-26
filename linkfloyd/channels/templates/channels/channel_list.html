@@ -18,7 +18,7 @@
                      {% endwith %}
                      <div class="header">
                          <h3 class="name">
-                             <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({% blocktrans with subscribers=channel.num_of_subscribers %} {{subscribers}} subscribers{% endblocktrans %}, {{channel.language}})
+                             <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({% blocktrans with subscribers=channel.num_of_subscribers %}{{subscribers}} subscribers{% endblocktrans %}, {{channel.language}})
                          </h3>
                      </div>
                      <div class="description">

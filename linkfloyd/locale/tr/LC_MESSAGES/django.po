@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-25 12:56-0500\n"
+"POT-Creation-Date: 2012-07-26 02:39-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,7 @@ msgstr "Takip Ettiğin Kanallar Görüntüleniyor"
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
-#: channels/templates/channels/channel.html:23 templates/base.html:58
+#: channels/templates/channels/channel.html:23 templates/base.html:56
 msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
@@ -136,7 +136,12 @@ msgstr ""
 msgid "Subscribed"
 msgstr "Takip Ediliyor"
 
-#: channels/templates/channels/create.html:9 templates/base.html:54
+#: channels/templates/channels/channel_list.html:21
+#, python-format
+msgid "%(subscribers)s subscribers"
+msgstr "%(subscribers)s takipçi"
+
+#: channels/templates/channels/create.html:9 templates/base.html:52
 msgid "Create a Channel"
 msgstr "Kanal Oluştur"
 
@@ -164,7 +169,7 @@ msgstr "Notlar"
 
 #: channels/templates/channels/create.html:46
 msgid "Parent"
-msgstr ""
+msgstr "Üst Kanal"
 
 #: channels/templates/channels/create.html:52
 #: channels/templates/channels/update.html:23
@@ -191,9 +196,7 @@ msgstr "%(username)s adlı kullanıcı şu gönderiye yorum yaptı: %(link_title
 
 #: comments/templates/comments/body.txt:9
 msgid "To reply to this comment or to see all comments on this link click here"
-msgstr ""
-"Bu yoruma cevap vermek ya da bütün yorumları görüntülemek için buraya "
-"tıklayın"
+msgstr "Bu yoruma cevap vermek ya da bütün yorumları görüntülemek için buraya tıklayın"
 
 #: comments/templates/comments/subject.txt:1
 #, python-format
@@ -239,7 +242,7 @@ msgid "Posts From %s Channel"
 msgstr "%s Kanalına Yapılmış Gönderiler"
 
 #: links/views.py:112
-msgid "Please subscribe channels that you are interested in"
+msgid "Subscribe channels that you are interested in"
 msgstr "İlgi alanına giren kanalları takibe al"
 
 #: links/views.py:128
@@ -290,6 +293,10 @@ msgstr "Kanal Hakkında"
 #: links/templates/links/link_list.html:42
 msgid "Actions"
 msgstr "Aksiyonlar"
+
+#: links/templates/links/link_list.html:46
+msgid "Update Channel"
+msgstr "Kanalı Güncelle"
 
 #: links/templates/links/link_list.html:58
 msgid "About User"
@@ -368,27 +375,27 @@ msgstr "Seçeneklerin güncellendi."
 msgid "Update Preferences"
 msgstr "Seçenekleri Güncelle"
 
-#: templates/base.html:40
+#: templates/base.html:38
 msgid "Preferences"
 msgstr "Seçenekler"
 
-#: templates/base.html:41
+#: templates/base.html:39
 msgid "Log out"
 msgstr "Çıkış Yap"
 
-#: templates/base.html:47
+#: templates/base.html:45
 msgid "Channels"
 msgstr "Kanallar"
 
-#: templates/base.html:51
+#: templates/base.html:49
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
 
-#: templates/base.html:65
+#: templates/base.html:63
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
-#: templates/base.html:69 templates/registration/login.html:2
+#: templates/base.html:67 templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
 
@@ -417,7 +424,7 @@ msgid ""
 "password you set at registration."
 msgstr ""
 "Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a "
-"href='%(login_url)s'>Giriş yap</a>abilirsin. "
+"href='%(login_url)s'>Giriş yap</a>abilirsin."
 
 #: templates/registration/activate.html:10
 msgid ""
@@ -504,7 +511,8 @@ msgstr "Kullanıcı adını unuttuysan: %(username)s"
 msgid ""
 "Best regards,\n"
 "%(site_name)s Management"
-msgstr ""
+msgstr "Sevgilerle,\n"
+"%(site_name)s Yönetimi"
 
 #: templates/registration/password_reset_form.html:2
 msgid "Reset password"
