@@ -483,7 +483,7 @@ msgid ""
 "We have sent you an email with a link to reset your password.  Please check "
 "your email and click the link to continue."
 msgstr ""
-"Şimdi e-posta adresine şifreni sıfırlayabilmen için bir e-posta attık. O "
+"E-posta adresine şifreni sıfırlayabilmen için bir e-posta attık. O "
 "posta içinde bir bağ var, ona tıklaman gerekiyor."
 
 #: templates/registration/password_reset_email.html:1
@@ -500,6 +500,7 @@ msgid ""
 "it\n"
 "into your web browser:"
 msgstr ""
+
 
 #: templates/registration/password_reset_email.html:12
 #, python-format
