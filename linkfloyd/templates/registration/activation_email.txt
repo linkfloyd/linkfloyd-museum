@@ -1,7 +1,7 @@
-{% load i18n %}{% blocktrans with domain=site.domain site_name=site.name activation_key=activation_key %}You have asked to register an account at {{ site_name }}.
+{% load i18n %}{% blocktrans with site_name=site.name %}You have asked to register an account at {{ site_name }}.
 
 To activate this account, click the following link within the next {{ expiration_days }} days:{% endblocktrans %}
 
-http://{{site_domain}}/accounts/activate/{{ activation_key }}
+http://{{site.domain}}/accounts/activate/{{ activation_key }}
 
 {% blocktrans with site_name=site.name %}{{ site_name }} Management.{% endblocktrans %}

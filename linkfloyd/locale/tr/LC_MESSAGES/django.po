@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-26 05:22-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-07-26 12:41-0500\n"
+"PO-Revision-Date: 2012-07-26 20:41+0200\n"
+"Last-Translator: Mirat Can Bayrak <miratcanbayrak@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -22,8 +21,9 @@ msgstr ""
 msgid "You have to be logged in to complete this action"
 msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmanız gerekmekte"
 
-#: api/views.py:170 links/templates/links/link_as_list_item.html:27
-#: links/templates/links/link_list.html:49
+#: api/views.py:170
+#: links/templates/links/link_as_list_item.html:27
+#: links/templates/links/link_list.html:51
 msgid "Unsubscribe"
 msgstr "Takibi Bırak"
 
@@ -31,10 +31,11 @@ msgstr "Takibi Bırak"
 msgid "Are you sure that you want to be admin of this channel?"
 msgstr "Bu kanalın yöneticisi olmak istediğinden emin misin?"
 
-#: api/views.py:196 api/views.py:209
+#: api/views.py:196
+#: api/views.py:209
 #: channels/templates/channels/channel_list.html:16
 #: links/templates/links/link_as_list_item.html:29
-#: links/templates/links/link_list.html:49
+#: links/templates/links/link_list.html:51
 msgid "Subscribe"
 msgstr "Takip Et"
 
@@ -108,17 +109,18 @@ msgstr "Takip Ettiğin Kanallar Görüntüleniyor"
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
-#: channels/templates/channels/channel.html:23 templates/base.html:56
+#: channels/templates/channels/channel.html:23
+#: templates/base.html:56
 msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
 #: channels/templates/channels/channel.html:34
-#: links/templates/links/link_list.html:77
+#: links/templates/links/link_list.html:89
 msgid "Subscribers"
 msgstr "Takipçiler"
 
 #: channels/templates/channels/channel.html:61
-#: links/templates/links/link_list.html:111
+#: links/templates/links/link_list.html:123
 msgid "No links found."
 msgstr "Hiç link bulunamadı."
 
@@ -140,7 +142,8 @@ msgstr "Takip Ediliyor"
 msgid "%(subscribers)s subscribers"
 msgstr "%(subscribers)s takipçi"
 
-#: channels/templates/channels/create.html:9 templates/base.html:52
+#: channels/templates/channels/create.html:9
+#: templates/base.html:52
 msgid "Create a Channel"
 msgstr "Kanal Oluştur"
 
@@ -158,7 +161,8 @@ msgid "Language"
 msgstr "Dil"
 
 #: channels/templates/channels/create.html:33
-#: channels/templates/channels/update.html:17 preferences/models.py:16
+#: channels/templates/channels/update.html:17
+#: preferences/models.py:16
 msgid "Description"
 msgstr "Açıklama"
 
@@ -180,7 +184,8 @@ msgstr "Üst Kanal"
 msgid "Submit"
 msgstr "Gönder"
 
-#: comments/models.py:25 links/templates/links/submit_form.html:12
+#: comments/models.py:25
+#: links/templates/links/submit_form.html:12
 #: links/templates/links/update_form.html:13
 msgid "Comment"
 msgstr "Yorum"
@@ -291,34 +296,42 @@ msgid "About Channel"
 msgstr "Kanal Hakkında"
 
 #: links/templates/links/link_list.html:42
+msgid "Notes & Rules"
+msgstr ""
+
+#: links/templates/links/link_list.html:44
 msgid "Actions"
 msgstr "Aksiyonlar"
 
-#: links/templates/links/link_list.html:46
+#: links/templates/links/link_list.html:48
 msgid "Update Channel"
 msgstr "Kanalı Güncelle"
 
-#: links/templates/links/link_list.html:58
+#: links/templates/links/link_list.html:60
 msgid "About User"
 msgstr "Kullanıcı Hakında"
 
-#: links/templates/links/link_list.html:64
+#: links/templates/links/link_list.html:66
 msgid "Subscripted Channels"
 msgstr "Takip Ettiğin Kanallar"
 
-#: links/templates/links/link_list.html:94
+#: links/templates/links/link_list.html:78
+msgid "Recommended Channels"
+msgstr "Önerilen Kanallar"
+
+#: links/templates/links/link_list.html:106
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: links/templates/links/link_list.html:97
+#: links/templates/links/link_list.html:109
 msgid "Top Voted"
 msgstr "Yüksek Puanlı"
 
-#: links/templates/links/link_list.html:100
+#: links/templates/links/link_list.html:112
 msgid "Latest"
 msgstr "En Son"
 
-#: links/templates/links/link_list.html:103
+#: links/templates/links/link_list.html:115
 msgid "Hot"
 msgstr "Sıcak"
 
@@ -395,7 +408,8 @@ msgstr "Kanallara Bak"
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
-#: templates/base.html:67 templates/registration/login.html:2
+#: templates/base.html:67
+#: templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
 
@@ -428,17 +442,19 @@ msgstr "Aktivasyon anahtarın geçersiz gözüküyor. URL'yi bir kontrol et."
 
 #: templates/registration/activation_complete.html:5
 #, python-format
-msgid "Activation complete. Now <a href='%(login_url)s'>login</a> using the username and password you set at registration."
+msgid "Activation complete. Now <a href='%(login_url)s'>log in</a> using the username and password you set at registration."
 msgstr "Aktivasyon tamamlandı. Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a href='%(login_url)s'>Giriş yap</a>abilirsin."
 
 #: templates/registration/activation_email.txt:1
+#, python-format
 msgid ""
 "You have asked to register an account at %(site_name)s.\n"
 "\n"
 "To activate this account, click the following link within the next %(expiration_days)s days:"
-msgstr "%(site.name)s üzerinde bir hesap oluşturmak için başvuruda bulundun.\n"
+msgstr ""
+"%(site_name)s üzerinde bir hesap oluşturmak için başvuruda bulundun.\n"
 "\n"
-"Hesabını aktive edebilmen için aşağıdaki bağlantıya %(expiration_days)s içinde tıklaman gerekiyor:"
+"Hesabını aktive edebilmen için aşağıdaki bağlantıya %(expiration_days)s gün içinde tıklaman gerekiyor:"
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -450,7 +466,8 @@ msgstr "%(site_name)s Yönetimi."
 msgid "Account registration for %(site_name)s"
 msgstr "%(site_name)s için hesap kaydı"
 
-#: templates/registration/login.html:6 templates/registration/login.html:18
+#: templates/registration/login.html:6
+#: templates/registration/login.html:18
 msgid "Log in"
 msgstr "Giriş Yap"
 
@@ -460,11 +477,11 @@ msgstr "Kullanıcı adı ve şifren uyuşmadı. Tekrar dene."
 
 #: templates/registration/login.html:16
 msgid "Do you need an account"
-msgstr "Hesabın yok mu?"
+msgstr "Hesabın yok mu"
 
 #: templates/registration/login.html:17
 msgid "Don't you remember your password"
-msgstr "Şifreni hatırlamıyor musun?"
+msgstr "Şifreni hatırlamıyor musun"
 
 #: templates/registration/logout.html:2
 msgid "Logged out"
@@ -497,6 +514,7 @@ msgid "Password reset"
 msgstr "Şifre sıfırla"
 
 #: templates/registration/password_reset_confirm.html:6
+#: templates/registration/password_reset_form.html:7
 msgid "Reset Password"
 msgstr "Şifreyi Sıfırla"
 
@@ -513,10 +531,15 @@ msgstr "E-posta adresine şifreni sıfırlayabilmen için bir e-posta attık. O 
 msgid ""
 "Greetings %(user)s,\n"
 "\n"
-"You are receiving this email because you (or someone pretending to be you) requested that your password be reset on the %(domain)s site.  If you do not wish to reset your password, please ignore this message.\n"
+"You are requested that your password be reset on the %(site_name)s site.\n"
 "\n"
-"To reset your password, please click the following link, or copy and paste it into your web browser:"
+"Click the following link, or copy and paste it into your web browser to reset your password:"
 msgstr ""
+"Merhaba %(user)s,\n"
+"\n"
+"%(site_name)s üserinde şifre sıfırlama isteğinde bulundun.\n"
+"\n"
+"Bu işlemi gerçekleştirebilmek için aşağıdaki bağlantıya tıkla ya da internet tarayıcına kopyalayıp yapıştır:"
 
 #: templates/registration/password_reset_email.html:9
 #, python-format
@@ -531,6 +554,10 @@ msgstr "%(site_name)s Yönetimi"
 #: templates/registration/password_reset_form.html:2
 msgid "Reset password"
 msgstr "Şifreyi sıfırla"
+
+#: templates/registration/password_reset_form.html:13
+msgid "Reset"
+msgstr "Sıfırla"
 
 #: templates/registration/registration_complete.html:2
 msgid "Activation email sent"
@@ -560,6 +587,9 @@ msgstr "Şifre"
 #: templates/registration/registration_form.html:23
 msgid "Password Again"
 msgstr "Şifre Tekrar"
+
+#~ msgid "Enter your email in the form below:"
+#~ msgstr "Aşağıdaki forma e-posta adresini yaz:"
 
 #~ msgid "Your Subcriptions"
 #~ msgstr "Takip Ettiklerin"

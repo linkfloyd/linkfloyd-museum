@@ -38,6 +38,8 @@
                     <h2 class="header">{% trans "About Channel" %}</h2>
                     <p class="channel_description">{{channel.description|linebreaks}}</p>
                 </div>
+                {% if channel.notes %}
+                <div class="section><h2>{% trans "Notes & Rules" %}</h2>{{ channel.notes }}{% endif %}
                 <div class="actions section">
                     <h2 class="header">{% trans "Actions" %}</h2>
                     <ul class="navigation">
@@ -62,16 +64,26 @@
         {% if user.is_authenticated %}
             <div class="channels section">
                 <h2 class="header">{% trans "Subscripted Channels" %}</h2>
-		<ul class="channels navigation">
+		        <ul class="channels navigation">
                     {% for subscription in user.channel_subscriptions.all %}
-		    <li {% ifequal subscription instance %}class="active"{% endifequal %}>
-                        <a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a>
-                    </li>
+            		    <li {% ifequal subscription instance %}class="active"{% endifequal %}>
+                           <a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
         {% endif %}
-        {% if links_from == 'channel' %}
+        {% if recommended_channels %}
+            <div class="section">
+                <h2>{% trans "Recommended Channels" %}</h2>
+                <ul class="navigation">
+                   {% for recommended_channel in recommended_channels %}
+                      <li><a href="{{recommended_channel.get_absolute_url}}">{{recommended_channel}}</a></li>
+                   {% endfor %}                
+                </ul>
+            </div>
+       {% endif %}
+       {% if links_from == 'channel' %}
             {% with channel=instance %}
             <div class="subscribers section">
                 <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
