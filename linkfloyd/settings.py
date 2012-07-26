@@ -86,8 +86,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
 
- 
-
 ROOT_URLCONF = 'linkfloyd.urls'
 
 TEMPLATE_DIRS = (
@@ -131,9 +129,10 @@ DEVSERVER_MODULES = (
 DEVSERVER_TRUNCATE_SQL = True
 
 # EMAIL
-SERVER_EMAIL = 'server@linkfloyd.com'
+
 SEND_BROKEN_LINK_EMAILS=True
 DEFAULT_FROM_EMAIL = "noreply@linkfloyd.com"
+
 
 # REGISTRATION
 ACCOUNT_ACTIVATION_DAYS = 3
