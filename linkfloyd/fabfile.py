@@ -4,7 +4,6 @@ from fabric.api import run, env, cd, sudo, prefix
 def testing():
     env.host_string = "linkfloyd.com"
     env.user = "miratcan"
-    env.password = "kurukasap"
     env.webapp = "/home/miratcan/webapps/linkfloyd/linkfloyd/linkfloyd/"
     env.activate_env = 'source /home/miratcan/envs/linkfloyd/bin/activate'
 
