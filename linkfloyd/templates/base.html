@@ -60,7 +60,7 @@
                         </li>
 
                        <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
-                            <a href="/links/submit/">{% trans "Submit a Link" %}</a>
+                       <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>
                         </li>
                         {% if not user.is_authenticated %}
                         <li>

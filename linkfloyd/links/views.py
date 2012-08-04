@@ -60,7 +60,8 @@ def submit_link(request, bookmarklet=False):
             template, {
                 "form": SubmitLinkForm(initial={
                     "url": request.GET.get("url"),
-                    "channel": channel
+                    "channel": channel,
+                    "rating": 1
                 }),
                 "channel": channel,
                 "active_nav_item": "submit"
