@@ -1,16 +1,20 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags ogp_tags qhonuskan_votes %}
 
 {% block meta_tags %}
+
     {% if instance.ogp_enabled %}
         {% render_ogp instance %}
     {% else %}
         {% include "includes/meta_tags.html" %}
     {% endif %}
+    
 {% endblock %}
     
 {% block extra_head %}
+
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
+
     {% if highlight %}
         <script type="text/javascript"
                 src="{{STATIC_URL}}js/libs/jquery.color.js">
@@ -20,7 +24,9 @@
     {% if links_from == "channel" %}
         <script type="text/javascript" src="{{STATIC_URL}}js/subscriptions.js"></script>
     {% endif %}
+    
 {% endblock extra_head %}
+
 {% block content %}
 <div class="two-column">
     <div class="panel">
@@ -35,14 +41,15 @@
         {% if links_from == 'channel' %}
             {% with channel=instance %}
                <div class="about section">
-                    <h2 class="header">{% trans "About Channel" %}</h2>
-                    <p class="channel_description">{{channel.description|linebreaks}}</p>
+                   <h2 class="header">{{ channel.name }}</h2>
+                    <p class="channel_description">{{ channel.description }}</p>
                 </div>
                 {% if channel.notes %}
                 <div class="section><h2>{% trans "Notes & Rules" %}</h2>{{ channel.notes }}{% endif %}
                 <div class="actions section">
-                    <h2 class="header">{% trans "Actions" %}</h2>
+                    <h2>{% trans "Actions" %}</h2>
                     <ul class="navigation">
+                        <li><a href="{% url submit_link %}?channel={{channel.slug}}">{% trans "Submit a Link" %}</a></li>
                         {% with subscription_status=user|channel_subscription_status:channel %}
                             {% if subscription_status == 'admin' %}
                                 <li><a href="{% url update_channel channel.slug %}">{% trans "Update Channel" %}</a></li>
@@ -56,40 +63,18 @@
             {% endwith %}
         {% endif %}
         {% if links_from == 'user' %}
-            <div class="about section">
+            <div class="section">
                 <h2 class="header">{% trans "About User" %}</h2>
                 <p class="channel_description">{{description}}</p>
             </div>
         {% endif %}
-        {% if user.is_authenticated %}
-            <div class="channels section">
-                <h2 class="header">{% trans "Subscripted Channels" %}</h2>
-		        <ul class="channels navigation">
-                    {% for subscription in user.channel_subscriptions.all %}
-            		    <li {% ifequal subscription instance %}class="active"{% endifequal %}>
-                           <a href="{{subscription.channel.get_absolute_url}}">{{subscription.channel}}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        {% if sibling_channels %}
+        {% if recommened_channels %}
             <div class="section">
-                <h2>{% trans "Sibling Channels" %}</h2>
+                <h2>{% trans "Recommened Channels" %}</h2>
                 <ul class="navigation">
-                   {% for sibling_channel in sibling_channels %}
-                      <li><a href="{{ sibling_channel.get_absolute_url }}">{{ sibling_channel }}</a></li>
-                   {% endfor %}                
-                </ul>
-            </div>
-        {% endif %}
-        {% if child_channels %}
-            <div class="section">
-                <h2>{% trans "Child Channels" %}</h2>
-                <ul class="navigation">
-                   {% for child_channel in child_channels %}
-                      <li><a href="{{ child_channel.get_absolute_url }}">{{ child_channel }}</a></li>
-                   {% endfor %}                
+                   {% for recommened_channel in recommened_channels %}
+                      <li><a href="{{ recommened_channel.get_absolute_url }}">{{ recommened_channel }}</a></li>
+                   {% endfor %}
                 </ul>
             </div>
         {% endif %}
@@ -99,11 +84,7 @@
                 <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
                 <div class="avatars">
                     {% for subscription in channel.subscription_set.all %}
-	            	    <a class="subscriber"
-            		       href="{{subscription.user.get_absolute_url}}"
-		                   style="background: url({% gravatar_for_user subscription.user 30 %})"
-            		       title="{{subscription.user.username}}" 
-            		   ></a>
+	            	    <a class="subscriber" href="{{subscription.user.get_absolute_url}}" style="background: url({% gravatar_for_user subscription.user 30 %})" title="{{subscription.user.username}}"></a>
                     {% endfor %}
                 </div>
             </div>

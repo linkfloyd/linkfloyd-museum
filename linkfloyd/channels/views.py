@@ -63,7 +63,7 @@ def update(request, slug):
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
             return render_to_response(
-                "channels/update.html", {
+                "channels/create.html", {
                     "form": form
                 }, context_instance=RequestContext(request))
     else:
@@ -75,7 +75,7 @@ def update(request, slug):
             status="admin"
         )
         return render_to_response(
-           "channels/update.html", {
+           "channels/create.html", {
                 "form": UpdateChannelForm(instance=channel)
             }, context_instance=RequestContext(request)
         )

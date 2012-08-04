@@ -128,6 +128,7 @@ def links_from_user(request, username):
     user.ogp_title = _("%s on Linkfloyd" % user.username)
     user.ogp_description = description or ""
 
+    # Prepare context
     context = context_builder(request, links_from="user", instance=user)
     context.update({"description": description})
 

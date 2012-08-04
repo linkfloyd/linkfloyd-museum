@@ -28,7 +28,7 @@ class CreateChannelForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
        self.base_fields["parent"] = ModelChoiceField(
-           queryset=Channel.objects.filter(parent=False))
+           queryset=Channel.objects.filter(parent=None))
        super(CreateChannelForm, self).__init__(*args, **kwargs)
  
 class UpdateChannelForm(forms.ModelForm):
