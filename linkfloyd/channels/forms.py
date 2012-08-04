@@ -2,7 +2,6 @@ from django import forms
 from channels.models import Channel
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext as _
-from django.forms import ModelChoiceField
 
 class CreateChannelForm(forms.ModelForm):
     name = forms.CharField(
@@ -26,11 +25,14 @@ class CreateChannelForm(forms.ModelForm):
     class Media:
         js = ("js/libs/jquery.slugify.js",)
 
+    """
     def __init__(self, *args, **kwargs):
        self.base_fields["parent"] = ModelChoiceField(
            queryset=Channel.objects.filter(parent=None))
        super(CreateChannelForm, self).__init__(*args, **kwargs)
- 
+    """
+
+
 class UpdateChannelForm(forms.ModelForm):
 
     name = forms.CharField(

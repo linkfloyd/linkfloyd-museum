@@ -23,7 +23,7 @@ def create(request):
             )
             messages.add_message(
                 request,
-                messages.INFO,
+                messages.SUCCESS,
 	        	'You Created %s Channel' % channel
             )
             return HttpResponseRedirect(channel.get_absolute_url())
