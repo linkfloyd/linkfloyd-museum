@@ -36,20 +36,16 @@ def submit_link(request, bookmarklet=False):
             link.posted_by = request.user
             link.save()
             if bookmarklet:
-                return HttpResponse(
-                    "<script>window.close()</script>"
-                )
+                return HttpResponse("<script>window.close()</script>")
             else:
                 return HttpResponseRedirect("%s?highlight=%s" % (
-                    link.channel.get_absolute_url(), link.id)
-                )
+                    link.channel.get_absolute_url(), link.id))
         else:
             return render_to_response(
                 template, {
                     "form": form,
                     "active_nav_item": "submit"
-                }, context_instance=RequestContext(request)
-            )
+                }, context_instance=RequestContext(request))
     else:
         channel_slug = request.GET.get("channel")
         if channel_slug:

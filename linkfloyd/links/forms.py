@@ -1,31 +1,39 @@
 from django import forms
-from links.models import Link, Report 
-
-from django.forms.widgets import Input
-from django.utils.safestring import mark_safe
+from links.models import Link
+from channels.models import Channel
 
 class SubmitLinkForm(forms.ModelForm):
+
     body = forms.CharField(widget=forms.Textarea, required=False)
+
+    channel = forms.ModelChoiceField(
+        widget=forms.TextInput,
+        required=True,
+        queryset=Channel.objects.all()
+    )
+
     class Meta:
         model = Link
-        exclude = ['posted_by', 'is_banned', 'is_sponsored', 'shown',
-                   'vote_score', 'comment_score']
+        exclude = ['posted_by',
+                   'is_banned',
+                   'is_sponsored',
+                   'shown',
+                   'vote_score',
+                   'comment_score']
 
     class Media:
-        js = (
-            "js/autofill.js",
-            "js/libs/jquery.tokeninput.js",
-            "js/csrf_fix.js"
-        )
+        js = ('js/autofill.js',
+              'js/libs/jquery.tokeninput.js',
+              'js/csrf_fix.js')
 
     def clean(self):
+
         cleaned_data = super(SubmitLinkForm, self).clean()
 
         if not (cleaned_data.get("body") or cleaned_data.get("url")):
             raise forms.ValidationError(\
                 "Sending nothing? Please write something, or attach "
-                "a link."
-            )
+                "a link.")
 
         # Always return the full collection of cleaned data.
         return cleaned_data

@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^api/', include('linkfloyd.api.urls')),
     url(r'^404/$', direct_to_template, {'template': '404.html'}),
     url(r'^500/$', direct_to_template, {'template': '500.html'}),
-    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
+    url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
 )
 
 urlpatterns += staticfiles_urlpatterns()

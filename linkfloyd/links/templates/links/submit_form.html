@@ -34,14 +34,14 @@
 
 <script type="application/javascript">
     $("#id_body").focus(function() {
-        $(this).animate({"height": 48}, {"easing": "linear"})
+        $(this).height(48)
     });
     $("#id_channel").tokenInput("/api/channels/list/", {
          tokenLimit: 1,
          {% if form.channel.value %}
              prePopulate: [{
                  "id": "{{ form.channel.value }}",
-                 "name": $("option[value=" + {{ form.channel.value }} + "]").html()
+                 "name": "{{ form.channel.instance }}"
              }]
          {% endif %}
      });
