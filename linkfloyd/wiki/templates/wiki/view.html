@@ -1,0 +1,21 @@
+{% extends 'base.html' %}{% load i18n %}
+
+{% block content %}
+    <div class="light">
+    <h1><a href="../{{ page.name }}/" rel="bookmark">{{ page.name }}</a></h1>
+
+	{% if not page.id %}
+        <p>{% trans "This page does not exist" %}</p>
+	{% endif %}
+
+	{{ page.content_as_html|safe }}
+
+    <ul class="flat-list actions">
+    {% if page.id %}
+        <li><a href="edit/">Edit this page</a></li>
+        {% else %}
+        <li><a href="edit/">Create this page</a></li>
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}

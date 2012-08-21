@@ -1,0 +1,16 @@
+{% extends 'base.html' %}{% load i18n %}
+
+
+{% block content %}
+    <h1>{% trans "Edit" %}</h1>
+
+	<form action="" method="post">
+		{% csrf_token %}
+        {% for field in form %}
+            {% include "forms/form_field.html" %}
+        {% endfor %}
+		<div class="submit">
+			<input type="submit" value="Save" />
+		</div>
+	</form>
+{% endblock %}
