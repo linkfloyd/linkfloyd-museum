@@ -1,22 +1,21 @@
-{% extends 'wiki/base.html' %}
-
+{% extends 'base.html' %}{% load i18n %}
 
 {% block content %}
-	<h1><a href="../{{ page.name }}/" rel="bookmark">{{ page.name }}</a></h1>
+    <div class="light">
+    <h1><a href="../{{ page.name }}/" rel="bookmark">{{ page.name }}</a></h1>
 
 	{% if not page.id %}
-		<p>This page does not exist, <a href="edit/">create it now</a>?</p>
+        <p>{% trans "This page does not exist" %}</p>
 	{% endif %}
 
-	{{ page.rendered|safe|linebreaks }}
-{% endblock %}
+	{{ page.content_as_html|safe }}
 
-
-{% block footer %}
-	{% if page.id %}
-		<a href="edit/">Edit this page</a>
-	{% else %}
-		<a href="edit/">Create this page</a>
-	{% endif %}
-	|
+    <ul class="flat-list actions">
+    {% if page.id %}
+        <li><a href="edit/">Edit this page</a></li>
+        {% else %}
+        <li><a href="edit/">Create this page</a></li>
+        {% endif %}
+    </ul>
+</div>
 {% endblock %}

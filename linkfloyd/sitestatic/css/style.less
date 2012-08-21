@@ -22,7 +22,7 @@ body {
 }
 h1, h2, h3, h4, h5, h6, dt {
     margin: 0 0 10px 0;
-    padding: 10px 6px 0 0;
+    padding: 0 6px 0 0;
     color: lighten(@blue, 60%);
 }
 h2 {
@@ -36,7 +36,7 @@ h3 {
 p {
     margin: 0 0 10px 0;
     font-size: 13px;
-    line-height: 15px;
+    line-height: 18px;
 }
 a {
     color: inherit;
@@ -493,6 +493,9 @@ form {
        .left, .right {
             width: 49%;
         }
+        &#comment textarea {
+            height: 30px;
+        }
         margin: 0 0 5px 0;
         padding: 0;
 		overflow: auto;
@@ -553,7 +556,6 @@ form {
         }
     }
     textarea {
-        height: 30px;
         &#id_notes {
             height: 102px;
         }

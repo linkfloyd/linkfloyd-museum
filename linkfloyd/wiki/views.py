@@ -44,7 +44,7 @@ def edit(request, name):
                 page = Page()
             page.name = form.cleaned_data['name']
             page.content = form.cleaned_data['content']
-
+            page.rendered = form.cleaned_data['content']
             page.save()
             return redirect(view, name=page.name)
     else:
