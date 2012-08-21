@@ -70,6 +70,11 @@ def comment_saved(sender, **kwargs):
 @receiver(post_delete, sender=Comment, dispatch_uid="comment_deleted")
 def comment_deleted(sender, **kwargs):
     comment = kwargs['instance']
-    comment.link.comment_score = comment.link.comment_set.all().count()
-    comment.link.save()
+    try:
+        link = comment.link
+    except Link.DoesNotExist:
+        link = False
 
+    if link:
+        comment.link.comment_score = comment.link.comment_set.all().count()
+        comment.link.save()
