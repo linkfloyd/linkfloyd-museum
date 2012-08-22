@@ -20,6 +20,8 @@ body {
     font-family: sans-serif;
     color: lighten(@blue, 50%);
 }
+
+
 h1, h2, h3, h4, h5, h6, dt {
     margin: 0 0 10px 0;
     padding: 0 6px 0 0;
@@ -64,8 +66,8 @@ pre, ol, ul, blockquote  {
     margin:0 0 5px 0;
 }
 ol, ul {
-    padding: 0 0 0 20px;
-    li {margin: 0 0 10px 0;}
+    padding: 0 0 0 40px;
+    li {margin: 0 0 5px 0;}
 }
 dl {
     dt {
@@ -306,6 +308,13 @@ div#content {
         &.white {
             background: @white;
         }
+    }
+}
+body.white div#content div.wrapper {
+    background: @white;
+    color: lighten(@black, 10%);
+    h1, h2, h3, h4, h5, h6 {
+        color: @black;
     }
 }
 a#logo {
@@ -737,13 +746,5 @@ div#add_link.fieldWrapper {
     }
     ul.errorlist {
         display: none;
-    }
-}
-div.light {
-    background: @white;
-    padding: 10px;
-    color: @black;
-    h1, h2, h3, h4, h5, dt {
-        color: @black;
     }
 }
