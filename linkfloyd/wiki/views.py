@@ -22,8 +22,11 @@ def view(request, name):
     except Page.DoesNotExist:
         page = Page(name=name)
 
+    pages = Page.objects.filter(listed=True)
+    
     context = {
         'page': page,
+        'pages': pages
     }
 
     return render_to_response('wiki/view.html',
