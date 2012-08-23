@@ -6,7 +6,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
 from django.views.generic.simple import direct_to_template
-print settings.DEBUG
+
 urlpatterns = patterns('',
     url(r'^$', 'links.views.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),

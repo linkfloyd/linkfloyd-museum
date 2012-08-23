@@ -1,6 +1,6 @@
-@base: #333d48;
-@white: #fff;
-@black: #000;
+@base     :#333d48;
+@white    :#fff;
+@black    :#000;
 @yellow   :#b58900; 
 @orange   :#cb4b16; 
 @red      :#dc322f; 
@@ -21,9 +21,8 @@ body {
     color: lighten(@blue, 50%);
 }
 
-
 h1, h2, h3, h4, h5, h6, dt {
-    margin: 0 0 10px 0;
+    margin: 10px 0 10px 0;
     padding: 0 6px 0 0;
     color: lighten(@blue, 60%);
 }
@@ -200,6 +199,7 @@ div#header {
 .section {
     margin: 0;
     padding: 0;
+    overflow: auto;
     > .header {
         span.ordering {
             a {
@@ -236,9 +236,15 @@ div.two-column {
     div.panel {
         width: 230px;
         float: right;
+        div.section {
+			margin: 0 0 10px 0;
+        }
         p {
             margin-left: 0;
             margin-right: 0;
+        }
+        p.last-child {
+			margin-bottom: 0;
         }
 	    div.subscribers {
 	        a.subscriber {
@@ -312,9 +318,12 @@ div#content {
 }
 body.white div#content div.wrapper {
     background: @white;
-    color: lighten(@black, 10%);
+    color: lighten(@black, 20%);
     h1, h2, h3, h4, h5, h6 {
         color: @black;
+    }
+    h1, h2 {
+		border-bottom: 1px solid darken(@white, 10);
     }
 }
 a#logo {

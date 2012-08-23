@@ -1,6 +1,15 @@
 {% extends 'base.html' %}{% load i18n %}{% block class_body %}class="white"{% endblock %}
 {% block content %}
 <div class="two-column">
+	
+	<div class="panel">
+		<h2>Mevzular</h2>
+		<ul>
+			{% for page in pages %}
+				<li><a href="/wiki/{{page.name}}/">{{page.name}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
     <div class="content section narrow">
     	{% if not page.id %}<p>{% trans "This page does not exist" %}</p>{% endif %}
 	    {{ page.content_as_html|safe }}

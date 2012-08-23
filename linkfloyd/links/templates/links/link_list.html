@@ -30,14 +30,6 @@
 {% block content %}
 <div class="two-column">
     <div class="panel">
-        {% if not user.is_authenticated %}
-            <h2 class="header">Linkfloyd Nedir?</h2>
-            <p>
-                Aynı ilgi alanına sahip insanları bir araya getirme
-                niyetinde olan, paylaşım ve yer imleme servisidir. 
-                <a href="/about/tr/">Devamı...</a>
-            </p>
-        {% endif %}
         {% if links_from == 'channel' %}
             {% with channel=instance %}
                <div class="about section">
@@ -90,7 +82,15 @@
             </div>
             {% endwith %}
        {% endif %}
-   </div>
+		<div class="section">
+			<h2 class="header">Linkfloyd Nedir?</h2>
+			<p>
+				Aynı ilgi alanına sahip insanları bir araya getirme
+				niyetinde olan, paylaşım ve yer imleme servisidir. 
+				<a href="/wiki/AnaSayfa/">Devamı...</a>
+			</p>
+		</div>
+	</div>
     <div class="content section">
         <h2 class="header">{{title}}
             <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
