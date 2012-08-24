@@ -14,7 +14,7 @@
 
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/links.js"></script>
-
+	{% voting_script %}
     {% if highlight %}
         <script type="text/javascript"
                 src="{{STATIC_URL}}js/libs/jquery.color.js">
@@ -24,6 +24,7 @@
     {% if links_from == "channel" %}
         <script type="text/javascript" src="{{STATIC_URL}}js/subscriptions.js"></script>
     {% endif %}
+    
     
 {% endblock extra_head %}
 

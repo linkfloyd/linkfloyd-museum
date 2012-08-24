@@ -1,7 +1,9 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
 <div class="post{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
-    <a class="avatar" href="{{link.posted_by.get_absolute_url}}" style="background: url({% gravatar_for_user link.posted_by 42 %})"></a>
-    {% comment %}{% vote_buttons_for link %}{% endcomment %}
+	<div class="side">
+		<a class="avatar" href="{{link.posted_by.get_absolute_url}}" style="background: url({% gravatar_for_user link.posted_by 42 %})"></a>
+		{% vote_buttons_for link %}
+	</div>
     <div class="content">
         <div class="info">
             <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> &rarr;

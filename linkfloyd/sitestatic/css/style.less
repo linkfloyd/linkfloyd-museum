@@ -368,19 +368,69 @@ div.post a.avatar {
     display: block;
     background: top left no-repeat;
     box-shadow: 0 1px 5px rgba(0,0,0,.46);
-    float: left;
 }
 div.post {
     overflow: auto;
     float:both;
     padding: 10px 0;
     margin: 0;
+    div.side {
+		float: left;
+		width: 42px;
+    }
     &:first-child {
         padding-top: 0;
     }
     &.highlight {
         background: #ffff88;
     }
+    div.vote_buttons {
+        overflow: auto;
+		border-radius: 3px;
+		border: 1px outset lighten(@base, 20%);
+		box-shadow: inset 0 0 3px darken(@base, 20%);
+		margin: 10px 0 5px 0;
+		padding: 0 0 5px 0;
+		background: lighten(@base, 20%);
+		a.upVote, a.downVote, div.score {
+			display: block;
+		}
+		a.upVote {
+			width: 0;
+			height: 0;
+			border-left: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-bottom: 12px solid @base;
+			margin-left: 8px;
+			margin-bottom: 5px;
+		}
+		a.downVote {
+			width: 0;
+			height: 0;
+			border-left: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-top: 12px solid @base;
+			margin-left: 8px;
+		}
+		a.upVote.voted {
+			border-bottom-color: darken(@base, 10%);
+		}
+		a.downVote.voted {
+			border-top-color: darken(@base, 10%);
+		}
+		div.score {
+			text-align: center;
+			vertical-align: center;
+			font-size: 13px;
+			font-weight: bold;
+			color: darken(@base, 10%);
+			border-radius: 2px;
+			margin: 0 0;
+			padding: 10px 0 10px 0;
+			display: block;
+			clear: both;
+		}
+	}
     > div.content {
         width: 630px;
         padding: 10px;
@@ -421,57 +471,9 @@ div.post {
         div.embed_player > img.embed {
             height: auto;
         }
-        div.vote_buttons {
-            overflow: auto;
-            border-radius: 3px;
-            border: 1px outset #eee;
-            box-shadow: inset 0 0 3px #ccc;
-            margin: 0 0 5px 0;
-            padding: 0 0 5px 0;
-            a.upVote, a.downVote, div.score {
-                height: 10px;
-            }
-            a.upVote {
-                width: 0;
-                height: 0;
-                border-left: 12px solid transparent;
-                border-right: 12px solid transparent;
-                border-bottom: 12px solid #888;
-                margin: 0 0 2px 6px;
-                clear: both;
-                float: left;
-            }
-            a.downVote {
-                width: 0;
-                height: 0;
-                border-left: 12px solid transparent;
-                border-right: 12px solid transparent;
-                border-top: 12px solid #888;
-                margin: 2px 0 0 6px;
-                clear: both;
-                float: left;
-            }
-            a.upVote.voted {
-                border-bottom-color: #222;
-            }
-            a.downVote.voted {
-                border-top-color: #222;
-            }
-            div.score {
-                text-align: center;
-                vertical-align: center;
-                font-size: 13px;
-                font-weight: bold;
-                color: #888;
-                border-radius: 2px;
-                margin: 0 0;
-                padding: 0 0 5px 0;
-                display: block;
-                clear: both;
-            }
-        }
     }
 }
+
 div.attachment {
     margin: 0 0 0 0;
     padding: 5px;
