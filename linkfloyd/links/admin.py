@@ -14,7 +14,8 @@ mark_as_seen.short_description = "Mark selected reports as seen"
 mark_as_updated_now.short_description = "Mark selected links updated at now"
 
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ('title', 'posted_by', 'posted_at', 'rating', 'shown')
+    list_display = ('title', 'posted_by', 'posted_at', 'rating',
+                    'shown', 'vote_score')
     actions = [mark_as_updated_now,]
 
 class ReportAdmin(admin.ModelAdmin):

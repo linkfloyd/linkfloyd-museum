@@ -180,8 +180,9 @@ def switch_channel_subscription(request):
             else:
                 return HttpResponse(simplejson.dumps({
                     "status": "confirmation_needed",
-                    "confirmation_text": _("Are you sure that you want to be " \
-                                           "admin of this channel?")
+                    "confirmation_text": _(
+						"Are you sure that you want to be " \
+                        "admin of this channel?")
                 }))
 
         return HttpResponse(status=400)
@@ -300,4 +301,5 @@ def post_report(request):
         else:
             return HttpResponse(status=400)
     else:
+
         return HttpResponse(status=400)

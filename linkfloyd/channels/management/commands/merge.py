@@ -7,8 +7,8 @@ class Command(BaseCommand):
     args = '<channel_slug channel_slug>'
     help = 'Merges first channel to second channel with subscriptions'
 
-    def handle(self, *args, **options):
 
+c    def handle(self, *args, **options):
         if not len(args) == 2:
             raise CommandError('Please give source and destination channel slugs')
 

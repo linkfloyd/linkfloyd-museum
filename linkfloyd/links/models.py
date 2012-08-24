@@ -158,4 +158,7 @@ def link_deleted(sender, **kwargs):
 def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
     link = sender.object
     link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
+    print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>updated vote score"
+    print link.votes.all()
+    print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", link.vote_score
     link.save()
