@@ -146,4 +146,6 @@ def links_from_channel(request, channel_slug):
         context_instance=RequestContext(request)
     )
 
-
+def random(request):
+    link = Link.objects.order_by('?')[0]
+    return HttpResponseRedirect(link.get_absolute_url())
