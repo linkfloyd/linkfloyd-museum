@@ -15,7 +15,7 @@ from django.conf import settings
 from django.core.mail import send_mass_mail
 
 from django.utils.translation import ugettext as _
-
+from datetime import datetime
 
 # Create your models here.
 
@@ -65,6 +65,11 @@ def comment_saved(sender, **kwargs):
         if created:
            subscription.status = 1
            subscription.save()
+        
+        # update link's updated at
+
+        comment.link.updated_at = datetime.now()
+        comment.link.save()
 
 
 @receiver(post_delete, sender=Comment, dispatch_uid="comment_deleted")
