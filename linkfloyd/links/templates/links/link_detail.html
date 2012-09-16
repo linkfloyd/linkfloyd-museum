@@ -27,6 +27,14 @@
             <dd>{{link.shown}} {% trans "times" %}</dd>
 	    </dl>	
     </div>
+    <div class="section">
+        <h2>Up Voted Users</h2>
+        <div class="avatars">
+            {% for up_voter in up_voted_users %}
+                <a class="avatar" href="{{up_voter.get_absolute_url}}" style="background: url({% gravatar_for_user up_voter 30 %})" title="{{up_voter.username}}"></a>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 <div class="content section">
     {% include "links/link_as_list_item.html" %}

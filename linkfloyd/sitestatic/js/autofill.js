@@ -22,7 +22,7 @@ $(document).ready(function() {
                 $("input[name='thumbnail_url']").val(data.info.image);
                 $("input[name='player']").val(data.info.player);
                 $("#remove_link").show();
-                $("#link_input").hide();
+                $("#url").hide();
             },
             statusCode: {
                 404: function() {

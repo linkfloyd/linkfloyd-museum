@@ -510,10 +510,16 @@ form {
     padding: 10px;
     border-radius: 5px;
     div.fieldWrapper{
-       .left, .right {
+        &#rating, &#channel {
             width: 49%;
         }
-        &#comment textarea {
+        &#rating {
+            float: left;
+        }
+        &#channel {
+            float: right;
+        }
+        &#body textarea {
             height: 30px;
         }
         margin: 0 0 5px 0;
@@ -670,7 +676,7 @@ div.token-input-dropdown ul li em {
     font-style: normal;
 }
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
-    background: @white;
+    background: darken(@blue, 10);
 }
 
 /* ------------------------------------------------------------ */

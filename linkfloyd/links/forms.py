@@ -7,10 +7,12 @@ class SubmitLinkForm(forms.ModelForm):
     body = forms.CharField(widget=forms.Textarea, required=False)
 
     title = forms.CharField(
+        required=False,
         max_length=255,
         widget=forms.HiddenInput)
 
-    description = forms.CharField(    
+    description = forms.CharField(
+        required=False,
         max_length=2048,
         widget=forms.HiddenInput)
 
