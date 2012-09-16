@@ -18,7 +18,7 @@ def context_builder(request, **kwargs):
     from django.core.paginator import EmptyPage
     from django.core.paginator import PageNotAnInteger
     from django.utils.translation import ugettext as _
-
+    from qhonuskan_votes.utils import get_vote_model
 
     response = {
         "links_from": kwargs.get("links_from"),
@@ -37,8 +37,9 @@ def context_builder(request, **kwargs):
     response['title'] = {
         "subscriptions": _("Posts From Your Subscripted Channels"),
         "user": _("Posts From %s") % response['instance'],
-        "channel": _("Posts From %s Channel") % response['instance']\
-    }[response['links_from']]
+        "channel": _("Posts From %s Channel") % response['instance'],
+        "likes": _("Posts liked by %s") % response['instance'],
+    }.get(response['links_from'], _("All Posts Shared on Linkfloyd"))
 
     # is_authenticated method hits db on every call, so i cached it with this.
     user_is_authenticated = request.user.is_authenticated()
@@ -51,7 +52,10 @@ def context_builder(request, **kwargs):
         query = query & Q(channel=response['instance'])
     elif response['links_from'] == "user":
         query = query & Q(posted_by=response['instance'])
-        print query
+    elif response['links_from'] == "likes":
+        vote_model = get_vote_model('links.LinkVote')
+        votes = vote_model.objects.filter(voter=request.user, value=1)
+        query = query & Q(id__in = [vote.object.id for vote in votes])
 
     if response['days']:
         query = query & Q(

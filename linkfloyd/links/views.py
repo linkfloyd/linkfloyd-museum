@@ -76,11 +76,11 @@ def update(request, pk):
             link = form.save(request.POST)
             return HttpResponseRedirect(link.get_absolute_url())
         else:
-            return render_to_response("links/update.html", {
+            return render_to_response("links/submit.html", {
                 "form": form
             }, context_instance=RequestContext(request))
     else:
-        return render_to_response("links/update.html", {
+        return render_to_response("links/submit.html", {
             "form": UpdateLinkForm(
                 instance=get_object_or_404(
                     Link, pk=pk, posted_by=request.user)),
@@ -135,8 +135,34 @@ def links_from_user(request, username):
 
     return render_to_response(
         "links/link_list.html", context,
-        context_instance=RequestContext(request)
-    )
+        context_instance=RequestContext(request))
+
+def links_liked_by_user(request, username):
+
+    # Here were monkeypatching user instance to make it work with
+    # django_ogp
+
+    user = get_object_or_404(User, username=username)
+    description = UserPreferences.objects.get(user=user).description
+
+    user.ogp_enabled = True
+    user.ogp_title = _("%s's Likes on Linkfloyd" % user.username)
+    user.ogp_description = description or ""
+
+    # Prepare context
+    context = context_builder(request, links_from="likes", instance=user)
+    context.update({"description": description})
+
+    return render_to_response(
+        "links/link_list.html", context,
+        context_instance=RequestContext(request))
+
+def links_from_all_channels(request):
+    context = context_builder(request)
+    return render_to_response(
+        "links/link_list.html", context,
+        context_instance=RequestContext(request))
+
 
 def links_from_channel(request, channel_slug):
     channel = get_object_or_404(Channel, slug=channel_slug)

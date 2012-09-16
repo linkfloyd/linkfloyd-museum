@@ -41,7 +41,18 @@
                         </li>
                         {% endif %}
                         <li>
-                            <a href="#" {%if active_nav_item == "channels"%}class="active"{%endif%}>
+                            <a href="#">{% trans "Links" %}</a>
+                            <ul class="sub">
+                                <li>
+                                    <a href="{% url links_liked_by user %}">Your Likes</a>
+                                </li>
+                                <li>
+                                    <a href="{% url all_links %}">All Links</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" {% if active_nav_item == "channels" %}class="active"{% endif %}>
                                 {% trans "Channels" %}
                             </a>
                             <ul class="sub">
