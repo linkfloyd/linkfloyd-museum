@@ -2,6 +2,11 @@ from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from tastypie.api import Api
+from linkfloyd.api import LinkResource
+
+v1_api = Api(api_name='v1')
+v1_api.register(LinkResource())
 
 admin.autodiscover()
 
@@ -20,6 +25,8 @@ urlpatterns = patterns('',
     url(r'^404/$', direct_to_template, {'template': '404.html'}),
     url(r'^500/$', direct_to_template, {'template': '500.html'}),
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
+    url(r'^restful/', include(v1_api.urls)),
+    
 )
 
 urlpatterns += staticfiles_urlpatterns()
