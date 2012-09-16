@@ -6,11 +6,38 @@ class SubmitLinkForm(forms.ModelForm):
 
     body = forms.CharField(widget=forms.Textarea, required=False)
 
+    title = forms.CharField(
+        max_length=255,
+        widget=forms.HiddenInput)
+
+    description = forms.CharField(    
+        max_length=2048,
+        widget=forms.HiddenInput)
+
+    thumbnail_url = forms.URLField(
+        required=False,
+        widget=forms.HiddenInput)
+
     channel = forms.ModelChoiceField(
-        widget=forms.TextInput,
         required=True,
-        queryset=Channel.objects.all()
-    )
+        queryset=Channel.objects.all())
+
+    player = forms.CharField(
+        required = False,
+        widget=forms.HiddenInput)
+
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = [
+            'url',
+            'body',
+            'channel',
+            'rating',
+            'title',
+            'description',
+            'thumbnail_url',
+            'player'
+        ]
 
     class Meta:
         model = Link
@@ -38,7 +65,18 @@ class SubmitLinkForm(forms.ModelForm):
         # Always return the full collection of cleaned data.
         return cleaned_data
 
-class UpdateLinkForm(forms.ModelForm):
+class UpdateLinkForm(SubmitLinkForm):
+
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+        self.fields.keyOrder = [
+            'body',
+            'channel',
+            'rating',
+            'title',
+            'description',
+            'thumbnail_url',
+            'player']
 
     class Meta:
         model = Link
@@ -50,11 +88,3 @@ class UpdateLinkForm(forms.ModelForm):
             "js/libs/jquery.tokeninput.js",
             "js/csrf_fix.js"
         )
-
-"""
-class SubmitReportForm(forms.ModelForm):
-
-    class Meta:
-        model = Report
-        exclude = ['reporter',]
-"""
