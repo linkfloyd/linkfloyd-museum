@@ -73,11 +73,11 @@
         {% endif %}
         {% if links_from == 'channel' %}
         {% with channel=instance %}
-            <div class="subscribers section">
+            <div class="section">
                 <h2 class="header">{% trans "Subscribers" %} ({{channel.subscription_set.all.count}})</h2>
                 <div class="avatars">
                     {% for subscription in channel.subscription_set.all %}
-	            	    <a class="subscriber" href="{{subscription.user.get_absolute_url}}" style="background: url({% gravatar_for_user subscription.user 30 %})" title="{{subscription.user.username}}"></a>
+	            	    <a class="avatar" href="{{subscription.user.get_absolute_url}}" style="background: url({% gravatar_for_user subscription.user 30 %})" title="{{subscription.user.username}}"></a>
                     {% endfor %}
                 </div>
             </div>
