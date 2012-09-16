@@ -88,20 +88,18 @@ def update(request, pk):
         )
 
 def link_detail(request, link_id):
-    from qhonuskan_votes.utils import get_vote_model
     try:
         link = Link.objects.get(id=link_id)
     except Link.DoesNotExist:
         return HttpResponse(status=404)
     link.inc_shown()
 
-    vote_model = get_vote_model('links.LinkVote')
 
     return render_to_response("links/link_detail.html",
     {
         "link": link,
         "up_voted_users": [vote.voter for vote in \
-                           vote_model.objects.filter(value=1)],
+                           link.linkvote_set.filter(value=1)],
         "expanded_attachments": True,
         "expanded_comments": True,
         "form": CommentForm(initial={"link": link})
