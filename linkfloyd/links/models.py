@@ -31,8 +31,8 @@ class Link(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     body = models.CharField(max_length=512, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
-    title = models.CharField(max_length=144, null=True, blank=True)
-    description = models.CharField(max_length=512, null=True,
+    title = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField(max_length=2048, null=True,
         blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
     rating = models.PositiveIntegerField(
@@ -94,8 +94,8 @@ class Subscription(models.Model):
     """
     user = models.ForeignKey(User, related_name="link_unsubscriptions")
     link = models.ForeignKey(Link)
-    status = models.PositiveSmallIntegerField(null=True, blank=True, choices=(
-        (0, "unsubscribed"), (1, "subscribed")))
+    status = models.PositiveSmallIntegerField(null=True, blank=True,
+        choices=((0, "unsubscribed"), (1, "subscribed")))
 
 
 class Report(models.Model):
@@ -158,7 +158,4 @@ def link_deleted(sender, **kwargs):
 def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
     link = sender.object
     link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
-    print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>updated vote score"
-    print link.votes.all()
-    print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", link.vote_score
     link.save()
