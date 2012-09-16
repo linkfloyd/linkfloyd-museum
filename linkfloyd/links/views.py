@@ -41,7 +41,6 @@ def submit_link(request, bookmarklet=False):
                 return HttpResponseRedirect("%s?highlight=%s" % (
                     link.channel.get_absolute_url(), link.id))
         else:
-            print form.errors
             return render_to_response(
                 template, {
                     "form": form,
@@ -95,13 +94,14 @@ def link_detail(request, link_id):
     except Link.DoesNotExist:
         return HttpResponse(status=404)
     link.inc_shown()
-    vote_model = get_vote_model.objects.filter(value=1)
+
+    vote_model = get_vote_model('links.LinkVote')
 
     return render_to_response("links/link_detail.html",
     {
         "link": link,
         "up_voted_users": [vote.voter for vote in \
-                           vote_model.model.objects.filter(value=1)],
+                           vote_model.objects.filter(value=1)],
         "expanded_attachments": True,
         "expanded_comments": True,
         "form": CommentForm(initial={"link": link})
