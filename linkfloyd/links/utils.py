@@ -54,7 +54,7 @@ def context_builder(request, **kwargs):
         query = query & Q(posted_by=response['instance'])
     elif response['links_from'] == "likes":
         vote_model = get_vote_model('links.LinkVote')
-        votes = vote_model.objects.filter(voter=request.user, value=1)
+        votes = vote_model.objects.filter(voter=response['instance'], value=1)
         query = query & Q(id__in = [vote.object.id for vote in votes])
 
     if response['days']:
