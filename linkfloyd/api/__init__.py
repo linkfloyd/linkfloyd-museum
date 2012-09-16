@@ -4,3 +4,4 @@ from links.models import Link
 class LinkResource(ModelResource):
     class Meta:
         queryset = Link.objects.all()
+        excludes = ['updated_at']
