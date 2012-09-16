@@ -1,4 +1,4 @@
-var addthis_share =  { 
+var addthis_share =  {
     templates: {
         twitter: '{' + '{title}' + '} {' + '{url}' + '}'
     }
@@ -16,6 +16,7 @@ var addthis_config = {
 $(document).ready( function() {
     $(".comment").bind("delete", function(event) {
         var comment_el = $(this);
+        console.log(comment_el);
 	    $.ajax({
             type: "GET",
 	        url: "/api/comments/delete/",
@@ -32,7 +33,7 @@ $(document).ready( function() {
             }
         });
     });
-    $(".link").bind("delete", function(event) {
+    $(".post").bind("delete", function(event) {
         var link_el = $(this);
 	    $.ajax({
             type: "GET",
@@ -97,12 +98,6 @@ $(document).ready( function() {
         var comment_el = $(this).parent().parent();
         comment_el.find("div.content").show();
         comment_el.find("form.comment").remove();
-        return false;
-    });
-    $('.deleteLink').live('click', function(){
-        var link_el = $(this).parent().parent().parent();
-        var accepted = confirm("Are you sure to remove this link?");
-        if (accepted) { link_el.trigger("delete"); }
         return false;
     });
     $('.switchFollowLink').live('click', function(){
