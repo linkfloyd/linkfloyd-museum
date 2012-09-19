@@ -9,13 +9,17 @@ distribute==0.6.24
 django-devserver==0.3.1
 django-extensions==0.7.1
 django-gravatar==0.1.0
+-e git+https://github.com/mkai/django-inviting.git@7e2bfce8cbd9379652263b79a551a838c5bb0d53#egg=django_inviting-dev
+django-jsonfield==0.8.7
 -e git+https://github.com/miratcan/django-ogp.git@4ada147f507c284bc5c824ebf77f6504ff249448#egg=django_ogp-dev
 django-registration==0.7
+django-tastypie==0.9.11
 django-transmeta==0.6.6
 ipython==0.12
 line-profiler==1.0b3
+mimeparse==0.1.3
 opengraph==0.4
+python-dateutil==1.5
 qhonuskan-votes==0.1.7
 sorl-thumbnail==11.12
 wsgiref==0.1.2
-django-tastypie==0.9.11
