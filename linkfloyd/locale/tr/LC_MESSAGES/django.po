@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 10:09-0500\n"
-"PO-Revision-Date: 2012-08-24 15:27+0200\n"
+"POT-Creation-Date: 2012-09-21 07:51-0500\n"
+"PO-Revision-Date: 2012-09-21 15:45+0200\n"
 "Last-Translator: Mirat Can Bayrak <miratcanbayrak@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,8 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: api/views.py:139
-msgid "You have to be logged in to complete this action"
-msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmanız gerekmekte"
+msgid "You have to be logged in to complete this action."
+msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmış olman gerekiyor."
 
 #: api/views.py:170 links/templates/links/link_as_list_item.html:28
 #: links/templates/links/link_list.html:51
@@ -108,7 +108,7 @@ msgstr "Takip Ettiğin Kanallar Görüntüleniyor"
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
-#: channels/templates/channels/channel.html:23 templates/base.html:67
+#: channels/templates/channels/channel.html:23 templates/base.html:69
 msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
@@ -118,7 +118,7 @@ msgid "Subscribers"
 msgstr "Takipçiler"
 
 #: channels/templates/channels/channel.html:60
-#: links/templates/links/link_list.html:126
+#: links/templates/links/link_list.html:125
 msgid "No links found."
 msgstr "Hiç link bulunamadı."
 
@@ -140,7 +140,7 @@ msgstr "Takip Ediliyor"
 msgid "%(subscribers)s subscribers"
 msgstr "%(subscribers)s takipçi"
 
-#: channels/templates/channels/create.html:9 templates/base.html:63
+#: channels/templates/channels/create.html:9 templates/base.html:65
 msgid "Create a Channel"
 msgstr "Kanal Oluştur"
 
@@ -225,14 +225,13 @@ msgid "Posts From %s Channel"
 msgstr "%s Kanalına Yapılmış Gönderiler"
 
 #: links/utils.py:41
-#, fuzzy, python-format
+#, python-format
 msgid "Posts liked by %s"
-msgstr "%s Kullanıcısından Gönderiler"
+msgstr "%s tarafından beğenilmiş gönderiler"
 
 #: links/utils.py:42
-#, fuzzy
 msgid "All Posts Shared on Linkfloyd"
-msgstr "Linkfloyd üzerinde %s kanalı"
+msgstr "Linkfloyd üzerinde paylaşılmış tüm gönderiler"
 
 #: links/views.py:113
 msgid "Subscribe channels that you are interested in"
@@ -244,8 +243,8 @@ msgid "%s on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
 
 #: links/views.py:149
-#, fuzzy, python-format
-msgid "%s's Likes on Linkfloyd"
+#, python-format
+msgid "%s's Up Votes on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
 
 #: links/templates/links/comment.html:5
@@ -285,9 +284,8 @@ msgid "times"
 msgstr "defa"
 
 #: links/templates/links/link_detail.html:31
-#, fuzzy
 msgid "Up Voted Users"
-msgstr "Yüksek Puanlı"
+msgstr "Yukarı Oylayan Kullanıcılar"
 
 #: links/templates/links/link_list.html:41
 msgid "Notes & Rules"
@@ -297,7 +295,7 @@ msgstr "Notlar & Kurallar"
 msgid "Actions"
 msgstr "Aksiyonlar"
 
-#: links/templates/links/link_list.html:45 templates/base.html:74
+#: links/templates/links/link_list.html:45 templates/base.html:76
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
@@ -315,42 +313,44 @@ msgstr "Önerilen Kanallar"
 
 #: links/templates/links/link_list.html:96
 msgid ""
-"Once added to your toolbar, this button will let you share web pages on "
-"Linkfloyd."
+"Drag and drop \"Post to Linkfloyd\" button to you bookmarks toolbar. It will "
+"let you share web pages on Linkfloyd easily."
 msgstr ""
+"\"Post to Linkfloyd\" düğmesini yer imi araç çubuğuna sürükleyip bırak. Web "
+"sayfa"
 
-#: links/templates/links/link_list.html:97
-msgid "Click and drag \"Post to Linkfloyd\" button to your toolbar."
-msgstr ""
+#: links/templates/links/link_list.html:100
+msgid "Remember to Vote"
+msgstr "Oylamayı Unutma"
 
 #: links/templates/links/link_list.html:101
-msgid "Remember to Vote"
-msgstr ""
-
-#: links/templates/links/link_list.html:102
 msgid "Votes are intended to indicate importance and relevance to the posts."
 msgstr ""
+"Oylar gönderilerin önemliliğini ve işe yararlığını tespit etmek için "
+"kullanılıyor"
 
-#: links/templates/links/link_list.html:103
+#: links/templates/links/link_list.html:102
 msgid ""
 "If you think something contributes to conversation, upvote it. If you think "
 "it does not contribute to the channel it is posted in or is off-topic in a "
 "particular community, downvote it."
 msgstr ""
+"Gönderinin önemli-işe yarar olduğunu düşünüyorsan yukarı oylamayı unutma. "
+"Eğer önemsiz ya da yanlış kanalda olduğunu düşünüyorsan aşağı oylamalısın"
 
-#: links/templates/links/link_list.html:109
+#: links/templates/links/link_list.html:108
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: links/templates/links/link_list.html:112
+#: links/templates/links/link_list.html:111
 msgid "Top Voted"
 msgstr "Yüksek Puanlı"
 
-#: links/templates/links/link_list.html:115
+#: links/templates/links/link_list.html:114
 msgid "Latest"
 msgstr "En Son"
 
-#: links/templates/links/link_list.html:118
+#: links/templates/links/link_list.html:117
 msgid "Hot"
 msgstr "Sıcak"
 
@@ -418,19 +418,19 @@ msgstr "Çıkış Yap"
 msgid "Links"
 msgstr "Bağlar"
 
-#: templates/base.html:56
+#: templates/base.html:58
 msgid "Channels"
 msgstr "Kanallar"
 
-#: templates/base.html:60
+#: templates/base.html:62
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
 
-#: templates/base.html:72
+#: templates/base.html:74
 msgid "Random"
 msgstr "Rasgele"
 
-#: templates/base.html:78 templates/registration/login.html:2
+#: templates/base.html:80 templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
 
@@ -646,6 +646,10 @@ msgstr "Bu sayfayı düzenle"
 #: wiki/templates/wiki/view.html:19
 msgid "Create this page"
 msgstr "Bu sayfayı oluştur"
+
+#~ msgid "Click and drag \"Post to Linkfloyd\" button to your toolbar."
+#~ msgstr ""
+#~ "\"Post to Linkfloyd\" düğmesini yer imi araç çubuğuna sürükleyip bırak."
 
 #~ msgid "Slug"
 #~ msgstr "Takoz"

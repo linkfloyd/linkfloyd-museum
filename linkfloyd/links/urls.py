@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('',
     url(r'^from/(?P<username>\w+)/$', 'links.views.links_from_user', name='links_from_user'),
-    url(r'^liked/(?P<username>\w+)/$', 'links.views.links_liked_by_user', name='links_liked_by'),
+    url(r'^liked/(?P<username>\w+)/$', 'links.views.links_upvoted_by_user', name='links_upvoted_by'),
 
     url(r'^all/$', 'links.views.links_from_all_channels', name='all_links'),
     

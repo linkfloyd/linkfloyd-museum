@@ -137,7 +137,7 @@ def links_from_user(request, username):
         "links/link_list.html", context,
         context_instance=RequestContext(request))
 
-def links_liked_by_user(request, username):
+def links_upvoted_by_user(request, username):
 
     # Here were monkeypatching user instance to make it work with
     # django_ogp
@@ -146,7 +146,7 @@ def links_liked_by_user(request, username):
     description = UserPreferences.objects.get(user=user).description
 
     user.ogp_enabled = True
-    user.ogp_title = _("%s's Likes on Linkfloyd" % user.username)
+    user.ogp_title = _("%s's Up Votes on Linkfloyd" % user.username)
     user.ogp_description = description or ""
 
     # Prepare context

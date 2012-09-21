@@ -137,7 +137,7 @@ def switch_channel_subscription(request):
     if not request.user.is_authenticated():
         return HttpResponse(simplejson.dumps(
             {"notification_text": _("You have to be logged in to "
-                                    "complete this action")}
+                                    "complete this action.")}
         ), status=401)
 
     if not "channel_slug" in request.POST:

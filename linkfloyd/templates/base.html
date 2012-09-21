@@ -43,9 +43,11 @@
                         <li>
                             <a href="#">{% trans "Links" %}</a>
                             <ul class="sub">
+                                {% if user.is_authenticated %}
                                 <li>
-                                    <a href="{% url links_liked_by user %}">Your Likes</a>
+                                    <a href="{% url links_upvoted_by user %}">Your Likes</a>
                                 </li>
+                                {% endif %}
                                 <li>
                                     <a href="{% url all_links %}">All Links</a>
                                 </li>
