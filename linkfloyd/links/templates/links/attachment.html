@@ -1,7 +1,7 @@
 {% load thumbnail %}{% spaceless %}
 <div class="attachment">
     {% if link.thumbnail_url %}
-        <a {%if link.player %} href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}" style="background: url({% thumbnail link.thumbnail_url '100x50' crop='center' as im %}{{ im.url }}{% endthumbnail %})">{% if link.player %}<i></i>{% endif %}</a>
+        <a {%if link.player %} href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}" style="background: url({% thumbnail link.thumbnail_url '100x' crop='center' as im %}{{ im.url }}{% endthumbnail %})">{% if link.player %}<i></i>{% endif %}</a>
     {% endif %}
     <a class="title" href="{{link.url}}">{% if link.title %}{{link.title}}{% else %}{{link.url|truncatechars:60}}{% endif %}</a>
     {% if link.description %}
