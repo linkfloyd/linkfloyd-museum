@@ -15,7 +15,7 @@
 body {
     padding: 0;
     margin: 0;
-    background: lighten(@base, 10%) url(http://i.imgur.com/gIctw.png) repeat-x top left;
+    background: lighten(@base, 10%);
     font-size: 13px;
     font-family: sans-serif;
     color: lighten(@blue, 50%);
@@ -43,6 +43,15 @@ a {
     color: inherit;
     text-decoration: underline;
     color: inherit;
+}
+
+/* Mixins */
+.darkGlass {
+    background: darken(@base, 5);
+    overflow: display;
+    padding: 5px;
+    margin: 0 0 10px 0;
+    border-radius: 3px;
 }
 
 /* Site wide */
@@ -304,11 +313,10 @@ div.two-column {
     }
 }
 div#content {
-    margin: 20px 0;
+    margin: 0;
     overflow: auto;
     min-height: 10em;
     div.wrapper {
-        background: lighten(@base, 10%);
         border-radius: 5px;
         overflow: auto;
         &.white {
@@ -334,11 +342,7 @@ a#logo {
 }
 div.channels {
     div.channel {
-    	background: darken(@base, 5);
-        overflow: display;
-        padding: 5px;
-        margin: 0 0 10px 0;
-        border-radius: 3px;
+        .darkGlass;
         a.subscription_status {
             .buttonized;
             margin: 0 -10px 0 0;
@@ -368,6 +372,7 @@ div.post a.avatar {
     display: block;
     background: top left no-repeat;
     box-shadow: 0 1px 5px rgba(0,0,0,.46);
+    display: none;
 }
 div.post {
     overflow: auto;
@@ -389,7 +394,7 @@ div.post {
 		border-radius: 3px;
 		border: 1px outset lighten(@base, 20%);
 		box-shadow: inset 0 0 3px darken(@base, 20%);
-		margin: 10px 0 5px 0;
+		margin: 0 0 5px 0;
 		padding: 0 0 5px 0;
 		background: lighten(@base, 20%);
 		a.upVote, a.downVote, div.score {
@@ -426,22 +431,19 @@ div.post {
 			color: darken(@base, 10%);
 			border-radius: 2px;
 			margin: 0 0;
-			padding: 10px 0 10px 0;
+			padding: 5px 0 5px 0;
 			display: block;
 			clear: both;
 		}
 	}
     > div.content {
-        margin: 0 0 0 60px;
-        padding: 10px;
-        border-radius: 6px;
-        background: @white;
+        margin: 0 0 0 50px;
+        padding: 0;
         > p.body, p.description, a.title, div.info, ul.actions {
-            margin: 4px 10px 10px 0;
+            margin: 0 10px 10px 0;
             font-size: 13px;
-	        color: lighten(@black, 15%);
         }
-        div.info {
+        span.info {
             margin-bottom: 10px;
             margin-top: 0;
             font-weight: bold;
@@ -450,7 +452,7 @@ div.post {
             }
         }
         ul.actions {
-            margin-top: 10px;
+            margin: 0;
             a {
                 &:hover {
                 }
@@ -474,12 +476,7 @@ div.post {
 }
 
 div.attachment {
-    margin: 0 0 0 0;
-    padding: 5px;
-    overflow: auto;
-    color: @black;
-    background: #eee;
-    border:1px solid #ddd;
+    .darkGlass;
     a.title { 
         font-weight: bold;
     }
@@ -713,7 +710,7 @@ div.comments {
             }
             ul.actions {
                 display: none;
-           }
+            }
             &:hover {
                 ul.actions {
                    display: block;
