@@ -200,7 +200,6 @@ div#header {
         }
     }
 }
-
 .section {
     margin: 0;
     padding: 0;
@@ -361,7 +360,6 @@ div.channels {
         }
     }
 }
- 
 div.post a.avatar {
     width: 42px;
     height: 42px;
@@ -427,20 +425,20 @@ div.post {
     > div.content {
         margin: 0 0 0 30px;
         padding: 0;
-        > p.body, p.description, a.title, div.info, ul.actions {
+        > p.body {
+            display: block;
             margin: 0 10px 5px 0;
             font-size: 13px;
         }
-        span.info {
-            margin-bottom: 10px;
-            margin-top: 0;
+        a.channel {
             font-weight: bold;
-            a.channel {
-                text-transform:lowercase;
-            }
+            text-transform:lowercase;
         }
         ul.actions {
             margin: 0;
+            font-size: 11px;
+            font-weight: bold;
+            color: desaturate(@blue, 40);
             a {
                 &:hover {
                 }
@@ -463,9 +461,15 @@ div.post {
     }
 }
 div.attachment {
-    .darkGlass;
+    &.withThumbnail {
+        a.title, p.description {
+            margin-left: 110px;
+        }
+    }
     a.title { 
         font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
     }
     a.thumbnail {
         position: relative;

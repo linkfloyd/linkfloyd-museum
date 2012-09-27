@@ -5,9 +5,7 @@
 	</div>
     <div class="content">
             <p class="body">
-                <span class="info">
-                    <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>:
-                </span>
+                <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>:
                 {% if link.body %}
                     {{link.body}}
                 {% endif %}

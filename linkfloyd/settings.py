@@ -7,7 +7,7 @@ ugettext = lambda s: s # dummy ugettext function, as django's docs say
 from local_settings import *
 
 TEMPLATE_DEBUG = DEBUG
-THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_DEBUG = False
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
     ('Mirat Can Bayrak', 'miratcanbayrak@gmail.com'),
