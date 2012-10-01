@@ -4,12 +4,9 @@
 		{% vote_buttons_for link %}
 	</div>
     <div class="content">
-            <p class="body">
-                <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>:
-                {% if link.body %}
-                    {{link.body}}
-                {% endif %}
-            </p>
+        {% if link.body %}
+            <p class="body"><a class="posted_by" href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a>: {{link.body}}</p>
+        {% endif %}
         {%if link.url %}
             {% include "links/attachment.html" %}
         {% endif %}

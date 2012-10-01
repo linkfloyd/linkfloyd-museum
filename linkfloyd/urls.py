@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^500/$', direct_to_template, {'template': '500.html'}),
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
     url(r'^restful/', include(v1_api.urls)),
-    
+    url(r'^palette/$', direct_to_template, {'template': 'palette_test.html'})
 )
 
 urlpatterns += staticfiles_urlpatterns()

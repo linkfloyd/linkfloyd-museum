@@ -1,6 +1,18 @@
-@base     :#333d48;
+
+@cello: #5D6F84;
+@cello_dark_1: darken(@cello, 10);
+@cello_dark_2: darken(@cello, 20);
+@cello_dark_3: darken(@cello, 30);
+@cello_dark_4: darken(@cello, 40);
+@cello_light_1: lighten(@cello, 10);
+@cello_light_2: lighten(@cello, 20);
+@cello_light_3: lighten(@cello, 30);
+@cello_light_4: lighten(@cello, 40);
+@cello_light_5: lighten(@cello, 50);
+
 @white    :#fff;
 @black    :#000;
+
 @yellow   :#b58900; 
 @orange   :#cb4b16; 
 @red      :#dc322f; 
@@ -15,15 +27,15 @@
 body {
     padding: 0;
     margin: 0;
-    background: lighten(@base, 10%);
+    background: @cello_dark_2;
     font-size: 13px;
     font-family: sans-serif;
-    color: lighten(@blue, 50%);
+    color: @cello_light_4;
 }
 h1, h2, h3, h4, h5, h6, dt {
     margin: 10px 0 10px 0;
     padding: 0 6px 0 0;
-    color: lighten(@blue, 60%);
+    color: @white;
 }
 h2 {
    font-size:15px;
@@ -41,13 +53,13 @@ p {
 a {
     color: inherit;
     text-decoration: underline;
-    color: inherit;
+    color: @cello_light_5;
 }
 
 /* Mixins */
 
 .darkGlass {
-    background: darken(@base, 5);
+    background: @cello_dark_3;
     overflow: auto;
     padding: 5px;
     margin: 0 0 5px 0;
@@ -106,6 +118,7 @@ dl {
 div.wrapper {
     margin: 0 auto;
     padding: 0 15px;
+    max-width: 1300px;
 }
 ul.flat-list {
     margin: 0;
@@ -273,12 +286,12 @@ div.two-column {
                 list-style-type: none;
                 margin: 0;
                 padding: 10px;
-    	        background: darken(@base, 10%);
+    	        background: darken(@cello, 10%);
                 //box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
-        		border-top: 1px solid darken(@base, 5%);
-    	    	border-bottom: 1px solid darken(@base, 15%);
-        		border-left: 1px solid darken(@base, 5%);
-                border-right: 1px solid darken(@base, 15%);
+        		border-top: 1px solid darken(@cello, 5%);
+    	    	border-bottom: 1px solid darken(@cello, 15%);
+        		border-left: 1px solid darken(@cello, 5%);
+                border-right: 1px solid darken(@cello, 15%);
  	    	    a {
                     font-size: 12px;
     		        text-decoration: none;
@@ -394,7 +407,7 @@ div.post {
 			height: 0;
 			border-left: 12px solid transparent;
 			border-right: 12px solid transparent;
-			border-bottom: 12px solid @base;
+			border-bottom: 12px solid @cello;
 			margin-bottom: 5px;
 		}
 		a.downVote {
@@ -402,13 +415,13 @@ div.post {
 			height: 0;
 			border-left: 12px solid transparent;
 			border-right: 12px solid transparent;
-			border-top: 12px solid @base;
+			border-top: 12px solid @cello;
 		}
 		a.upVote.voted {
-			border-bottom-color: darken(@base, 10%);
+			border-bottom-color: darken(@cello, 10%);
 		}
 		a.downVote.voted {
-			border-top-color: darken(@base, 10%);
+			border-top-color: darken(@cello, 10%);
 		}
 		div.score {
 			margin: 0;
@@ -417,7 +430,7 @@ div.post {
 			vertical-align: center;
 			font-size: 13px;
 			font-weight: bold;
-			color: darken(@base, 10%);
+			color: darken(@cello, 10%);
 			display: block;
 			clear: both;
 		}
@@ -428,9 +441,11 @@ div.post {
         > p.body {
             display: block;
             margin: 0 10px 5px 0;
+            padding: 5px;
             font-size: 13px;
+            background: @cello_dark_3;
         }
-        a.channel {
+        a.posted_by {
             font-weight: bold;
             text-transform:lowercase;
         }
@@ -672,8 +687,8 @@ div.comments {
     float: right;
     div.comment {
         overflow: auto;
-        background:  desaturate(lighten(@base, 15), 5);
-        border: 1px solid desaturate(lighten(@base, 15), 30);
+        background:  desaturate(lighten(@cello, 15), 5);
+        border: 1px solid desaturate(lighten(@cello, 15), 30);
         clear: both;
         margin: 0 0 10px 0;
         padding: 0;
@@ -708,8 +723,8 @@ div.comments {
            }
        }
        blockquote {
-            background: lighten(@base, 10%);
-            border: 1px solid @base;
+            background: lighten(@cello, 10%);
+            border: 1px solid @cello;
             padding: 5px;
             p {
                 margin: 5px 0 !important;
