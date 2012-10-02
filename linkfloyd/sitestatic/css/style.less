@@ -9,6 +9,7 @@
 @cello_light_3: lighten(@cello, 30);
 @cello_light_4: lighten(@cello, 40);
 @cello_light_5: lighten(@cello, 50);
+@cello_light_6: lighten(@cello, 60);
 
 @white    :#fff;
 @black    :#000;
@@ -51,9 +52,11 @@ p {
     line-height: 18px;
 }
 a {
-    color: inherit;
     text-decoration: underline;
-    color: @cello_light_5;
+    color: @cello_light_2;
+    &:hover {
+        color: @cello_light_4;
+    }
 }
 
 /* Mixins */
@@ -118,7 +121,7 @@ dl {
 div.wrapper {
     margin: 0 auto;
     padding: 0 15px;
-    max-width: 1052px;
+    max-width: 1200px;
 }
 ul.flat-list {
     margin: 0;
@@ -439,11 +442,14 @@ div.post {
     > div.content {
         margin: 0 0 0 35px;
         padding: 0;
-        > p.body {
-            display: block;
-            margin: 0 10px 5px 0;
-            padding: 0;
-            font-size: 13px;
+        p {
+            margin: 0 0 5px 0;
+        }
+        p.body {
+            color: @cello_light_6;
+            font-size: 16px;
+            line-height: 20px;
+
         }
         a.posted_by, a.channel {
             font-weight: bold;
@@ -453,7 +459,6 @@ div.post {
             margin: 0;
             font-size: 11px;
             font-weight: bold;
-            color: desaturate(@blue, 40);
         }
         div.embed_player {
 	        margin: 0;
@@ -472,10 +477,10 @@ div.post {
     }
 }
 div.attachment {
-    background: @cello_dark_3;
     overflow: auto;
     margin: 0 0 5px 0;
-    padding: 5px;
+    padding: 0;
+
     &.withThumbnail {
         a.title, p.description {
             margin-left: 110px !important;
@@ -684,7 +689,7 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 
 /* ------------------------------------------------------------ */
 div.comments {
-    padding: 5px 5px 10px 35px;
+    padding: 25px 5px 10px 35px;
     div.comment {
         overflow: auto;
         clear: both;
