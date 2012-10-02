@@ -11,8 +11,19 @@
 @cello_light_5: lighten(@cello, 50);
 @cello_light_6: lighten(@cello, 60);
 
-@white    :#fff;
 @black    :#000;
+
+@grey_dark_5  : #000;
+@grey_dark_4  : lighten(@black, 10%);
+@grey_dark_3  : lighten(@black, 20%);
+@grey_dark_2  : lighten(@black, 30%);
+@grey_dark_1  : lighten(@black, 40%);
+@grey         : lighten(@black, 50%);
+@grey_light_1 : lighten(@black, 60%);
+@grey_light_2 : lighten(@black, 70%);
+@grey_light_3 : lighten(@black, 80%);
+@grey_light_4 : lighten(@black, 90%);
+@grey_light_5 : lighten(@black, 100%);
 
 @yellow   :#b58900; 
 @orange   :#cb4b16; 
@@ -23,33 +34,39 @@
 @cyan     :#2aa198; 
 @green    :#8c982e;
 
-/* Basics */
-
 body {
     padding: 0;
     margin: 0;
     background: @cello_dark_2;
-    font-size: 13px;
     font-family: sans-serif;
     color: @cello_light_4;
+    font-size: 1em;
 }
 h1, h2, h3, h4, h5, h6, dt {
-    margin: 10px 0 10px 0;
-    padding: 0 6px 0 0;
-    color: @white;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    color: @grey_light_5;
+}
+h1 {
+    font-size: 1.8em;
 }
 h2 {
-   font-size:15px;
-   line-height: 18px;
+   font-size:1.6em;
 }
 h3 {
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 1.4em;
+}
+h4 {
+    font-size: 1.2em;
+}
+h5 {
+    font-size: 1.0em;
+}
+h6 {
+    font-size: 0.8;
 }
 p {
-    margin: 0 0 10px 0;
-    font-size: 13px;
-    line-height: 18px;
+    margin: 0 0 1em 0;
 }
 a {
     text-decoration: underline;
@@ -58,15 +75,11 @@ a {
         color: @cello_light_4;
     }
 }
-
-/* Mixins */
-
 .darkGlass {
     background: @cello_dark_3;
     overflow: auto;
-    padding: 5px;
-    margin: 0 0 5px 0;
-    border-radius: 3px;
+    padding: 0.5epm;
+    margin: 0 0 0.5em 0;
 }
 
 /* Site wide */
@@ -81,16 +94,16 @@ a#logo {
     top: 8px;
     font-size: 36px;
     font-family: 'Lilita One', cursive;
-    color: @white;
+    color: @grey_light_5;
     text-decoration: none;
 }
 pre, ol, ul, blockquote  {
-    padding: 5px;
-    margin:0 0 5px 0;
+    padding: 0.5em;
+    margin:0 0 0.5em 0;
 }
 ol, ul {
-    padding: 0 0 0 40px;
-    li {margin: 0 0 5px 0;}
+    padding: 0 0 0 4em;
+    li {margin: 0 0 0.5em 0;}
 }
 dl {
     dt {
@@ -99,29 +112,28 @@ dl {
 }
 .buttonized {
     background: lighten(@black, 12%);
-    padding: 4px 15px;
-    color: lighten(@black, 80%);
+    padding: 0.4em 1.5em;
+    color: @grey;
     font-weight: bold;
-    border-radius: 3px;
-	border: 1px outset lighten(@black, 20%);
+    border-radius: 0.3em;
+	border: 0.1em outset lighten(@black, 20%);
     text-decoration: none;
     &:hover {
-        color: @white;
+        color: @grey_light_5;
     }
     &:active {
         background: lighten(@black, 6%);
         border-style: inset;
     }
     &:disabled {
-        color: darken(@white, 30%);
-        background: lighten(@black, 24%);
+        color: @grey_light_3;
+        background: @grey_dark_3;
     }
 }
 /* Layout */
 div.wrapper {
     margin: 0 auto;
-    padding: 0 15px;
-    max-width: 1200px;
+    padding: 0 1.5em;
 }
 ul.flat-list {
     margin: 0;
@@ -130,7 +142,7 @@ ul.flat-list {
     > li {
         list-style-type: none;
         float: left;
-	    margin: 0 0 0 18px;
+	    margin: 0 0 0 1.8em;
 	    padding: 0;
     }
     > li:first-child {
@@ -138,13 +150,13 @@ ul.flat-list {
     }
 }
 p.success, p.error, p.warning {
-    font-size: 16px;
-    padding: 20px;
+    font-size: 1.6em;
+    padding: 2em;
     text-align: center;
 }
 .success {
     background: @green;
-    color: white;
+    color: grey_light_5;
 }
 .warning {
     background: @yellow;
@@ -152,20 +164,21 @@ p.success, p.error, p.warning {
 }
 .error {
     background: @red;
-    color: white;
+    color: grey_light_5;
 }
 div#header {
-    background: lighten(@black, 12%);
+    background: @grey_dark_4;
     border-bottom: 1px solid @black;
     overflow: visible;
-    height: 50px;
+    height: 42px;
     ul.navigation {
         overflow: visible;
     	> li {
-            border-right: 1px lighten(@black, 5%) solid;
-            border-left: 1px lighten(@black, 19%) solid;
+            border-right: 1px @grey_dark_4 solid;
+            border-left: 1px @grey_dark_3 solid;
         }
         li {
+            height: 42px;
             padding: 0;
             margin: 0;
             position: relative;
@@ -174,23 +187,23 @@ div#header {
                 overflow: visible;
             }
             a {
-                padding: 20px;
+                padding: 15px;
                 height: 10px;
-                font-size: 12px;
+                font-size: 13px;
                 font-weight: bold;
-                color: lighten(@black, 60%);
+                color: @grey_light_2;
                 display: block;
                 text-decoration: none;
                 &.active {
                     background: lighten(@black, 6%);
                 }
                 &:hover {
-                    color: white;
+                    color: grey_light_5;
                 }
             }
             a.avatar {
-                width: 50px;
-                height: 50px;
+                width: 42px;
+                height: 42px;
                 padding: 0;
                 margin: 0;
             }
@@ -203,14 +216,14 @@ div#header {
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
             position: absolute;
-            top: 50px;
+            top: 42px;
             left: -1px;
             margin: 0;
             padding: 0;
             z-index: 10;
             list-style-type: none;
-             > li > a {
-                padding: 10px;
+            > li > a {
+                padding: 0 10px 0 0;
                 white-space: nowrap;
             }
         }
@@ -226,30 +239,22 @@ div#header {
 	            color: lighten(@blue, 30%);
     	        text-decoration: none;
 	        }
-            font-size: 10px;
+            font-size: 0.5em;
             float: right;
-            margin: 0 5px 0 0;
-            padding: 0 5px 0 3px;
+            margin: 0 0.5em 0 0;
+            padding: 0 0.5em 0 0.3em;
             font-weight: normal;
             &.active {
                 a {
-                    color: white;
+                    color: grey_light_5;
                 }
             }
         }
     }
-    h2 > i, h3 > i {
-        background: url(https://github.com/defunkt/facebox/raw/master/src/closelabel.png);
-        width: 8px;
-        height: 8px;
-        float: right;
-        margin: 4px 0 0 0;
-        cursor: pointer;
-    }
 }
 div.one-column {
     div.section.narrow {
-        width: 600px;
+        width: 60em;
     }
 }
 div.two-column {
@@ -258,7 +263,7 @@ div.two-column {
         float: right;
         div.section {
 			margin: 0;
-            border-bottom: 1px white dashed;
+            border-bottom: 1px grey_light_5 dashed;
         }
         p {
             margin-left: 0;
@@ -278,50 +283,48 @@ div.two-column {
         }
 	    dl {
 	        dd {
-    	    	margin: 0 0 0 10px;
+    	    	margin: 0 0 0 1em;
 	        }
     	}
         ul.navigation {
-            margin: 0 0 10px 0;
+            margin: 0 0 1em 0;
             padding: 0;
             li {
                 display: block;
                 list-style-type: none;
                 margin: 0;
-                padding: 10px;
-    	        background: darken(@cello, 10%);
-                //box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
-        		border-top: 1px solid darken(@cello, 5%);
-    	    	border-bottom: 1px solid darken(@cello, 15%);
-        		border-left: 1px solid darken(@cello, 5%);
-                border-right: 1px solid darken(@cello, 15%);
+                padding: 1em;
+    	        background: @cello_dark_3;
+        		border-top: 0.1em solid @cello_dark_1;
+    	    	border-bottom: 0.1em solid @cello_dark_3;
+        		border-left: 0.1em solid @cello_dark_1;
+                border-right: 0.1em solid @cello_dark_3;
  	    	    a {
-                    font-size: 12px;
     		        text-decoration: none;
                 }
                 &:hover {
         		    background: darken(@blue, 15%);
                     a {
-                        color: white;
+                        color: grey_light_5;
                     }
                 }
     	    	&.active {
     		        background: black;
         		}
                 &:last-child {
-                  	border-bottom-left-radius: 5px;
-    		        border-bottom-right-radius: 5px;
+                  	border-bottom-left-radius: 0.5em;
+    		        border-bottom-right-radius: 0.5em;
         		}
                 &:first-child {
-                	border-top-left-radius: 5px;
-        			border-top-right-radius: 5px;
+                	border-top-left-radius: 0.5em;
+        			border-top-right-radius: 0.5em;
                     margin-top: 0;
                     }
                 }
             }
         }
     > div.content {
-        padding: 0 20px 0 0;
+        padding: 0 2em 0 0;
     }
 }
 div#content {
@@ -329,22 +332,21 @@ div#content {
     overflow: auto;
     min-height: 10em;
     div.wrapper {
-        margin-top: 10px;
-        border-radius: 5px;
+        margin-top: 1em;
         overflow: auto;
-        &.white {
-            background: @white;
+        &.grey_light_5 {
+            background: @grey_light_5;
         }
     }
 }
 body.white div#content div.wrapper {
-    background: @white;
+    background: @grey_light_5;
     color: lighten(@black, 20%);
     h1, h2, h3, h4, h5, h6 {
-        color: @black;
+        color: @grey_dark_5;
     }
     h1, h2 {
-		border-bottom: 1px solid darken(@white, 10);
+		border-bottom: 1px solid @grey_light_4;
     }
 }
 a#logo {
@@ -356,9 +358,10 @@ a#logo {
 div.channels {
     div.channel {
         .darkGlass;
+        padding: 5px;
         a.subscription_status {
             .buttonized;
-            margin: 0 -10px 0 0;
+            margin: 0;
             border-radius-left-top: 5px;
             float: right;
             &.subscribed {
@@ -366,29 +369,18 @@ div.channels {
             }
         }
         h3.name {
-            margin: 0 0 10px 0;
+            margin-top: 0;
             padding: 0;
             a {
                 font-weight: bold;
                 font-effect: outline;
             }
         }
-        div.description {
-        }
     }
-}
-div.post a.avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 6px;
-    display: block;
-    background: top left no-repeat;
-    box-shadow: 0 1px 5px rgba(0,0,0,.46);
-    display: none;
 }
 div.post {
     overflow: auto;
-    padding: 10px 0;
+    padding: 1em 0;
     margin: 0;
     div.side {
 		float: left;
@@ -399,7 +391,7 @@ div.post {
         padding-top: 0;
     }
     &.highlight {
-        background: #ffff88;
+        background: #cello_light_5;
     }
     div.vote_buttons {
         overflow: auto;
@@ -411,7 +403,7 @@ div.post {
 			height: 0;
 			border-left: 12px solid transparent;
 			border-right: 12px solid transparent;
-			border-bottom: 12px solid @cello_light_1;
+			border-bottom: 12px solid @cello;
 			margin-bottom: 5px;
 		}
 		a.downVote {
@@ -419,7 +411,7 @@ div.post {
 			height: 0;
 			border-left: 12px solid transparent;
 			border-right: 12px solid transparent;
-			border-top: 12px solid @cello_light_1;
+			border-top: 12px solid @cello;
 		}
 		a.upVote.voted {
 			border-bottom-color: @cello_light_3;
@@ -432,7 +424,6 @@ div.post {
 			padding: 0 0 5px 0;
 			text-align: center;
 			vertical-align: center;
-			font-size: 13px;
 			font-weight: bold;
 			color: @cello_light_3;
 			display: block;
@@ -443,7 +434,7 @@ div.post {
         margin: 0 0 0 35px;
         padding: 0;
         p {
-            margin: 0 0 5px 0;
+            margin: 0 0 0.5em 0;
         }
         p.body {
             color: @cello_light_6;
@@ -451,24 +442,27 @@ div.post {
             line-height: 20px;
 
         }
-        a.posted_by, a.channel {
-            font-weight: bold;
-            text-transform:lowercase;
+        p.info {
+            font-size: 0.8em;
+            a.posted_by, a.channel {
+                font-weight: bold;
+                text-transform:lowercase;
+            }
         }
         ul.actions {
             margin: 0;
-            font-size: 11px;
             font-weight: bold;
+            font-size: 0.8em;
         }
         div.embed_player {
 	        margin: 0;
-            padding: 5px 0 0 0;
+            padding: 0.5em 0 0 0;
             display: block;
             clear: both;
         }
         div.embed_player > * {
             display: block;
-            height: 260px;
+            height: 360px;
             width: 100%;
         }
         div.embed_player > img.embed {
@@ -478,16 +472,16 @@ div.post {
 }
 div.attachment {
     overflow: auto;
-    margin: 0 0 5px 0;
+    margin: 1em 0;
     padding: 0;
-
+    font-size: 0.8em;
     &.withThumbnail {
         a.title, p.description {
             margin-left: 110px !important;
         }
     }
     a.title, p.description {
-        margin: 0 5px 5px 5px;
+        margin: 0 0.5em 0.5em 0.5em;
     }
     a.title { 
         font-weight: bold;
@@ -497,7 +491,7 @@ div.attachment {
         position: relative;
         display: block;
         float: left;
-        margin: 0 10px 0 0;
+        margin: 0 1em 0 0;
         padding: 0;
         width: 100px;
         i {
@@ -534,7 +528,7 @@ form {
         padding: 0;
 		overflow: auto;
         label {
-            color: @white;
+            color: @grey_light_5;
 	        display: block;
             font-weight: bold;
             margin: 0 0 5px 0;
@@ -563,7 +557,7 @@ form {
                 list-style-type: none;
                 margin: 6px 0 0 0;
                 padding: 0;
-                color: @white;
+                color: @grey_light_5;
                 float:right;
                 font-weight: normal;
                 font-size: 10px;
@@ -581,8 +575,8 @@ form {
         padding: 6px;
         margin: 0;
         border-radius: 3px;
-        border: 1px inset darken(@white, 30%);
-        background: darken(@white, 10%);
+        border: 1px inset darken(@grey_light_5, 30%);
+        background: darken(@grey_light_5, 10%);
         color: lighten(@black, 10%);
         &:disabled {
             background: #ccc;
@@ -602,7 +596,7 @@ form {
         float: right;
         width: auto;
         .buttonized;
-        color: @white;
+        color: @grey_light_5;
         &:first-child {
             margin-right: 0;
         }
@@ -613,7 +607,7 @@ form {
 
 ul.token-input-list {
     cursor: text;
-    background: darken(@white, 20%);
+    background: darken(@grey_light_5, 20%);
     padding: 4px 3px !important;
     margin: 0;
     li {
@@ -672,7 +666,7 @@ div.token-input-dropdown {
             padding: 5px;
             list-style-type: none;
             &:hover {
-                background: @white;
+                background: @grey_light_5;
             }
 	    }
     }
@@ -705,14 +699,15 @@ div.comments {
         }
         div.content {
             p {
-                margin: 0 0 10px 0;
+                margin: 0 0 1em 0;
+                font-size: 0.8em;
             }
             p.info {
                 a.posted_by {
                     font-weight: bold;
                 }
                 span.date {
-                    font-size: 10px;
+                    font-size: 0.8em;
                 }
             }
             ul.actions {
@@ -727,9 +722,9 @@ div.comments {
        blockquote {
             background: lighten(@cello, 10%);
             border: 1px solid @cello;
-            padding: 5px;
+            padding: 0.5em;
             p {
-                margin: 5px 0 !important;
+                margin: 0.5em 0 !important;
             }
         }
         pre {
