@@ -31,7 +31,7 @@ urlpatterns = patterns('',
 
 urlpatterns += staticfiles_urlpatterns()
 
-"""
+
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$',
@@ -47,4 +47,4 @@ if settings.DEBUG:
              'show_indexes': True
         })
     )
-"""
+
