@@ -173,7 +173,7 @@ div#header {
     overflow: visible;
     height: 42px;
     ul.navigation {
-        overflow: visible;
+        overflow: hidden;
         margin: 0;
         padding: 0;
         position: relative;
@@ -185,6 +185,7 @@ div#header {
             margin: 0;
             width: auto;
             &:hover {
+                background: red;
                 overflow: visible;
             }
             a {
@@ -213,9 +214,9 @@ div#header {
         ul.sub {
             position: relative;
             background: @cello_dark_2;
-            border-left: 1px lighten(@black, 20%) solid;
-            border-right: 1px lighten(@black, 6%) solid;
-            border-bottom: 1px lighten(@black, 6%) solid;
+            border-left  : 1px @grey_dark_1 solid;
+            border-right : 1px @grey_dark_1 solid;
+            border-bottom: 1px @grey_dark_1 solid;
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
             top: 0;
