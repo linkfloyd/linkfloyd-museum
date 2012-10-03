@@ -40,7 +40,8 @@ body {
     background: @cello_dark_2;
     font-family: sans-serif;
     color: @cello_light_4;
-    font-size: 1em;
+    font-size: 0.8em;
+    line-height: 1.2em;
 }
 h1, h2, h3, h4, h5, h6, dt {
     margin: 0 0 0.5em 0;
@@ -48,22 +49,22 @@ h1, h2, h3, h4, h5, h6, dt {
     color: @grey_light_5;
 }
 h1 {
-    font-size: 1.8em;
+    font-size: 1.3em;
 }
 h2 {
-   font-size:1.6em;
+   font-size:1.25em;
 }
 h3 {
-    font-size: 1.4em;
+    font-size: 1.20em;
 }
 h4 {
-    font-size: 1.2em;
+    font-size: 1.15em;
 }
 h5 {
-    font-size: 1.0em;
+    font-size: 1.10em;
 }
 h6 {
-    font-size: 0.8;
+    font-size: 1.05;
 }
 p {
     margin: 0 0 1em 0;
@@ -239,7 +240,7 @@ div#header {
 	            color: lighten(@blue, 30%);
     	        text-decoration: none;
 	        }
-            font-size: 0.5em;
+            font-size: 0.8em;
             float: right;
             margin: 0 0.5em 0 0;
             padding: 0 0.5em 0 0.3em;
@@ -477,11 +478,11 @@ div.attachment {
     font-size: 0.8em;
     &.withThumbnail {
         a.title, p.description {
-            margin-left: 110px !important;
+            margin-left: 105px !important;
         }
     }
     a.title, p.description {
-        margin: 0 0.5em 0.5em 0.5em;
+        margin: 0 0 0.5em;
     }
     a.title { 
         font-weight: bold;
@@ -491,7 +492,7 @@ div.attachment {
         position: relative;
         display: block;
         float: left;
-        margin: 0 1em 0 0;
+        margin: 0;
         padding: 0;
         width: 100px;
         i {
@@ -700,7 +701,6 @@ div.comments {
         div.content {
             p {
                 margin: 0 0 1em 0;
-                font-size: 0.8em;
             }
             p.info {
                 a.posted_by {
@@ -720,7 +720,7 @@ div.comments {
            }
        }
        blockquote {
-            background: lighten(@cello, 10%);
+            background: @cello_light_1;
             border: 1px solid @cello;
             padding: 0.5em;
             p {
