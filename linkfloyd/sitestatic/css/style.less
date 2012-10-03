@@ -37,7 +37,7 @@
 body {
     padding: 0;
     margin: 0;
-    background: @cello_dark_2;
+    background: @black;
     font-family: sans-serif;
     color: @cello_light_4;
     font-size: 0.8em;
@@ -92,7 +92,7 @@ a {
     float: right;
 }
 a#logo {
-    top: 8px;
+    top: 11px;
     font-size: 36px;
     font-family: 'Lilita One', cursive;
     color: @grey_light_5;
@@ -168,29 +168,30 @@ p.success, p.error, p.warning {
     color: grey_light_5;
 }
 div#header {
-    background: @grey_dark_4;
-    border-bottom: 1px solid @black;
+    background: @cello_dark_2;
+    border-bottom: 1px solid @grey_dark_1;
     overflow: visible;
     height: 42px;
     ul.navigation {
         overflow: visible;
-    	> li {
-            border-right: 1px @grey_dark_4 solid;
-            border-left: 1px @grey_dark_3 solid;
-        }
+        margin: 0;
+        padding: 0;
+        position: relative;
+        height: 42px;
         li {
-            height: 42px;
+            line-height: 42px;
+            overflow: hidden;
             padding: 0;
             margin: 0;
-            position: relative;
-            overflow: hidden;
+            width: auto;
             &:hover {
                 overflow: visible;
             }
             a {
-                padding: 15px;
-                height: 10px;
-                font-size: 13px;
+                margin: 0;
+                padding: 0;
+                line-height: 42px;
+                vertical-align: middle;
                 font-weight: bold;
                 color: @grey_light_2;
                 display: block;
@@ -203,29 +204,34 @@ div#header {
                 }
             }
             a.avatar {
-                width: 42px;
-                height: 42px;
+                width: 41px;
+                height: 41px;
                 padding: 0;
                 margin: 0;
             }
         }
         ul.sub {
-            background: lighten(@black, 12%);
+            position: relative;
+            background: @cello_dark_2;
             border-left: 1px lighten(@black, 20%) solid;
             border-right: 1px lighten(@black, 6%) solid;
             border-bottom: 1px lighten(@black, 6%) solid;
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
-            position: absolute;
-            top: 42px;
+            top: 0;
             left: -1px;
             margin: 0;
             padding: 0;
-            z-index: 10;
+            z-index: 100;
             list-style-type: none;
             > li > a {
-                padding: 0 10px 0 0;
+                line-height: 30px;
+                padding: 0 5px;
+                margin: 0;
                 white-space: nowrap;
+                &:hover {
+                    background: @cello_dark_3;
+                }
             }
         }
     }
@@ -354,7 +360,7 @@ a#logo {
     display: block;
     position: absolute;
     float: left;
-    margin: -3px 0 0 0;
+    margin: 0;
 }
 div.channels {
     div.channel {
@@ -476,13 +482,15 @@ div.attachment {
     margin: 1em 0;
     padding: 0;
     font-size: 0.8em;
+    background: lighten(@black, 5%);
+    border: 1px solid lighten(@black, 10%);
     &.withThumbnail {
         a.title, p.description {
             margin-left: 105px !important;
         }
     }
     a.title, p.description {
-        margin: 0 0 0.5em;
+        margin: 0.5em 0.5em 0.5em 0;
     }
     a.title { 
         font-weight: bold;
