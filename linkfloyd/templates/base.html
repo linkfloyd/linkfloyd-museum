@@ -33,7 +33,7 @@
                         {% block extra_nav %}{% endblock extra_nav %}
                         {% if user.is_authenticated %}
                         <li>
-                           <a class="avatar" href="{{user.get_absolute_url}}" style="background: url({% gravatar_for_user user 50 %})"></a>
+                           <a class="avatar" href="{{user.get_absolute_url}}" style="background: url({% gravatar_for_user user 42 %})"></a>
                            <ul class="sub">
                                 <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
                                 <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
@@ -97,4 +97,3 @@
         <div id="footer"></div>
     </body>
 </html>
-
