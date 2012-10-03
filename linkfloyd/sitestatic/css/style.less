@@ -1,9 +1,9 @@
 
 @cello: #5D6F84;
-@cello_dark_1: darken(@cello, 10);
-@cello_dark_2: darken(@cello, 20);
-@cello_dark_3: darken(@cello, 30);
-@cello_dark_4: darken(@cello, 40);
+@cello_dark_1 : darken(@cello, 10);
+@cello_dark_2 : darken(@cello, 20);
+@cello_dark_3 : darken(@cello, 30);
+@cello_dark_4 : darken(@cello, 40);
 @cello_light_1: lighten(@cello, 10);
 @cello_light_2: lighten(@cello, 20);
 @cello_light_3: lighten(@cello, 30);
@@ -92,11 +92,15 @@ a {
     float: right;
 }
 a#logo {
-    top: 11px;
-    font-size: 36px;
+    top: 13px;
+    font-size: 34px;
     font-family: 'Lilita One', cursive;
     color: @grey_light_5;
     text-decoration: none;
+    display: block;
+    position: absolute;
+    float: left;
+    margin: 0 0 0 20px;
 }
 pre, ol, ul, blockquote  {
     padding: 0.5em;
@@ -167,72 +171,66 @@ p.success, p.error, p.warning {
     background: @red;
     color: grey_light_5;
 }
+
 div#header {
     background: @cello_dark_2;
-    border-bottom: 1px solid @grey_dark_1;
+    border-bottom: 1px solid @cello_dark_1;
     overflow: visible;
     height: 42px;
-    ul.navigation {
-        overflow: hidden;
-        margin: 0;
+    div.wrapper {
         padding: 0;
-        position: relative;
-        height: 42px;
+    }
+    ul.navigation {
+        overflow: visible;
+    	> li {
+        }
         li {
-            line-height: 42px;
-            overflow: hidden;
             padding: 0;
             margin: 0;
-            width: auto;
+            position: relative;
+            overflow: hidden;
             &:hover {
-                background: red;
                 overflow: visible;
             }
             a {
-                margin: 0;
-                padding: 0;
-                line-height: 42px;
-                vertical-align: middle;
+                padding: 16px;
+                height: 10px;
+                font-size: 12px;
                 font-weight: bold;
-                color: @grey_light_2;
+                color: lighten(@black, 60%);
                 display: block;
                 text-decoration: none;
                 &.active {
                     background: lighten(@black, 6%);
                 }
                 &:hover {
-                    color: grey_light_5;
+                    color: white;
                 }
             }
             a.avatar {
-                width: 41px;
-                height: 41px;
+                width: 42px;
+                height: 42px;
                 padding: 0;
                 margin: 0;
             }
         }
         ul.sub {
-            position: relative;
             background: @cello_dark_2;
-            border-left  : 1px @grey_dark_1 solid;
-            border-right : 1px @grey_dark_1 solid;
-            border-bottom: 1px @grey_dark_1 solid;
+            border-left: 1px @cello_dark_1 solid;
+            border-right: 1px @cello_dark_1 solid;
+            border-bottom: 1px @cello_dark_1 solid;
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
-            top: 0;
+            position: absolute;
+            top: 42px;
             left: -1px;
             margin: 0;
             padding: 0;
-            z-index: 100;
+            z-index: 10;
             list-style-type: none;
-            > li > a {
-                line-height: 30px;
-                padding: 0 5px;
-                margin: 0;
+             > li > a {
+                padding: 10px;
                 white-space: nowrap;
-                &:hover {
-                    background: @cello_dark_3;
-                }
             }
         }
     }
@@ -356,12 +354,6 @@ body.white div#content div.wrapper {
     h1, h2 {
 		border-bottom: 1px solid @grey_light_4;
     }
-}
-a#logo {
-    display: block;
-    position: absolute;
-    float: left;
-    margin: 0;
 }
 div.channels {
     div.channel {
