@@ -29,6 +29,9 @@
             <li>
             <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "Share" %}</a>
             </li>
+            <li>
+                {{link.posted_at|timesince}} {% trans "ago" %}
+            </li>
         </ul>
     </div>
         {% if expanded_comments %}
