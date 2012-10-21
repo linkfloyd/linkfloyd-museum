@@ -114,10 +114,7 @@ def index(request):
             return HttpResponseRedirect(reverse("browse_channels"))
     return render_to_response(
         "links/link_list.html",
-        context_builder(request,
-            links_from="subscriptions",
-            days=1,
-            ordering='top'),
+        context_builder(request, links_from="subscriptions"),
         context_instance=RequestContext(request)
     )
 
