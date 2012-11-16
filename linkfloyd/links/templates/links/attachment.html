@@ -2,7 +2,7 @@
 <div class="attachment {% if link.thumbnail_url %}withThumbnail{% endif %}">
     {% if link.thumbnail_url %}
         <a {%if link.player %} href="#" play="{{link.player}}"{% else %}href="{{link.get_absolute_url}}"{% endif %} class="thumbnail {% if link.player %}playble{% endif %}">
-            <img alt="thumbnail" src="{% thumbnail link.thumbnail_url '100' as im %}{{ im.url }}{% endthumbnail %}" />{% if link.player %}
+            <img alt="thumbnail" src="{% thumbnail link.thumbnail_url '130' as im %}{{ im.url }}{% endthumbnail %}" />{% if link.player %}
             <i></i>{% endif %}</a>
     {% endif %}
     <a class="title" href="{{link.url}}">{% if link.title %}{{link.title}}{% else %}{{link.url|truncatechars:60}}{% endif %}</a>
