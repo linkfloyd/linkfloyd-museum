@@ -103,20 +103,20 @@
 		</div>
 	</div>
     <div class="content section">
-        <h2 class="header">{{title}}
-            <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
+        <h2 class="nomargin">{{title}}</h2>
+        <ul class="flat-list ordering">
+            <li {% if ordering == 'controversial' %}class="active"{% endif %}>
                 <a href="?ordering=controversial">{% trans "Controversial" %}</a>
-            </span>
-            <span class="ordering{% if ordering == 'top' %} active{% endif %}">
+            </li>
+            <li {% if ordering == 'top' %}class="active"{% endif %}>
                 <a href="?ordering=top">{% trans "Top Voted" %}</a>
-            </span>
-            <span class="ordering{% if ordering == 'latest' %} active{% endif %}">
+            </li>
+            <li {% if ordering == 'latest' %}class="active"{% endif %}>
                 <a href="?ordering=latest">{% trans "Latest" %}</a>
-            </span>
-            <span class="ordering{% if ordering == 'hot' %} active{% endif %}">
+            </li>
+            <li {% if ordering == 'hot' %}class="active"{% endif %}>
                 <a href="?">{% trans "Hot" %}</a>
-            </span>
-         </h2>
+            </li>
         </ul>
         <div class="body">
             {% for link in links %}

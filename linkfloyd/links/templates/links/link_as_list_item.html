@@ -4,7 +4,7 @@
 		{% vote_buttons_for link %}
 	</div>
     <div class="content">
-        <p class="info"><a class="posted_by" href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> &rarr; <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>:</p>
+        <p class="info"><a class="posted_by" href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> &rarr; <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>: <span class="date">{{link.posted_at|date:"D m Y"}}</span><p>
         {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}
         {%if link.url %}
             {% include "links/attachment.html" %}
@@ -28,9 +28,6 @@
             {% endif %}
             <li>
             <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "Share" %}</a>
-            </li>
-            <li>
-                {{link.posted_at|timesince}} {% trans "ago" %}
             </li>
         </ul>
     </div>

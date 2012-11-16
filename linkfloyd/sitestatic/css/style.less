@@ -100,7 +100,8 @@ a#logo {
     display: block;
     position: absolute;
     float: left;
-    margin: 0 0 0 20px;
+    margin: 0;
+    padding: 0;
 }
 pre, ol, ul, blockquote  {
     padding: 0.5em;
@@ -136,9 +137,16 @@ dl {
     }
 }
 /* Layout */
+.nomargin {
+    margin: 0;
+}
+.nopadding {
+    padding: 0;
+}
 div.wrapper {
     margin: 0 auto;
     padding: 0 1.5em;
+    max-width: 1024px;
 }
 ul.flat-list {
     margin: 0;
@@ -153,6 +161,10 @@ ul.flat-list {
     > li:first-child {
         margin-left: 0;
     }
+}
+ul.ordering {
+    font-size: 0.8em;
+    margin: 0 0 1em 0;
 }
 p.success, p.error, p.warning {
     font-size: 1.6em;
@@ -175,10 +187,10 @@ p.success, p.error, p.warning {
 div#header {
     background: @cello_dark_2;
     border-bottom: 1px solid @cello_dark_1;
-    overflow: visible;
-    height: 42px;
+    overflow: auto;
+    padding: 0 0 0.5em 0;
     div.wrapper {
-        padding: 0;
+        padding: 0 0 0.5em 0;
     }
     ul.navigation {
         overflow: visible;
@@ -239,24 +251,6 @@ div#header {
     margin: 0;
     padding: 0;
     overflow: auto;
-    > .header {
-        span.ordering {
-            a {
-	            color: lighten(@blue, 30%);
-    	        text-decoration: none;
-	        }
-            font-size: 0.8em;
-            float: right;
-            margin: 0 0.5em 0 0;
-            padding: 0 0.5em 0 0.3em;
-            font-weight: normal;
-            &.active {
-                a {
-                    color: grey_light_5;
-                }
-            }
-        }
-    }
 }
 div.one-column {
     div.section.narrow {
@@ -434,15 +428,20 @@ div.post {
         }
         p.info {
             font-size: 0.8em;
-            a.posted_by, a.channel {
+            a.posted_by, a.channel, span.date {
                 font-weight: bold;
                 text-transform:lowercase;
             }
+            span.date {
+                font-weight: normal;
+            }
         }
         ul.actions {
+            padding: 0;
             margin: 0;
             font-weight: bold;
             font-size: 0.8em;
+            line-height: 1.2em;
         }
         div.embed_player {
 	        margin: 0;
@@ -462,7 +461,7 @@ div.post {
 }
 div.attachment {
     overflow: auto;
-    margin: 1em 0;
+    margin: 0 0 0.5em 0;
     padding: 0;
     font-size: 0.8em;
     background: lighten(@black, 5%);
@@ -743,8 +742,8 @@ div.pagination {
     .section {
         h1.header
         {
-           font-size: 28px;
-            padding: 10px 10px 5px 5px;
+            font-size: 28px;
+            padding: 0;
             display: inline;
             clear: both;
         }
@@ -757,4 +756,13 @@ div#add_link.fieldWrapper {
     ul.errorlist {
         display: none;
     }
+}
+
+@media screen and (max-width: 480px) {
+    div.panel {
+        display: none;
+    }
+}
+@media screen and (max-width: 1024px) {
+
 }
