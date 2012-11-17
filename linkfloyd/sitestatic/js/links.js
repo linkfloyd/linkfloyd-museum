@@ -105,17 +105,16 @@ $(document).ready( function() {
         link_el.trigger("switch_follow");
         return false;
     });
-    $("a.playble").click(function() {
-        var link_el = $(this).parent();
-        console.log(link_el);
-        var embed_player = link_el.find("div.embed_player");
-        if (embed_player.length) {
-            console.log("player removed");
-            embed_player.remove();
+    $("i.playButton").click(function() {
+        var attachment_el = $(this).parent();
+        console.log(attachment_el);
+        var embed_player_el = attachment_el.find("div.embed_player");
+        console.log(embed_player_el, embed_player_el.is(":empty"));
+        if (embed_player_el.is(":empty")) {
+            embed_player_el.append($(this).attr("player"));
+            attachment_el.addClass("expanded");
         } else {
             console.log("player appended");
-            link_el.append(
-                '<div class="embed_player">' + $(this).attr("play") + '</div>');
         }
         return false;
     });
