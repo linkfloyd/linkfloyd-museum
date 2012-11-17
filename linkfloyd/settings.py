@@ -124,7 +124,6 @@ INSTALLED_APPS = (
     'south',
     #'devserver',
 )
-
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
 """
 DEVSERVER_MODULES = (

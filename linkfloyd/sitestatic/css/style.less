@@ -124,7 +124,7 @@ dl {
     color: @grey;
     font-weight: bold;
     border-radius: 0.3em;
-	border: 0.1em outset lighten(@black, 20%);
+    border: 0.1em outset lighten(@black, 20%);
     text-decoration: none;
     &:hover {
         color: @grey_light_5;
@@ -157,8 +157,8 @@ ul.flat-list {
     > li {
         list-style-type: none;
         float: left;
-	    margin: 0 0 0 1.8em;
-	    padding: 0;
+        margin: 0 0 0 1.8em;
+        padding: 0;
     }
     > li:first-child {
         margin-left: 0;
@@ -206,7 +206,7 @@ div#header {
     }
     ul.navigation {
         overflow: visible;
-    	> li {
+        > li {
         }
         li {
             padding: 0;
@@ -274,7 +274,7 @@ div.two-column {
         width: 230px;
         float: right;
         div.section {
-			margin: 0;
+            margin: 0;
             border-bottom: 1px grey_light_5 dashed;
         }
         p {
@@ -282,22 +282,22 @@ div.two-column {
             margin-right: 0;
         }
         p.last-child {
-			margin-bottom: 0;
+            margin-bottom: 0;
         }
-	    div.avatars {
-	        a.avatar {
+        div.avatars {
+            a.avatar {
                 width: 30px;
-	        	height: 30px;
-        		float: left;
-    		    display: block;
-        		margin: 5px;
-    	    }
+                height: 30px;
+                float: left;
+                display: block;
+                margin: 5px;
+            }
         }
-	    dl {
-	        dd {
-    	    	margin: 0 0 0 1em;
-	        }
-    	}
+        dl {
+            dd {
+                margin: 0 0 0 1em;
+            }
+        }
         ul.navigation {
             margin: 0 0 1em 0;
             padding: 0;
@@ -306,31 +306,31 @@ div.two-column {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
-    	        background: @cello_dark_3;
-        		border-top: 0.1em solid @cello_dark_1;
-    	    	border-bottom: 0.1em solid @cello_dark_3;
-        		border-left: 0.1em solid @cello_dark_1;
+                background: @cello_dark_3;
+                border-top: 0.1em solid @cello_dark_1;
+                border-bottom: 0.1em solid @cello_dark_3;
+                border-left: 0.1em solid @cello_dark_1;
                 border-right: 0.1em solid @cello_dark_3;
- 	    	    a {
+                a {
                     padding: 0.5em;
-    		        text-noneffa: decoration;
+                    text-noneffa: decoration;
                 }
                 &:hover {
-        		    background: darken(@blue, 15%);
+                    background: darken(@blue, 15%);
                     a {
                         color: grey_light_5;
                     }
                 }
-    	    	&.active {
-    		        background: black;
-        		}
+                &.active {
+                    background: black;
+                }
                 &:last-child {
-                  	border-bottom-left-radius: 0.5em;
-    		        border-bottom-right-radius: 0.5em;
-        		}
+                    border-bottom-left-radius: 0.5em;
+                    border-bottom-right-radius: 0.5em;
+                }
                 &:first-child {
-                	border-top-left-radius: 0.5em;
-        			border-top-right-radius: 0.5em;
+                    border-top-left-radius: 0.5em;
+                    border-top-right-radius: 0.5em;
                     margin-top: 0;
                     }
                 }
@@ -380,8 +380,8 @@ div.post {
     padding: 1em 0;
     margin: 0;
     div.side {
-		float: left;
-		width: 24px;
+        float: left;
+        width: 24px;
         position: absolute;
     }
     &:first-child {
@@ -392,41 +392,41 @@ div.post {
     }
     div.vote_buttons {
         overflow: auto;
-		a.upVote, a.downVote, div.score {
-			display: block;
-		}
-		a.upVote {
-			width: 0;
-			height: 0;
-			border-left: 12px solid transparent;
-			border-right: 12px solid transparent;
-			border-bottom: 12px solid @cello;
-			margin-bottom: 5px;
-		}
-		a.downVote {
-			width: 0;
-			height: 0;
-			border-left: 12px solid transparent;
-			border-right: 12px solid transparent;
-			border-top: 12px solid @cello;
-		}
-		a.upVote.voted {
-			border-bottom-color: @cello_light_3;
-		}
-		a.downVote.voted {
-			border-top-color: @cello_light_3;
-		}
-		div.score {
-			margin: 0;
-			padding: 0 0 5px 0;
-			text-align: center;
-			vertical-align: center;
-			font-weight: bold;
-			color: @cello_light_3;
-			display: block;
-			clear: both;
-		}
-	}
+        a.upVote, a.downVote, div.score {
+            display: block;
+        }
+        a.upVote {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 12px solid @cello;
+            margin-bottom: 5px;
+        }
+        a.downVote {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid @cello;
+        }
+        a.upVote.voted {
+            border-bottom-color: @cello_light_3;
+        }
+        a.downVote.voted {
+            border-top-color: @cello_light_3;
+        }
+        div.score {
+            margin: 0;
+            padding: 0 0 5px 0;
+            text-align: center;
+            vertical-align: center;
+            font-weight: bold;
+            color: @cello_light_3;
+            display: block;
+            clear: both;
+        }
+    }
     > div.content {
         margin: 0 0 0 35px;
         padding: 0;
@@ -457,7 +457,7 @@ div.post {
             line-height: 1.6em;
         }
         div.embed_player {
-	        margin: 0;
+            margin: 0;
             padding: 0.5em 0 0 0;
             display: block;
             clear: both;
@@ -490,28 +490,35 @@ div.attachment {
     &.expanded {
         padding-top: 0.5em !important;
         background-image: none !important; 
+        i.playButton {
+            background-image: url(../img/icons/stop.png) !important;
+        }
     }
     &.playble {
         a.title, p.description {
-            margin-left: 40px !important;
+            margin-left: 25px !important;
         }
     }
-    a.title, p.description {
-        margin: 0.5em 0 0.5em 0.5em;
-    }
-    a.title { 
-        font-weight: bold;
-        display: block;
-    }
-    i {
-        background: top left url(https://s-static.ak.facebook.com/rsrc.php/v1/y6/r/gY6pCnDw29i.png);
-        width: 35px;
-        height: 26px;
-        position: absolute;
-        bottom: 4px;
-        left: 2px;
-        display: block;
-        float: left;
+    div.cover {
+        position: relative;
+        a.title, p.description {
+            margin: 0.5em 0 0.5em 0.5em;
+        }
+        a.title { 
+            font-weight: bold;
+            display: block;
+        }
+        i.playButton {
+            background: top left url(../img/icons/play.png);
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            float: left;
+            cursor: pointer;
+        }
     }
 }
 form {
@@ -536,15 +543,15 @@ form {
         }
         margin: 0 0 5px 0;
         padding: 0;
-		overflow: auto;
+        overflow: auto;
         label {
             color: @grey_light_5;
-	        display: block;
+            display: block;
             font-weight: bold;
             margin: 0 0 5px 0;
             padding: 0;
             &:first-child {
-	            margin-top: 0;
+                margin-top: 0;
             }
             span {
                 font-size: 10px;
@@ -559,7 +566,7 @@ form {
             }
         }
         ul.errorlist {
-	        float: right;
+            float: right;
             margin: 0;
             padding: 0;
             display: block;
@@ -602,7 +609,7 @@ form {
         padding: 4px;
     }
     input[type='submit'], input[type='button'] {
-	    margin:10px 10px 0 0;
+        margin:10px 10px 0 0;
         float: right;
         width: auto;
         .buttonized;
@@ -678,7 +685,7 @@ div.token-input-dropdown {
             &:hover {
                 background: @grey_light_5;
             }
-	    }
+        }
     }
 }
 

@@ -269,7 +269,7 @@ msgstr "Yorumlar"
 #: links/templates/links/link_as_list_item.html:51
 #, python-format
 msgid " <a href=\"%(login_url)s\">Log in</a> to leave comment "
-msgstr "Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yap</a>"
+msgstr "Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yapsan</a> NOLURDU!!?"
 
 #: links/templates/links/link_detail.html:24
 msgid "Posted at"
