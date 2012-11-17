@@ -35,7 +35,8 @@ def fetch_info(request):
                 "html": render_to_string(
                     "links/attachment.html",
                     {
-                        "link": dummy_link
+                        "link": dummy_link,
+                        "attachment_editable": True
                     }
                 ),
                 "info": info

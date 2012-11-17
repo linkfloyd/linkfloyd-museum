@@ -31,6 +31,7 @@ def submit_link(request, bookmarklet=False):
 
     if request.method == "POST":
         form = SubmitLinkForm(request.POST)
+        print request.POST
         if form.is_valid():
             link = form.save(commit=False)
             link.posted_by = request.user
@@ -41,9 +42,11 @@ def submit_link(request, bookmarklet=False):
                 return HttpResponseRedirect("%s?highlight=%s" % (
                     link.channel.get_absolute_url(), link.id))
         else:
+            print form.errors
             return render_to_response(
                 template, {
                     "form": form,
+                    "attachment_editable": True,
                     "active_nav_item": "submit"
                 }, context_instance=RequestContext(request))
     else:
@@ -60,6 +63,7 @@ def submit_link(request, bookmarklet=False):
                     "rating": 1
                 }),
                 "channel": channel,
+                "attachment_editable": True,
                 "active_nav_item": "submit"
             }, context_instance=RequestContext(request)
         )
@@ -67,6 +71,7 @@ def submit_link(request, bookmarklet=False):
 @login_required
 def update(request, pk):
     if request.POST:
+        print request.POST
         form = UpdateLinkForm(
             request.POST,
             instance=get_object_or_404(
@@ -76,14 +81,17 @@ def update(request, pk):
             link = form.save(request.POST)
             return HttpResponseRedirect(link.get_absolute_url())
         else:
+            print form.errors
             return render_to_response("links/submit.html", {
-                "form": form
+                "form": form,
+                "attachment_editable": True
             }, context_instance=RequestContext(request))
     else:
         return render_to_response("links/submit.html", {
-            "form": UpdateLinkForm(
-                instance=get_object_or_404(
-                    Link, pk=pk, posted_by=request.user)),
+                "form": UpdateLinkForm(
+                    instance=get_object_or_404(
+                        Link, pk=pk, posted_by=request.user)),
+                "attachment_editable": True
             }, context_instance=RequestContext(request)
         )
 

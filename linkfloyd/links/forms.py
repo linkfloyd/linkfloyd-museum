@@ -53,6 +53,7 @@ class SubmitLinkForm(forms.ModelForm):
     class Media:
         js = ('js/autofill.js',
               'js/libs/jquery.tokeninput.js',
+              'js/libs/jquery.jeditable.js',
               'js/csrf_fix.js')
 
     def clean(self):
@@ -82,7 +83,7 @@ class UpdateLinkForm(SubmitLinkForm):
 
     class Meta:
         model = Link
-        fields = ['body', 'channel', 'rating']
+        fields = ['title', 'description', 'body', 'channel', 'rating']
 
     class Media:
         js = (

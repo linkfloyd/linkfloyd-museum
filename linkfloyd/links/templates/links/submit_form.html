@@ -1,4 +1,6 @@
 {% load i18n %}
+>> {{attachment_editable}}
+
 <form action="#" method="post">
     {% csrf_token %}
     <div class="fieldWrapper" id="attachment_preview">
@@ -15,6 +17,25 @@
 </form>
 
 <script type="application/javascript">
+    $('[contenteditable]').live('focus', function() {
+        var $this = $(this);
+        $this.data('before', $this.html());
+        return $this;
+    }).live('blur keyup paste', function() {
+        var $this = $(this);
+        if ($this.data('before') !== $this.html()) {
+            $this.data('before', $this.html());
+            $this.trigger('change');
+        }
+        return $this;
+    });
+
+    $("a.title").live("change", function() {
+        $("#id_title").val($("a.title").html());
+    })
+    $("p.description").live("change", function() {
+        $("#id_description").val($("p.description").html());
+    })
     $("#id_body").focus(function() {
         $(this).height(48)
     });
@@ -37,5 +58,4 @@
     if (selected_channel != undefined) {
         options.prePopulate = [channels[selected_channel]]
     }
-    $("#id_channel").tokenInput(channels, options);
 </script>
