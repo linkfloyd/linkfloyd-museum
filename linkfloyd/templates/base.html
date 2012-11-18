@@ -23,67 +23,120 @@
     {% include "includes/google_analytics.html" %}
 
     {% block extra_head %}{% endblock %}
+    <script type="text/javascript" >
+        var ww;
+        $(document).ready(function() {
+            ww = document.body.clientWidth;
+            $(".nav li a").each(function() {
+                if ($(this).next().length > 0) {
+                    $(this).addClass("parent");
+                };
+            })
+            
+            $(".toggleMenu").click(function(e) {
+                e.preventDefault();
+                $(this).toggleClass("active");
+                $(".nav").toggle();
+            });
+            adjustMenu();
+        })
+
+        $(window).bind('resize orientationchange', function() {
+            ww = document.body.clientWidth;
+            adjustMenu();
+        });
+
+        var adjustMenu = function() {
+            if (ww < 768) {
+                $(".toggleMenu").css("display", "inline-block");
+                if (!$(".toggleMenu").hasClass("active")) {
+                    $(".nav").hide();
+                } else {
+                    $(".nav").show();
+                }
+                $(".nav li").unbind('mouseenter mouseleave');
+                $(".nav li a.parent").unbind('click').bind('click', function(e) {
+                    // must be attached to anchor element to prevent bubbling
+                    e.preventDefault();
+                    $(this).parent("li").toggleClass("hover");
+                });
+            } 
+            else if (ww >= 768) {
+                $(".toggleMenu").css("display", "none");
+                $(".nav").show();
+                $(".nav li").removeClass("hover");
+                $(".nav li a").unbind('click');
+                $(".nav li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
+                    // must be attached to li so that mouseleave is not triggered when hover over submenu
+                    $(this).toggleClass('hover');
+                });
+            }
+        }
+    </script>
+
+
 </head>
 <body {% block class_body %}{% endblock %}>
     <div id="header">
         <div class="wrapper">
-            <a id="logo" href="/">LinkFloyd</a>
-                <div class="right">
-                    <ul class="flat-list navigation">
-                        {% block extra_nav %}{% endblock extra_nav %}
+            <a class="toggleMenu" href="#">{% trans "Menu" %}</a>
+            <ul class="nav">
+                <li>
+                    <a id="logo" href="/">LinkFloyd</a>
+                </li>
+                {% block extra_nav %}{% endblock extra_nav %}
+                {% if user.is_authenticated %}
+                <li>
+                   <a href="{{user.get_absolute_url}}">Ben</a>
+                   <ul class="sub">
+                        <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
+                        <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="#">{% trans "Posts" %}</a>
+                    <ul>
                         {% if user.is_authenticated %}
                         <li>
-                           <a class="avatar" href="{{user.get_absolute_url}}" style="background: url({% gravatar_for_user user 42 %})"></a>
-                           <ul class="sub">
-                                <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
-                                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-                            </ul>
+                            <a href="{% url links_upvoted_by user %}">{% trans "Your Likes" %}</a>
                         </li>
                         {% endif %}
                         <li>
-                            <a href="#">{% trans "Links" %}</a>
-                            <ul class="sub">
-                                {% if user.is_authenticated %}
-                                <li>
-                                    <a href="{% url links_upvoted_by user %}">Your Likes</a>
-                                </li>
-                                {% endif %}
-                                <li>
-                                    <a href="{% url all_links %}">All Links</a>
-                                </li>
-                            </ul>
+                            <a href="{% url all_links %}">{% trans "All Posts" %}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" {% if active_nav_item == "channels" %}class="active"{% endif %}>
+                        {% trans "Channels" %}
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a>
                         </li>
                         <li>
-                            <a href="#" {% if active_nav_item == "channels" %}class="active"{% endif %}>
-                                {% trans "Channels" %}
-                            </a>
-                            <ul class="sub">
-                                <li>
-                                    <a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a>
-                                </li>
-                                <li>
-                                    <a href="{% url create_channel %}">{% trans "Create a Channel" %}</a>
-                                </li>
-                                {% if user.is_authenticated %}
-                                <li>
-                                    <a href="{% url browse_subscriptions %}">{% trans "Your Subscriptions" %}</a>
-                                </li>
-                                {% endif %}
-                            </ul>
+                            <a href="{% url create_channel %}">{% trans "Create a Channel" %}</a>
                         </li>
-                        <li><a href="/links/random/">{% trans "Random" %}</a></li>
-                       <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
-                       <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>
-                        </li>
-                        {% if not user.is_authenticated %}
+                        {% if user.is_authenticated %}
                         <li>
-                            <a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
+                            <a href="{% url browse_subscriptions %}">{% trans "Your Subscriptions" %}</a>
                         </li>
                         {% endif %}
                     </ul>
-                </div>
-            </div>
+                </li>
+                <li><a href="/links/random/">{% trans "Random" %}</a></li>
+                <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
+                    <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>
+                </li>
+                {% if not user.is_authenticated %}
+                <li>
+                    <a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
+    </div>
         {% if messages %}
             {% for message in messages %}
                 <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
