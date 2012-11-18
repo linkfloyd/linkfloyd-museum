@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-21 07:51-0500\n"
-"PO-Revision-Date: 2012-09-21 15:45+0200\n"
+"POT-Creation-Date: 2012-11-18 10:08-0600\n"
+"PO-Revision-Date: 2012-11-18 18:11+0200\n"
 "Last-Translator: Mirat Can Bayrak <miratcanbayrak@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,29 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-#: api/views.py:139
+#: api/views.py:140
 msgid "You have to be logged in to complete this action."
 msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmış olman gerekiyor."
 
-#: api/views.py:170 links/templates/links/link_as_list_item.html:28
+#: api/views.py:171
+#: links/templates/links/link_as_list_item.html:23
 #: links/templates/links/link_list.html:51
 msgid "Unsubscribe"
 msgstr "Takibi Bırak"
 
-#: api/views.py:184
+#: api/views.py:185
 msgid "Are you sure that you want to be admin of this channel?"
 msgstr "Bu kanalın yöneticisi olmak istediğinden emin misin?"
 
-#: api/views.py:197 api/views.py:210
+#: api/views.py:198
+#: api/views.py:211
 #: channels/templates/channels/channel_list.html:16
-#: links/templates/links/link_as_list_item.html:30
+#: links/templates/links/link_as_list_item.html:25
 #: links/templates/links/link_list.html:51
 msgid "Subscribe"
 msgstr "Takip Et"
 
-#: api/views.py:202
-msgid ""
-"You will loose your adminstration rights from this channel. Are you sure?"
+#: api/views.py:203
+msgid "You will loose your adminstration rights from this channel. Are you sure?"
 msgstr "Kanaldaki yönetim haklarınızı kaybedeceksiniz. Emin misiniz?"
 
 #: channels/forms.py:17
@@ -108,7 +109,8 @@ msgstr "Takip Ettiğin Kanallar Görüntüleniyor"
 msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
-#: channels/templates/channels/channel.html:23 templates/base.html:69
+#: channels/templates/channels/channel.html:23
+#: templates/base.html:123
 msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
@@ -123,7 +125,7 @@ msgid "No links found."
 msgstr "Hiç link bulunamadı."
 
 #: channels/templates/channels/channel.html:80
-#: links/templates/links/link_as_list_item.html:36
+#: links/templates/links/link_as_list_item.html:31
 msgid "Share"
 msgstr "Paylaş"
 
@@ -140,7 +142,8 @@ msgstr "Takip Ediliyor"
 msgid "%(subscribers)s subscribers"
 msgstr "%(subscribers)s takipçi"
 
-#: channels/templates/channels/create.html:9 templates/base.html:65
+#: channels/templates/channels/create.html:9
+#: templates/base.html:119
 msgid "Create a Channel"
 msgstr "Kanal Oluştur"
 
@@ -158,11 +161,13 @@ msgstr "Gönder"
 msgid "Name"
 msgstr "İsim"
 
-#: channels/templates/channels/update.html:17 preferences/models.py:16
+#: channels/templates/channels/update.html:17
+#: preferences/models.py:16
 msgid "Description"
 msgstr "Açıklama"
 
-#: comments/models.py:25 links/templates/links/update_form.html:13
+#: comments/models.py:25
+#: links/templates/links/update_form.html:13
 msgid "Comment"
 msgstr "Yorum"
 
@@ -177,9 +182,7 @@ msgstr "%(username)s adlı kullanıcı şu gönderiye yorum yaptı: %(link_title
 
 #: comments/templates/comments/body.txt:9
 msgid "To reply to this comment or to see all comments on this link click here"
-msgstr ""
-"Bu yoruma cevap vermek ya da bütün yorumları görüntülemek için buraya "
-"tıklayın"
+msgstr "Bu yoruma cevap vermek ya da bütün yorumları görüntülemek için buraya tıklayın"
 
 #: comments/templates/comments/subject.txt:1
 #, python-format
@@ -233,16 +236,16 @@ msgstr "%s tarafından beğenilmiş gönderiler"
 msgid "All Posts Shared on Linkfloyd"
 msgstr "Linkfloyd üzerinde paylaşılmış tüm gönderiler"
 
-#: links/views.py:113
+#: links/views.py:121
 msgid "Subscribe channels that you are interested in"
 msgstr "İlgi alanına giren kanalları takibe al"
 
-#: links/views.py:129
+#: links/views.py:137
 #, python-format
 msgid "%s on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
 
-#: links/views.py:149
+#: links/views.py:157
 #, python-format
 msgid "%s's Up Votes on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
@@ -253,20 +256,20 @@ msgid "ago"
 msgstr "önce"
 
 #: links/templates/links/comment.html:10
-#: links/templates/links/link_as_list_item.html:21
+#: links/templates/links/link_as_list_item.html:16
 msgid "Update"
 msgstr "Güncelle"
 
 #: links/templates/links/comment.html:11
-#: links/templates/links/link_as_list_item.html:22
+#: links/templates/links/link_as_list_item.html:17
 msgid "Delete"
 msgstr "Sil"
 
-#: links/templates/links/link_as_list_item.html:19
+#: links/templates/links/link_as_list_item.html:14
 msgid "Comments"
 msgstr "Yorumlar"
 
-#: links/templates/links/link_as_list_item.html:51
+#: links/templates/links/link_as_list_item.html:46
 #, python-format
 msgid " <a href=\"%(login_url)s\">Log in</a> to leave comment "
 msgstr "Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yapsan</a> NOLURDU!!?"
@@ -295,7 +298,8 @@ msgstr "Notlar & Kurallar"
 msgid "Actions"
 msgstr "Aksiyonlar"
 
-#: links/templates/links/link_list.html:45 templates/base.html:76
+#: links/templates/links/link_list.html:45
+#: templates/base.html:130
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
@@ -312,12 +316,8 @@ msgid "Recommened Channels"
 msgstr "Önerilen Kanallar"
 
 #: links/templates/links/link_list.html:96
-msgid ""
-"Drag and drop \"Post to Linkfloyd\" button to you bookmarks toolbar. It will "
-"let you share web pages on Linkfloyd easily."
-msgstr ""
-"\"Post to Linkfloyd\" düğmesini yer imi araç çubuğuna sürükleyip bırak. Web "
-"sayfa"
+msgid "Drag and drop \"Post to Linkfloyd\" button to you bookmarks toolbar. It will let you share web pages on Linkfloyd easily."
+msgstr "\"Post to Linkfloyd\" düğmesini yer imi araç çubuğuna sürükleyip bırak. Web sayfa"
 
 #: links/templates/links/link_list.html:100
 msgid "Remember to Vote"
@@ -325,36 +325,29 @@ msgstr "Oylamayı Unutma"
 
 #: links/templates/links/link_list.html:101
 msgid "Votes are intended to indicate importance and relevance to the posts."
-msgstr ""
-"Oylar gönderilerin önemliliğini ve işe yararlığını tespit etmek için "
-"kullanılıyor"
+msgstr "Oylar gönderilerin önemliliğini ve işe yararlığını tespit etmek için kullanılıyor"
 
 #: links/templates/links/link_list.html:102
-msgid ""
-"If you think something contributes to conversation, upvote it. If you think "
-"it does not contribute to the channel it is posted in or is off-topic in a "
-"particular community, downvote it."
-msgstr ""
-"Gönderinin önemli-işe yarar olduğunu düşünüyorsan yukarı oylamayı unutma. "
-"Eğer önemsiz ya da yanlış kanalda olduğunu düşünüyorsan aşağı oylamalısın"
+msgid "If you think something contributes to conversation, upvote it. If you think it does not contribute to the channel it is posted in or is off-topic in a particular community, downvote it."
+msgstr "Gönderinin önemli-işe yarar olduğunu düşünüyorsan yukarı oylamayı unutma. Eğer önemsiz ya da yanlış kanalda olduğunu düşünüyorsan aşağı oylamalısın"
 
-#: links/templates/links/link_list.html:108
+#: links/templates/links/link_list.html:109
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: links/templates/links/link_list.html:111
+#: links/templates/links/link_list.html:112
 msgid "Top Voted"
 msgstr "Yüksek Puanlı"
 
-#: links/templates/links/link_list.html:114
+#: links/templates/links/link_list.html:115
 msgid "Latest"
 msgstr "En Son"
 
-#: links/templates/links/link_list.html:117
+#: links/templates/links/link_list.html:118
 msgid "Hot"
 msgstr "Sıcak"
 
-#: links/templates/links/submit.html:6
+#: links/templates/links/submit.html:7
 msgid "Post a Link"
 msgstr "Bağ Gönder"
 
@@ -406,31 +399,44 @@ msgstr "Seçeneklerin güncellendi."
 msgid "Update Preferences"
 msgstr "Seçenekleri Güncelle"
 
-#: templates/base.html:38
+#: templates/base.html:82
+msgid "Menu"
+msgstr "Menü"
+
+#: templates/base.html:92
 msgid "Preferences"
 msgstr "Seçenekler"
 
-#: templates/base.html:39
+#: templates/base.html:93
 msgid "Log out"
 msgstr "Çıkış Yap"
 
-#: templates/base.html:44
-msgid "Links"
-msgstr "Bağlar"
+#: templates/base.html:98
+msgid "Posts"
+msgstr "Gönderiler"
 
-#: templates/base.html:58
+#: templates/base.html:102
+msgid "Your Likes"
+msgstr "Sevdiklerim"
+
+#: templates/base.html:106
+msgid "All Posts"
+msgstr "Tüm Gönderiler"
+
+#: templates/base.html:112
 msgid "Channels"
 msgstr "Kanallar"
 
-#: templates/base.html:62
+#: templates/base.html:116
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
 
-#: templates/base.html:74
+#: templates/base.html:128
 msgid "Random"
 msgstr "Rasgele"
 
-#: templates/base.html:80 templates/registration/login.html:2
+#: templates/base.html:134
+#: templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
 
@@ -454,12 +460,8 @@ msgstr "Teşekkürler %(account)s, aktivasyonun tamamlandı"
 
 #: templates/registration/activate.html:8
 #, python-format
-msgid ""
-"Now <a href='%(login_url)s'>login</a> using the username and password you "
-"set at registration."
-msgstr ""
-"Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a "
-"href='%(login_url)s'>Giriş yap</a>abilirsin."
+msgid "Now <a href='%(login_url)s'>login</a> using the username and password you set at registration."
+msgstr "Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a href='%(login_url)s'>Giriş yap</a>abilirsin."
 
 #: templates/registration/activate.html:10
 msgid "It seems that your activation key is invalid. Check the URL again."
@@ -467,25 +469,19 @@ msgstr "Aktivasyon anahtarın geçersiz gözüküyor. URL'yi bir kontrol et."
 
 #: templates/registration/activation_complete.html:5
 #, python-format
-msgid ""
-"Activation complete. Now <a href='%(login_url)s'>log in</a> using the "
-"username and password you set at registration."
-msgstr ""
-"Aktivasyon tamamlandı. Şimdi kayıt esnasında belirlediğin kullanıcı adı ve "
-"şifre ile <a href='%(login_url)s'>Giriş yap</a>abilirsin."
+msgid "Activation complete. Now <a href='%(login_url)s'>log in</a> using the username and password you set at registration."
+msgstr "Aktivasyon tamamlandı. Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a href='%(login_url)s'>Giriş yap</a>abilirsin."
 
 #: templates/registration/activation_email.txt:1
 #, python-format
 msgid ""
 "You have asked to register an account at %(site_name)s.\n"
 "\n"
-"To activate this account, click the following link within the next "
-"%(expiration_days)s days:"
+"To activate this account, click the following link within the next %(expiration_days)s days:"
 msgstr ""
 "%(site_name)s üzerinde bir hesap oluşturmak için başvuruda bulundun.\n"
 "\n"
-"Hesabını aktive edebilmen için aşağıdaki bağlantıya %(expiration_days)s gün "
-"içinde tıklaman gerekiyor:"
+"Hesabını aktive edebilmen için aşağıdaki bağlantıya %(expiration_days)s gün içinde tıklaman gerekiyor:"
 
 #: templates/registration/activation_email.txt:7
 #, python-format
@@ -497,7 +493,8 @@ msgstr "%(site_name)s Yönetimi."
 msgid "Account registration for %(site_name)s"
 msgstr "%(site_name)s için hesap kaydı"
 
-#: templates/registration/login.html:6 templates/registration/login.html:18
+#: templates/registration/login.html:6
+#: templates/registration/login.html:18
 msgid "Log in"
 msgstr "Giriş Yap"
 
@@ -535,11 +532,8 @@ msgstr "Şifre sıfırlanması tamamlandı"
 
 #: templates/registration/password_reset_complete.html:3
 #, python-format
-msgid ""
-"Your password has been reset, you can <a href=\"%(login_url)s\">log in</a>.</"
-"p>"
-msgstr ""
-"Şifren sıfırlandı, <a href=\"%(login_url)s\">giriş yap</a>abilirsin.</p>"
+msgid "Your password has been reset, you can <a href=\"%(login_url)s\">log in</a>.</p>"
+msgstr "Şifren sıfırlandı, <a href=\"%(login_url)s\">giriş yap</a>abilirsin.</p>"
 
 #: templates/registration/password_reset_confirm.html:2
 #: templates/registration/password_reset_done.html:2
@@ -556,12 +550,8 @@ msgid "Enter your new password below to reset your password"
 msgstr "Yeni şifreni aşağıya yaz, ve bu sefer unutma"
 
 #: templates/registration/password_reset_done.html:13
-msgid ""
-"We have sent you an email with a link to reset your password.  Please check "
-"your email and click the link to continue."
-msgstr ""
-"E-posta adresine şifreni sıfırlayabilmen için bir e-posta attık. O posta "
-"içinde bir bağ var, ona tıklaman gerekiyor."
+msgid "We have sent you an email with a link to reset your password.  Please check your email and click the link to continue."
+msgstr "E-posta adresine şifreni sıfırlayabilmen için bir e-posta attık. O posta içinde bir bağ var, ona tıklaman gerekiyor."
 
 #: templates/registration/password_reset_email.html:1
 #, python-format
@@ -570,15 +560,13 @@ msgid ""
 "\n"
 "You are requested that your password be reset on the %(site_name)s site.\n"
 "\n"
-"Click the following link, or copy and paste it into your web browser to "
-"reset your password:"
+"Click the following link, or copy and paste it into your web browser to reset your password:"
 msgstr ""
 "Merhaba %(user)s,\n"
 "\n"
 "%(site_name)s üserinde şifre sıfırlama isteğinde bulundun.\n"
 "\n"
-"Bu işlemi gerçekleştirebilmek için aşağıdaki bağlantıya tıkla ya da internet "
-"tarayıcına kopyalayıp yapıştır:"
+"Bu işlemi gerçekleştirebilmek için aşağıdaki bağlantıya tıkla ya da internet tarayıcına kopyalayıp yapıştır:"
 
 #: templates/registration/password_reset_email.html:9
 #, python-format
@@ -603,12 +591,8 @@ msgid "Activation email sent"
 msgstr "Aktivasyon e-postası gönderildi"
 
 #: templates/registration/registration_complete.html:3
-msgid ""
-"An activation email has been sent. Check your email and click on the link to "
-"activate your account."
-msgstr ""
-"E-posta adresine aktivasyon işlemini tamamlayabilmen için bir e-posta "
-"gönderdik."
+msgid "An activation email has been sent. Check your email and click on the link to activate your account."
+msgstr "E-posta adresine aktivasyon işlemini tamamlayabilmen için bir e-posta gönderdik."
 
 #: templates/registration/registration_form.html:2
 #: templates/registration/registration_form.html:6
@@ -646,6 +630,9 @@ msgstr "Bu sayfayı düzenle"
 #: wiki/templates/wiki/view.html:19
 msgid "Create this page"
 msgstr "Bu sayfayı oluştur"
+
+#~ msgid "Links"
+#~ msgstr "Bağlar"
 
 #~ msgid "Click and drag \"Post to Linkfloyd\" button to your toolbar."
 #~ msgstr ""
