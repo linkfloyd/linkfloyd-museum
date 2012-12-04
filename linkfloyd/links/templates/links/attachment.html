@@ -1,8 +1,7 @@
 {% load thumbnail %}{% spaceless %}
-<div class="attachment {% if expanded_attachments and link.player %}expanded{% endif %} {% if link.player %}playble{% endif %}"
+<div class="attachment{% if expanded_attachments and link.player %} expanded{% endif %}{% if link.player %} playble{% endif %}{% if link.thumbnail_url %} thumbnailed{% endif %}"
         {% thumbnail link.thumbnail_url '800' blurred="True" as im %}style="background-image: url({{ im.url }});"{% endthumbnail %}>
     <div class="embed_player">{% if expanded_attachments %}{{link.player|safe}}{% endif %}</div>
-    		
     <div class="cover">
         {% if link.player %}<i class="playButton" player="{{link.player}}"></i>{% endif %}
         <a class="title" href="{{link.url}}"{% if attachment_editable %} contenteditable="True"{% endif %}>{% if link.title %}{{link.title}}{% else %}{{link.url|truncatechars:60}}{% endif %}</a>
