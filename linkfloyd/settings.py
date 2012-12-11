@@ -2,16 +2,15 @@
 
 import os
 
-ugettext = lambda s: s # dummy ugettext function, as django's docs say
+ugettext = lambda s: s  # dummy ugettext function, as django's docs say
 
 from local_settings import *
 
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = False
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
     ('Mirat Can Bayrak', 'miratcanbayrak@gmail.com'),
-)
+    )
 
 MANAGERS = ADMINS
 
@@ -32,7 +31,7 @@ LANGUAGE_CODE = 'tr'
 LANGUAGES = (
     ('tr', 'Türkçe'),
     ('en', 'English')
-)
+    )
 
 SITE_ID = 1
 
@@ -51,7 +50,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-)
+    )
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -59,14 +58,14 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
+    )
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+    #     'django.template.loaders.eggs.Loader',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -76,24 +75,23 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # 'django.middleware.locale.LocaleMiddleware',
-)
-  
+    )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-   "django.contrib.auth.context_processors.auth",
+    "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
-)
+    )
 
 ROOT_URLCONF = 'linkfloyd.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
-)
+    )
 
 INSTALLED_APPS = (
     # contrib
@@ -123,19 +121,17 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     #'devserver',
-)
+    )
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
-"""
-DEVSERVER_MODULES = (
-    'devserver.modules.profile.LineProfilerModule',
-    'devserver.modules.sql.SQLRealTimeModule',
-)
-"""
+#DEVSERVER_MODULES = (
+#    'devserver.modules.profile.LineProfilerModule',
+#    'devserver.modules.sql.SQLRealTimeModule',
+#)
 DEVSERVER_TRUNCATE_SQL = True
 
 # EMAIL
 
-SEND_BROKEN_LINK_EMAILS=True
+SEND_BROKEN_LINK_EMAILS = True
 DEFAULT_FROM_EMAIL = "noreply@linkfloyd.com"
 
 
