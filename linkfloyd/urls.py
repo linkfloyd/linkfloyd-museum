@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -12,7 +12,9 @@ admin.autodiscover()
 
 from django.views.generic.simple import direct_to_template
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
+
     url(r'^$', 'links.views.index', name='index'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^links/', include('linkfloyd.links.urls')),
@@ -33,18 +35,20 @@ urlpatterns += staticfiles_urlpatterns()
 
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
+    urlpatterns += patterns(
+        '',
+
         (r'^media/(?P<path>.*)$',
          'django.views.static.serve',
          {
              'document_root': settings.MEDIA_ROOT,
              'show_indexes': True
-        }),
+         }),
         (r'^static/(?P<path>.*)$',
          'django.views.static.serve',
          {
              'document_root': settings.STATIC_ROOT,
              'show_indexes': True
-        })
+         }),
+        url(r'^experimental/', include('linkfloyd.experimental.urls'))
     )
-

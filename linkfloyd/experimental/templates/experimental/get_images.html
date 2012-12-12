@@ -1,0 +1,17 @@
+<form action="" method="post">
+  {% csrf_token %}
+
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+
+  <button type="submit">get images</button>
+</form>
+
+<ul>
+  {% for image in images %}
+    <li>
+      <img src="{{ image }}" width="100" height="100" />
+    </li>
+  {% endfor %}
+</ul>
