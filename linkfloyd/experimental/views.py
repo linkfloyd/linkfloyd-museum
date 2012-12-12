@@ -13,10 +13,11 @@ class GetImages(FormView):
         p = CustomHTMLParser(url, min_size)
 
         # update context
+        images = list(p.get_images())
         context = self.get_context_data(form=form)
         context.update({
-            'images': list(p.get_images())
+            'images': images
         })
 
         # and show response
-        return self.render_to_response(self.get_context_data(form=form))
+        return self.render_to_response(context)
