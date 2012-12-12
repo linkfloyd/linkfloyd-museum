@@ -1,3 +1,6 @@
+# you should install these packages before pip installation on Ubuntu:
+# python-virtualenv, git, python-dev
+
 BeautifulSoup==3.2.0
 Django==1.4
 Markdown==2.1.1
@@ -23,3 +26,6 @@ python-dateutil==1.5
 qhonuskan-votes==0.1.7
 sorl-thumbnail==11.12
 wsgiref==0.1.2
+
+## Development
+Fabric
