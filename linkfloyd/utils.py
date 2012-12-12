@@ -1,4 +1,3 @@
-import requests
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from django.http import HttpResponse
 from django.utils.html_parser import HTMLParser
@@ -165,7 +164,6 @@ def reduced_markdown(text, *args, **kwargs):
     from markdown import util
     from markdown import markdown
 
-
     def run_with_prettify(self, parent, blocks):
         """ Run method is overriden to render pre tag with prettify class """
 
@@ -210,6 +208,7 @@ def reduced_markdown(text, *args, **kwargs):
 
     return markdown(text, *args, **kwargs)
 
+
 def get_object_or_403(klass, *args, **kwargs):
     from django.shortcuts import _get_queryset
     queryset = _get_queryset(klass)
@@ -217,7 +216,6 @@ def get_object_or_403(klass, *args, **kwargs):
         return queryset.get(*args, **kwargs)
     except queryset.model.DoesNotExist:
         return HttpResponse(status=403)
-
 
 class HTMLImageParser(HTMLParser):
     """
@@ -253,7 +251,7 @@ class CustomHTMLParser(object):
                 # first try to read content length
                 content_length = int(content_length_header[0])
             except IndexError:
-                # if content length doesn't exist, donwload for min_size and
+                # if content length doesn't exist, download for min_size and
                 # check the size.
                 content_length = len(content.read(self.min_size))
 
