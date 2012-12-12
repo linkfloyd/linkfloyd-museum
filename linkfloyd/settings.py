@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'linkfloyd.comments',
     'linkfloyd.summaries',
     'linkfloyd.wiki',
+    'linkfloyd.experimental',
 
     # 3th party
     'django_extensions',
