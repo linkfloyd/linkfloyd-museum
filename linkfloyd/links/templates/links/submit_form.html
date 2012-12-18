@@ -11,7 +11,7 @@
     {% for field in form %}
         {% include "forms/form_field.html" %}
     {% endfor %}
-    <input type="submit" value="{% trans "Submit" %}" />
+    <input type="submit" id="id_submit" value="{% trans "Submit" %}" />
 </form>
 
 <script type="application/javascript">
