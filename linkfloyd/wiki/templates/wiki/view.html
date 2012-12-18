@@ -7,18 +7,27 @@
 			{% for page in pages %}
 				<li><a href="/wiki/{{page.name}}/">{{page.name}}</a></li>
 			{% endfor %}
-		</ul>
-	</div>
-    <div class="content section narrow">
-    	{% if not page.id %}<p>{% trans "This page does not exist" %}</p>{% endif %}
-	    {{ page.content_as_html|safe }}
-        <ul class="flat-list actions">
+        </ul>
+        <div class="section">
+            <h2>{% trans "Contributors" %}</h2>
+            <ul>
+            {% for contributor in page.contributors.all %}
+                <li>{{contributor}}</li>        
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="section">
+            <h2>{% trans "Actions" %}</h2>
             {% if page.id %}
                 <li><a href="edit/">{% trans "Edit this page" %}</a></li>
             {% else %}
                 <li><a href="edit/">{% trans "Create this page" %}</a></li>
             {% endif %}
-        </ul>
+        </div>
+	</div>
+    <div class="content section narrow">
+    	{% if not page.id %}<p>{% trans "This page does not exist" %}</p>{% endif %}
+	    {{ page.content_as_html|safe }}
     </div>
 </div>
 {% endblock %}

@@ -4,6 +4,7 @@ from django.template import RequestContext
 from forms import PageForm
 from models import Page
 
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     """Lists all pages stored in the wiki."""
@@ -32,7 +33,7 @@ def view(request, name):
     return render_to_response('wiki/view.html',
         RequestContext(request, context))
 
-
+@login_required
 def edit(request, name):
     """Allows users to edit wiki pages."""
     try:
@@ -49,6 +50,7 @@ def edit(request, name):
             page.content = form.cleaned_data['content']
             page.rendered = form.cleaned_data['content']
             page.save()
+            page.contributors.add(request.user)
             return redirect(view, name=page.name)
     else:
         if page:
