@@ -1,4 +1,5 @@
 <div class="fieldWrapper" id="{{field.html_name}}" {% if field.is_hidden %}style="display:none"{% endif %}>
-    <label for="{{field.html_name}}">{{field.label}}<span class="desc">{{field.help_text}}</span> {{ field.errors }}</label>
-    {{field}}
+    {{ fieldd.errors }}
+    <label for="{{field.html_name}}">{{ field.label }}<span class="desc">{{ field.help_text }}</span> {{ field.errors }}</label>
+    {{ field }}
 </div>
