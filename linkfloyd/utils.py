@@ -1,6 +1,5 @@
 from BeautifulSoup import BeautifulSoup, BeautifulStoneSoup
 from django.http import HttpResponse
-from django.utils.html_parser import HTMLParser
 from urllib2 import build_opener, URLError, urlopen
 from urlparse import urljoin
 from django.db.models import aggregates
@@ -27,7 +26,6 @@ def get_info(url):
         return resp_dict
 
     resp_dict = {"url": url}
-
 
     if "text/html" in opener.info().getheaders('content-type')[0]:
         data = opener.read()
@@ -208,7 +206,6 @@ def reduced_markdown(text, *args, **kwargs):
 
     return markdown(text, *args, **kwargs)
 
-
 def get_object_or_403(klass, *args, **kwargs):
     from django.shortcuts import _get_queryset
     queryset = _get_queryset(klass)
@@ -217,69 +214,4 @@ def get_object_or_403(klass, *args, **kwargs):
     except queryset.model.DoesNotExist:
         return HttpResponse(status=403)
 
-class HTMLImageParser(HTMLParser):
-    """
-    It's wrapper class for parsing images from HTML content. I found this idea
-    from a stackoverflow page:
 
-    http://stackoverflow.com/questions/4295139/
-    """
-    image_urls = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'img':
-            src = dict(attrs)['src']
-            self.image_urls.append(src)
-
-
-class CustomHTMLParser(object):
-    """
-    This class includes some tools for parsing images, header objects from url.
-    """
-    def __init__(self, url, min_size=None):
-        self.url = url
-        self.min_size = min_size
-
-    def check_size(self, url):
-        """
-        Checks media size for url header info or buffer size.
-        """
-        if self.min_size:
-            content = urlopen(url)
-            content_length_header = content.info().getheaders('Content-Length')
-            try:
-                # first try to read content length
-                content_length = int(content_length_header[0])
-            except IndexError:
-                # if content length doesn't exist, download for min_size and
-                # check the size.
-                content_length = len(content.read(self.min_size))
-
-            # compare content length with expected size
-            if content_length < self.min_size:
-                return False
-
-        return True
-
-    def get_images(self):
-        """
-        Returns all image urls from url content.
-        """
-        content = urlopen(self.url)
-        encoding = content.headers.getparam('charset')
-        data = content.read().decode(encoding)
-
-        p = HTMLImageParser()
-        p.feed(data)
-        image_urls = p.image_urls
-        p.close()
-
-        for image_url in image_urls:
-            # fix image path
-            image_url = urljoin(self.url, image_url).replace('/..', '/')
-
-            # check minimal size if argument determined
-            if not self.check_size(image_url):
-                continue
-
-            yield image_url
