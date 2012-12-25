@@ -35,6 +35,7 @@ class Link(models.Model):
     description = models.CharField(max_length=2048, null=True,
         blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
+    thumbnail_offset = models.IntegerField(null=True, blank=True, default=0)
     rating = models.PositiveIntegerField(
         choices=SITE_RATINGS,
         verbose_name=_("Rating"),
