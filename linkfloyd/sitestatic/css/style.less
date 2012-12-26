@@ -1,4 +1,3 @@
-
 @cello: #5D6F84;
 @cello_dark_1 : darken(@cello, 10);
 @cello_dark_2 : darken(@cello, 20);
@@ -542,7 +541,6 @@ div.attachment {
     line-height: 1.6em;
     background-color: lighten(@black, 5%);
     background-size: 100% auto;
-    background-position: center;
     background-repeat: no-repeat;
     border: 1px solid lighten(@black, 10%);
     position: relative;
@@ -609,6 +607,8 @@ form {
         margin: 0 0 5px 0;
         padding: 0;
         overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
         label {
             color: @grey_light_5;
             display: block;
@@ -764,6 +764,7 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 }
 
 /* ------------------------------------------------------------ */
+
 div.comments {
     padding: 25px 5px 10px 35px;
     div.comment {
@@ -840,6 +841,43 @@ div.pagination {
         }
     }
 }
+#thumbnailControls {
+    overflow: auto;
+    display: none;
+    margin: 0 0 10px 0;
+    #toggleThumbnail {
+        float: left;
+    }
+    #selectThumbnail {
+        display: none;
+        overflow: auto;
+        float: right;
+    }
+    #prev {
+        float: left;
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid white;
+    }
+    #next {
+        float: left;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid white;
+    }
+    p#thumbnailStatus {
+        float: left;
+        margin: 0 10px;
+        text-align: center;
+        font-weight: bold;
+    }
+}
+
 div#add_link.fieldWrapper {
     #id_url.busy {
         background: url(/static/img/loading.gif) center right no-repeat #ccc;

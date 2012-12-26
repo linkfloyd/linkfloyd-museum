@@ -20,6 +20,10 @@ class SubmitLinkForm(forms.ModelForm):
         required=False,
         widget=forms.HiddenInput)
 
+    thumbnail_offset = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput)
+
     channel = forms.ModelChoiceField(
         required=True,
         queryset=Channel.objects.all())
@@ -38,6 +42,7 @@ class SubmitLinkForm(forms.ModelForm):
             'title',
             'description',
             'thumbnail_url',
+            'thumbnail_offset',
             'player'
         ]
 
@@ -53,8 +58,7 @@ class SubmitLinkForm(forms.ModelForm):
     class Media:
         js = ('js/autofill.js',
               'js/libs/jquery.tokeninput.js',
-              'js/libs/jquery.jeditable.js',
-              'js/csrf_fix.js')
+              'js/libs/draggable_background.js')
 
     def clean(self):
 

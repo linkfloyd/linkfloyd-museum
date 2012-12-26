@@ -50,5 +50,5 @@ if settings.DEBUG:
              'document_root': settings.STATIC_ROOT,
              'show_indexes': True
          }),
-        url(r'^experimental/', include('linkfloyd.experimental.urls'))
+        #url(r'^experimental/', include('linkfloyd.experimental.urls'))
     )

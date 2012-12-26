@@ -31,7 +31,6 @@ def submit_link(request, bookmarklet=False):
 
     if request.method == "POST":
         form = SubmitLinkForm(request.POST)
-        print request.POST
         if form.is_valid():
             link = form.save(commit=False)
             link.posted_by = request.user

@@ -8,6 +8,18 @@
             {% endif %}
         {% endwith %}
     </div>
+    <div id="thumbnailControls">
+        <div id="toggleThumbnail">
+            <span>
+                <input type="checkbox" id="toggleBgImage" /> {% trans "Background Image" %}
+            </span>
+        </div>
+        <div id="selectThumbnail">
+            <a href="#" id="prev" value="Prev" onclick="thumbnailrepo.getPrev()"></a>
+            <p id="thumbnailStatus"><span id="currentThumbnail">0</span>/<span id="totalThumbnails">0</span></p>
+            <a href="#" id="next" value="Next" onclick="thumbnailrepo.getNext()"></a>
+        </div>
+    </div>
     {% for field in form %}
         {% include "forms/form_field.html" %}
     {% endfor %}
@@ -54,6 +66,7 @@
         tokenLimit: 1
     }
     if (selected_channel != undefined) {
-        options.prePopulate = [channels[selected_channel]]
-    }
+        options.prePopulate = [channels[selected_channel]];
+    };
+    $(".attachment").backgroundDraggable({axis: 'y'});
 </script>

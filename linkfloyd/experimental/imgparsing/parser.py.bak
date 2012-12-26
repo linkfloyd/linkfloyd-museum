@@ -1,0 +1,33 @@
+from urllib2 import urlopen
+import Queue
+import threading
+from PIL.ImageFile import Parser as ImageParser
+from pickle import load
+
+class ImageSizeFilter(threading.Thread):
+    def __init__(self, image_urls, min_size):
+        threading.Thread.__init__(self)
+        self.image_urls = image_urls
+
+    def run(self):
+        while True:
+            image_url = self.image_urls.get()
+            file = urlopen(image_url)
+            data = file.read(1024)
+            file.close()
+            parser = ImageParser()
+            parser.feed(data)
+            if parser.image:
+                print parser.image.size
+
+queue = Queue.Queue()
+
+for i in range(5):
+    thread = ImageSizeFilter(queue)
+    thread.setDeamon(True)
+    thread.start()
+
+urls = load(open("urls.pkl", "rb"))
+
+for url in urls:
+    queue.put(url)
