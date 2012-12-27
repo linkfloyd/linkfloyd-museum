@@ -40,7 +40,7 @@ def comment_saved(sender, **kwargs):
     if kwargs['created'] == True:
 
         comment = kwargs['instance']
-
+        '''
         # send mail to followers
         title = render_to_string("comments/subject.txt",{"comment": comment})
         body = render_to_string("comments/body.txt", {"comment": comment})
@@ -54,6 +54,11 @@ def comment_saved(sender, **kwargs):
                              [email,]))
 
         send_mass_mail(messages, fail_silently=True)
+        '''
+
+        # PEP8 is not for Django...
+        for subscriber in LinkSubscription.objects.filter(link=comment.link).exclude(user=comment.posted_by):
+            notification.send(user, "link_commented", {"comment": comment})
 
         comment.link.comment_score = comment.link.comment_set.all().count()
         comment.link.save()

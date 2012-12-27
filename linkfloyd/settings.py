@@ -121,7 +121,8 @@ INSTALLED_APPS = (
     'registration',
     'gravatar',
     'south',
-    #'devserver',
+    'devserver',
+    'notification'
     )
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
 #DEVSERVER_MODULES = (

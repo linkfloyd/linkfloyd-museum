@@ -29,10 +29,6 @@ urlpatterns = patterns('',
          'linkfloyd.api.views.get_update_comment_form',
          name='get_update_comment_form'),
 
-    url(r'^reports/post/$',
-        'linkfloyd.api.views.post_report',
-        name='post_report'),
-
     url(r'^votes/',
         include('qhonuskan_votes.urls'))
 )

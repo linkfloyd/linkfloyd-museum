@@ -22,6 +22,8 @@ urlpatterns = patterns(
     url(r'^comments/', include('linkfloyd.comments.urls')),
     url(r'^accounts/', include('registration.urls')),
     url(r'^preferences/', include('preferences.urls')),
+    url(r'^notifications/', include('notification.urls')),
+
     url(r'^wiki/', include('wiki.urls')),
     url(r'^api/', include('linkfloyd.api.urls')),
     url(r'^404/$', direct_to_template, {'template': '404.html'}),
