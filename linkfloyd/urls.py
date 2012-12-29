@@ -21,7 +21,6 @@ urlpatterns = patterns(
     url(r'^channels/', include('linkfloyd.channels.urls')),
     url(r'^comments/', include('linkfloyd.comments.urls')),
     url(r'^accounts/', include('registration.urls')),
-    url(r'^preferences/', include('preferences.urls')),
     url(r'^wiki/', include('wiki.urls')),
     url(r'^api/', include('linkfloyd.api.urls')),
     url(r'^preferences/', include('linkfloyd.preferences.urls')),

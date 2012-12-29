@@ -5,7 +5,7 @@ from notifications.models import NotificationType
 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('actor', 'type', 'recipient')
+    list_display = ('actor', 'type', 'recipient', 'seen')
 
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(NotificationPreference)

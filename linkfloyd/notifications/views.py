@@ -16,6 +16,6 @@ def list(request):
                     "notification": notification}),
             "date": notification.date
         })
-
+    notifications.update(seen=True)
     return render_to_response("notifications/list.html",
             {"objects": objects})
