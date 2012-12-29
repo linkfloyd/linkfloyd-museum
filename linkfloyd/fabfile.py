@@ -29,6 +29,7 @@ def collect_static():
 def update_scores():
     run('python manage.py update_scores')
  
+
 def deploy():
     with prefix(env.activate_env):
         with cd(env.webapp):
@@ -37,5 +38,4 @@ def deploy():
            syncdb()
            collect_static()
            restart_server()
-
 
