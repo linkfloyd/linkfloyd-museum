@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     'devserver',
-    'notification'
     )
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
