@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans with username=comment.posted_by.username user_url=comment.posted_by.get_absolute_url link_title=comment.link.title link_url=comment.link.title %}<div class="notification"><p><a href="{{user_url}}">{{username}}</a> has made a comment on: <a href="{{link_url}}">{{link_title}}</a></p></div>{% endblocktrans %}

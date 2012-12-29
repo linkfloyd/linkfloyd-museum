@@ -284,23 +284,3 @@ def channels_list(request):
         simplejson.dumps(response, 'application/javascript')
     )
 
-
-@login_required
-def post_report(request):
-    from links.forms import SubmitReportForm
-
-    if not request.user.is_authenticated():
-        return HttpResponse(status=401)
-
-    if request.POST:
-        form = SubmitReportForm(request.POST)
-        if form.is_valid():
-            report = form.save(commit=False)
-            report.reporter = request.user
-            report.save()
-            return HttpResponse(status=200)
-        else:
-            return HttpResponse(status=400)
-    else:
-
-        return HttpResponse(status=400)
