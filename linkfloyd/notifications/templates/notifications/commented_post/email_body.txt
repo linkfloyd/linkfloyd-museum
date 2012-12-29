@@ -8,4 +8,4 @@
 
 {% trans "To reply to this comment or to see all comments on this link click here" %}:
 
-{{notification.target_object.link.get_full_url}}
+{{notification.target_object.get_full_url}}

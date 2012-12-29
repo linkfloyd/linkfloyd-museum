@@ -15,10 +15,5 @@ def get_unread_notifications_count(context):
     if user.is_anonymous():
         return ''
 
-    return Notification.objects.filter(recipient=user).count()
-
-
-@register.filter(is_safe=True)
-def sentence_as_html(notification):
-    return notification__unicode__()
-
+    return Notification.objects.filter(recipient=user,
+        seen=False).count()
