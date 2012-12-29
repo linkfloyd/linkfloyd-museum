@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with link_title=notification.target_object.title %}Up voted on: {{link_title}}{% endblocktrans %}

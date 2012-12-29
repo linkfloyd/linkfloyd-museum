@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from channels.models import Channel, Subscription, Language
 
+
 class ChannelAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'language', 'description', 'is_official')
 

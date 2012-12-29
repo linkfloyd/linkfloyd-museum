@@ -9,15 +9,12 @@ from django.contrib.auth.models import User
 
 from utils import reduced_markdown
 
-from django.template.loader import render_to_string
-from django.conf import settings
-
-from django.core.mail import send_mass_mail
-
 from django.utils.translation import ugettext as _
 from datetime import datetime
 
+from notifications.models import Notification, NotificationType
 # Create your models here.
+
 
 class Comment(models.Model):
     link = models.ForeignKey(Link)
@@ -35,37 +32,39 @@ class Comment(models.Model):
         self.as_html = reduced_markdown(self.body, safe_mode="remove")
         super(Comment, self).save(*args, **kwargs)
 
+
 @receiver(post_save, sender=Comment, dispatch_uid="comment_saved")
 def comment_saved(sender, **kwargs):
-    if kwargs['created'] == True:
+    if kwargs['created']:
 
         comment = kwargs['instance']
-
-        # send mail to followers
-        title = render_to_string("comments/subject.txt",{"comment": comment})
-        body = render_to_string("comments/body.txt", {"comment": comment})
-        messages = []
-
-        for email in [subscription.user.email for subscription in \
-            LinkSubscription.objects.filter(link=comment.link).exclude(
-                user=comment.posted_by)]:
-
-            messages.append((title, body, settings.DEFAULT_FROM_EMAIL,
-                             [email,]))
-
-        send_mass_mail(messages, fail_silently=True)
-
         comment.link.comment_score = comment.link.comment_set.all().count()
         comment.link.save()
- 
+
+        for subscription in LinkSubscription.objects.filter(
+            link=comment.link).exclude(user=comment.posted_by):
+
+            commented_post = \
+                NotificationType.objects.get(label="commented_post")
+
+            commented_your_post = NotificationType.objects.get(
+                label="commented_your_post")
+
+            Notification.objects.create(
+                actor=comment.posted_by,
+                recipient=subscription.user,
+                target_object=comment.link,
+                type=commented_your_post if comment.posted_by ==
+                    subscription.user else commented_post)
+
         # create subscription
         subscription, created = LinkSubscription.objects.get_or_create(
             user=comment.posted_by, link=comment.link)
 
         if created:
-           subscription.status = 1
-           subscription.save()
-        
+            subscription.status = 1
+            subscription.save()
+
         # update link's updated at
 
         comment.link.updated_at = datetime.now()

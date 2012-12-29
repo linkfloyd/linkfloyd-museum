@@ -3,8 +3,8 @@ from links.models import Link
 from comments.models import Comment
 from comments.forms import CommentForm
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
+
 
 def submit(request):
     if request.method == "POST":
@@ -21,8 +21,9 @@ def submit(request):
     if link_id:
         link = Link.objects.get(id=link_id)
         return HttpResponseRedirect(link.get_absolute_url())
-    #----------
+
     return HttpResponseRedirect("/")
+
 
 def update(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
@@ -34,4 +35,3 @@ def update(request, pk):
                 comment.link.get_absolute_url(), comment.id))
         else:
             print form.errors
-

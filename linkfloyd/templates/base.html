@@ -1,4 +1,7 @@
-{% load static i18n gravatar %}{% get_static_prefix as STATIC_PREFIX %}<!DOCTYPE html>
+{% load static i18n gravatar notification_tags %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% get_unread_notifications_count as notifications_count %}
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
     <head>
 
@@ -125,6 +128,11 @@
                         {% endif %}
                     </ul>
                 </li>
+                {% if notifications_count %}
+                    <li>
+                        <a href="/notifications/">{{ notifications_count }}</a>
+                    </li>
+                {% endif %}
                 <li><a href="/links/random/">{% trans "Random" %}</a></li>
                 <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
                     <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>

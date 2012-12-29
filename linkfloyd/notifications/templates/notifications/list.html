@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% load notification_tags %}
+{% block content %}
+	<ul>
+	{% for notification in objects %}
+		<li>{{notification.sentence}} - <span class="date">{{notification.date|timesince}}</span></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

@@ -8,13 +8,11 @@ Pillow==1.7.6
 PyOpenGraph==0.2
 South==0.7.3
 argparse==1.2.1
-distribute==0.6.24
 django-devserver==0.3.1
 django-extensions==0.7.1
 django-gravatar==0.1.0
--e git+https://github.com/mkai/django-inviting.git@7e2bfce8cbd9379652263b79a551a838c5bb0d53#egg=django_inviting-dev
 django-jsonfield==0.8.7
--e git+https://github.com/miratcan/django-ogp.git@4ada147f507c284bc5c824ebf77f6504ff249448#egg=django_ogp-dev
+-e git+http://github.com/linkfloyd/django-ogp.git#egg=django_ogp-dev
 django-registration==0.7
 django-tastypie==0.9.11
 django-transmeta==0.6.6
