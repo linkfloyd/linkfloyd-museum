@@ -65,7 +65,7 @@ class Link(models.Model):
         return "/links/edit/%s/" % self.id
 
     def get_sharing_url(self):
-        return "%s?site=%s" % (\
+        return "%s?site=%s" % (
            Site.objects.get_current().domain, self.url)
 
     def inc_shown(self):
@@ -134,7 +134,7 @@ def link_saved(sender, **kwargs):
 
     from summaries.models import Unseen
 
-    if kwargs['created'] == True:
+    if kwargs['created']:
         link = kwargs['instance']
         subscriptions = \
             ChannelSubscription.objects.filter(channel=link.channel)
