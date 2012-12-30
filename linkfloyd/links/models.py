@@ -99,36 +99,6 @@ class Subscription(models.Model):
         choices=((0, "unsubscribed"), (1, "subscribed")))
 
 
-class Report(models.Model):
-    reporter = models.ForeignKey(User)
-    link = models.ForeignKey(Link)
-    reason = models.CharField(
-        max_length=16,
-        help_text="why are you reporting this?",
-        choices=(
-            ("hatespeech", "Contains hate Speech"),
-            ("wrong_channel", "Channel is not appropriate"),
-            ("wrong_rating", "Rating is not appropriate"),
-            ("wrong_language", "Language is not appropriate"),
-            ("other", "Other")
-        )
-    )
-    note = models.CharField(
-        max_length=255,
-        help_text="do you have note for admins?",
-        null=True,
-        blank=True
-    )
-    reported_at = models.DateTimeField(auto_now_add=True)
-    seen = models.BooleanField(default=False)
-
-    def get_link_url(self):
-        return self.link.get_absolute_url()
-
-    def __unicode__(self):
-        return "%s's report for %s" % (self.reporter, self.reason)
-
-
 @receiver(post_save, sender=Link, dispatch_uid="link_saved")
 def link_saved(sender, **kwargs):
 
@@ -141,11 +111,8 @@ def link_saved(sender, **kwargs):
         for subscription in subscriptions:
             Unseen.objects.get_or_create(user=subscription.user, link=link)
         LinkSubscription = Subscription
-        LinkSubscription.objects.get_or_create(
-            link=link,
-            user=link.posted_by,
-            status=1
-        )
+        LinkSubscription.objects.get_or_create(link=link, user=link.posted_by,
+            status=1)
 
 
 @receiver(pre_delete, sender=Link, dispatch_uid="link_deleted")
