@@ -1,0 +1,5 @@
+{% load i18n %}{% blocktrans with actor=notification.actor link_title=notification.target_object.title %}{{actor}} has up voted on: {{link_title}}{% endblocktrans %}
+
+{% trans "To to see all comments on this link click here" %}:
+
+{{notification.target_object.get_full_url}}

@@ -1,0 +1,11 @@
+{% load i18n %}{% blocktrans with actor=notification.actor link_title=notification.target_object.title %}{{actor}} has made a comment on: {{link_title}}{% endblocktrans %}
+
+----
+
+{{notification.target_object.body}}
+
+----
+
+{% trans "To reply to this comment or to see all comments on this link click here" %}:
+
+{{notification.target_object.get_full_url}}

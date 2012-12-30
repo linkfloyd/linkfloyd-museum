@@ -1,5 +1,4 @@
 # encoding: utf-8
-import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
@@ -8,15 +7,13 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Page'
-        db.create_table('wiki_page', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('content_as_html', self.gf('django.db.models.fields.TextField')()),
-            ('listed', self.gf('django.db.models.fields.BooleanField')(default=False)),
+        # Adding M2M table for field contributors on 'Page'
+        db.create_table('wiki_page_contributors', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('page', models.ForeignKey(orm['wiki.page'], null=False)),
+            ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
-        db.send_create_signal('wiki', ['Page'])
+        db.create_unique('wiki_page_contributors', ['page_id', 'user_id'])
 
 
     def backwards(self, orm):

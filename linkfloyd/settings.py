@@ -111,6 +111,7 @@ INSTALLED_APPS = (
     'linkfloyd.comments',
     'linkfloyd.summaries',
     'linkfloyd.wiki',
+    'linkfloyd.notifications',
     # 'linkfloyd.experimental',
 
     # 3th party
@@ -122,8 +123,8 @@ INSTALLED_APPS = (
     'gravatar',
     'south',
     'devserver',
-    'notification'
     )
+
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
 #DEVSERVER_MODULES = (
 #    'devserver.modules.profile.LineProfilerModule',
@@ -165,4 +166,3 @@ LOGGING = {
         },
     }
 }
-

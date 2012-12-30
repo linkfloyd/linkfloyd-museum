@@ -9,5 +9,3 @@
 {% trans "To reply to this comment or to see all comments on this link click here" %}:
 
 {{comment.link.get_full_url}}
-
-

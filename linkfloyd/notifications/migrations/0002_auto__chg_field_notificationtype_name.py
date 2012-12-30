@@ -8,21 +8,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Page'
-        db.create_table('wiki_page', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=255)),
-            ('content', self.gf('django.db.models.fields.TextField')()),
-            ('content_as_html', self.gf('django.db.models.fields.TextField')()),
-            ('listed', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('wiki', ['Page'])
+        # Changing field 'NotificationType.name'
+        db.alter_column('notifications_notificationtype', 'name', self.gf('django.db.models.fields.CharField')(max_length=255))
 
 
     def backwards(self, orm):
         
-        # Removing M2M table for field contributors on 'Page'
-        db.delete_table('wiki_page_contributors')
+        # Changing field 'NotificationType.name'
+        db.alter_column('notifications_notificationtype', 'name', self.gf('django.db.models.fields.CharField')(max_length=32))
 
 
     models = {
@@ -41,7 +34,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 12, 18, 16, 26, 14, 559201)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 12, 30, 5, 15, 28, 133913)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -49,7 +42,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 12, 18, 16, 26, 14, 559094)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 12, 30, 5, 15, 28, 133807)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -62,15 +55,32 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'wiki.page': {
-            'Meta': {'ordering': "('name',)", 'object_name': 'Page'},
-            'content': ('django.db.models.fields.TextField', [], {}),
-            'content_as_html': ('django.db.models.fields.TextField', [], {}),
-            'contributors': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'}),
+        'notifications.notification': {
+            'Meta': {'object_name': 'Notification'},
+            'actor': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'actor'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'custom_message': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'listed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '255'})
+            'recipient': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'recipient'", 'null': 'True', 'to': "orm['auth.User']"}),
+            'seen': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'target_object_ctype': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']", 'null': 'True', 'blank': 'True'}),
+            'target_object_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['notifications.NotificationType']"})
+        },
+        'notifications.notificationpreference': {
+            'Meta': {'object_name': 'NotificationPreference'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'notification_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['notifications.NotificationType']"}),
+            'subscription_status': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+        },
+        'notifications.notificationtype': {
+            'Meta': {'object_name': 'NotificationType'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_important': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'label': ('django.db.models.fields.SlugField', [], {'max_length': '32', 'db_index': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         }
     }
 
-    complete_apps = ['wiki']
+    complete_apps = ['notifications']

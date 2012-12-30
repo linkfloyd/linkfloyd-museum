@@ -1,0 +1,69 @@
+# Languages
+
+
+# Notification Types
+- fields: {
+    is_important: false,
+    label: commented_your_post,
+    name: Somebody commented on your post
+  }
+  model: notifications.notificationtype
+  pk: 1
+
+- fields: {
+    is_important: false,
+    label: commented_post,
+    name: Somebody commented on post that you're subscribed
+  }
+  model: notifications.notificationtype
+  pk: 2
+
+- fields: {
+    is_important: false,
+    label: upvoted_your_post,
+    name: Somebody upvoted on your post
+  }
+  model: notifications.notificationtype
+  pk: 3
+
+- fields: {
+    is_important: false,
+    label: upvoted_post,
+    name: Somebody commented on a post that you're subscribed
+  }
+  model: notifications.notificationtype
+  pk: 4
+
+# downvotes
+- fields: {
+    is_important: false,
+    label: downvoted_your_post,
+    name: Somebody downvoted your post
+  }
+  model: notifications.notificationtype
+  pk: 5
+
+- fields: {
+    is_important: false,
+    label: downvoted_post,
+    name: Somebody downvoted a post that you're subscribed
+  }
+  model: notifications.notificationtype
+  pk: 6
+
+- fields: {
+    is_important: false,
+    label: subscribed_your_channel,
+    name: Somebody subscribed on your channel
+  }
+  model: notifications.notificationtype
+  pk: 7
+
+- fields: {
+    is_important: false,
+    label: unsubscribed_your_channel,
+    name: Somebody unsubscribed on your channel
+  }
+  model: notifications.notificationtype
+  pk: 8
+
