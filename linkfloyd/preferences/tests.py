@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class UserPreferencesTest(TestCase):
-    def creating_user_preference(self):
+    def test_creating_user_preference(self):
         """
         When we try to get non existing user preference, it must be
         created on the fly.
