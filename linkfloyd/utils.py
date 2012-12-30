@@ -9,12 +9,14 @@ from django.utils import simplejson
 client = build_opener()
 client.addheaders = [('User-agent', 'Mozilla/5.0')]
 
+
 def get_info(url):
     """Fetches the contents of url and extracts (and utf-8 encodes)
        the contents of title, description and embed data
     """
     resp_dict = {}
-    if not url or not (url.startswith('http://') or url.startswith('https://')):
+    if not url or not (url.startswith('http://') or
+        url.startswith('https://')):
         return resp_dict
 
     try:
@@ -38,7 +40,7 @@ def get_info(url):
         if og_title_bs:
             resp_dict['title'] = og_title_bs['content']
         else:
-            del(og_title_bs) # i like working sooo clean :)
+            del(og_title_bs)  # i like working sooo clean :)
             try:
                 title_bs = bs.html.head.title
             except AttributeError:
@@ -48,12 +50,12 @@ def get_info(url):
 
         desc_bs = bs.find("meta", attrs={"name": "description"})
 
-        if desc_bs and desc_bs.has_key('content'):
+        if desc_bs and ('content' in desc_bs):
             resp_dict['description'] = desc_bs['content']
 
         img_bs = bs.find("meta", attrs={"property": "og:image"})
 
-        if img_bs and img_bs.has_key('content'):
+        if img_bs and ('content' in img_bs):
             resp_dict['images'].append(img_bs['content'])
 
         del(img_bs)
@@ -64,7 +66,7 @@ def get_info(url):
             resp_dict['images'].append(img_src_bs['href'])
             resp_dict['player'] = "<img src='%s' class='embed' />" \
                 % img_src_bs['href']
-        
+
         imgs_bs = bs.findAll("img")
         if imgs_bs:
             resp_dict['images'] = []
@@ -72,7 +74,7 @@ def get_info(url):
 
         # cleanup title and description
 
-        if resp_dict.has_key('title'):
+        if 'title' in resp_dict:
             resp_dict['title'] = resp_dict['title'].strip()
 
             try:
@@ -83,7 +85,7 @@ def get_info(url):
             except IndexError:
                 pass
 
-            if resp_dict.has_key('description'):
+            if 'description' in resp_dict:
                 resp_dict['description'] == resp_dict['description'].strip()
             try:
                 resp_dict['description'] = BeautifulStoneSoup(
@@ -128,16 +130,16 @@ def get_info(url):
                         resp_dict['player'] = embed_data['html']
                     except IndexError:
                         exit
-        else: # there is no oembed
+        else:  # there is no oembed
 
             og_video_bs = bs.find("meta", attrs={"property": "og:video"})
 
             if og_video_bs:
-                resp_dict['player'] = "<embed src='%s'/>" % og_video_bs['content']
-
+                resp_dict['player'] = "<embed src='%s'/>" % \
+                    og_video_bs['content']
 
     if "image" in opener.info().getheaders('content-type')[0]:
-        resp_dict['images'] = [url,]
+        resp_dict['images'] = [url, ]
         resp_dict['player'] = "<img src='%s' class='embed' />" % url
 
     opener.close()
@@ -145,8 +147,10 @@ def get_info(url):
 
 # -----------------------------------------------------------------------------
 
+
 class SumWithDefault(aggregates.Aggregate):
     name = 'SumWithDefault'
+
 
 class SQLSumWithDefault(sql_aggregates.Sum):
     sql_template = 'COALESCE(%(function)s(%(field)s), %(default)s)'
@@ -154,6 +158,7 @@ class SQLSumWithDefault(sql_aggregates.Sum):
 setattr(sql_aggregates, 'SumWithDefault', SQLSumWithDefault)
 
 # -----------------------------------------------------------------------------
+
 
 def reduced_markdown(text, *args, **kwargs):
     """
@@ -178,7 +183,7 @@ def reduced_markdown(text, *args, **kwargs):
             # linebreaks removed from the split into a list.
             code = sibling[0]
             block, theRest = self.detab(block)
-            code.text = util.AtomicString('%s\n%s\n' % \
+            code.text = util.AtomicString('%s\n%s\n' %
                 (code.text, block.rstrip()))
         else:
             # This is a new codeblock. Create the elements and insert text.
@@ -209,6 +214,7 @@ def reduced_markdown(text, *args, **kwargs):
 
     return markdown(text, *args, **kwargs)
 
+
 def get_object_or_403(klass, *args, **kwargs):
     from django.shortcuts import _get_queryset
     queryset = _get_queryset(klass)
@@ -216,5 +222,3 @@ def get_object_or_403(klass, *args, **kwargs):
         return queryset.get(*args, **kwargs)
     except queryset.model.DoesNotExist:
         return HttpResponse(status=403)
-
-
