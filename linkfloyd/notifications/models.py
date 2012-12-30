@@ -12,7 +12,7 @@ from django.conf import settings
 
 class NotificationType(models.Model):
     label = models.SlugField(max_length=32)
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=255)
     is_important = models.BooleanField(default=False)
 
     def __unicode__(self):
