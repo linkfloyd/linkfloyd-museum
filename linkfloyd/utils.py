@@ -5,7 +5,6 @@ from urlparse import urljoin
 from django.db.models import aggregates
 from django.db.models.sql import aggregates as sql_aggregates
 from django.utils import simplejson
-from experimental.imgparsing.parser import get_size_filtered_images
 
 client = build_opener()
 client.addheaders = [('User-agent', 'Mozilla/5.0')]
