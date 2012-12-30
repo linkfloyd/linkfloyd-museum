@@ -9,20 +9,6 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
 
-"""
-    commented_on_your_link: mirat commented on your link.
-    commented_on_a_link: mirat commented on a link that you
-        subscribed.
-
-    upvoted_on_your_link: mirat upvoted on your link.
-    upvoted_on_link: mirat upvoted on a link that you subscribed
-
-    joined_to_your_channel: mirat joined to your channel.
-
-    system_message: you updated your preferences.
-
-"""
-
 
 class NotificationType(models.Model):
     label = models.SlugField(max_length=32)
@@ -72,8 +58,8 @@ class Notification(models.Model):
     target_object_ctype = models.ForeignKey(ContentType,
         blank=True, null=True)
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
-    target_object = GenericForeignKey(
-        'target_object_ctype', 'target_object_id')
+    target_object = GenericForeignKey('target_object_ctype',
+        'target_object_id')
     type = models.ForeignKey(NotificationType)
     date = models.DateTimeField(auto_now_add=True)
     seen = models.BooleanField(default=False)
