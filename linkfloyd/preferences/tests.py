@@ -1,16 +1,22 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
+from preferences.models import UserPreferences
+from django.contrib.auth.models import User
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
+class UserPreferencesTest(TestCase):
+    def creating_user_preference(self):
         """
-        Tests that 1 + 1 always equals 2.
+        When we try to get non existing user preference, it must be
+        created on the fly.
         """
-        self.assertEqual(1 + 1, 2)
+        # We have a user
+        u1 = User.objects.create_user('u1', 'u1@u1.com', 'u1')
+
+        # We don't have any UserPreferences at db.
+        self.assertEqual(UserPreferences.objects.count(), 0,)
+
+        # We're requesting it
+        p1 = UserPreferences.objects.get(user=u1)
+
+        # We have a UserPreference at p1
+        self.assertEqual(isinstance(p1, UserPreferences), True)
