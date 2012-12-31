@@ -108,7 +108,28 @@ def context_builder(request, **kwargs):
         preferences = UserPreferences.objects.get(user=request.user)
         query = query & Q(rating__lte  = preferences.max_rating)
 
-    links = Link.objects.filter(query).order_by({
+    links = Link.objects.filter(query).extra(select={
+        'is_owned':      'posted_by_id=%s' % request.user.id,
+
+        'is_subscribed': 'SELECT COUNT(*) FROM links_subscription WHERE '
+                         'user_id=%s '
+                         'AND '
+                         'id=links_subscription.link_id' % request.user.id,
+
+        'is_voted_up':   'SELECT COUNT(*) FROM links_linkvote WHERE '
+                         'voter_id=%s '
+                         'AND '
+                         'object_id=links_link.id '
+                         'AND '
+                         'value=1' % request.user.id,
+
+        'is_voted_down': 'SELECT COUNT(*) FROM links_linkvote WHERE '
+                         'voter_id=%s '
+                         'AND '
+                         'object_id=links_link.id '
+                         'AND '
+                         'value=-1' % request.user.id
+    }).order_by({
         "hot": "-updated_at",
             "controversial": "-comment_score",
             "top": "-vote_score",

@@ -1,7 +1,11 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
 <div class="post{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
 	<div class="side">
-		{% vote_buttons_for link %}
+        <div class="vote_buttons" x:model="Link" x:id="{{link.id}}">
+            <div class="score">{{link.vote_score}}</div>
+            <a href="#" class="upVote{% if link.is_voted_up %} voted{%endif%}" x:value="1" ></a>
+            <a href="#" class="downVote{% if link.is_voted_down %} voted{%endif%}" x:value="-1"></a>
+        </div>
 	</div>
     <div class="content">
         <p class="info">
@@ -18,13 +22,11 @@
             {% endif %}
             {% if user.is_authenticated %}
             <li>
-                {% with link_subscription_status=user|link_subscription_status:link %}
-                    {% if link_subscription_status %}
-                        <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "Unsubscribe" %}</a></li>
-                    {% else %}
-                        <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "Subscribe" %}</a></li>
-                    {% endif %}
-                {% endwith %}
+                {% if link.is_subscribed %}
+                    <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "Unsubscribe" %}</a></li>
+                {% else %}
+                    <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "Subscribe" %}</a></li>
+                {% endif %}
             </li>
             {% endif %}
             <li>
