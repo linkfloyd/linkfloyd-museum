@@ -11,7 +11,7 @@ distribute==0.6.31
 django-activity-stream==0.4.4
 django-debug-toolbar==0.9.4
 django-devserver==0.3.1
-django-extensions==1.0.3
+-e git+https://github.com/django-extensions/django-extensions.git#egg=django_extensions
 django-gravatar==0.1.0
 -e git+https://github.com/mkai/django-inviting.git@7e2bfce8cbd9379652263b79a551a838c5bb0d53#egg=django_inviting-dev
 django-jsonfield==0.8.7
