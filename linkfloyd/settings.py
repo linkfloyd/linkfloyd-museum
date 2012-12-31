@@ -74,8 +74,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
     # 'django.middleware.locale.LocaleMiddleware',
     )
+
+INTERNAL_IPS = ('127.0.0.1',)
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
@@ -122,6 +126,7 @@ INSTALLED_APPS = [
     'gravatar',
     'south',
     'devserver',
+    'debug_toolbar'
 ]
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']

@@ -86,8 +86,8 @@ def context_builder(request, **kwargs):
 
     if response['links_from'] == "subscriptions" and user_is_authenticated:
         # TODO: this line can be optimised:
-        query = query & Q(channel__in=[subscription.channel for \
-            subscription in Subscription.objects.filter(user=request.user)])
+        query = query & Q(channel_id__in=[subscription.channel for \
+            subscription in Subscription.objects.filter(user=request.user).select_related("channel")])
     elif response['links_from'] == "channel":
         query = query & Q(channel=response['instance'])
     elif response['links_from'] == "user":
@@ -95,7 +95,8 @@ def context_builder(request, **kwargs):
     elif response['links_from'] == "likes":
         # TODO: this line can be optimised:
         vote_model = get_vote_model('links.LinkVote')
-        votes = vote_model.objects.filter(voter=response['instance'], value=1)
+        votes = vote_model.objects.filter(voter=response['instance'], value=1
+            ).select_related("object")
         query = query & Q(id__in = [vote.object.id for vote in votes])
 
     if response['days']:
@@ -129,13 +130,13 @@ def context_builder(request, **kwargs):
                          'object_id=links_link.id '
                          'AND '
                          'value=-1' % request.user.id
-    }).order_by({
+    }).select_related("posted_by", "channel").order_by({
         "hot": "-updated_at",
-            "controversial": "-comment_score",
-            "top": "-vote_score",
-            "latest": "-posted_at",
+        "controversial": "-comment_score",
+        "top": "-vote_score",
+        "latest": "-posted_at",
     }[response['ordering']])
-
+    
     paginator = Paginator(links, 25)
 
     page = request.GET.get('page', 1)
