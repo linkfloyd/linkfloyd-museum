@@ -1,7 +1,6 @@
 # encoding: utf-8
 from south.db import db
 from south.v2 import SchemaMigration
-from django.core.management import call_command
 
 
 class Migration(SchemaMigration):
@@ -39,12 +38,9 @@ class Migration(SchemaMigration):
             ('custom_message', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal('notifications', ['Notification'])
-
-        
+      
         # Adding unique constraint on 'Subscription', fields ['user', 'channel']
         db.create_unique('channels_subscription', ['user_id', 'channel_id'])
-
-        call_command('loaddata', 'fixtures/notificationtypes.yaml')
 
     def backwards(self, orm):
         

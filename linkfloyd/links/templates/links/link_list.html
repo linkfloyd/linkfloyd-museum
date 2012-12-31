@@ -1,15 +1,4 @@
 {% extends "base.html" %}{% load i18n gravatar channel_tags ogp_tags qhonuskan_votes %}
-
-{% block meta_tags %}
-
-    {% if instance.ogp_enabled %}
-        {% render_ogp instance %}
-    {% else %}
-        {% include "includes/meta_tags.html" %}
-    {% endif %}
-    
-{% endblock %}
-    
 {% block extra_head %}
 
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>
@@ -24,7 +13,6 @@
     {% if links_from == "channel" %}
         <script type="text/javascript" src="{{STATIC_URL}}js/subscriptions.js"></script>
     {% endif %}
-    
     
 {% endblock extra_head %}
 

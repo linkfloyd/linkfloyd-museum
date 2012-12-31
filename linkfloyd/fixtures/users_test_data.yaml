@@ -1,0 +1,95 @@
+- fields:
+    username: user1
+    first_name: user1
+    last_name: user1
+    email: user1@user.com
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    date_joined: 2012-12-15 07:56:19
+    last_login: 2012-12-20 03:06:50.369848
+    password: pbkdf2_sha256$10000$Bxh6E67yaQYm$NcDDTpMrbCnwDFdYRVZ6iCDBIwU4/CwfnLWS5f2rqlg=
+    groups: []
+    user_permissions: []
+  model: auth.user
+  pk: 1
+
+- fields:
+    username: user2
+    first_name: user2
+    last_name: user2
+    email: user2@user.com
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    date_joined: 2012-12-15 07:56:19
+    last_login: 2012-12-20 03:06:50.369848
+    password: pbkdf2_sha256$10000$Bxh6E67yaQYm$NcDDTpMrbCnwDFdYRVZ6iCDBIwU4/CwfnLWS5f2rqlg=
+    groups: []
+    user_permissions: []
+  model: auth.user
+  pk: 2
+
+- fields:
+    username: user3
+    first_name: user3
+    last_name: user3
+    email: user3@user.com
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    date_joined: 2012-12-15 07:56:19
+    last_login: 2012-12-20 03:06:50.369848
+    password: pbkdf2_sha256$10000$Bxh6E67yaQYm$NcDDTpMrbCnwDFdYRVZ6iCDBIwU4/CwfnLWS5f2rqlg=
+    groups: []
+    user_permissions: []
+  model: auth.user
+  pk: 3
+
+- fields:
+    username: user4
+    first_name: user4
+    last_name: user4
+    email: user4@user.com
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    date_joined: 2012-12-15 07:56:19
+    last_login: 2012-12-20 03:06:50.369848
+    password: pbkdf2_sha256$10000$Bxh6E67yaQYm$NcDDTpMrbCnwDFdYRVZ6iCDBIwU4/CwfnLWS5f2rqlg=
+    groups: []
+    user_permissions: []
+  model: auth.user
+  pk: 4
+
+- fields:
+    username: user5
+    first_name: user5
+    last_name: user5
+    email: user5@user.com
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    date_joined: 2012-12-15 07:56:19
+    last_login: 2012-12-20 03:06:50.369848
+    password: pbkdf2_sha256$10000$Bxh6E67yaQYm$NcDDTpMrbCnwDFdYRVZ6iCDBIwU4/CwfnLWS5f2rqlg=
+    groups: []
+    user_permissions: []
+  model: auth.user
+  pk: 5
+
+- fields:
+    username: user6
+    first_name: user6
+    last_name: user6
+    email: user6@user.com
+    is_active: true
+    is_staff: false
+    is_superuser: false
+    date_joined: 2012-12-15 07:56:19
+    last_login: 2012-12-20 03:06:50.369848
+    password: pbkdf2_sha256$10000$Bxh6E67yaQYm$NcDDTpMrbCnwDFdYRVZ6iCDBIwU4/CwfnLWS5f2rqlg=
+    groups: []
+    user_permissions: []
+  model: auth.user
+  pk: 5

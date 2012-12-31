@@ -91,9 +91,11 @@ ROOT_URLCONF = 'linkfloyd.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
-    )
+)
 
-INSTALLED_APPS = (
+SOUTH_TESTS_MIGRATE = False
+
+INSTALLED_APPS = [
     # contrib
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,18 +114,15 @@ INSTALLED_APPS = (
     'linkfloyd.summaries',
     'linkfloyd.wiki',
     'linkfloyd.notifications',
-    # 'linkfloyd.experimental',
 
     # 3th party
-    'django_extensions',
     'sorl.thumbnail',
     'qhonuskan_votes',
-    'django_ogp',
     'registration',
     'gravatar',
     'south',
     'devserver',
-    )
+]
 
 DEVSERVER_IGNORED_PREFIXES = ['/media', '/uploads']
 #DEVSERVER_MODULES = (

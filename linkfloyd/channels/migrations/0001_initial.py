@@ -27,7 +27,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('channels', ['Subscription'])
 
-
     def backwards(self, orm):
         
         # Removing unique constraint on 'Subscription', fields ['user', 'channel']

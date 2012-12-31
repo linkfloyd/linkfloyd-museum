@@ -1,0 +1,12 @@
+- fields: {
+  code: tr,
+  name: "Türkçe"
+  }
+  model: channels.language
+  pk: 1
+- fields: {
+    code: en,
+    name: "English"
+  }
+  model: channels.language
+  pk: 2
