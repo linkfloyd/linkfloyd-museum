@@ -14,8 +14,12 @@ class Migration(SchemaMigration):
         # Deleting field 'Link.is_banned'
         db.delete_column('links_link', 'is_banned')
 
+        # Fix bad vote_score data
+        orm.Link.objects.filter(vote_score=None).update(vote_score=0)
+
         # Changing field 'Link.vote_score'
-        db.alter_column('links_link', 'vote_score', self.gf('django.db.models.fields.IntegerField')())
+        db.alter_column('links_link',
+            'vote_score', self.gf('django.db.models.fields.IntegerField')(default=0))
 
 
     def backwards(self, orm):
