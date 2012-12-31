@@ -1,21 +1,21 @@
 - fields: {
-	name: "channel1",
-	slug: "channel1",
-	description: "channel1",
-	is_official: false,
-	language: 1,
+    name: "channel1",
+    slug: "channel1",
+    description: "channel1",
+    is_official: false,
+    language: 1,
     notes: "",
     parent: null,
   }
   model: channels.channel
-  pk: 1	
+  pk: 1    
 
 - fields: {
-	name: "channel2",
-	slug: "channel2",
-	description: "channel1",
-	is_official: false,
-	language: 1,
+    name: "channel2",
+    slug: "channel2",
+    description: "channel1",
+    is_official: false,
+    language: 1,
     notes: "",
     parent: null,
   }
@@ -23,11 +23,11 @@
   pk: 2
 
 - fields: {
-	name: "channel3",
-	slug: "channel3",
-	description: "channel1",
-	is_official: false,
-	language: 1,
+    name: "channel3",
+    slug: "channel3",
+    description: "channel1",
+    is_official: false,
+    language: 1,
     notes: "",
     parent: null,
   }

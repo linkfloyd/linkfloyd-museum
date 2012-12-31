@@ -36,10 +36,9 @@ class Link(models.Model):
         blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
     thumbnail_offset = models.IntegerField(null=True, blank=True, default=0)
-    rating = models.PositiveIntegerField(
-        choices=SITE_RATINGS,
-        verbose_name=_("Rating"),
-        help_text=_("warn people about your link"))
+    rating = models.PositiveIntegerField(choices=SITE_RATINGS,
+        verbose_name=_("Rating"), default=1,
+        help_text=_("warn people about your link"),)
     votes = VotesField()
     shown = models.PositiveIntegerField(default=0)
     player = models.TextField(null=True, blank=True)

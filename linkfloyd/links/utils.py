@@ -47,7 +47,7 @@ def context_builder(request, **kwargs):
       links in that way.
 
     '''
-    from links.models import Link, Report
+    from links.models import Link
     from preferences.models import UserPreferences
     from channels.models import Subscription
     from datetime import datetime
@@ -103,9 +103,6 @@ def context_builder(request, **kwargs):
             posted_at__gte=datetime.today() - timedelta(days=response['days']))
 
     if user_is_authenticated:
-
-        query = query & ~Q(report__in =\
-            Report.objects.filter(reporter=request.user))
 
         # Filter links that not in known languages and rating higer than users.
         preferences = UserPreferences.objects.get(user=request.user)
