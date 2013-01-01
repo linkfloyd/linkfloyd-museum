@@ -36,7 +36,7 @@ thumbnailRepo = function(imgUrls) {
                 if (_this.imgObjs.length) {
                     $("#thumbnailControls").show();
                     _this.updateBg();
-                    $("#toggleBgImage").attr('checked', true).trigger("change");
+		    toggleBgImage()
                 };
                 //if (_this.imgObjs.length > 0 && !bgImageSwitch) {
                 // }
