@@ -36,10 +36,10 @@ thumbnailRepo = function(imgUrls) {
                 if (_this.imgObjs.length) {
                     $("#thumbnailControls").show();
                     _this.updateBg();
-                };
-                if (_this.imgObjs.length > 1 && !bgImageSwitch) {
                     $("#toggleBgImage").attr('checked', true).trigger("change");
-                }
+                };
+                //if (_this.imgObjs.length > 0 && !bgImageSwitch) {
+                // }
             }
         });
     };

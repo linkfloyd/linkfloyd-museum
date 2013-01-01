@@ -8,7 +8,8 @@ from notifications.models import Notification
 def list(request):
 
     objects = []
-    notifications = Notification.objects.filter(recipient=request.user)
+    notifications = Notification.objects.filter(recipient=request.user).order_by("-date")
+
     for notification in notifications:
         objects.append({
             "sentence": render_to_string(

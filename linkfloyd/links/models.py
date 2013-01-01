@@ -113,7 +113,7 @@ def link_deleted(sender, **kwargs):
 def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
     vote = sender
     link = sender.object
-    link.vote_score = link.votes.aggregate(score=Sum('value'))['score']
+    link.vote_score = link.votes.aggregate(score=Sum('value'))['score'] or 0
     link.save()
 
     for subscription in Subscription.objects.filter(

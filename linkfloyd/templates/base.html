@@ -128,11 +128,9 @@
                         {% endif %}
                     </ul>
                 </li>
-                {% if notifications_count %}
-                    <li>
-                        <a href="/notifications/">{{ notifications_count }}</a>
-                    </li>
-                {% endif %}
+                <li>
+                    <a href="/notifications/">{% trans "Notifications" %} {% if notifications_count %} ({{ notifications_count }}){% endif %}</a>
+                </li>
                 <li><a href="/links/random/">{% trans "Random" %}</a></li>
                 <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
                     <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>

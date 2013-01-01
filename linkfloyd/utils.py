@@ -50,27 +50,28 @@ def get_info(url):
 
         desc_bs = bs.find("meta", attrs={"name": "description"})
 
-        if desc_bs and ('content' in desc_bs):
+        if desc_bs and desc_bs.get('content'):
             resp_dict['description'] = desc_bs['content']
 
         img_bs = bs.find("meta", attrs={"property": "og:image"})
 
-        if img_bs and ('content' in img_bs):
-            resp_dict['images'].append(img_bs['content'])
+        if img_bs and img_bs.get("content"):
+            resp_dict['images'].append(img_bs.get('content'))
+            print resp_dict
 
         del(img_bs)
 
         img_src_bs = bs.find("link", attrs={"rel": "image_src"})
 
         if img_src_bs:
-            resp_dict['images'].append(img_src_bs['href'])
+            resp_dict['images'].append(img_src_bs.get('href'))
             resp_dict['player'] = "<img src='%s' class='embed' />" \
                 % img_src_bs['href']
 
         imgs_bs = bs.findAll("img")
+
         if imgs_bs:
-            resp_dict['images'] = []
-            resp_dict['images'].extend([bs['src'] for bs in imgs_bs])
+            resp_dict['images'].extend([bs.get('src') for bs in imgs_bs])
 
         # cleanup title and description
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 10:08-0600\n"
-"PO-Revision-Date: 2012-11-18 18:11+0200\n"
+"POT-Creation-Date: 2012-12-31 15:24-0600\n"
+"PO-Revision-Date: 2012-12-31 23:46+0200\n"
 "Last-Translator: Mirat Can Bayrak <miratcanbayrak@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -22,8 +22,8 @@ msgid "You have to be logged in to complete this action."
 msgstr "Bu aksiyonu tamamlayabilmek için giriş yapmış olman gerekiyor."
 
 #: api/views.py:171
-#: links/templates/links/link_as_list_item.html:23
-#: links/templates/links/link_list.html:51
+#: links/templates/links/link_as_list_item.html:26
+#: links/templates/links/link_list.html:39
 msgid "Unsubscribe"
 msgstr "Takibi Bırak"
 
@@ -34,8 +34,8 @@ msgstr "Bu kanalın yöneticisi olmak istediğinden emin misin?"
 #: api/views.py:198
 #: api/views.py:211
 #: channels/templates/channels/channel_list.html:16
-#: links/templates/links/link_as_list_item.html:25
-#: links/templates/links/link_list.html:51
+#: links/templates/links/link_as_list_item.html:28
+#: links/templates/links/link_list.html:39
 msgid "Subscribe"
 msgstr "Takip Et"
 
@@ -110,22 +110,22 @@ msgid "Top Channels"
 msgstr "En İyi Kanallar"
 
 #: channels/templates/channels/channel.html:23
-#: templates/base.html:123
+#: templates/base.html:126
 msgid "Your Subscriptions"
 msgstr "Takip Ettiklerin"
 
 #: channels/templates/channels/channel.html:33
-#: links/templates/links/link_list.html:77
+#: links/templates/links/link_list.html:65
 msgid "Subscribers"
 msgstr "Takipçiler"
 
 #: channels/templates/channels/channel.html:60
-#: links/templates/links/link_list.html:125
+#: links/templates/links/link_list.html:113
 msgid "No links found."
 msgstr "Hiç link bulunamadı."
 
 #: channels/templates/channels/channel.html:80
-#: links/templates/links/link_as_list_item.html:31
+#: links/templates/links/link_as_list_item.html:33
 msgid "Share"
 msgstr "Paylaş"
 
@@ -143,14 +143,14 @@ msgid "%(subscribers)s subscribers"
 msgstr "%(subscribers)s takipçi"
 
 #: channels/templates/channels/create.html:9
-#: templates/base.html:119
+#: templates/base.html:122
 msgid "Create a Channel"
 msgstr "Kanal Oluştur"
 
 #: channels/templates/channels/create.html:16
 #: channels/templates/channels/update.html:23
 #: links/templates/links/comment_form.html:15
-#: links/templates/links/submit_form.html:14
+#: links/templates/links/submit_form.html:26
 #: links/templates/links/update_form.html:28
 #: templates/registration/password_reset_confirm.html:13
 #: templates/registration/registration_form.html:26
@@ -162,32 +162,18 @@ msgid "Name"
 msgstr "İsim"
 
 #: channels/templates/channels/update.html:17
-#: preferences/models.py:16
+#: preferences/models.py:28
 msgid "Description"
 msgstr "Açıklama"
 
-#: comments/models.py:25
+#: comments/models.py:22
 #: links/templates/links/update_form.html:13
 msgid "Comment"
 msgstr "Yorum"
 
-#: comments/models.py:26
+#: comments/models.py:23
 msgid "you can use markdown here"
 msgstr "bu alanda markdown kullanabilirsin"
-
-#: comments/templates/comments/body.txt:1
-#, python-format
-msgid "%(username)s has made a comment on: %(link_title)s"
-msgstr "%(username)s adlı kullanıcı şu gönderiye yorum yaptı: %(link_title)s"
-
-#: comments/templates/comments/body.txt:9
-msgid "To reply to this comment or to see all comments on this link click here"
-msgstr "Bu yoruma cevap vermek ya da bütün yorumları görüntülemek için buraya tıklayın"
-
-#: comments/templates/comments/subject.txt:1
-#, python-format
-msgid "Comment posted on: %(link_title)s"
-msgstr "Şu gönderiye yorum yapıldı: %(link_title)s"
 
 #: links/models.py:22
 msgid "Safe Posts"
@@ -209,46 +195,63 @@ msgstr "Derece"
 msgid "warn people about your link"
 msgstr "insanları gönderin hakkında uyar"
 
-#: links/models.py:47
+#: links/models.py:46
 msgid "Channel"
 msgstr "Kanal"
 
-#: links/utils.py:38
+#: links/utils.py:76
 msgid "Posts From Your Subscripted Channels"
 msgstr "Takip Ettiğin Kanallardan Gönderiler"
 
-#: links/utils.py:39
+#: links/utils.py:77
 #, python-format
 msgid "Posts From %s"
 msgstr "%s Kullanıcısından Gönderiler"
 
-#: links/utils.py:40
+#: links/utils.py:78
 #, python-format
 msgid "Posts From %s Channel"
 msgstr "%s Kanalına Yapılmış Gönderiler"
 
-#: links/utils.py:41
+#: links/utils.py:79
 #, python-format
 msgid "Posts liked by %s"
 msgstr "%s tarafından beğenilmiş gönderiler"
 
-#: links/utils.py:42
+#: links/utils.py:80
 msgid "All Posts Shared on Linkfloyd"
 msgstr "Linkfloyd üzerinde paylaşılmış tüm gönderiler"
 
-#: links/views.py:121
+#: links/views.py:120
 msgid "Subscribe channels that you are interested in"
 msgstr "İlgi alanına giren kanalları takibe al"
 
-#: links/views.py:137
+#: links/views.py:136
 #, python-format
 msgid "%s on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
 
-#: links/views.py:157
+#: links/views.py:156
 #, python-format
 msgid "%s's Up Votes on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
+
+#: links/management/__init__.py:9
+#, fuzzy
+msgid "Link Commented"
+msgstr "Yorum"
+
+#: links/management/__init__.py:9
+msgid "Some of links that you subscribed, has new comment"
+msgstr "Takip ettiğiniz gönderilerden birine yorum yapıldı"
+
+#: links/management/__init__.py:10
+msgid "Link Upvoted"
+msgstr "Gönderi Yukarı Oylandı"
+
+#: links/management/__init__.py:10
+msgid "Some of links that you subscribed, has new upvote"
+msgstr "Takip ettiğiniz gönderilerdne biri yukarı oylandı"
 
 #: links/templates/links/comment.html:5
 #: links/templates/links/link_detail.html:25
@@ -256,20 +259,20 @@ msgid "ago"
 msgstr "önce"
 
 #: links/templates/links/comment.html:10
-#: links/templates/links/link_as_list_item.html:16
+#: links/templates/links/link_as_list_item.html:20
 msgid "Update"
 msgstr "Güncelle"
 
 #: links/templates/links/comment.html:11
-#: links/templates/links/link_as_list_item.html:17
+#: links/templates/links/link_as_list_item.html:21
 msgid "Delete"
 msgstr "Sil"
 
-#: links/templates/links/link_as_list_item.html:14
+#: links/templates/links/link_as_list_item.html:18
 msgid "Comments"
 msgstr "Yorumlar"
 
-#: links/templates/links/link_as_list_item.html:46
+#: links/templates/links/link_as_list_item.html:48
 #, python-format
 msgid " <a href=\"%(login_url)s\">Log in</a> to leave comment "
 msgstr "Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yapsan</a> NOLURDU!!?"
@@ -290,60 +293,61 @@ msgstr "defa"
 msgid "Up Voted Users"
 msgstr "Yukarı Oylayan Kullanıcılar"
 
-#: links/templates/links/link_list.html:41
+#: links/templates/links/link_list.html:29
 msgid "Notes & Rules"
 msgstr "Notlar & Kurallar"
 
-#: links/templates/links/link_list.html:43
+#: links/templates/links/link_list.html:31
+#: wiki/templates/wiki/view.html:20
 msgid "Actions"
 msgstr "Aksiyonlar"
 
-#: links/templates/links/link_list.html:45
-#: templates/base.html:130
+#: links/templates/links/link_list.html:33
+#: templates/base.html:136
 msgid "Submit a Link"
 msgstr "Bağ Gönder"
 
-#: links/templates/links/link_list.html:48
+#: links/templates/links/link_list.html:36
 msgid "Update Channel"
 msgstr "Kanalı Güncelle"
 
-#: links/templates/links/link_list.html:60
+#: links/templates/links/link_list.html:48
 msgid "About User"
 msgstr "Kullanıcı Hakında"
 
-#: links/templates/links/link_list.html:66
+#: links/templates/links/link_list.html:54
 msgid "Recommened Channels"
 msgstr "Önerilen Kanallar"
 
-#: links/templates/links/link_list.html:96
+#: links/templates/links/link_list.html:84
 msgid "Drag and drop \"Post to Linkfloyd\" button to you bookmarks toolbar. It will let you share web pages on Linkfloyd easily."
 msgstr "\"Post to Linkfloyd\" düğmesini yer imi araç çubuğuna sürükleyip bırak. Web sayfa"
 
-#: links/templates/links/link_list.html:100
+#: links/templates/links/link_list.html:88
 msgid "Remember to Vote"
 msgstr "Oylamayı Unutma"
 
-#: links/templates/links/link_list.html:101
+#: links/templates/links/link_list.html:89
 msgid "Votes are intended to indicate importance and relevance to the posts."
 msgstr "Oylar gönderilerin önemliliğini ve işe yararlığını tespit etmek için kullanılıyor"
 
-#: links/templates/links/link_list.html:102
+#: links/templates/links/link_list.html:90
 msgid "If you think something contributes to conversation, upvote it. If you think it does not contribute to the channel it is posted in or is off-topic in a particular community, downvote it."
 msgstr "Gönderinin önemli-işe yarar olduğunu düşünüyorsan yukarı oylamayı unutma. Eğer önemsiz ya da yanlış kanalda olduğunu düşünüyorsan aşağı oylamalısın"
 
-#: links/templates/links/link_list.html:109
+#: links/templates/links/link_list.html:97
 msgid "Controversial"
 msgstr "Tartışmalı"
 
-#: links/templates/links/link_list.html:112
+#: links/templates/links/link_list.html:100
 msgid "Top Voted"
 msgstr "Yüksek Puanlı"
 
-#: links/templates/links/link_list.html:115
+#: links/templates/links/link_list.html:103
 msgid "Latest"
 msgstr "En Son"
 
-#: links/templates/links/link_list.html:118
+#: links/templates/links/link_list.html:106
 msgid "Hot"
 msgstr "Sıcak"
 
@@ -351,43 +355,97 @@ msgstr "Sıcak"
 msgid "Post a Link"
 msgstr "Bağ Gönder"
 
+#: links/templates/links/submit_form.html:14
+msgid "Background Image"
+msgstr "Fon İmajı"
+
 #: links/templates/links/update_form.html:5
 msgid "This link is not reachable"
 msgstr "Bu bağlantı erişilemez"
 
-#: preferences/models.py:17
+#: notifications/templates/notifications/commented_post/email_body.txt:1
+#, python-format
+msgid "%(actor)s has made a comment on: %(link_title)s"
+msgstr "%(actor)s adlı kullanıcı şu gönderiye yorum yaptı: %(link_title)s"
+
+#: notifications/templates/notifications/commented_post/email_body.txt:9
+#: templates/notification/link_commented/email_body.txt:9
+msgid "To reply to this comment or to see all comments on this link click here"
+msgstr "Bu yoruma cevap vermek ya da bütün yorumları görüntülemek için buraya tıklayın"
+
+#: notifications/templates/notifications/commented_post/email_subject.txt:1
+#: notifications/templates/notifications/commented_your_post/email_subject.txt:1
+#: templates/notification/link_commented/email_subject.txt:1
+#, python-format
+msgid "Comment posted on: %(link_title)s"
+msgstr "Şu gönderiye yorum yapıldı: %(link_title)s"
+
+#: notifications/templates/notifications/commented_your_post/email_body.txt:1
+#: notifications/templates/notifications/downvoted_post/email_body.txt:1
+#: notifications/templates/notifications/downvoted_your_post/email_body.txt:1
+#, python-format
+msgid "%(actor)s has down voted on: %(link_title)s"
+msgstr "%(actor)s adlı kullanıcı şu gönderiyi aşağı oyladı: %(link_title)s"
+
+#: notifications/templates/notifications/commented_your_post/email_body.txt:3
+#: notifications/templates/notifications/downvoted_post/email_body.txt:3
+#: notifications/templates/notifications/downvoted_your_post/email_body.txt:3
+#: notifications/templates/notifications/upvoted_post/email_body.txt:3
+#: notifications/templates/notifications/upvoted_your_post/email_body.txt:3
+msgid "To to see all comments on this link click here"
+msgstr "Bütün yorumları görüntülemek için buraya tıklayın"
+
+#: notifications/templates/notifications/downvoted_post/email_subject.txt:1
+#: notifications/templates/notifications/downvoted_your_post/email_subject.txt:1
+#, python-format
+msgid "Down voted on: %(link_title)s"
+msgstr "Şu gönderi aşağı oylandı: %(link_title)s"
+
+#: notifications/templates/notifications/upvoted_post/email_body.txt:1
+#: notifications/templates/notifications/upvoted_your_post/email_body.txt:1
+#, python-format
+msgid "%(actor)s has up voted on: %(link_title)s"
+msgstr "%(actor)s adlı kullanıcı şu gönderiyi yukarı oyladı: %(link_title)s"
+
+#: notifications/templates/notifications/upvoted_post/email_subject.txt:1
+#: notifications/templates/notifications/upvoted_your_post/email_subject.txt:1
+#, python-format
+msgid "Up voted on: %(link_title)s"
+msgstr "Şu gönderi yukarı oylandı : %(link_title)s"
+
+#: preferences/models.py:29
 msgid "describe yourself"
 msgstr "kendini tanıt"
 
-#: preferences/models.py:20
+#: preferences/models.py:31
 msgid "Maximum Rating"
 msgstr "En Yüksek Derece"
 
-#: preferences/models.py:22
+#: preferences/models.py:33
 msgid "how much can you handle?"
 msgstr "ne kadar sert içeriğe katlanabilirsin?"
 
-#: preferences/models.py:28
+#: preferences/models.py:39
 msgid "Daily"
 msgstr "Günlük"
 
-#: preferences/models.py:29
+#: preferences/models.py:40
 msgid "Weekly"
 msgstr "Haftalık"
 
-#: preferences/models.py:30
+#: preferences/models.py:41
 msgid "Monthly"
 msgstr "Aylık"
 
-#: preferences/models.py:31
+#: preferences/models.py:42
 msgid "Never Send"
 msgstr "Hiç Gönderme"
 
-#: preferences/models.py:32
+#: preferences/models.py:43
 msgid "Summary Emails"
 msgstr "Özet Postalar"
 
-#: preferences/models.py:33
+#: preferences/models.py:44
 msgid "When do you want to get summaries of your subscripted channels"
 msgstr "Takibe aldığın kanalların özetini ne sıklıkla almak istersin?"
 
@@ -399,43 +457,47 @@ msgstr "Seçeneklerin güncellendi."
 msgid "Update Preferences"
 msgstr "Seçenekleri Güncelle"
 
-#: templates/base.html:82
+#: templates/base.html:85
 msgid "Menu"
 msgstr "Menü"
 
-#: templates/base.html:92
+#: templates/base.html:95
 msgid "Preferences"
 msgstr "Seçenekler"
 
-#: templates/base.html:93
+#: templates/base.html:96
 msgid "Log out"
 msgstr "Çıkış Yap"
 
-#: templates/base.html:98
+#: templates/base.html:101
 msgid "Posts"
 msgstr "Gönderiler"
 
-#: templates/base.html:102
+#: templates/base.html:105
 msgid "Your Likes"
 msgstr "Sevdiklerim"
 
-#: templates/base.html:106
+#: templates/base.html:109
 msgid "All Posts"
 msgstr "Tüm Gönderiler"
 
-#: templates/base.html:112
+#: templates/base.html:115
 msgid "Channels"
 msgstr "Kanallar"
 
-#: templates/base.html:116
+#: templates/base.html:119
 msgid "Browse Channels"
 msgstr "Kanallara Bak"
 
-#: templates/base.html:128
+#: templates/base.html:132
+msgid "Notifications"
+msgstr "Bildirimler"
+
+#: templates/base.html:134
 msgid "Random"
 msgstr "Rasgele"
 
-#: templates/base.html:134
+#: templates/base.html:140
 #: templates/registration/login.html:2
 msgid "Login"
 msgstr "Giriş Yap"
@@ -443,6 +505,16 @@ msgstr "Giriş Yap"
 #: templates/index.html:3
 msgid "No links shared today. Share it now!"
 msgstr "Bu gün hiç bağ gönderilmemiş. Siz gönderin!"
+
+#: templates/notification/link_commented/email_body.txt:1
+#, python-format
+msgid "%(username)s has made a comment on: %(link_title)s"
+msgstr "%(username)s adlı kullanıcı şu gönderiye yorum yaptı: %(link_title)s"
+
+#: templates/notification/link_commented/web_body.html:2
+#, python-format
+msgid "<div class=\"notification\"><p><a href=\"%(user_url)s\">%(username)s</a> has made a comment on: <a href=\"%(link_url)s\">%(link_title)s</a></p></div>"
+msgstr "<div class=\"notification\"><p><a href=\"%(user_url)s\">%(username)s</a> şu önderiye yorum yaptı: <a href=\"%(link_url)s\">%(link_title)s</a></p></div>"
 
 #: templates/registration/activate.html:2
 #: templates/registration/activation_complete.html:2
@@ -619,17 +691,21 @@ msgstr "Şifre Tekrar"
 msgid "Edit"
 msgstr "Düzenle"
 
-#: wiki/templates/wiki/view.html:13
-msgid "This page does not exist"
-msgstr "Bu sayfa bulunamıyor"
+#: wiki/templates/wiki/view.html:12
+msgid "Contributors"
+msgstr "Katkıcılar"
 
-#: wiki/templates/wiki/view.html:17
+#: wiki/templates/wiki/view.html:22
 msgid "Edit this page"
 msgstr "Bu sayfayı düzenle"
 
-#: wiki/templates/wiki/view.html:19
+#: wiki/templates/wiki/view.html:24
 msgid "Create this page"
 msgstr "Bu sayfayı oluştur"
+
+#: wiki/templates/wiki/view.html:29
+msgid "This page does not exist"
+msgstr "Bu sayfa bulunamıyor"
 
 #~ msgid "Links"
 #~ msgstr "Bağlar"
