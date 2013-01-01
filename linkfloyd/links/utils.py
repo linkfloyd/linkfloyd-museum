@@ -1,4 +1,5 @@
-from django.db.models import Q, Sum
+from django.db.models import Q
+
 
 def get_in(d, k, p, df=None):
     if k in d:
@@ -6,10 +7,11 @@ def get_in(d, k, p, df=None):
             return d[k]
     return df
 
+
 def context_builder(request, **kwargs):
 
     ''' (request object, [kwargs...]) -> response dict
-        
+
     Builds query via request item contents overriden by kwargs.
 
     links_from and instance properties
@@ -34,7 +36,7 @@ def context_builder(request, **kwargs):
       keyword supplied and it must contain an instance of User model.
 
     * Request object can have "days" property which is integer, that limits
-      query in time. 
+      query in time.
 
     ordering and limiting
     ---------------------
@@ -42,7 +44,7 @@ def context_builder(request, **kwargs):
     * Request object can be supplied with "days" property which is positive
       integer to limit links in time.
 
-    * Request object can be supplied with "ordering" property which is 
+    * Request object can be supplied with "ordering" property which is
       string that can contain "contreversial", "top" or "latest" to get
       links in that way.
 
@@ -86,8 +88,9 @@ def context_builder(request, **kwargs):
 
     if response['links_from'] == "subscriptions" and user_is_authenticated:
         # TODO: this line can be optimised:
-        query = query & Q(channel_id__in=[subscription.channel for \
-            subscription in Subscription.objects.filter(user=request.user).select_related("channel")])
+        query = query & Q(channel_id__in=[subscription.channel for
+            subscription in Subscription.objects.filter(
+              user=request.user).select_related("channel")])
     elif response['links_from'] == "channel":
         query = query & Q(channel=response['instance'])
     elif response['links_from'] == "user":
@@ -97,7 +100,7 @@ def context_builder(request, **kwargs):
         vote_model = get_vote_model('links.LinkVote')
         votes = vote_model.objects.filter(voter=response['instance'], value=1
             ).select_related("object")
-        query = query & Q(id__in = [vote.object.id for vote in votes])
+        query = query & Q(id__in=[vote.object.id for vote in votes])
 
     if response['days']:
         query = query & Q(
@@ -107,7 +110,7 @@ def context_builder(request, **kwargs):
 
         # Filter links that not in known languages and rating higer than users.
         preferences = UserPreferences.objects.get(user=request.user)
-        query = query & Q(rating__lte  = preferences.max_rating)
+        query = query & Q(rating__lte=preferences.max_rating)
 
     links = Link.objects.filter(query).extra(select={
         'is_owned':      'posted_by_id=%s' % request.user.id,
@@ -136,7 +139,7 @@ def context_builder(request, **kwargs):
         "top": "-vote_score",
         "latest": "-posted_at",
     }[response['ordering']])
-    
+
     paginator = Paginator(links, 25)
 
     page = request.GET.get('page', 1)
