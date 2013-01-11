@@ -43,8 +43,8 @@ body {
     background: @black;
     font-family: sans-serif;
     color: @cello_light_4;
-    font-size: 0.9em;
-    line-height: 1.3em;
+    font-size: 1em;
+    line-height: 1.6em;
 }
 h1, h2, h3, h4, h5, h6, dt {
     margin: 0 0 0.5em 0;
@@ -76,7 +76,7 @@ p {
 }
 a {
     text-decoration: underline;
-    color: @cello_light_2;
+    color: inherit;
     &:hover {
         color: @cello_light_4;
     }
@@ -99,6 +99,9 @@ a {
 pre, ol, ul, blockquote  {
     padding: 0.5em;
     margin:0 0 0.5em 0;
+}
+pre {
+        background: #111;    
 }
 ol, ul {
     padding: 0 0 0 4em;
@@ -157,8 +160,6 @@ ul.flat-list {
     }
 }
 ul.ordering {
-    font-size: 0.8em;
-    margin: 0 0 1em 0;
     li {
         float: right;
         &.active a {
@@ -171,8 +172,8 @@ ul.ordering {
     }
 }
 p.success, p.error, p.warning {
-    font-size: 1.6em;
-    padding: 2em;
+    font-size: 1.3em;
+    padding: 1em;
     text-align: center;
 }
 .success {
@@ -215,7 +216,6 @@ p.success, p.error, p.warning {
         padding: 1em 2em;
         margin: 0;
         color: @grey_light_1;
-        font-size: 0.8em;
         text-decoration: none;
         font-weight: bold;
     }
@@ -439,7 +439,7 @@ div.channels {
 }
 div.post {
     overflow: auto;
-    padding: 1em 0;
+    padding: 0.5em 0;
     margin: 0;
     div.side {
         float: left;
@@ -497,8 +497,6 @@ div.post {
         }
         p.body {
             color: @cello_light_6;
-            font-size: 16px;
-            line-height: 20px;
 
         }
         p.info {
@@ -516,7 +514,7 @@ div.post {
             margin: 0;
             font-weight: bold;
             font-size: 0.8em;
-            line-height: 1.6em;
+            line-height: 1.3em;
         }
         div.embed_player {
             margin: 0;
