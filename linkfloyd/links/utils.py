@@ -103,34 +103,36 @@ def context_builder(request, **kwargs):
         query = query & Q(
             posted_at__gte=datetime.today() - timedelta(days=response['days']))
 
+    links = Link.objects.filter(query)
+
     if user_is_authenticated:
 
         # Filter links that not in known languages and rating higer than users.
         preferences = UserPreferences.objects.get(user=request.user)
         query = query & Q(rating__lte  = preferences.max_rating)
+        links = links.extra(select={
+            'is_owned':      'posted_by_id=%s' % request.user.id,
 
-    links = Link.objects.filter(query).extra(select={
-        'is_owned':      'posted_by_id=%s' % request.user.id,
+            'is_subscribed': 'SELECT COUNT(*) FROM links_subscription WHERE '
+                             'user_id=%s '
+                             'AND '
+                             'id=links_subscription.link_id' % request.user.id,
 
-        'is_subscribed': 'SELECT COUNT(*) FROM links_subscription WHERE '
-                         'user_id=%s '
-                         'AND '
-                         'id=links_subscription.link_id' % request.user.id,
+            'is_voted_up':   'SELECT COUNT(*) FROM links_linkvote WHERE '
+                             'voter_id=%s '
+                             'AND '
+                             'object_id=links_link.id '
+                             'AND '
+                             'value=1' % request.user.id,
 
-        'is_voted_up':   'SELECT COUNT(*) FROM links_linkvote WHERE '
-                         'voter_id=%s '
-                         'AND '
-                         'object_id=links_link.id '
-                         'AND '
-                         'value=1' % request.user.id,
+            'is_voted_down': 'SELECT COUNT(*) FROM links_linkvote WHERE '
+                             'voter_id=%s '
+                             'AND '
+                             'object_id=links_link.id '
+                             'AND '
+                             'value=-1' % request.user.id})
 
-        'is_voted_down': 'SELECT COUNT(*) FROM links_linkvote WHERE '
-                         'voter_id=%s '
-                         'AND '
-                         'object_id=links_link.id '
-                         'AND '
-                         'value=-1' % request.user.id
-    }).select_related("posted_by", "channel").order_by({
+    links = links.select_related("posted_by", "channel").order_by({
         "hot": "-updated_at",
         "controversial": "-comment_score",
         "top": "-vote_score",
