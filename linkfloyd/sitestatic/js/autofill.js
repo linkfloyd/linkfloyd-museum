@@ -36,10 +36,12 @@ thumbnailRepo = function(imgUrls) {
                 if (_this.imgObjs.length) {
                     $("#thumbnailControls").show();
                     _this.updateBg();
-		    toggleBgImage()
+                    toggleBgImage()
                 };
-                //if (_this.imgObjs.length > 0 && !bgImageSwitch) {
-                // }
+                if (_this.imgObjs.length > 0 && !bgImageSwitch) {
+                    toggleBgImage();
+                    $("#toggleBgImage").attr("checked", true);
+                }
             }
         });
     };
@@ -61,7 +63,7 @@ thumbnailRepo.prototype = {
     "getPrev": function() {
         this.idx--;
         if (this.idx<=0) {
-            this.idx = this.imgObjs.length;
+            this.idx = this.imgObjs.length - 1;
         }
         this.updateBg();
     }
