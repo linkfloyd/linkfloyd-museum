@@ -8,6 +8,7 @@ from local_settings import *
 
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = False
+
 ADMINS = (
     ('Mirat Can Bayrak', 'miratcanbayrak@gmail.com'),
     )
