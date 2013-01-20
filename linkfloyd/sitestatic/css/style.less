@@ -69,6 +69,7 @@ a#logo {
     color: white;
     position: absolute;
     top: 10px;
+    text-decoration: none;
 }
 
 ul#nav {
@@ -125,10 +126,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans;
+    font-family: serif;
 }
 
 p {
-    margin: 0 0 10px 0;
+    margin: 15px 0;
 }
 
 a {
@@ -274,7 +276,6 @@ div.post {
 }
 
 div.attachment{
-    
     margin: 0 0 10px 0;
     padding: 0;
     border-radius: 3px;
@@ -328,18 +329,20 @@ div.comments {
     div.comment {
         overflow: auto;
         clear: both;
-        margin: 0 0 10px 0;
-        padding: 10px;
-        background: #light;
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px dashed @middle;
         form {
             padding: 0;
             textarea {
-                height: 90px;
+                height: 120px;
             }
             label {
             }
         }
         div.content {
+            margin: 0;
+            padding: 0;
             p.info {
                 a.posted_by {
                     font-weight: bold;
@@ -360,9 +363,9 @@ div.comments {
        blockquote {
             background: @black;
             border: 1px solid @cello;
-            padding: 0.5em;
+            padding: 5px;
             p {
-                margin: 0.5em 0 !important;
+                margin:  0 !important;
             }
         }
         pre {
@@ -550,7 +553,6 @@ div.channels {
         }
     }
 }
-
 
 @media screen and (max-width: 800px) {
     div.panel {
