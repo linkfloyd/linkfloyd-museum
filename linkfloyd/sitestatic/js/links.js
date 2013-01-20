@@ -11,7 +11,7 @@ var addthis_config = {
     "ui_use_addressbook": true,
     "data_ga_property": "UA-6315603-13",
     "data_ga_social": true,
-    "services_expanded": "friendfeed,reddit,twitter"
+    "services_expanded": "friendfeed, reddit, twitter"
 };
 $(document).ready( function() {
     $(".comment").bind("delete", function(event) {
@@ -108,10 +108,11 @@ $(document).ready( function() {
     $("div.thumbnail i").click(function() {
         var attachment_el = $(this).parent().parent();
         var embed_player_el = attachment_el.find("div.embed_player");
-        console.log(attachment_el, embed_player_el);
 
         if (embed_player_el.length === 0) {
+            embed_player_el = $("<div class='embed_player'></div>");
             embed_player_el.append($(this).attr("player"));
+            attachment_el.append(embed_player_el);
             attachment_el.addClass("expanded");
         } else {
             embed_player_el.empty();
