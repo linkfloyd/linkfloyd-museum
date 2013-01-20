@@ -1,13 +1,10 @@
 {% extends "base.html" %}{% load i18n %}
 {% block extra_head %}{{form.media}}{% endblock extra_head %}
 {% block content %}
-<div class="two-column">
-	<div class="panel">&nbsp</div>
-    <div class="content section">
-        <h2 class="header">{% trans "Post a Link" %}</h2>
-        <div class="body">
-            {% include "links/submit_form.html" %}
-        </div>
+<div class="content section">
+    <h2 class="header">{% trans "Post a Link" %}</h2>
+    <div class="body">
+        {% include "links/submit_form.html" %}
     </div>
 </div>
 {% endblock content %}

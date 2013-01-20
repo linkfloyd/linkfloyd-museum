@@ -105,16 +105,19 @@ $(document).ready( function() {
         link_el.trigger("switch_follow");
         return false;
     });
-    $("i.playButton").click(function() {
+    $("div.thumbnail i").click(function() {
         var attachment_el = $(this).parent().parent();
         var embed_player_el = attachment_el.find("div.embed_player");
-        if (embed_player_el.is(":empty")) {
+        console.log(attachment_el, embed_player_el);
+
+        if (embed_player_el.length === 0) {
             embed_player_el.append($(this).attr("player"));
             attachment_el.addClass("expanded");
         } else {
             embed_player_el.empty();
             attachment_el.removeClass("expanded");
         }
+
         return false;
     });
 });

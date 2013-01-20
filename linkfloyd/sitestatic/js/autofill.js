@@ -1,24 +1,18 @@
-var attachment_el,
-    thumbnailrepo,
-    thumbnailRepo,
-    bgImageSwitch   = false,
-    origin          = {x: 0, y: 0},
-    start           = {x: 0, y: 0},
-    movecontinue    = false;
+var thumbnailSwitch = false;
 
-function toggleBgImage() {
-    bgImageSwitch = !bgImageSwitch;
-    if (bgImageSwitch) {
-        $("#selectThumbnail").show();
-        attachment_el.addClass("thumbnailed");
-        thumbnailrepo.updateBg();
-        $("input[name='thumbnail_url']").val(thumbnailrepo.imgObjs[thumbnailrepo.idx].src6);
+function toggleThumbnail() {
+    if (thumbnailSwitch === false) {
+        console.log("switch false");
+        if ($("img.thumbnail").length === 0) {
+            console.log("creating img");
+            $(".attachment").prepend("<div class='thumbnail'><img src='' /></div>");
+        } else {
+            $("div.thumbnail").show();
+        }
     } else {
-        $("#selectThumbnail").hide();
-        attachment_el.css('background-image', 'None');
-        attachment_el.removeClass("thumbnailed");
-        $("input[name='thumbnail_url']").val('');
+        $("div.thumbnail").hide();
     }
+    thumbnailSwitch = !thumbnailSwitch;
 }
 
 thumbnailRepo = function(imgUrls) {
@@ -33,14 +27,12 @@ thumbnailRepo = function(imgUrls) {
             if (this.width > 310 && this.height > 120) {
                 _this.imgObjs.push(this);
                 $("#totalThumbnails").html(_this.imgObjs.length);
-                if (_this.imgObjs.length) {
+                if (_this.imgObjs.length > 0) {
                     $("#thumbnailControls").show();
-                    _this.updateBg();
-                    toggleBgImage()
                 };
-                if (_this.imgObjs.length > 0 && !bgImageSwitch) {
-                    toggleBgImage();
-                    $("#toggleBgImage").attr("checked", true);
+                if (_this.imgObjs.length > 0 && !thumbnailSwitch) {
+                    toggleThumbnail();
+                    _this.updateBg();
                 }
             }
         });
@@ -49,8 +41,8 @@ thumbnailRepo = function(imgUrls) {
 
 thumbnailRepo.prototype = {
     "updateBg": function() {
-        attachment_el.css('background-image', "url(" + this.imgObjs[this.idx].src + ")");
         $("#currentThumbnail").html(this.idx + 1);
+        $("div.thumbnail img").attr("src", thumbnailrepo.imgObjs[thumbnailrepo.idx].src)
         $("input[name='thumbnail_url']").val(thumbnailrepo.imgObjs[thumbnailrepo.idx].src);
     },
     "getNext": function() {
@@ -68,52 +60,10 @@ thumbnailRepo.prototype = {
         this.updateBg();
     }
 };
-   
-function MoveAttachmentBg (e){
-    var moveby = {
-        // x: origin.x - e.clientX, 
-        x: 0,
-        y: origin.y - e.clientY
-    };
-    
-    if (movecontinue === true) {
-        start.x = start.x - moveby.x;
-        start.y = start.y - moveby.y;        
-        $(this).css('background-position', start.x + 'px ' + start.y + 'px');
-        $("#id_thumbnail_offset").val(start.y);
-    }
-    
-    origin.x = e.clientX;
-    origin.y = e.clientY;
-    
-    e.stopPropagation();
-    return false;
-}
 
-function handle (e){
-    movecontinue = false;
-    attachment_el.unbind('mousemove', MoveAttachmentBg);
-    
-    if (e.type == 'mousedown') {
-        origin.x = e.clientX;
-        origin.y = e.clientY;
-        movecontinue = true;
-        attachment_el.bind('mousemove', MoveAttachmentBg);
-    } else {
-        $(document.body).focus();
-    }
-    
-    e.stopPropagation();
-    return false;
-}
-
-function reset (){
-    start = {x: 0, y: 0};
-    $(this).css('backgroundPosition', '0 0');
-}
 
 $(document).ready(function() {
-    $("#toggleBgImage").change(toggleBgImage);
+    $("#toggleBgImage").change(toggleThumbnail);
 
     $("#id_url").change(function() {
         $.ajax({
@@ -138,7 +88,6 @@ $(document).ready(function() {
                 $("#url").hide();
                 thumbnailrepo = new thumbnailRepo(data.info.images);
                 attachment_el = $(".attachment");
-                attachment_el.bind('mousedown mouseup mouseleave', handle);
             },
             statusCode: {
                 404: function() {

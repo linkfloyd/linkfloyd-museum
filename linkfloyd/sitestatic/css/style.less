@@ -1,6 +1,13 @@
 @cello: #333d48;
-@black: #000;
-@grey: #aaa;
+@olive: #336d48;
+@orange: #cd5c0c;
+@purple: #633d48;
+@red: #c33d48;
+@black: #000000;
+
+@light: #ccc;
+@middle: #666;
+@heavy: #111;
 
 /* Fonts */
 
@@ -19,12 +26,40 @@
     line-height: 18px;
 }
 
+p.success, p.error, p.warning {
+    .bigtext;
+    text-align: center;
+    padding: 10px;
+}
+
+.success {
+    background: @olive;
+ }
+
+.warning {
+    background: @purple;
+    color: black;
+}
+
+.error {
+    background: @red;
+    color: grey_light_5;
+}
+
+a.avatar {
+    width: 30px;
+    height: 30px;
+    float: left;
+    display: block;
+    margin: 5px;
+}
+
 /* Layout */
 
 /* remove the list style */
 
 div#header {
-    background: #111;
+    background: @heavy;
     overflow: auto;
 }
 
@@ -32,8 +67,8 @@ a#logo {
     font-size: 2em;
     font-family: 'Lilita One', cursive;
     color: white;
-    margin: 0.4em 0 0 0;
-    padding: 0;
+    position: absolute;
+    top: 10px;
 }
 
 ul#nav {
@@ -52,44 +87,21 @@ ul#nav {
         position: relative;
         z-index: 500; 
         margin: 0;
+        padding: 0;
+    }
+}
+
+ul#nav, ul.subnav {
+    a {
+        display:block;
         padding: 10px;
-        &:hover {
-            ul {
-                display: block;
-            }
-        }
-        ul {
-            background: #111;
-            position: absolute; 
-            left: 0; 
-            display: none; 
-            margin: 0 0 0 -1px; 
-            padding: 0; 
-            list-style: none;
-            li {
-                width: 100px; 
-                float: left; 
-                border-top: 1px solid #fff;
-            }
-            a {
-                display:block;
-                padding: 8px 5px;
-                color:#666;
-                font-weight: normal;
-            }
-        }
-        a {
-            display: block;
-            padding: 5px; 
-            font-weight: 700;  
-            text-decoration: none; 
-            color: #fff; 
-            text-align: center; 
-            color: #333;
-            &:hover {
-                color: #fff;
-            }
-        }
+        color:@middle;
+        font-weight: normal;
+        text-decoration: none;
+    }
+    a:hover {
+        background: #333;
+        color: #ccc;
     }
 }
 
@@ -98,12 +110,17 @@ div.content div.body {
 }
 
 div.wrapper {
-    padding: 10px;
+    padding: 0 10px;
+}
+
+div.section {
+    display: block;
+    overflow: auto;
 }
 
 body {
     background: @black;
-    color: @grey;
+    color: @light;
     .normaltext;
     margin: 0;
     padding: 0;
@@ -142,7 +159,7 @@ div.pagination {
 /* Widgets */
 
 .buttonized {
-    background: #111;
+    background: @heavy;
     padding: 10px;
     color: inherit;
     font-weight: bold;
@@ -222,7 +239,7 @@ div.post {
             height: 0;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-bottom: 12px solid #666;
+            border-bottom: 12px solid @middle;
             margin-bottom: 15px;
         }
 
@@ -231,7 +248,7 @@ div.post {
             height: 0;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-top: 12px solid #666;
+            border-top: 12px solid @middle;
         }
 
         a.upVote.voted {
@@ -261,31 +278,32 @@ div.attachment{
     margin: 0 0 10px 0;
     padding: 0;
     border-radius: 3px;
-    border: 1px solid #111;
+    border: 1px solid @heavy;
     overflow: auto;
     a.title, p.description {
         .smalltext;
         margin: 10px;
     }
-
     a.title {
         display: block;
     }
-
     &.playble {
         a.title, p.description {
             margin-left: 35px !important;
         }
     }
-
-    img.thumbnail {
+    div.thumbnail {
         position: relative;
         display: block;
         float: left;
         margin: 0 10px 0 0;
         padding: 0;
-        width: 160;
-        height: 100px;
+        width: 160px;
+        img {
+            width: 160px;
+            padding: 0;
+            margin: 0 auto;
+        }
         i {
             background: top left url(https://s-static.ak.facebook.com/rsrc.php/v1/y6/r/gY6pCnDw29i.png);
             width: 35px;
@@ -293,9 +311,9 @@ div.attachment{
             position: absolute;
             bottom: 4px;
             left: 2px;
+            cursor: pointer;
         }
     }
-
     &.expanded {
         padding-top: 5px;
         background-image: none !important; 
@@ -312,6 +330,7 @@ div.comments {
         clear: both;
         margin: 0 0 10px 0;
         padding: 10px;
+        background: #light;
         form {
             padding: 0;
             textarea {
@@ -326,7 +345,7 @@ div.comments {
                     font-weight: bold;
                 }
                 span.date {
-                    font-size: 0.8em;
+                    font-size: 10px;
                 }
             }
             ul.actions {
@@ -352,20 +371,188 @@ div.comments {
     }
 }   
 
-ul.submenu {
-    border-radius: 3px;
-    background: red;
-    display: inline;
+ul.subnav {
+    position: absolute;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left: 1px solid #222;
+    border-right: 1px solid #000;
     list-style-type: none;
-    width: 400px;
-    height: 600px;
+    margin: 0;
+    padding: 0;
+    background: @heavy;
+    display: none;
     li {
         margin: 0;
         padding: 0;
     }
 }
 
-@media screen and (max-width: 640px) {
+form {
+    display:block;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 800px;
+    div.fieldWrapper{
+        &#rating, &#channel {
+            width: 49%;
+        }
+        &#rating {
+            float: left;
+        }
+        &#channel {
+            float: right;
+        }
+        &#body textarea {
+            height: 30px;
+        }
+        margin: 0 0 5px 0;
+        padding: 0;
+        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        label {
+            color: @middle;
+            display: block;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            padding: 0;
+            &:first-child {
+                margin-top: 0;
+            }
+            span {
+                .smalltext;
+                font-weight: normal;
+                margin: 0 0 0 6px;
+                &#remove_link {
+                    display: none;
+                }
+                &#slug_hview {
+                    margin: 0;
+                }
+            }
+        }
+        ul.errorlist {
+            float: right;
+            margin: 0;
+            padding: 0;
+            display: block;
+            li {
+                list-style-type: none;
+                margin: 6px 0 0 0;
+                padding: 0;
+                color: red;
+                float:right;
+                .smalltext;
+            }
+        }
+    }
+
+ input[type=text], input[type=password], textarea, select, textarea, ul.token-input-list {
+        box-sizing: border-box; /* css3 rec */
+        -moz-box-sizing: border-box; /* ff2 */
+        -ms-box-sizing: border-box; /* ie8 */
+        -webkit-box-sizing: border-box; /* safari3 */
+        -khtml-box-sizing: border-box; /* konqueror */
+        width: 100%;
+        padding: 6px;
+        margin: 0;
+        border-radius: 3px;
+        border: 1px inset @light;
+        background: @heavy;
+        color: @light;
+        &:disabled {
+            color: @middle;
+        }
+    }
+    textarea {
+        &#id_notes {
+            height: 102px;
+        }
+    }
+    select {
+        padding: 4px;
+    }
+    input[type='submit'], input[type='button'] {
+        margin:10px 10px 0 0;
+        float: right;
+        width: auto;
+        .buttonized;
+        color: @middle;
+        &:first-child {
+            margin-right: 0;
+        }
+    }
+}
+
+#thumbnailControls {
+    overflow: auto;
+    display: none;
+    margin: 0 0 10px 0;
+    #toggleThumbnail {
+        float: left;
+    }
+    #selectThumbnail {
+        overflow: auto;
+        float: right;
+    }
+    #prev {
+        float: left;
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid white;
+    }
+    #next {
+        float: left;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-left: 10px solid white;
+    }
+    p#thumbnailStatus {
+        float: left;
+        margin: 0 10px;
+        text-align: center;
+        font-weight: bold;
+    }
+}
+
+div.channels {
+    div.channel {
+        background: @heavy;
+        padding: 5px;
+        margin: 0 0 10px 0;
+        a.subscription_status {
+            .buttonized;
+            margin: 0;
+
+
+            float: right;
+            &.subscribed {
+                border-color: lighten(@olive, 30);
+                background: @olive;
+            }
+        }
+        h3.name {
+            margin-top: 0;
+            padding: 0;
+            a {
+                font-weight: bold;
+                font-effect: outline;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 800px) {
     div.panel {
         display: none;
     }

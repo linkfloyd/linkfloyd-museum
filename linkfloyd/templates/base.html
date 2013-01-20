@@ -28,74 +28,39 @@
 
     {% block extra_head %}{% endblock %}
     <script type="text/javascript" >
-        var ww;
         $(document).ready(function() {
-            ww = document.body.clientWidth;
-            $(".nav li a").each(function() {
-                if ($(this).next().length > 0) {
-                    $(this).addClass("parent");
-                };
-            })
-            
-            $(".toggleMenu").click(function(e) {
-                e.preventDefault();
-                $(this).toggleClass("active");
-                $(".nav").toggle();
+            $("a.parent").each(function(i, v){
+                var el = $(v)
+                var offs = el.offset();
+                var sub_el= $($($(v).attr("href"))[0]);
+                sub_el.css("top", offs.top + 40);
+                sub_el.css("left", offs.left - 1);
+                el.click(function(){
+                    sub_el.toggle();
+                    return false;
+                });
             });
-            adjustMenu();
-        })
-
-        $(window).bind('resize orientationchange', function() {
-            ww = document.body.clientWidth;
-            adjustMenu();
         });
-
-        var adjustMenu = function() {
-            if (ww < 768) {
-                $(".toggleMenu").css("display", "inline-block");
-                if (!$(".toggleMenu").hasClass("active")) {
-                    $(".nav").hide();
-                } else {
-                    $(".nav").show();
-                }
-                $(".nav li").unbind('mouseenter mouseleave');
-                $(".nav li a.parent").unbind('click').bind('click', function(e) {
-                    // must be attached to anchor element to prevent bubbling
-                    e.preventDefault();
-                    $(this).parent("li").toggleClass("hover");
-                });
-            } 
-            else if (ww >= 768) {
-                $(".toggleMenu").css("display", "none");
-                $(".nav").show();
-                $(".nav li").removeClass("hover");
-                $(".nav li a").unbind('click');
-                $(".nav li").unbind('mouseenter mouseleave').bind('mouseenter mouseleave', function() {
-                    // must be attached to li so that mouseleave is not triggered when hover over submenu
-                    $(this).toggleClass('hover');
-                });
-            }
-        }
     </script>
 
 
 </head>
 <body {% block class_body %}{% endblock %}>
     <div id="header">
-        <a class="toggleMenu" href="#">{% trans "Menu" %}</a>
-        <a id="logo" href="/">LinkFloyd</a>    
+        <div class="wrapper">
+            <a id="logo" href="/">LinkFloyd</a>    
             <ul id="nav">
                 {% block extra_nav %}{% endblock extra_nav %}
                 {% if user.is_authenticated %}
                     <li>
-                       <a class="parent" href="#preferences-submenu">Ben</a>
+                       <a class="parent" href="#preferences-subnav">{{user}}</a>
                     </li>
                 {% endif %}
                 <li>
-                    <a class="parent" href="#posts-submenu">{% trans "Posts" %}</a>
+                    <a class="parent" href="#posts-subnav">{% trans "Posts" %}</a>
                 </li>
                 <li>
-                    <a class="parent" href="#channels-submenu" {% if active_nav_item == "channels" %}class="active"{% endif %}>
+                    <a class="parent" href="#channels-subnav" {% if active_nav_item == "channels" %}class="active"{% endif %}>
                         {% trans "Channels" %}
                     </a>
                 </li>
@@ -115,21 +80,25 @@
                 {% endif %}
             </ul>
         </div>
+    </div>
         {% if messages %}
             {% for message in messages %}
                 <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
             {% endfor %}
         {% endif %}
 
-       <ul class="submenu" id="preferences-submenu">
+       <ul class="subnav" id="preferences-subnav">
             <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
             <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
         </ul>
 
-        <ul class="submenu" id="posts-submenu">
+        <ul class="subnav" id="posts-subnav">
             {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url links_upvoted_by user %}">{% trans "Your Likes" %}</a>
+                    <a href="{% url links_upvoted_by user %}">{% trans "My Likes" %}</a>
+                </li>
+                <li>
+                    <a href="{% url links_from_user user %}">{% trans "My Posts" %}</a>
                 </li>
             {% endif %}
             <li>
@@ -137,7 +106,7 @@
             </li>
         </ul>
 
-        <ul class="submenu" id="channels-submenu">
+        <ul class="subnav" id="channels-subnav">
             <li>
                 <a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a>
             </li>

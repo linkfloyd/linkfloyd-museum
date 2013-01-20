@@ -167,8 +167,8 @@ def switch_channel_subscription(request):
                 status="subscriber"
             )
             return HttpResponse(simplejson.dumps({
-                    "status": "subscribed",
-                    "update_text": _("Unsubscribe"),
+                "status": "subscribed",
+                "update_text": _("Subscribed"),
             }), status = 200)
         
         if  request.POST.get("requested_status") == "admin":

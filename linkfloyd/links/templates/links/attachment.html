@@ -3,11 +3,10 @@
     {% if link.thumbnail_url %}
     	<div class="thumbnail">
         	<img
-        		{%if link.player %}play="{{link.player}}"{% endif %}
         		class="thumbnail {% if link.player %}playble{% endif %}"
         		src="{% thumbnail link.thumbnail_url '160x100' crop='center' as im %}{{ im.url }}{% endthumbnail %}"
         	/>
-        	{% if link.player %}<i></i>{% endif %}</a>
+        	{% if link.player %}<i player="{{link.player}}"></i>{% endif %}</a>
         </div>
     {% endif %}
     <a class="title" href="{{link.url}}">{% if link.title %}{{link.title}}{% else %}{{link.url|truncatechars:60}}{% endif %}</a>
