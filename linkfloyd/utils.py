@@ -115,6 +115,7 @@ def get_info(url):
                 pass
 
         # if thumbnail url is relative, make it absolute url.
+        resp_dict['images'] = filter(lambda x: x != None, resp_dict['images'])
         resp_dict['images'] = map(fix_url, resp_dict['images'])
         resp_dict['images'] = list(set(resp_dict['images']))
 
