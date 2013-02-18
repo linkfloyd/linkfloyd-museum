@@ -33,119 +33,118 @@ def get_info(url):
 
     resp_dict = {"url": url, "images": []}
 
-    if not "text/html" in opener.info().getheaders('content-type')[0]:
-        return resp_dict
+    if "text/html" in opener.info().getheaders('content-type')[0]:
 
-    data = opener.read()
-    opener.close()
+        data = opener.read()
+        opener.close()
 
-    bs = BeautifulSoup(data)
+        bs = BeautifulSoup(data)
 
-    if not bs:
-        return resp_dict
+        if not bs:
+            return resp_dict
 
-    og_title_bs = bs.find("meta", attrs={"property": "og:title"})
+        og_title_bs = bs.find("meta", attrs={"property": "og:title"})
 
-    if og_title_bs:
-        resp_dict['title'] = og_title_bs['content']
-    else:
-        del(og_title_bs)  # i like working sooo clean :)
-        try:
-            title_bs = bs.html.head.title
-        except AttributeError:
-            title_bs = None
-
-        if title_bs and title_bs.string:
-            resp_dict['title'] = title_bs.string
-
-    og_desc_bs = bs.find("meta", attrs={"property": "og:description"})
-
-    if og_desc_bs:
-        resp_dict['description'] = og_desc_bs['content']
-    else:
-        del(og_desc_bs)
-        try:
-            desc_bs = bs.find("meta", attrs={"property": "description"})
-        except AttributeError:
-            desc_bs = None
-
-        if desc_bs and desc_bs.string:
-            resp_dict['description'] = desc_bs.string
-
-    img_bs = bs.find("meta", attrs={"property": "og:image"})
-
-    if img_bs and img_bs.get("content"):
-        resp_dict['images'].append(img_bs.get('content'))
-
-    del(img_bs)
-
-    img_src_bs = bs.find("link", attrs={"rel": "image_src"})
-
-    if img_src_bs:
-        resp_dict['images'].append(img_src_bs.get('href'))
-        resp_dict['player'] = "<img src='%s' class='embed' />" \
-            % img_src_bs['href']
-
-    imgs_bs = bs.findAll("img")
-
-    if imgs_bs:
-        resp_dict['images'].extend([img_bs.get('src') for img_bs in imgs_bs])
-
-    # cleanup title and description
-    if 'title' in resp_dict:
-        resp_dict['title'] = resp_dict['title'].strip()
-
-        try:
-            resp_dict['title'] = BeautifulStoneSoup(
-                resp_dict['title'],
-                convertEntities=BeautifulStoneSoup.HTML_ENTITIES
-            ).contents[0]
-        except IndexError:
-            pass
-
-        if 'description' in resp_dict:
-            resp_dict['description'] == resp_dict['description'].strip()
-        try:
-            resp_dict['description'] = BeautifulStoneSoup(
-                resp_dict['description'],
-                convertEntities=BeautifulStoneSoup.HTML_ENTITIES
-            ).contents[0]
-        except KeyError:
-            pass
-        except IndexError:
-            pass
-
-    # if thumbnail url is relative, make it absolute url.
-    resp_dict['images'] = map(fix_url, resp_dict['images'])
-    resp_dict['images'] = list(set(resp_dict['images']))
-
-    # if there is a embed link:
-    embed_bs = bs.find('link', attrs={'type': 'application/json+oembed'})
-
-    if embed_bs:
-        try:
-            embed_link_opener = urlopen(embed_bs['href'], None, timeout=15)
-        except URLError:
-            embed_link_opener = None
-
-        if embed_link_opener:
+        if og_title_bs:
+            resp_dict['title'] = og_title_bs['content']
+        else:
+            del(og_title_bs)  # i like working sooo clean :)
             try:
-                embed_data = simplejson.loads(embed_link_opener.read())
-            except ValueError:
-                embed_data = None
+                title_bs = bs.html.head.title
+            except AttributeError:
+                title_bs = None
 
-            if embed_data:
+            if title_bs and title_bs.string:
+                resp_dict['title'] = title_bs.string
+
+        og_desc_bs = bs.find("meta", attrs={"property": "og:description"})
+
+        if og_desc_bs:
+            resp_dict['description'] = og_desc_bs['content']
+        else:
+            del(og_desc_bs)
+            try:
+                desc_bs = bs.find("meta", attrs={"property": "description"})
+            except AttributeError:
+                desc_bs = None
+
+            if desc_bs and desc_bs.string:
+                resp_dict['description'] = desc_bs.string
+
+        img_bs = bs.find("meta", attrs={"property": "og:image"})
+
+        if img_bs and img_bs.get("content"):
+            resp_dict['images'].append(img_bs.get('content'))
+
+        del(img_bs)
+
+        img_src_bs = bs.find("link", attrs={"rel": "image_src"})
+
+        if img_src_bs:
+            resp_dict['images'].append(img_src_bs.get('href'))
+            resp_dict['player'] = "<img src='%s' class='embed' />" \
+                % img_src_bs['href']
+
+        imgs_bs = bs.findAll("img")
+
+        if imgs_bs:
+            resp_dict['images'].extend([img_bs.get('src') for img_bs in imgs_bs])
+
+        # cleanup title and description
+        if 'title' in resp_dict:
+            resp_dict['title'] = resp_dict['title'].strip()
+
+            try:
+                resp_dict['title'] = BeautifulStoneSoup(
+                    resp_dict['title'],
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+                ).contents[0]
+            except IndexError:
+                pass
+
+            if 'description' in resp_dict:
+                resp_dict['description'] == resp_dict['description'].strip()
+            try:
+                resp_dict['description'] = BeautifulStoneSoup(
+                    resp_dict['description'],
+                    convertEntities=BeautifulStoneSoup.HTML_ENTITIES
+                ).contents[0]
+            except KeyError:
+                pass
+            except IndexError:
+                pass
+
+        # if thumbnail url is relative, make it absolute url.
+        resp_dict['images'] = map(fix_url, resp_dict['images'])
+        resp_dict['images'] = list(set(resp_dict['images']))
+
+        # if there is a embed link:
+        embed_bs = bs.find('link', attrs={'type': 'application/json+oembed'})
+
+        if embed_bs:
+            try:
+                embed_link_opener = urlopen(embed_bs['href'], None, timeout=15)
+            except URLError:
+                embed_link_opener = None
+
+            if embed_link_opener:
                 try:
-                    resp_dict['player'] = embed_data['html']
-                except IndexError:
-                    exit
-    else:  # there is no oembed
+                    embed_data = simplejson.loads(embed_link_opener.read())
+                except ValueError:
+                    embed_data = None
 
-        og_video_bs = bs.find("meta", attrs={"property": "og:video"})
+                if embed_data:
+                    try:
+                        resp_dict['player'] = embed_data['html']
+                    except IndexError:
+                        exit
+        else:  # there is no oembed
 
-        if og_video_bs:
-            resp_dict['player'] = "<embed src='%s'/>" % \
-                og_video_bs['content']
+            og_video_bs = bs.find("meta", attrs={"property": "og:video"})
+
+            if og_video_bs:
+                resp_dict['player'] = "<embed src='%s'/>" % \
+                    og_video_bs['content']
 
     if "image" in opener.info().getheaders('content-type')[0]:
         resp_dict['images'] = [url, ]
