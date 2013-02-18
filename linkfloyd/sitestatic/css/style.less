@@ -16,7 +16,8 @@ body {
     padding: 0;
     margin: 0;
     background: lighten(@base, 10%) url(http://i.imgur.com/gIctw.png) repeat-x top left;
-    font-size: 13px;
+    font-size: 14px;
+    line-height: 20px;
     font-family: sans-serif;
     color: lighten(@blue, 50%);
 }
@@ -36,8 +37,6 @@ h3 {
 }
 p {
     margin: 0 0 10px 0;
-    font-size: 13px;
-    line-height: 18px;
 }
 a {
     color: inherit;
@@ -54,7 +53,7 @@ a {
     float: right;
 }
 a#logo {
-    top: 8px;
+    top: 18px;
     font-size: 36px;
     font-family: 'Lilita One', cursive;
     color: @white;
@@ -206,12 +205,13 @@ div#header {
                 color: lighten(@blue, 30%);
                 text-decoration: none;
             }
-            font-size: 10px;
+            font-size: 13px;
             float: right;
             margin: 0 5px 0 0;
             padding: 0 5px 0 3px;
             font-weight: normal;
             &.active {
+                background: @base;
                 a {
                     color: white;
                 }
@@ -318,7 +318,7 @@ div#content {
 }
 body.white div#content div.wrapper {
     background: @white;
-    color: lighten(@black, 20%);
+    color: lighten(@black, 10%);
     h1, h2, h3, h4, h5, h6 {
         color: @black;
     }
@@ -437,18 +437,10 @@ div.post {
         float: right;
         border-radius: 6px;
         background: @white;
-        > p.body, p.description, a.title, div.info, ul.actions {
+        > p.body, p.description, a.title, ul.actions {
             margin: 4px 10px 10px 0;
             font-size: 13px;
             color: lighten(@black, 15%);
-        }
-        div.info {
-            margin-bottom: 10px;
-            margin-top: 0;
-            font-weight: bold;
-            a.channel {
-                text-transform:lowercase;
-            }
         }
         ul.actions {
             margin-top: 10px;
@@ -470,6 +462,16 @@ div.post {
         }
         div.embed_player > img.embed {
             height: auto;
+        }
+    }
+    div.info {
+        display: block;
+        color: #888;
+        font-size: 10px;
+        margin: 10px 0 0 60px;
+        font-weight: normal;
+        a.channel {
+            text-transform:lowercase;
         }
     }
 }

@@ -10,15 +10,12 @@
         </div>
 	</div>
     <div class="content">
-        <div class="info">
-            <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> &rarr;
-            <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>:
-        </div>
 
         {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}
         {%if link.url %}
             {% include "links/attachment.html" %}
         {% endif %}
+
         <ul class="flat-list actions">
             <li><a href="{{link.get_absolute_url}}">{% trans "Comments" %} ({{link.comment_score}})</a></li>
             {% if link.posted_by == user or user.is_staff %}
@@ -38,7 +35,16 @@
             <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "Share" %}</a>
             </li>
         </ul>
+
     </div>
+
+    <div class="info">
+        Posted by 
+        <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a>
+        to 
+        <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>, {{link.posted_at|timesince}} ago.
+    </div>
+
         {% if expanded_comments %}
             <div class="comments">
                 {% for comment in link.comment_set.all %}
