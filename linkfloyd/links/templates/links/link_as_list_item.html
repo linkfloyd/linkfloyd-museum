@@ -1,6 +1,8 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
 <div class="post{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
 	<div class="side">
+        <a class="avatar" href="{{link.posted_by.get_absolute_url}}" style="background: url({% gravatar_for_user link.posted_by 42 %})"></a>
+
         <div class="vote_buttons" x:model="links.LinkVote" x:id="{{link.id}}">
             <div class="score">{{link.vote_score}}</div>
             <a href="#" class="upVote{% if link.is_voted_up %} voted{%endif%}" x:value="1" ></a>
@@ -8,6 +10,11 @@
         </div>
 	</div>
     <div class="content">
+        <div class="info">
+            <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> &rarr;
+            <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>:
+        </div>
+
         {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}
         {%if link.url %}
             {% include "links/attachment.html" %}

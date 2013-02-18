@@ -48,78 +48,58 @@
 <body {% block class_body %}{% endblock %}>
     <div id="header">
         <div class="wrapper">
-            <a id="logo" href="/">LinkFloyd</a>    
-            <ul id="nav">
-                {% block extra_nav %}{% endblock extra_nav %}
-                {% if user.is_authenticated %}
-                    <li>
-                       <a class="parent" href="#preferences-subnav">{{user}}</a>
-                    </li>
-                {% endif %}
-                <li>
-                    <a class="parent" href="#posts-subnav">{% trans "Posts" %}</a>
-                </li>
-                <li>
-                    <a class="parent" href="#channels-subnav" {% if active_nav_item == "channels" %}class="active"{% endif %}>
-                        {% trans "Channels" %}
-                    </a>
-                </li>
-                <li>
-                    <a href="/notifications/">{% trans "Notifications" %} {% if notifications_count %} ({{ notifications_count }}){% endif %}</a>
-                </li>
-                <li>
-                    <a href="/links/random/">{% trans "Random" %}</a>
-                </li>
-                <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
-                    <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>
-                </li>
-                {% if not user.is_authenticated %}
-                <li>
-                    <a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
-                </li>
-                {% endif %}
-            </ul>
+            <a id="logo" href="/">LinkFloyd</a>
+                <div class="right">
+                    <ul class="flat-list navigation">
+                        {% block extra_nav %}{% endblock extra_nav %}
+                        {% if user.is_authenticated %}
+                        <li>
+                           <a class="avatar" href="{{user.get_absolute_url}}" style="background: url({% gravatar_for_user user 50 %})"></a>
+                           <ul class="sub">
+                                <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
+                                <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="/notifications/">{% trans "Notifications" %}</a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="#" {%if active_nav_item == "channels"%}class="active"{%endif%}>
+                                {% trans "Channels" %}
+                            </a>
+                            <ul class="sub">
+                                <li>
+                                    <a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a>
+                                </li>
+                                <li>
+                                    <a href="{% url create_channel %}">{% trans "Create a Channel" %}</a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                <li>
+                                    <a href="{% url browse_subscriptions %}">{% trans "Your Subscriptions" %}</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li><a href="/links/random/">{% trans "Random" %}</a></li>
+                       <li{% if active_nav_item == "submit" %} class="active"{% endif %}>
+                       <a href="/links/submit/{% if links_from == "channel" %}?channel={{instance.slug}}{% endif %}">{% trans "Submit a Link" %}</a>
+                        </li>
+                        {% if not user.is_authenticated %}
+                        <li>
+                            <a href="{% url auth_login %}?next={{request.get_full_path}}">{% trans "Login" %}</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
         {% if messages %}
             {% for message in messages %}
                 <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
             {% endfor %}
-        {% endif %}
-
-       <ul class="subnav" id="preferences-subnav">
-            <li><a href="{% url update_preferences %}">{% trans "Preferences" %}</a></li>
-            <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-        </ul>
-
-        <ul class="subnav" id="posts-subnav">
-            {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url links_upvoted_by user %}">{% trans "My Likes" %}</a>
-                </li>
-                <li>
-                    <a href="{% url links_from_user user %}">{% trans "My Posts" %}</a>
-                </li>
-            {% endif %}
-            <li>
-                <a href="{% url all_links %}">{% trans "All Posts" %}</a>
-            </li>
-        </ul>
-
-        <ul class="subnav" id="channels-subnav">
-            <li>
-                <a href="{% url browse_channels %}">{% trans "Browse Channels" %}</a>
-            </li>
-            <li>
-                <a href="{% url create_channel %}">{% trans "Create a Channel" %}</a>
-            </li>
-            {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url browse_subscriptions %}">{% trans "Your Subscriptions" %}</a>
-                </li>
-            {% endif %}
-        </ul>
-    
+        {% endif %}    
         <div id="content">
             <div class="wrapper">
                 {%block content%}{%endblock content%}

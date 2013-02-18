@@ -91,21 +91,21 @@
 		</div>
 	</div>
     <div class="content section">
-        <h2 class="nomargin">{{title}}</h2>
-        <ul class="flat-list ordering">
-            <li {% if ordering == 'controversial' %}class="active"{% endif %}>
+        <h2 class="header">{{title}}
+            <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
                 <a href="?ordering=controversial">{% trans "Controversial" %}</a>
-            </li>
-            <li {% if ordering == 'top' %}class="active"{% endif %}>
+            </span>
+            <span class="ordering{% if ordering == 'top' %} active{% endif %}">
                 <a href="?ordering=top">{% trans "Top Voted" %}</a>
-            </li>
-            <li {% if ordering == 'latest' %}class="active"{% endif %}>
+            </span>
+            <span class="ordering{% if ordering == 'latest' %} active{% endif %}">
                 <a href="?ordering=latest">{% trans "Latest" %}</a>
-            </li>
-            <li {% if ordering == 'hot' %}class="active"{% endif %}>
+            </span>
+            <span class="ordering{% if ordering == 'hot' %} active{% endif %}">
                 <a href="?">{% trans "Hot" %}</a>
-            </li>
-        </ul>
+            </span>
+        </h2>
+
         <div class="body">
             {% for link in links %}
                 {% include "links/link_as_list_item.html" %}
