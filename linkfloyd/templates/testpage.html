@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="two-column">
+	<div class="panel">
+		<div class="section">
+			<h1>Test Header<h1>
+			<h2>Test Header<h2>
+			<h3>Test Header<h3>
+		</div>
+	</div>
+	<div class="content">
+		<h1>Test Header</h1>
+		<h2>Test Header</h2>
+		<h3>Test Header</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a dolor ligula, in adipiscing nulla. Quisque nec nisl ut nibh consectetur pulvinar non ac mauris. Morbi eros augue, elementum eget fermentum nec, lacinia quis eros. Sed pulvinar varius ultricies. Aliquam sapien felis, fringilla sit amet posuere sed, elementum quis orci. Curabitur bibendum pulvinar ornare. Sed dolor lacus, consectetur vel posuere a, feugiat quis lorem. Quisque volutpat, odio vel consequat sagittis, diam lacus fermentum odio, et consequat lectus ante vitae dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean magna risus, facilisis vel mollis at, pulvinar vitae dui. Vestibulum viverra orci sed sem sollicitudin sollicitudin. In hac habitasse platea dictumst.</p>
+		<p class="success">Sucessful Message</p>
+		<p clasS="warning">Warning Message</p>
+		<p clasS="error">Error Message</p>
+		<div class="buttonized">Button</div>
+		<div class="post">section</div>
+		{% for link in links %}
+			{% include "links/link_as_list_item.html" %}
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

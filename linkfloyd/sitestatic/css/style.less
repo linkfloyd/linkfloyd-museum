@@ -10,16 +10,40 @@
 @cyan     :#2aa198; 
 @green    :#8c982e;
 
+/* Font Mixins (line height=font-size + 6px)*/
+
+.small {
+    font-size: 10px;
+    line-height: 16px;
+}
+.normal {
+    font-size: 14px;
+    line-height: 20px;
+}
+.h3 {
+    font-size: 17px;
+    line-heigh: 21px;
+}
+.h2 {
+    font-size: 19px;
+    line-height: 23px;
+}
+.h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+.rounded {
+    border-radius: 3px;
+}
 /* Basics */
 
 body {
     padding: 0;
     margin: 0;
     background: lighten(@base, 10%) url(http://i.imgur.com/gIctw.png) repeat-x top left;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: sans-serif;
     color: lighten(@blue, 50%);
+    font-family: sans-serif;
+    .normal;
 }
 
 h1, h2, h3, h4, h5, h6, dt {
@@ -27,13 +51,14 @@ h1, h2, h3, h4, h5, h6, dt {
     padding: 0 6px 0 0;
     color: lighten(@blue, 60%);
 }
+h1 {
+    .h1;
+}
 h2 {
-   font-size:15px;
-   line-height: 18px;
+    .h2;
 }
 h3 {
-    font-size: 13px;
-    line-height: 16px;
+    .h3;
 }
 p {
     margin: 0 0 10px 0;
@@ -77,8 +102,8 @@ dl {
     padding: 4px 15px;
     color: lighten(@black, 80%);
     font-weight: bold;
-    border-radius: 3px;
     border: 1px outset lighten(@black, 20%);
+    .rounded;
     text-decoration: none;
     &:hover {
         color: @white;
@@ -113,13 +138,17 @@ ul.flat-list {
     }
 }
 p.success, p.error, p.warning {
-    font-size: 16px;
-    padding: 20px;
+    .h3;
+    .rounded;
+    padding: 10px;
     text-align: center;
+    box-shadow: inset 0px 2px 3px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+    color: white;
 }
+
 .success {
     background: @green;
-    color: white;
 }
 .warning {
     background: @yellow;
@@ -201,11 +230,11 @@ div#header {
     overflow: auto;
     > .header {
         span.ordering {
+            .small;
             a {
                 color: lighten(@blue, 30%);
                 text-decoration: none;
             }
-            font-size: 13px;
             float: right;
             margin: 0 5px 0 0;
             padding: 0 5px 0 3px;
@@ -288,17 +317,19 @@ div.two-column {
                     background: black;
                 }
                 &:last-child {
-                    border-bottom-left-radius: 5px;
-                    border-bottom-right-radius: 5px;
+                    .rounded;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
                 }
                 &:first-child {
-                    border-top-left-radius: 5px;
-                    border-top-right-radius: 5px;
+                    .rounded;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
                     margin-top: 0;
-                    }
                 }
             }
         }
+    }
     > div.content {
         width: 705px;
     }
@@ -369,10 +400,11 @@ div.post a.avatar {
     background: top left no-repeat;
     box-shadow: 0 1px 5px rgba(0,0,0,.46);
 }
+
 div.post {
     overflow: auto;
     float:both;
-    padding: 10px 0;
+    padding: 5px 0;
     margin: 0;
     div.side {
         float: left;

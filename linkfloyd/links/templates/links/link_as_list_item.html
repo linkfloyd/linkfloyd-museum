@@ -10,12 +10,10 @@
         </div>
 	</div>
     <div class="content">
-
         {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}
         {%if link.url %}
             {% include "links/attachment.html" %}
         {% endif %}
-
         <ul class="flat-list actions">
             <li><a href="{{link.get_absolute_url}}">{% trans "Comments" %} ({{link.comment_score}})</a></li>
             {% if link.posted_by == user or user.is_staff %}
