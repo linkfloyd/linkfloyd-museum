@@ -10,21 +10,7 @@
          <div class="content section channels">
 		 <h2 class="header">{{title}}</h2>
              {% for channel in channels %}
-                 <div id="{{ channel.slug }}" class="channel">
-                     {% with subscription_status=user|channel_subscription_status:channel %}
-                     <a href="#" data-slug= "{{channel.slug}}" class="subscription_status{% if subscription_status %} subscribed{% endif %}">
-                         {% if subscription_status %}{% trans "Subscribed" %}{% else %}{% trans "Subscribe" %}{% endif %}
-                     </a>
-                     {% endwith %}
-                     <div class="header">
-                         <h3 class="name">
-                             <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({% blocktrans with subscribers=channel.num_of_subscribers %}{{subscribers}} subscribers{% endblocktrans %}, {{channel.language}})
-                         </h3>
-                     </div>
-                     <div class="description">
-                         {{ channel.description|linebreaks }}
-                     </div>
-                 </div>
+                {% include "channels/channel_as_list_item.html" %}
              {% endfor %}
              {% include "pagination_links.html" %}
          </div>

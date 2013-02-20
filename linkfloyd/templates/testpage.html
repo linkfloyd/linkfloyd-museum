@@ -22,6 +22,11 @@
 		{% for link in links %}
 			{% include "links/link_as_list_item.html" %}
 		{% endfor %}
+		<div class"channels">
+		{% for channel in channels %}
+			{% include "channels/channel_as_list_item.html" %}
+		{% endfor %}
+	</div>
 	</div>
 </div>
 {% endblock %}

@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from links.models import Link
+from channels.models import Channel
 admin.autodiscover()
 
 from django.views.generic.simple import direct_to_template
@@ -25,7 +26,10 @@ urlpatterns = patterns(
     url(r'^testpage/$', direct_to_template, {
         'template': 'testpage.html',
         'extra_context': {
-            'links': Link.objects.all()[10:11],
+            'links': Link.objects.all()[835:836],
+            'channels': Channel.objects.all()[0:5],
+            'expanded_comments': True,
+            'expanded_attachment': True,
         }
     }),
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to',
