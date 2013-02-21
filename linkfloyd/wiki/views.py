@@ -5,6 +5,8 @@ from forms import PageForm
 from models import Page
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 def index(request):
     """Lists all pages stored in the wiki."""
@@ -24,18 +26,52 @@ def view(request, name):
         page = Page(name=name)
 
     pages = Page.objects.filter(listed=True)
-    
+
+    if page:
+        op = []
+        if page.translation_of:
+            op.extend([page.translation_of, ])
+        op.extend(list(page.page_set.all()))
+
     context = {
         'page': page,
-        'pages': pages
+        'pages': pages,
+        'other_pages': op
     }
 
     return render_to_response('wiki/view.html',
         RequestContext(request, context))
 
+
 @login_required
 def edit(request, name):
-    """Allows users to edit wiki pages."""
+    try:
+        page = Page.objects.get(name=name)
+    except Page.DoesNotExist:
+        page = None
+
+    if request.method == 'POST':
+        form = PageForm(request.POST, instance=page)
+        if form.is_valid():
+            page = form.save()
+            page.contributors.add(request.user)
+            messages.add_message(request, messages.SUCCESS,
+                'Successfully updated \'%s\' page' % page.name)
+            return redirect(view, name=page.name)
+    else:
+        if page:
+            form = PageForm(instance=page)
+        else:
+            form = PageForm(initial={'name': name})
+
+    return render_to_response('wiki/edit.html',
+        RequestContext(request, {'form': form}))
+
+
+"""
+@login_required
+def edit(request, name):
+    # Allows users to edit wiki pages.
     try:
         page = Page.objects.get(name=name)
     except Page.DoesNotExist:
@@ -46,9 +82,11 @@ def edit(request, name):
         if form.is_valid():
             if not page:
                 page = Page()
+
             page.name = form.cleaned_data['name']
             page.content = form.cleaned_data['content']
             page.rendered = form.cleaned_data['content']
+
             page.save()
             page.contributors.add(request.user)
             return redirect(view, name=page.name)
@@ -64,3 +102,4 @@ def edit(request, name):
 
     return render_to_response('wiki/edit.html',
         RequestContext(request, context))
+"""
