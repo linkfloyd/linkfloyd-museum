@@ -47,7 +47,7 @@ body {
     padding: 0;
     margin: 0;
     background: lighten(@base, 10%) url(http://i.imgur.com/gIctw.png) repeat-x top left;
-    color: lighten(@blue, 50%);
+    color: desaturate(lighten(@blue, 45%), 40%);
     font-family: "Arial", sans-serif;
     .normal;
 }
@@ -752,15 +752,17 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 
 /* ------------------------------------------------------------ */
 div.comments {
-    padding: 5px 5px 10px 5px;
-    width:640px;
+    padding: 10px 0 10px 0;
     float: right;
+    a.avatar {
+        float: left;
+    }
     div.comment {
         overflow: auto;
-        border-bottom: 1px solid @dark-grey;
+        border-bottom: 1px dashed @dark-grey;
         clear: both;
         margin: 0 0 10px 0;
-        padding: 0;
+        padding: 20px 0 20px 0;
         form {
             padding: 0;
             textarea {
@@ -770,7 +772,8 @@ div.comments {
             }
         }
         div.content {
-            padding: 5px;
+            padding: 0 0 10px 20px;
+            margin: 0 0 0 50px;
             p {
                 margin: 0 0 10px 0;
             }
@@ -780,6 +783,7 @@ div.comments {
                 }
                 span.date {
                     .small;
+                    color: @grey;
                 }
             }
             ul.actions {

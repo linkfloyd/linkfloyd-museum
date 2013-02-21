@@ -1,8 +1,10 @@
-{% load i18n %}
+{% load i18n gravatar %}
 <div class="comment" id="{{comment.id}}">
+    <a class="avatar" href="{{comment.posted_by.get_absolute_url}}" style="background: url({% gravatar_for_user comment.posted_by 40 %})" title="{{comment.posted_by.username}}"></a>
+
     <div class="content">
         <p class="info">
-            <a class="posted_by">{{comment.posted_by}}</a>: <span class="date">{{ comment.posted_at|timesince}} {% trans "ago" %}</span>
+            <a class="posted_by" href="{{comment.posted_by.get_absolute_url}}">{{comment.posted_by}}</a>: <span class="date">{{ comment.posted_at|timesince}} {% trans "ago" %}</span>
         </p>
         {{ comment.as_html|safe }}
         {% ifequal comment.posted_by user %}
