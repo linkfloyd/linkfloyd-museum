@@ -362,6 +362,11 @@ body.white div#content div.wrapper {
     h1, h2 {
         border-bottom: 1px solid darken(@white, 10);
     }
+    pre {
+        background: black;
+        color: @white;
+    }
+
 }
 a#logo {
     display: block;
@@ -422,35 +427,17 @@ div.post {
     }
     div.vote_buttons {
         overflow: auto;
-        border-radius: 3px;
+        .rounded;
         margin: 10px 0 5px 0;
         padding: 0 0 5px 0;
+        background: white;
         a.upVote, a.downVote, div.score {
             display: block;
+            height: 20px;
+            box-shadow: inset 0 5px 10px #000;
+
         }
-        a.upVote {
-            width: 0;
-            height: 0;
-            border-left: 17px solid transparent;
-            border-right: 17px solid transparent;
-            border-bottom: 17px solid @base;
-            margin-left: 3px;
-            margin-bottom: 5px;
-        }
-        a.downVote {
-            width: 0;
-            height: 0;
-            border-left: 17px solid transparent;
-            border-right: 17px solid transparent;
-            border-top: 17px solid @base;
-            margin-left: 3px;
-        }
-        a.upVote.voted {
-            // border-bottom-color: darken(@base, 10%);
-            border-bottom-color: @yellow;
-        }
-        a.downVote.voted {
-            border-top-color: darken(@base, 10%);
+        a.voted {
         }
         div.score {
             text-align: center;
