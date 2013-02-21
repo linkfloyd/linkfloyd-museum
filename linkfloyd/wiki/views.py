@@ -26,9 +26,9 @@ def view(request, name):
         page = Page(name=name)
 
     pages = Page.objects.filter(listed=True)
+    op = []
 
-    if page:
-        op = []
+    if page.id:
         if page.translation_of:
             op.extend([page.translation_of, ])
         op.extend(list(page.page_set.all()))
