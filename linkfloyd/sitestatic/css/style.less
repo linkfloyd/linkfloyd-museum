@@ -104,7 +104,7 @@ dl {
     }
 }
 .buttonized {
-    background: lighten(@black, 12%);
+    background-color: lighten(@black, 12%);
     padding: 4px 15px;
     color: lighten(@black, 80%);
     font-weight: bold;
@@ -431,14 +431,21 @@ div.post {
         padding: 0 0 5px 0;
         a.upVote, a.downVote {
             display: block;
-            height: 10px;
+            height: 20px;
             .buttonized;
+            background-position: center center;
+            background-repeat: no-repeat;
         }
         a.upVote {
             margin-bottom: 3px;
+            background-image:url(../img/upVote.png);
+        }
+        a.downVote {
+            margin-bottom: 3px;
+            background-image: url(../img/downVote.png);
         }
         a.voted {
-            box-shadow: inset 0 5px 10px #000;            
+            box-shadow: inset 0 10px 20px #000;            
         }
         div.score {
             box-shadow: inset 0 5px 10px #000;
