@@ -29,6 +29,10 @@ urlpatterns = patterns('',
          'linkfloyd.api.views.get_update_comment_form',
          name='get_update_comment_form'),
 
+    url(r'^notifications/$',
+         'linkfloyd.api.views.notifications',
+         name='get_notifications'),
+
     url(r'^votes/',
         include('qhonuskan_votes.urls'))
 )

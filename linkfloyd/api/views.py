@@ -13,10 +13,13 @@ from links.models import Link
 from channels.models import Subscription as ChannelSubscription
 from links.models import Subscription as LinkSubscription
 
+from notifications.models import Notification
+
 from comments.models import Comment
 from comments.forms import CommentForm
 
 from django.utils.translation import ugettext as _
+
 
 def fetch_info(request):
     if "url" in request.GET:
@@ -284,3 +287,19 @@ def channels_list(request):
         simplejson.dumps(response, 'application/javascript')
     )
 
+
+def notifications(request):
+    objects = []
+
+    notifications = Notification.objects.filter(recipient=request.user).order_by("-date")
+
+    for notification in notifications:
+        objects.append({
+            "sentence": render_to_string(
+                "notifications/%s/sentence.html" % notification.type.label, {
+                    "notification": notification}),
+            "date": notification.date
+        })
+    notifications.update(seen=True)
+
+    return render_to_response("notifications/stripped_list.html", {'objects': objects})

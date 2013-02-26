@@ -84,8 +84,8 @@ a {
     float: right;
 }
 a#logo {
-    top: 18px;
-    font-size: 36px;
+    top: 11px;
+    font-size: 33px;
     font-family: 'Lilita One', cursive;
     color: @white;
     text-decoration: none;
@@ -125,7 +125,7 @@ dl {
 }
 /* Layout */
 div.wrapper {
-    width: 950px;
+    max-width: 950px;
     margin: 0 auto;
     padding: 15px;
 }
@@ -164,69 +164,84 @@ p.success, p.error, p.warning {
     background: @red;
     color: white;
 }
+
 div#header {
     background: lighten(@black, 12%);
     border-bottom: 1px solid @black;
-    overflow: visible;
-    height: 50px;
+    overflow: auto;
     div.wrapper {
         padding: 0;
     }
-    ul.navigation {
-        overflow: visible;
-        > li {
-            border-right: 1px lighten(@black, 5%) solid;
-            border-left: 1px lighten(@black, 19%) solid;
-        }
-        li {
-            padding: 0;
+}
+
+ul#nav, ul.subnav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;        
+    font-weight: bold;
+    color: #999;
+    li {
+        margin: 0;
+        padding: 0;
+        a {
             margin: 0;
-            position: relative;
-            overflow: hidden;
-            &:hover {
-                overflow: visible;
-            }
-            a {
-                padding: 20px;
-                height: 10px;
-                font-size: 12px;
-                font-weight: bold;
-                color: lighten(@black, 60%);
-                display: block;
-                text-decoration: none;
-                &.active {
-                    background: lighten(@black, 6%);
-                }
-                &:hover {
-                    color: white;
-                }
-            }
-            a.avatar {
-                width: 50px;
-                height: 50px;
-                padding: 0;
-                margin: 0;
-            }
+            padding: 10px;
+            font-size: inherit;
+            font-weight: inherit;
+            display:block;
+            text-decoration: none;
         }
-        ul.sub {
-            background: lighten(@black, 12%);
-            border-left: 1px lighten(@black, 20%) solid;
-            border-right: 1px lighten(@black, 6%) solid;
-            border-bottom: 1px lighten(@black, 6%) solid;
-            border-bottom-left-radius: 3px;
-            border-bottom-right-radius: 3px;
-            position: absolute;
-            top: 50px;
-            left: -1px;
-            margin: 0;
-            padding: 0;
-            z-index: 10;
-            list-style-type: none;
-             > li > a {
-                padding: 10px;
-                white-space: nowrap;
-            }
+        a:hover {
+            background: #333;
+            color: #fff;
         }
+    }
+    
+    > li {
+        font-size: inherit;
+        font-weight: inherit;
+        border-right: 1px solid black;
+        border-left: 1px solid lighten(@black, 20%);
+        float: left;
+        display: block; 
+        position: relative;
+        z-index: 500; 
+    }
+}
+
+ul#nav {
+    float: right;
+}
+
+ul.subnav {
+    position: absolute;
+    display: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left: 1px solid #222;
+    border-right: 1px solid #000;
+    list-style-type: none;
+    background: #1f1f1f;
+    li {
+        float: none;
+    }
+    > li > a {
+        float: none;
+        display: block;
+    }
+}
+#notifications-subnav {
+    padding: 10px;
+    width: 200px;
+    li {
+        border: none;
+        padding-bottom: 10px;
+    }
+    a {
+        display: inline;
+        padding: 0;
+        text-decoration: underline;
     }
 }
 
@@ -474,6 +489,7 @@ div.post {
         }
         ul.actions {
             margin-top: 10px;
+            margin-bottom: 0;
             a {
                 &:hover {
                 }
@@ -532,8 +548,8 @@ div.attachment {
             width: 35px;
             height: 26px;
             position: absolute;
-            bottom: 4px;
-            left: 2px;
+            bottom: 8px;
+            left: 4px;
         }
     }
 }
@@ -772,7 +788,7 @@ div.comments {
         }
         div.content {
             padding: 0 0 10px 20px;
-            margin: 0 0 0 50px;
+            margin: 0 0 0 40px;
             p {
                 margin: 0 0 10px 0;
             }

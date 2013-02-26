@@ -1,8 +1,6 @@
-{% extends "base.html" %}{% load notification_tags %}
+{% extends "base.html" %}
 {% block content %}
 	<ul>
-	{% for notification in objects %}
-		<li>{{notification.sentence}} - <span class="date">{{notification.date|timesince}}</span></li>
-	{% endfor %}
+	   {% include "notifications/stripped_list.html" %}
 	</ul>
 {% endblock %}
