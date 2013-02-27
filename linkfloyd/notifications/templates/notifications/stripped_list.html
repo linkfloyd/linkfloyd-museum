@@ -1,7 +1,7 @@
 {% load i18n notification_tags %}
 {% if objects %}
 	{% for notification in objects %}
-		<li>{{ notification.sentence }} - <span class="date">{{ notification.date|timesince }}</span></li>
+		<li{% if not notification.seen %} class="unseen"{% endif %}>{{ notification.sentence }} - <span class="date">{{ notification.date|timesince }}</span></li>
 	{% endfor %}
 {% else %}
 	<li>{% trans "no new notifications" %}</li>

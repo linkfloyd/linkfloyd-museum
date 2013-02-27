@@ -71,6 +71,12 @@ class Notification(models.Model):
     def __unicode__(self):
         return "'%s' notification for %s" % (self.type, self.recipient)
 
+    def save(self, *args, **kwargs):
+        ns = Notification.objects.filter(actor=self.actor)
+        if ns.count() > 9:
+            ns.reverse()[0].delete()
+        super(Notification, self).save(*args, **kwargs)
+
 
 @receiver(post_save, sender=Notification, dispatch_uid="notification_saved")
 def notification_saved(sender, **kwargs):

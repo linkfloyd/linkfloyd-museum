@@ -232,11 +232,21 @@ ul.subnav {
     }
 }
 #notifications-subnav {
-    padding: 10px;
-    width: 200px;
+    padding: 0;
+    width: 220px;
     li {
+        padding: 10px;
         border: none;
         padding-bottom: 10px;
+        &:hover {
+            background: #444;
+        }
+        &.unseen {
+            background: #333;
+        }
+        span {
+            .small;
+        }
     }
     a {
         display: inline;

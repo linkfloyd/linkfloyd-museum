@@ -116,6 +116,8 @@ def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
     link.vote_score = link.votes.aggregate(score=Sum('value'))['score'] or 0
     link.save()
 
+    print "vote changed"
+
     for subscription in Subscription.objects.filter(
         link=vote.object).exclude(user=vote.voter):
         if vote.value == 1:
@@ -128,6 +130,8 @@ def update_vote_score(sender, dispatch_uid="update_vote_score", **kwargs):
                 label="downvoted_post")
             voted_your_post = NotificationType.objects.get(
                 label="downvoted_your_post")
+
+        print vote.value
 
         Notification.objects.create(
             actor=vote.voter,

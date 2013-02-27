@@ -17,8 +17,7 @@ def list(request):
                     "notification": notifications[i]}),
             "date": notifications[i].date
         })
-    notifications[10:].delete()
-
     notifications.update(seen=True)
+    notifications[10:].delete()
     return render_to_response("notifications/list.html",
             {"objects": objects})

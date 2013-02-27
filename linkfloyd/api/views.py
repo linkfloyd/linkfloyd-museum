@@ -91,6 +91,7 @@ def get_update_comment_form(request):
     else:
         return HttpResponse(status=400)
 
+
 def switch_channel_subscription(request):
     """
     Workflow:
@@ -106,9 +107,9 @@ def switch_channel_subscription(request):
           - request.POST has "requested_status" as "admin"
           - there is no admin of channel
           - request.POST has no sure = True
-        Response:     
+        Response:
           Api rejects request with, "ask_for_sure" parameter.
-          Client, pops up a window that confirms that user is 
+          Client, pops up a window that confirms that user is
           sure, and makes post request again with sure = True.
 
         Status 3:
@@ -151,7 +152,7 @@ def switch_channel_subscription(request):
         channel = Channel.objects.get(slug=request.POST["channel_slug"])
     except Channel.DoesNotExist:
         return HttpResponse(status=404)
- 
+
     try:
         subscription = ChannelSubscription.objects.get(
             user=request.user,
@@ -159,11 +160,11 @@ def switch_channel_subscription(request):
         )
     except ChannelSubscription.DoesNotExist:
         subscription = None
-    
+
     # Status 1
     if not subscription:
-        
-        if  not "requested_status" in request.POST:
+
+        if not "requested_status" in request.POST:
             subscription = ChannelSubscription.objects.create(
                 channel=channel,
                 user=request.user,
@@ -172,9 +173,9 @@ def switch_channel_subscription(request):
             return HttpResponse(simplejson.dumps({
                 "status": "subscribed",
                 "update_text": _("Subscribed"),
-            }), status = 200)
-        
-        if  request.POST.get("requested_status") == "admin":
+            }), status=200)
+
+        if request.POST.get("requested_status") == "admin":
             if request.POST.get("sure") == True:
                 subscription = ChannelSubscription.objects.create(
                     channel=channel,
@@ -185,16 +186,16 @@ def switch_channel_subscription(request):
                 return HttpResponse(simplejson.dumps({
                     "status": "confirmation_needed",
                     "confirmation_text": _(
-						"Are you sure that you want to be " \
+                        "Are you sure that you want to be " \
                         "admin of this channel?")
                 }))
 
         return HttpResponse(status=400)
 
-    else: # if user subscribed to channel
-        if  subscription.status == "admin" or \
+    else:  # if user subscribed to channel
+        if subscription.status == "admin" or \
             subscription.status == "moderator":
-            if  request.POST.get("sure") == "true":
+            if request.POST.get("sure") == "true":
                 subscription.delete()
                 return HttpResponse(simplejson.dumps({
                     "status": "unsubscribed",
@@ -289,17 +290,14 @@ def channels_list(request):
 
 
 def notifications(request):
+    keep = 10
     objects = []
-
     notifications = Notification.objects.filter(recipient=request.user).order_by("-date")
-
-    for notification in notifications:
+    for i in xrange(keep - (keep - notifications.count())):
         objects.append({
-            "sentence": render_to_string(
-                "notifications/%s/sentence.html" % notification.type.label, {
-                    "notification": notification}),
-            "date": notification.date
+            "sentence": render_to_string("notifications/%s/sentence.html" % notifications[i].type.label, {"notification": notifications[i]}),
+            "date": notifications[i].date,
+            "seen": notifications[i].seen
         })
     notifications.update(seen=True)
-
     return render_to_response("notifications/stripped_list.html", {'objects': objects})
