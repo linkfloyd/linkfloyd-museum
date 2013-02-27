@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-02-27 06:09-0600\n"
-"PO-Revision-Date: 2012-12-31 23:46+0200\n"
+"PO-Revision-Date: 2013-02-27 19:31+0200\n"
 "Last-Translator: Mirat Can Bayrak <miratcanbayrak@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #: api/views.py:144
 msgid "You have to be logged in to complete this action."
@@ -109,9 +109,8 @@ msgid "%(subscribers)s subscribers"
 msgstr "%(subscribers)s takipçi"
 
 #: channels/templates/channels/channel_list.html:11
-#, fuzzy
 msgid "Filter By Language"
-msgstr "Dil"
+msgstr "Dile Göre Filtrele"
 
 #: channels/templates/channels/create.html:9 templates/base.html:123
 msgid "Create a Channel"
@@ -205,9 +204,8 @@ msgid "%s's Up Votes on Linkfloyd"
 msgstr "Linkfloyd üzerinde %s"
 
 #: links/management/__init__.py:9
-#, fuzzy
 msgid "Link Commented"
-msgstr "Yorum"
+msgstr "Link Yorum Aldı"
 
 #: links/management/__init__.py:9
 msgid "Some of links that you subscribed, has new comment"
@@ -253,7 +251,7 @@ msgstr "Paylaş"
 #, python-format
 msgid " <a href=\"%(login_url)s\">Log in</a> to leave comment "
 msgstr ""
-"Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yapsan</a> NOLURDU!!?"
+"Yorum yapabilmek için <a href=\"%(login_url)s\">giriş yapsan</a> N'olurdu!!?"
 
 #: links/templates/links/link_detail.html:22
 msgid "Posted at"
@@ -359,9 +357,8 @@ msgid "This link is not reachable"
 msgstr "Bu bağlantı erişilemez"
 
 #: notifications/templates/notifications/stripped_list.html:7
-#, fuzzy
 msgid "no new notifications"
-msgstr "Bildirimler"
+msgstr "yeni bildirim yok"
 
 #: notifications/templates/notifications/commented_post/email_body.txt:1
 #, python-format
@@ -473,7 +470,7 @@ msgstr "Bildirimler"
 
 #: templates/base.html:80
 msgid "Random"
-msgstr "Rasgele"
+msgstr "Rastgele"
 
 #: templates/base.html:87 templates/registration/login.html:2
 msgid "Login"
@@ -488,14 +485,12 @@ msgid "Log out"
 msgstr "Çıkış Yap"
 
 #: templates/base.html:107
-#, fuzzy
 msgid "My Likes"
 msgstr "Sevdiklerim"
 
 #: templates/base.html:110
-#, fuzzy
 msgid "My Posts"
-msgstr "Gönderiler"
+msgstr "Benim Gönderilerim"
 
 #: templates/base.html:114
 msgid "All Posts"
@@ -511,7 +506,7 @@ msgstr "Takip Ettiklerin"
 
 #: templates/base.html:133
 msgid "Loading..."
-msgstr ""
+msgstr "Yükleniyor..."
 
 #: templates/index.html:3
 msgid "No links shared today. Share it now!"
@@ -551,8 +546,8 @@ msgid ""
 "Now <a href='%(login_url)s'>login</a> using the username and password you "
 "set at registration."
 msgstr ""
-"Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a href='%"
-"(login_url)s'>Giriş yap</a>abilirsin."
+"Şimdi kayıt esnasında belirlediğin kullanıcı adı ve şifre ile <a "
+"href='%(login_url)s'>Giriş yap</a>abilirsin."
 
 #: templates/registration/activate.html:10
 msgid "It seems that your activation key is invalid. Check the URL again."
@@ -572,8 +567,8 @@ msgstr ""
 msgid ""
 "You have asked to register an account at %(site_name)s.\n"
 "\n"
-"To activate this account, click the following link within the next %"
-"(expiration_days)s days:"
+"To activate this account, click the following link within the next "
+"%(expiration_days)s days:"
 msgstr ""
 "%(site_name)s üzerinde bir hesap oluşturmak için başvuruda bulundun.\n"
 "\n"
@@ -734,7 +729,7 @@ msgstr "Katkıcılar"
 
 #: wiki/templates/wiki/view.html:25
 msgid "This Page in Other Languages"
-msgstr ""
+msgstr "Bu Sayfa Diğer Dillerde"
 
 #: wiki/templates/wiki/view.html:36
 msgid "Edit this page"

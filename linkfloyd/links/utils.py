@@ -105,16 +105,16 @@ def context_builder(request, **kwargs):
         query = query & Q(
             posted_at__gte=datetime.today() - timedelta(days=response['days']))
 
-    if not user_is_authenticated:
+    if user_is_authenticated:
+        preferences = UserPreferences.objects.get(user=request.user)
+        query = query & Q(rating__lte=preferences.max_rating)
+    else:
         query = query & Q(rating__lte=1)
 
     links = Link.objects.filter(query)
 
     if user_is_authenticated:
 
-        # Filter links that not in known languages and rating higer than users.
-        preferences = UserPreferences.objects.get(user=request.user)
-        query = query & Q(rating__lte=preferences.max_rating)
         links = links.extra(select={
             'is_owned':      'posted_by_id=%s' % request.user.id,
 
