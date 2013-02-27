@@ -1,4 +1,18 @@
-{% extends "base.html" %}{% load i18n gravatar qhonuskan_votes %}
+{% extends "base.html" %}{% load meta i18n gravatar qhonuskan_votes %}
+
+{% meta %}
+    {% if link.title %}
+        <title>{{link.title}}</title>
+        <meta property="og:title" content="{{link.title}" />
+    {% endif %}
+    {% if link.description %}
+        <meta name="description" content="{{link.description}}" />
+        <meta property="og:description" content="{{link.description}}" />
+    {% endif %}
+    {% if link.thumbnail_url %}
+        <meta property="og:image" content="{{link.thumbnail_url}}" />
+    {% endif %}
+{% endmeta %}
 
 {% block extra_head %}
     <title>{% if link.body %}{{link.body}} {% elif link.title %}{{link.title}}{% else %}{{link.url}}{% endif %}</title>

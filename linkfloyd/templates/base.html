@@ -1,13 +1,17 @@
-{% load static i18n gravatar notification_tags %}
+{% load static meta i18n gravatar notification_tags %}
 {% get_static_prefix as STATIC_PREFIX %}
 {% get_unread_notifications_count as notifications_count %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml">
     <head>
 
-    {% block meta_tags %}
-        {% include "includes/meta_tags.html" %}
-    {% endblock %}
+    {% meta %}
+    <title>LinkFloyd</title>
+    <meta property="og:title" content="LinkFloyd" />
+    <meta name="description" content="Simply archive, share and comment on links" />
+    <meta property="og:description" content="Simply archive, share and comment on links." />
+    <meta property="og:image" content="http://linkfloyd.com/{{STATIC_PREFIX}}logo.png" />
+    {% endmeta %}
 
     <meta property="og:site_name" content="LinkFloyd" />
     <meta property="fb:app_id" content="272205239538842" />

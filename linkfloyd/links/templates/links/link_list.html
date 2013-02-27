@@ -1,4 +1,10 @@
-{% extends "base.html" %}{% load i18n gravatar channel_tags qhonuskan_votes %}
+{% extends "base.html" %}{% load i18n meta gravatar channel_tags qhonuskan_votes %}
+
+{% meta %}
+    <title>{{title}}</title>
+    <meta property="og:title" content="{{title}}" />
+{% endmeta %}
+
 {% block extra_head %}
 
     <script type="text/javascript" src="{{STATIC_URL}}js/csrf_fix.js"></script>

@@ -75,9 +75,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware'
-    # 'django.middleware.locale.LocaleMiddleware',
-    )
+    'django.middleware.locale.LocaleMiddleware',
+    'seo_cascade.middleware.SEOMiddleware',
+)
 
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -126,6 +126,7 @@ INSTALLED_APPS = [
     'registration',
     'gravatar',
     'south',
+    'seo_cascade'
 ]
 
 # EMAIL
