@@ -439,6 +439,23 @@ div.post {
     float:both;
     padding: 5px 0;
     margin: 0;
+    position: relative;
+    span.mod, span.lib {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: 20px;
+        height: 10px;
+        .rounded;
+        float: right;
+        margin-top: 2px;
+    }
+    span.mod {
+        background: @yellow;
+    }
+    span.lib {
+        background: @red;
+    }
     div.side {
         float: left;
         width: 42px;
@@ -487,6 +504,7 @@ div.post {
         }
     }
     > div.content {
+        position: relative;
         width: 630px;
         padding: 10px;
         float: right;

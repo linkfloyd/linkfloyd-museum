@@ -10,6 +10,8 @@
         </div>
 	</div>
     <div class="content">
+        {% if link.rating = 2 %}<span class="mod"></span>{% endif %}
+        {% if link.rating = 3 %}<span class="lib"></span>{% endif %}
         {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}
         {%if link.url %}
             {% include "links/attachment.html" %}
@@ -40,7 +42,7 @@
         Posted by 
         <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a>
         to 
-        <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>, {{link.posted_at|timesince}} ago.
+        <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>, {{link.posted_at|timesince}} ago. 
     </div>
 
         {% if expanded_comments %}
