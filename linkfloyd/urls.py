@@ -4,9 +4,22 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from links.models import Link
 from channels.models import Channel
+from django.views.generic.simple import direct_to_template
+from django.contrib.sitemaps import Sitemap
+from django.contrib.sitemaps import GenericSitemap
 admin.autodiscover()
 
-from django.views.generic.simple import direct_to_template
+
+class LinkSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.5
+
+    def items(self):
+        return Link.objects.filter(is_draft=False)
+
+    def lastmod(self, link):
+        return link.updated_at
+
 
 urlpatterns = patterns(
     '',
@@ -34,6 +47,14 @@ urlpatterns = patterns(
     }),
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to',
         {'url': '/static/img/favicon.ico'}),
+
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': {
+        'links': GenericSitemap({
+            'queryset': Link.objects.all(),
+            'priority': 0.6,
+            'changefreq': "daily"
+        })
+    }})
 )
 
 urlpatterns += staticfiles_urlpatterns()

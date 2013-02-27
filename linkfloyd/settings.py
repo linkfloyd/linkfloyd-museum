@@ -32,7 +32,7 @@ LANGUAGE_CODE = 'tr'
 LANGUAGES = (
     ('tr', 'Türkçe'),
     ('en', 'English')
-    )
+)
 
 SITE_ID = 1
 
@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.flatpages',
+    'django.contrib.sitemaps',
 
     # linkfloyd
     'linkfloyd.links',

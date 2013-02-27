@@ -77,9 +77,11 @@
                         {% trans "Channels" %}
                     </a>
                 </li>
+                {% if user.is_authenticated %}
                 <li>
                     <a class="parent" href="#notifications-subnav">{% trans "Notifications" %} {% if notifications_count %} ({{ notifications_count }}){% endif %}</a>
                 </li>
+                {% endif %}
                 <li>
                     <a href="/links/random/">{% trans "Random" %}</a>
                 </li>
