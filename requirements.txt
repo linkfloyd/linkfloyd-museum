@@ -21,6 +21,6 @@ paramiko==1.9.0
 pyaml==12.12.5
 pycrypto==2.6
 python-dateutil==1.5
--e git+git@github.com:linkfloyd/qhonuskan-votes.git#egg=qhonuskan_votes
+-e git+git://github.com/linkfloyd/qhonuskan-votes.git#egg=qhonuskan_votes
 sorl-thumbnail==11.12
 wsgiref==0.1.2
