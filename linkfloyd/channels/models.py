@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
+
 class Language(models.Model):
     code = models.CharField(
         max_length=5,
@@ -61,7 +62,7 @@ class Channel(models.Model):
 
     def ogp_description(self):
         return self.description
- 
+
     def __unicode__(self):
         return self.name
 
