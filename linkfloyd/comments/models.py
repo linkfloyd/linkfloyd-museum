@@ -53,9 +53,9 @@ def comment_saved(sender, **kwargs):
             Notification.objects.create(
                 actor=comment.posted_by,
                 recipient=subscription.user,
-                target_object=comment.link,
-                type=commented_your_post if comment.posted_by ==
-                    subscription.user else commented_post)
+                target_object=comment,
+                type=commented_your_post if subscription.user ==
+                    subscription.link.posted_by else commented_post)
 
         # create subscription
         subscription, created = LinkSubscription.objects.get_or_create(

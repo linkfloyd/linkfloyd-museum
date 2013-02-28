@@ -30,6 +30,7 @@ class NotificationPreferenceManager(models.Manager):
             obj = super(NotificationPreferenceManager, self).get(
                 user=user, notification_type=type)
         except ObjectDoesNotExist:
+            print type.label
             obj = self.create(user=user, notification_type=type,
                 subscription_status=1 if type.label in (
                     "commented_your_post", "upvoted_your_post") else 0)
