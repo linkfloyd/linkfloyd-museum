@@ -10,17 +10,6 @@ from django.contrib.sitemaps import GenericSitemap
 admin.autodiscover()
 
 
-class LinkSitemap(Sitemap):
-    changefreq = "daily"
-    priority = 0.5
-
-    def items(self):
-        return Link.objects.filter(is_draft=False)
-
-    def lastmod(self, link):
-        return link.updated_at
-
-
 urlpatterns = patterns(
     '',
 
