@@ -181,6 +181,7 @@ ul#nav, ul.subnav {
     font-size: 12px;        
     font-weight: bold;
     color: #999;
+    z-index: 10;
     li {
         margin: 0;
         padding: 0;
@@ -201,12 +202,9 @@ ul#nav, ul.subnav {
     > li {
         font-size: inherit;
         font-weight: inherit;
-        border-right: 1px solid black;
-        border-left: 1px solid lighten(@black, 20%);
         float: left;
         display: block; 
         position: relative;
-        z-index: 500; 
     }
 }
 
