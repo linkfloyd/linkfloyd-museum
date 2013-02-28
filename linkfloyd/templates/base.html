@@ -32,8 +32,7 @@
 
     {% block extra_head %}{% endblock %}
     <script type="text/javascript" >
-        $(document).ready(function() {
-            var notifications_loaded = false;
+        function setPositionOfMenus() {
             $("a.parent").each(function(i, v){
                 var el = $(v)
                 var offs = el.offset();
@@ -41,12 +40,14 @@
                 sub_el.css("top", offs.top + 40);
                 sub_el.css("left", offs.left - 1);
                 el.click(function(){
-                    $("ul.subnav").hide();
                     sub_el.toggle();
                     return false;
                 });
             });
+        }
 
+        $(document).ready(function() {
+            var notifications_loaded = false;
             $("a[href=#notifications-subnav]").click(function() {
                 if (!notifications_loaded) {
                     $.get("/api/notifications/", function(data) {
@@ -54,8 +55,14 @@
                         notifications_loaded = true;
                     })                    
                 }
-            })
+            })            
+            setPositionOfMenus();
         });
+
+        $(window).resize(function () {
+            setPositionOfMenus();
+        });
+
     </script>
 </head>
 <body {% block class_body %}{% endblock %}>
