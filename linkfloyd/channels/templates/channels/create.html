@@ -6,9 +6,9 @@
 {% block content %}
 <div class="one-column">
     <div class="content section narrow">
-        <h2>{% trans "Create a Channel" %}</h2>
+        <h2>{% if action == "create" %}{% trans "Create a Channel" %}{% elif action == "update" %}{% trans "Update Channel" %}{% endif %}</h2>
         <div class="body">
-            <form action="#" method="post">
+            <form action="#" method="post" class="channel">
                 {% for field in form %}
                     {% include "forms/form_field.html" %}
                 {% endfor %}

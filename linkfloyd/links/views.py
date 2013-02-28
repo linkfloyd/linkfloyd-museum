@@ -67,6 +67,7 @@ def submit_link(request, bookmarklet=False):
             }, context_instance=RequestContext(request)
         )
 
+
 @login_required
 def update(request, pk):
     if request.POST:
@@ -80,7 +81,6 @@ def update(request, pk):
             link = form.save(request.POST)
             return HttpResponseRedirect(link.get_absolute_url())
         else:
-            print form.errors
             return render_to_response("links/submit.html", {
                 "form": form,
                 "attachment_editable": True
@@ -94,13 +94,13 @@ def update(request, pk):
             }, context_instance=RequestContext(request)
         )
 
+
 def link_detail(request, link_id):
     try:
         link = Link.objects.get(id=link_id)
     except Link.DoesNotExist:
         return HttpResponse(status=404)
     link.inc_shown()
-
 
     return render_to_response("links/link_detail.html",
     {
@@ -125,6 +125,7 @@ def index(request):
         context_instance=RequestContext(request)
     )
 
+
 def links_from_user(request, username):
 
     # Here were monkeypatching user instance to make it work with django_ogp
@@ -143,6 +144,7 @@ def links_from_user(request, username):
     return render_to_response(
         "links/link_list.html", context,
         context_instance=RequestContext(request))
+
 
 def links_upvoted_by_user(request, username):
 
@@ -164,6 +166,7 @@ def links_upvoted_by_user(request, username):
         "links/link_list.html", context,
         context_instance=RequestContext(request))
 
+
 def links_from_all_channels(request):
     context = context_builder(request)
     return render_to_response(
@@ -174,14 +177,11 @@ def links_from_all_channels(request):
 def links_from_channel(request, channel_slug):
     channel = get_object_or_404(Channel, slug=channel_slug)
     context = context_builder(request, links_from="channel", instance=channel)
-    context.update({
-        "sibling_channels": Channel.objects.filter(
-            parent=channel.parent) if channel.parent else None,
-        "child_channels": Channel.objects.filter(parent=channel)})
     return render_to_response(
         "links/link_list.html", context,
         context_instance=RequestContext(request)
     )
+
 
 def random(request):
     link = Link.objects.order_by('?')[0]

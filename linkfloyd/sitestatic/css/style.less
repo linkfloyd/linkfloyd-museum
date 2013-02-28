@@ -412,14 +412,19 @@ div.channel {
     padding: 5px;
     margin: 0 0 10px 0;
     border-radius: 3px;
-    a.subscription_status {
+    position: relative;
+    a.subscription_status, a.edit_settings{
+        position: absolute;
         .buttonized;
-        margin: 0 -10px 0 0;
-        border-radius-left-top: 5px;
-        float: right;
-        &.subscribed {
-            
-        }
+        border-radius-left-top: 10px;
+    }
+    a.subscription_status {
+        top: 5px;
+        right: -5px;
+    }
+    a.edit_settings{
+        top: 40px;
+        right: -5px;
     }
     h3.name {
         margin: 0 0 10px 0;
@@ -651,7 +656,13 @@ form {
         }
     }
 
- input[type=text], input[type=password], textarea, select, textarea, ul.token-input-list {
+    &.channel {
+        #language {
+            width: 100% !important;
+        }
+    }
+
+    input[type=text], input[type=password], textarea, select, textarea, ul.token-input-list {
         box-sizing: border-box; /* css3 rec */
         -moz-box-sizing: border-box; /* ff2 */
         -ms-box-sizing: border-box; /* ie8 */

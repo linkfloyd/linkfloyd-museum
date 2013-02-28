@@ -4,6 +4,10 @@
         <a href="#" data-slug= "{{channel.slug}}" class="subscription_status{% if subscription_status %} subscribed{% endif %}">
             {% if subscription_status %}{% trans "Subscribed" %}{% else %}{% trans "Subscribe" %}{% endif %}
         </a>
+        {{subscription_status}}
+        {% if subscription_status == "admin" %}
+            <a class="edit_settings" href="{% url update_channel channel.slug %}">{% trans "Edit Settings" %}</a>
+        {% endif %}
     {% endwith %}
     <h3>
         <a href="{{channel.get_absolute_url}}">{{channel.name}}</a> ({% blocktrans with subscribers=channel.num_of_subscribers %}{{subscribers}} subscribers{% endblocktrans %}, {{channel.language}})

@@ -32,13 +32,15 @@ def create(request):
         else:
             return render_to_response(
                 "channels/create.html", {
-                    "form": form
+                    "form": form,
+                    "action": "create"
                 }, context_instance=RequestContext(request)
             )
     else:
         return render_to_response(
             "channels/create.html", {
-                "form": CreateChannelForm()
+                "form": CreateChannelForm(),
+                "action": "create"
             }, context_instance=RequestContext(request)
         )
 
@@ -56,13 +58,14 @@ def update(request, slug):
             channel = form.save()
             messages.add_message(
                 request,
-                messages.INFO,
+                messages.SUCCESS,
                 _('You Updated %s Channel' % channel)
             )
             return HttpResponseRedirect(channel.get_absolute_url())
         else:
             return render_to_response(
                 "channels/create.html", {
+                    "action": "update",
                     "form": form
                 }, context_instance=RequestContext(request))
     else:
@@ -75,6 +78,7 @@ def update(request, slug):
         )
         return render_to_response(
            "channels/create.html", {
+                "action": "update",
                 "form": UpdateChannelForm(instance=channel)
             }, context_instance=RequestContext(request)
         )

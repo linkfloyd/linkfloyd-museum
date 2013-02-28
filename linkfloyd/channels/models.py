@@ -37,8 +37,8 @@ class Channel(models.Model):
     )
     notes = models.TextField(
         help_text=_("notes and rules about that channel"),
-        blank = True,
-        null = True
+        blank=True,
+        null=True
     )
     language = models.ForeignKey(
         Language,
@@ -48,26 +48,12 @@ class Channel(models.Model):
 
     is_official = models.BooleanField(default=False)
 
-    parent = models.ForeignKey(
-        "self",
-        verbose_name=_("parent channel"),
-        blank=True,
-        null=True
-    )
-
-    ogp_enabled = True
-
-    def ogp_title(self):
-        return _("%s channel on Linkfloyd" % self.name)
-
-    def ogp_description(self):
-        return self.description
-
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return "/links/channel/%s/" % self.slug
+
 
 class Subscription(models.Model):
     user = models.ForeignKey(
@@ -79,7 +65,7 @@ class Subscription(models.Model):
     status = models.CharField(
         max_length=12,
         default="member",
-        choices=(        
+        choices=(
             ("admin", _("Admin")),
             ("moderator", _("Moderator")),
             ("subscriber", _("Subscriber"))
