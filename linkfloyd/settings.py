@@ -11,7 +11,9 @@ THUMBNAIL_DEBUG = False
 
 ADMINS = (
     ('Mirat Can Bayrak', 'miratcanbayrak@gmail.com'),
-    )
+)
+
+SERVER_EMAIL = "django@linkfloyd.com"
 
 MANAGERS = ADMINS
 
