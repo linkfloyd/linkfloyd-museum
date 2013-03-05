@@ -56,6 +56,7 @@ h1, h2, h3, h4, h5, h6, dt {
     margin: 10px 0 10px 0;
     padding: 0 6px 0 0;
     color: lighten(@blue, 60%);
+    overflow: auto;
 }
 h1 {
     .h1;
@@ -293,6 +294,7 @@ div.one-column {
 div.two-column {
     div.panel {
         width: 230px;
+        margin: 0 0 0 20px;
         float: right;
         div.section {
             margin: 0 0 10px 0;
@@ -369,7 +371,6 @@ div.two-column {
         }
     }
     > div.content {
-        width: 705px;
         overflow: visible;
     }
 }
@@ -518,9 +519,8 @@ div.post {
     }
     > div.content {
         position: relative;
-        width: 630px;
+        margin: 0 0 0 55px;
         padding: 10px;
-        float: right;
         border-radius: 6px;
         background: @white;
         > p.body, p.description, a.title, ul.actions {
@@ -835,8 +835,8 @@ div.comments {
             }
         }
         div.content {
-            padding: 0 0 10px 20px;
-            margin: 0 0 0 40px;
+            padding: 0 0 10px 0;
+            margin: 0 0 0 60px;
             p {
                 margin: 0 0 10px 0;
             }
@@ -870,7 +870,7 @@ div.comments {
             background: black;
         }
         img {
-            width: 630px;
+            width: 100%;
         }
     }
 }   
@@ -904,3 +904,25 @@ div#add_link.fieldWrapper {
         display: none;
     }
 }
+
+@media screen and (max-width: 800px) {
+    .panel {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #logo {
+        display: none !important;
+    }
+    div.post {
+        > div.content, > div.info {
+            margin-left: 0 !important;
+        }
+
+        div.side {
+            display: none !important;
+        }
+    }
+}
+
