@@ -3,16 +3,16 @@ from channels.models import Channel, Subscription
 from links.models import Link
 import sys
 
+
 class Command(BaseCommand):
     args = '<channel_slug channel_slug>'
     help = 'Merges first channel to second channel with subscriptions'
 
-
-c    def handle(self, *args, **options):
+    def handle(self, *args, **options):
         if not len(args) == 2:
             raise CommandError('Please give source and destination channel slugs')
 
-        source_channel_slug, dest_channel_slug= args[0], args[1]
+        source_channel_slug, dest_channel_slug = args[0], args[1]
 
         try:
             source_channel = Channel.objects.get(slug=source_channel_slug)
@@ -31,7 +31,7 @@ c    def handle(self, *args, **options):
 
         self.stdout.write("Migrating links of source channel\n")
         self.stdout.write("---------------------------------\n\n")
-		
+
         for link in Link.objects.filter(channel=source_channel):
             link.channel = dest_channel
             link.save()

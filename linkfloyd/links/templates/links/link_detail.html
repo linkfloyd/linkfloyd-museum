@@ -2,8 +2,11 @@
 
 {% meta %}
     {% if link.title %}
-        <title>{{link.title}}</title>
-        <meta property="og:title" content="{{link.title}}" />
+        <title>{{link.title}}: {{link.channel}}</title>
+        <meta property="og:title" content="{{link.title|truncatechars:60}}: {{link.channel}}" />
+    {% elif link.body %}
+        <title>{{link.body}}: {{link.channel}}</title>
+        <meta property="og:title" content="{{link.body|truncatechars:60}}: {{link.channel}}" />        
     {% endif %}
     {% if link.description %}
         <meta name="description" content="{{link.description}}" />
