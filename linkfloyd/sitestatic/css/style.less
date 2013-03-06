@@ -454,6 +454,10 @@ div.post {
     padding: 5px 0;
     margin: 0;
     position: relative;
+    &.withAttachment p.body {
+        border-bottom: 1px dashed @grey;
+        padding-bottom: 10px;
+    }
     span.mod, span.lib {
         position: absolute;
         right: 10px;
@@ -529,8 +533,7 @@ div.post {
             color: lighten(@black, 15%);
         }
         ul.actions {
-            margin-top: 10px;
-            margin-bottom: 0;
+            margin-top: 0;
             a {
                 &:hover {
                 }
@@ -565,11 +568,8 @@ div.post {
 
 div.attachment {
     margin: 0 0 0 0;
-    padding: 5px;
     overflow: auto;
     color: @black;
-    background: #eee;
-    border:1px solid #ddd;
     a.title { 
         font-weight: bold;
     }

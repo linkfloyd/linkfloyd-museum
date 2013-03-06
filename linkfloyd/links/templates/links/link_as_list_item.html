@@ -1,5 +1,5 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
-<div class="post{% ifequal highlight link.id %} highlight{% endifequal %}" id="{{link.id}}">
+<div class="post{% ifequal highlight link.id %} highlight{% endifequal %}{% if link.title or link.thumbnail_url %} withAttachment{% endif %}" id="{{link.id}}">
 	<div class="side">
         <a class="avatar" href="{{link.posted_by.get_absolute_url}}" style="background: url({% gravatar_for_user link.posted_by 42 %})"></a>
 
