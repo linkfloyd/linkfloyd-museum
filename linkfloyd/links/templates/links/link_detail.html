@@ -5,7 +5,7 @@
         <title>{{link.title}}: {{link.channel}}</title>
         <meta property="og:title" content="{{link.title|truncatechars:60}}: {{link.channel}}" />
     {% elif link.body %}
-        <title>{{link.body}}: {{link.channel}}</title>
+        <title>{{link.body|truncatechars:60}}: {{link.channel}}</title>
         <meta property="og:title" content="{{link.body|truncatechars:60}}: {{link.channel}}" />        
     {% endif %}
     {% if link.description %}
