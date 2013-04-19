@@ -1,65 +1,55 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
-<div class="post{% ifequal highlight link.id %} highlight{% endifequal %}{% if link.title or link.thumbnail_url %} withAttachment{% endif %}" id="{{link.id}}">
-	<div class="side">
-        <a class="avatar" href="{{link.posted_by.get_absolute_url}}" style="background: url({% gravatar_for_user link.posted_by 42 %})"></a>
-
-        <div class="vote_buttons" x:model="links.LinkVote" x:id="{{link.id}}">
-            <a href="#" class="upVote{% if link.is_voted_up %} voted{%endif%}" x:value="1" ></a>
-            <a href="#" class="downVote{% if link.is_voted_down %} voted{%endif%}" x:value="-1"></a>
-            <div class="score">{{link.vote_score}}</div>
+<div class="post{% ifequal highlight link.id %} highlight{% endifequal %}{% if link.thumbnail_url %} withThumbnail{% endif %}" data-id="{{link.id}}">
+    {% if link.thumbnail_url %}
+        <div class="thumbnail">
+            <img
+                class="thumbnail {% if link.player %}playble{% endif %}"
+                src="{% thumbnail link.thumbnail_url '100x70' crop='center' as im %}{{ im.url }}{% endthumbnail %}"
+            />
+            {% if link.player %}<i player="{{link.player}}"></i>{% endif %}</a>
         </div>
-	</div>
-    <div class="content">
-        {% if link.rating = 2 %}<span class="mod"></span>{% endif %}
-        {% if link.rating = 3 %}<span class="lib"></span>{% endif %}
-        {% if link.body %}<p class="body">{{link.body}}</p>{% endif %}
-        {%if link.url %}
-            {% include "links/attachment.html" %}
-        {% endif %}
+    {% endif %}
+    {{ link.body }}
+    <a class="title" href="{{link.url}}">{% if link.title %}{% if link.rating = 2 %}<span class="mod"></span>{% endif %}{% if link.rating = 3 %}<span class="lib"></span>{% endif %}{{link.title}}{% else %}{{link.url|truncatechars:60}}{% endif %}</a>
+    {% if link.description %}
+        <p class="description">{{link.description}}</p>
+    {% endif %}
+    {% if show_attachments %}
+        <div class="embed_player">{{link.player|safe}}</div>
+    {% endif %}
+    <p class="info">Posted by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> to <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>, {{link.posted_at|timesince}} ago.</p>
         <ul class="flat-list actions">
-            <li><a href="{{link.get_absolute_url}}">{% trans "Comments" %} ({{link.comment_score}})</a></li>
+            <li><a href="{{link.get_absolute_url}}">{{link.comment_score}} {% trans "comments" %}</a></li>
             {% if link.posted_by == user or user.is_staff %}
-                <li><a href="{% url update_link link.id %}">{% trans "Update" %}</a></li>
-                <li><a href="#" class="deleteLink">{% trans "Delete" %}</a></li>
+                <li><a href="{% url update_link link.id %}">{% trans "update" %}</a></li>
+                <li><a href="#" class="deleteLink">{% trans "delete" %}</a></li>
             {% endif %}
             {% if user.is_authenticated %}
-            <li>
-                {% if link.is_subscribed %}
-                    <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "Unsubscribe" %}</a></li>
-                {% else %}
-                    <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "Subscribe" %}</a></li>
-                {% endif %}
-            </li>
+                <li>
+                    {% if link.is_subscribed %}
+                        <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "unsubscribe" %}</a></li>
+                    {% else %}
+                        <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "subscribe" %}</a></li>
+                    {% endif %}
+                </li>
             {% endif %}
-            <li>
-            <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "Share" %}</a>
-            </li>
+            <li><a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "share" %}</a></li>
         </ul>
-
-    </div>
-
-    <div class="info">
-        Posted by 
-        <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a>
-        to 
-        <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>, {{link.posted_at|timesince}} ago. 
-    </div>
-
-        {% if expanded_comments %}
-            <div class="comments">
-                {% for comment in link.comment_set.all %}
-                    {% include "links/comment.html" %}
-                {% endfor %}
-                {% if user.is_authenticated %}
-                    {% include "links/comment_form.html" %}
-                {% else %}
-                    <div class="comment">
-                        <p class="warning">
-                            {% url auth_login as login_url %}
-                            {% blocktrans %} <a href="{{ login_url }}">Log in</a> to leave comment {% endblocktrans %}
-                        </p>
-                    </div>
-               {% endif %}
-            </div>
-        {% endif %}
+    {% if show_comments %}
+        <div class="comments">
+            {% for comment in link.comment_set.all %}
+                {% include "links/comment.html" %}
+            {% endfor %}
+            {% if user.is_authenticated %}
+                {% include "links/comment_form.html" %}
+            {% else %}
+                <div class="comment">
+                    <p class="warning">
+                        {% url auth_login as login_url %}
+                        {% blocktrans %} <a href="{{ login_url }}">Log in</a> to leave comment {% endblocktrans %}
+                    </p>
+                </div>
+           {% endif %}
+        </div>
+    {% endif %}
 </div>

@@ -1,54 +1,26 @@
 {% load i18n %}
 <form action="#" method="post">
     {% csrf_token %}
-    <div class="fieldWrapper" id="attachment_preview">
-        {% with form.instance as link %}
-            {% if link.url %}
-               {% include "links/attachment.html" %}
-            {% endif %}
-        {% endwith %}
-    </div>
+    {% for field in form %}
+        {% include "forms/form_field.html" %}
+    {% endfor %}
     <div id="thumbnailControls">
+        <div class='thumbnail'><img src='' /></div>
         <div id="toggleThumbnail">
             <span>
                 <input type="checkbox" id="toggleBgImage" checked="checked" /> {% trans "Thumbnail Image" %}
             </span>
         </div>
         <div id="selectThumbnail">
-            <a href="#" id="prev" value="Prev" onclick="thumbnailrepo.getPrev()"></a>
+            <a href="#" id="prev" value="Prev"></a>
             <p id="thumbnailStatus"><span id="currentThumbnail">0</span>/<span id="totalThumbnails">0</span></p>
-            <a href="#" id="next" value="Next" onclick="thumbnailrepo.getNext()"></a>
+            <a href="#" id="next" value="Next"></a>
         </div>
     </div>
-    {% for field in form %}
-        {% include "forms/form_field.html" %}
-    {% endfor %}
     <input type="submit" id="id_submit" value="{% trans "Submit" %}" />
 </form>
 
 <script type="application/javascript">
-    $('[contenteditable]').live('focus', function() {
-        var $this = $(this);
-        $this.data('before', $this.html());
-        return $this;
-    }).live('blur keyup paste', function() {
-        var $this = $(this);
-        if ($this.data('before') !== $this.html()) {
-            $this.data('before', $this.html());
-            $this.trigger('change');
-        }
-        return $this;
-    });
-
-    $("a.title").live("change", function() {
-        $("#id_title").val($("a.title").html());
-    })
-    $("p.description").live("change", function() {
-        $("#id_description").val($("p.description").html());
-    })
-    $("#id_body").focus(function() {
-        $(this).height(48)
-    });
     var channels = [];
     var selected_channel;
     $("#id_channel option").each(function(index) {
@@ -62,10 +34,4 @@
             }
         }
     });
-    var options = {
-        tokenLimit: 1
-    }
-    if (selected_channel != undefined) {
-        options.prePopulate = [channels[selected_channel]];
-    };
 </script>

@@ -29,14 +29,15 @@ class Link(models.Model):
     posted_by = models.ForeignKey(User)
     posted_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    body = models.CharField(max_length=512, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
-    description = models.CharField(max_length=2048, null=True,
-        blank=True)
+    description = models.TextField(
+        max_length=2048, null=True, blank=True,
+        help_text="You can use markdown here.")
     thumbnail_url = models.URLField(null=True, blank=True)
     thumbnail_offset = models.IntegerField(null=True, blank=True, default=0)
-    rating = models.PositiveIntegerField(choices=SITE_RATINGS,
+    rating = models.PositiveIntegerField(
+        choices=SITE_RATINGS,
         verbose_name=_("Rating"), default=1,
         help_text=_("warn people about your link"),)
     votes = VotesField()

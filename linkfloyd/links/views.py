@@ -86,7 +86,8 @@ def update(request, pk):
                 "attachment_editable": True
             }, context_instance=RequestContext(request))
     else:
-        return render_to_response("links/submit.html", {
+        return render_to_response(
+            "links/submit.html", {
                 "form": UpdateLinkForm(
                     instance=get_object_or_404(
                         Link, pk=pk, posted_by=request.user)),
@@ -102,22 +103,23 @@ def link_detail(request, link_id):
         return HttpResponse(status=404)
     link.inc_shown()
 
-    return render_to_response("links/link_detail.html",
-    {
-        "link": link,
-        "up_voted_users": [vote.voter for vote in \
-                           link.linkvote_set.filter(value=1)],
-        "expanded_attachments": True,
-        "expanded_comments": True,
-        "form": CommentForm(initial={"link": link})
-    }, context_instance=RequestContext(request))
+    return render_to_response(
+        "links/link_detail.html", {
+            "link": link,
+            "up_voted_users": [vote.voter for vote in
+                               link.linkvote_set.filter(value=1)],
+            "show_attachments": True,
+            "show_comments": True,
+            "form": CommentForm(initial={"link": link})
+        }, context_instance=RequestContext(request))
 
 
 def index(request):
     if request.user.is_authenticated():
         if not Subscription.objects.filter(user=request.user):
-            messages.add_message(request, messages.WARNING,
-                _("Subscribe channels that you are interested in"))
+            messages.add_message(
+                request, messages.WARNING,
+                ("Subscribe channels that you are interested in"))
             return HttpResponseRedirect(reverse("browse_channels"))
     return render_to_response(
         "links/link_list.html",
@@ -179,8 +181,7 @@ def links_from_channel(request, channel_slug):
     context = context_builder(request, links_from="channel", instance=channel)
     return render_to_response(
         "links/link_list.html", context,
-        context_instance=RequestContext(request)
-    )
+        context_instance=RequestContext(request))
 
 
 def random(request):

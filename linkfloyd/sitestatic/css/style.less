@@ -1,4 +1,4 @@
-@base     :#333d48;
+@base     :#333;
 @white    :#fff;
 @black    :#000;
 @yellow   :#b58900; 
@@ -20,19 +20,19 @@
 }
 .normal {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 18px;
 }
 .h4 {
     font-size: 15px;
-    line-height: 19px;
+    line-height: 21px;
 }
 .h3 {
     font-size: 17px;
-    line-heigh: 21px;
+    line-heigh: 23px;
 }
 .h2 {
     font-size: 19px;
-    line-height: 23px;
+    line-height: 25px;
 }
 .h1 {
     font-size: 24px;
@@ -46,17 +46,17 @@
 body {
     padding: 0;
     margin: 0;
-    background: lighten(@base, 10%) url(http://i.imgur.com/gIctw.png) repeat-x top left;
-    color: desaturate(lighten(@blue, 45%), 40%);
+    color: @base;
     font-family: "Arial", sans-serif;
     .normal;
 }
 
 h1, h2, h3, h4, h5, h6, dt {
-    margin: 10px 0 10px 0;
-    padding: 0 6px 0 0;
-    color: lighten(@blue, 60%);
+    margin: 0 0 20px 0;
+    padding: 0;
+    color: @base;
     overflow: auto;
+    border-bottom: 1px dashed #ccc;
 }
 h1 {
     .h1;
@@ -71,9 +71,8 @@ p {
     margin: 0 0 10px 0;
 }
 a {
-    color: inherit;
+    color: darken(@blue, 20%);
     text-decoration: underline;
-    color: inherit;
 }
 
 /* Site wide */
@@ -85,11 +84,13 @@ a {
     float: right;
 }
 a#logo {
-    top: 11px;
     font-size: 33px;
     font-family: 'Lilita One', cursive;
     color: @white;
     text-decoration: none;
+    display: block;
+    position: absolute;
+    margin: 10px 0 0 10px;
 }
 pre, ol, ul, blockquote  {
     padding: 5px;
@@ -126,9 +127,8 @@ dl {
 }
 /* Layout */
 div.wrapper {
-    max-width: 950px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 10px;
 }
 ul.flat-list {
     margin: 0;
@@ -167,8 +167,8 @@ p.success, p.error, p.warning {
 }
 
 div#header {
-    background: lighten(@black, 12%);
-    border-bottom: 1px solid @black;
+    background: #444;
+    border-bottom: 1px solid #222;
     overflow: auto;
     div.wrapper {
         padding: 0;
@@ -187,6 +187,7 @@ ul#nav, ul.subnav {
         margin: 0;
         padding: 0;
         a {
+            color: @white;
             margin: 0;
             padding: 10px;
             font-size: inherit;
@@ -266,7 +267,7 @@ ul.subnav {
                 text-decoration: none;
             }
             float: right;
-            margin: 0 5px 0 0;
+            margin: 5px 5px 0 0;
             padding: 0 5px 0 3px;
             font-weight: normal;
             &.active {
@@ -293,8 +294,8 @@ div.one-column {
 }
 div.two-column {
     div.panel {
-        width: 230px;
-        margin: 0 0 0 20px;
+        width: 280px;
+        margin: 0 0 0 40px;
         float: right;
         div.section {
             margin: 0 0 10px 0;
@@ -338,7 +339,7 @@ div.two-column {
                 margin: 0;
                 padding: 10px;
                 background: darken(@base, 10%);
-                //box-shadow: inset 1px 1px 5px lighten(@blue, 5%);
+                box-shadow: inset 1px 1px 5px lighten(@white, 5%);
                 border-top: 1px solid darken(@base, 5%);
                 border-bottom: 1px solid darken(@base, 15%);
                 border-left: 1px solid darken(@base, 5%);
@@ -379,8 +380,6 @@ div#content {
     overflow: auto;
     min-height: 10em;
     div.wrapper {
-        background: lighten(@base, 10%);
-        border-radius: 5px;
         overflow: auto;
         &.white {
             background: @white;
@@ -391,21 +390,16 @@ body.white div#content div.wrapper {
     background: @white;
     color: lighten(@black, 10%);
     h1, h2, h3, h4, h5, h6 {
-        color: @black;
+        background: none;
+        color: @base;
     }
     h1, h2 {
-        border-bottom: 1px solid darken(@white, 10);
+        border-bottom: 1px solid @base;
     }
     pre {
         background: black;
         color: @white;
     }
-}
-a#logo {
-    display: block;
-    position: absolute;
-    float: left;
-    margin: -3px 0 0 0;
 }
 div.channel {
     background: darken(@base, 5);
@@ -435,38 +429,26 @@ div.channel {
             font-effect: outline;
         }
     }
-    div.description {
-    }
 }
- 
 div.post a.avatar {
     width: 42px;
     height: 42px;
-    border-radius: 6px;
     display: block;
     background: top left no-repeat;
-    box-shadow: 0 1px 5px rgba(0,0,0,.46);
 }
-
 div.post {
     overflow: auto;
     float:both;
-    padding: 5px 0;
-    margin: 0;
+    padding: 0;
+    margin: 0 0 20px 0;
     position: relative;
-    &.withAttachment p.body {
-        border-bottom: 1px dashed @grey;
-        padding-bottom: 10px;
-    }
     span.mod, span.lib {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        width: 20px;
+        display: inline;
+        width: 10px;
         height: 10px;
-        .rounded;
-        float: right;
-        margin-top: 2px;
+        border-radius: 5px;
+        float: left;
+        margin: 4px 5px 0 0;
     }
     span.mod {
         background: @yellow;
@@ -474,114 +456,74 @@ div.post {
     span.lib {
         background: @red;
     }
-    div.side {
-        float: left;
-        width: 42px;
-    }
     &:first-child {
         padding-top: 0;
     }
     &.highlight {
         background: #ffff88;
     }
-    div.vote_buttons {
-        overflow: auto;
-        .rounded;
-        margin: 10px 0 5px 0;
-        padding: 0 0 5px 0;
-        a.upVote, a.downVote {
-            display: block;
-            height: 20px;
-            .buttonized;
-            background-position: center center;
-            background-repeat: no-repeat;
-        }
-        a.upVote {
-            margin-bottom: 3px;
-            background-image:url(../img/upVote.png);
-        }
-        a.downVote {
-            margin-bottom: 3px;
-            background-image: url(../img/downVote.png);
-        }
-        a.voted {
-            box-shadow: inset 0 10px 20px #000;            
-        }
-        div.score {
-            box-shadow: inset 0 5px 10px #000;
-            text-align: center;
-            vertical-align: center;
-            font-size: 13px;
-            font-weight: bold;
-            color: darken(@base, 10%);
-            border-radius: 2px;
-            margin: 5px 0 0 0;
-            padding: 5px 0 5px 0;
-            display: block;
-            clear: both;
-        }
+    position: relative;
+    p.body, p.description, a.title, p.info, ul.actions {
+        margin: 0;
     }
-    > div.content {
-        position: relative;
-        margin: 0 0 0 55px;
-        padding: 10px;
-        border-radius: 6px;
-        background: @white;
-        > p.body, p.description, a.title, ul.actions {
-            margin: 4px 10px 10px 0;
-            font-size: 13px;
-            color: lighten(@black, 15%);
-        }
-        ul.actions {
-            margin-top: 0;
-            a {
-                &:hover {
-                }
+    p.description, ul.actions {
+        color: lighten(@black, 50%);
+    }
+    a.title {
+        display: block;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    ul.actions, p.description {
+        font-size: 13px;
+    }
+    ul.actions {
+        margin: 0;
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: inherit;
+            &:hover {
+                text-decoration: underline;
             }
         }
-        div.embed_player {
-            margin: 0 0 0 0;
-            padding: 5px 0 0 0;
-            display: block;
-            clear: both;
-        }
-        div.embed_player > * {
-            display: block;
-            height: 260px;
-            width: 100%;
-        }
-        div.embed_player > img.embed {
-            height: auto;
-        }
     }
-    div.info {
+    div.embed_player {
+        margin: 0 0 0 0;
+        padding: 5px 0 5px 105px;
+        max-width: 600px;
+    }
+    div.embed_player > * {
+        display: block;
+        height: 260px;
+        width: 100%;
+    }
+    div.embed_player > img.embed {
+        height: auto;
+    }
+    > p.info {
         display: block;
         color: @grey;
         font-size: 10px;
-        margin: 10px 0 0 60px;
         font-weight: normal;
         a.channel {
             text-transform:lowercase;
         }
     }
-}
-
-div.attachment {
-    margin: 0 0 0 0;
-    overflow: auto;
-    color: @black;
-    a.title { 
-        font-weight: bold;
+    &.withThumbnail {
+        p.body, p.description, a.title, p.info, ul.actions {
+            margin-left: 105px;
+        }
     }
     div.thumbnail {
         position: relative;
         display: block;
-        float: right;
-        margin: 0 0 0 10px;
+        float: left;
+        margin: 0;
         padding: 0;
         overflow: auto;
         img {
-            width: 120px;
+            width: 100px;
             height: 70px;        
         }
         i {
@@ -595,13 +537,12 @@ div.attachment {
         }
     }
 }
+
 form {
     display:block;
     overflow: auto;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    padding: 10px;
-    border-radius: 5px;
     div.fieldWrapper{
         &#channel, &#rating, &#language, &#translation_of {
             width: 49%;
@@ -619,7 +560,6 @@ form {
         padding: 0;
         overflow: auto;
         label {
-            color: @white;
             display: block;
             font-weight: bold;
             margin: 0 0 5px 0;
@@ -704,21 +644,26 @@ form {
     overflow: auto;
     display: none;
     margin: 0 0 10px 0;
-    #toggleThumbnail {
+    padding: 20px 0 0 0;
+    clear: both;
+    div.thumbnail {
         float: left;
+        img {
+            width: 100px;
+        }
     }
-    #selectThumbnail {
-        overflow: auto;
-        float: right;
+    #toggleThumbnail, #selectThumbnail {
+        margin: 0 0 10px 105px;
     }
     #prev {
         float: left;
         display: block;
         width: 0;
         height: 0;
+        margin-left: 3px;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        border-right: 10px solid white;
+        border-right: 10px solid @black;
     }
     #next {
         float: left;
@@ -726,7 +671,7 @@ form {
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        border-left: 10px solid white;
+        border-left: 10px solid @black;
     }
     p#thumbnailStatus {
         float: left;
@@ -816,16 +761,15 @@ div.token-input-dropdown ul li.token-input-selected-dropdown-item {
 
 /* ------------------------------------------------------------ */
 div.comments {
-    padding: 10px 0 10px 0;
+    padding: 20px 0;
     a.avatar {
         float: left;
     }
     div.comment {
         overflow: auto;
-        border-bottom: 1px dashed @dark-grey;
         clear: both;
-        margin: 0 0 10px 0;
-        padding: 20px 0 20px 0;
+        margin: 0;
+        padding: 0;
         form {
             padding: 0;
             textarea {
@@ -836,7 +780,7 @@ div.comments {
         }
         div.content {
             padding: 0 0 10px 0;
-            margin: 0 0 0 60px;
+            margin: 0 0 0 50px;
             p {
                 margin: 0 0 10px 0;
             }
@@ -851,6 +795,7 @@ div.comments {
             }
             ul.actions {
                 display: none;
+                margin-left: 0;
            }
             &:hover {
                 ul.actions {
@@ -914,15 +859,6 @@ div#add_link.fieldWrapper {
 @media screen and (max-width: 600px) {
     #logo {
         display: none !important;
-    }
-    div.post {
-        > div.content, > div.info {
-            margin-left: 0 !important;
-        }
-
-        div.side {
-            display: none !important;
-        }
     }
 }
 
