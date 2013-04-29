@@ -5,7 +5,7 @@
 @m5       : #fff;
 
 @green    :#8c982e;
-@blue     :#0027b8; 
+@blue     :#0017b8; 
 @yellow   :#b58900; 
 @red      :#dc322f; 
 
@@ -78,7 +78,6 @@ p.success, p.error, p.warning {
     background: @red;
     color: white;
 }
-
 form {
     display:block;
     overflow: auto;
@@ -195,7 +194,7 @@ body {
     color: @m1;
     font-family: "Arial", sans-serif;
     .normal;
-    background: #eee;
+    background: #eee url(../img/mascot_asking.png) bottom right no-repeat;
 }
 div#header {
     display: block;
@@ -203,6 +202,8 @@ div#header {
     background: @m2;
     border-bottom: 1px solid @m2;
     margin: 0 0 20px 0;
+    box-shadow: 0 0 5px #888888;
+
 }
 ul#nav, ul.subnav {
     margin: 0;
@@ -315,9 +316,36 @@ div.post {
         margin: 0 10px 0 0;
     }
     div.vote_buttons {
-        width: 40px;
+        width: 30px;
         height: 70px;
-        background: @m2;
+        .upVote {
+            display: block;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 0 15px 15px 15px;
+            border-color: transparent transparent @m4 transparent;
+            &.voted {
+                border-color: transparent transparent @m3 transparent;
+            }
+        }
+        .downVote {
+            display: block;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 15px 15px 0 15px;
+            border-color: @m4 transparent transparent transparent;
+            &.voted {
+                border-color: @m3 transparent transparent transparent;
+            }
+        }
+        .score {
+            font-weight: bold;
+            color: @m3;
+            width: 30px;
+            text-align: center;
+        }
     }
     div.body {
         display: table-cell;

@@ -1,9 +1,9 @@
 {% load i18n qhonuskan_votes thumbnail gravatar channel_tags %}
 <div class="post{% ifequal highlight link.id %} highlight{% endifequal %}{% if link.thumbnail_url %} withThumbnail{% endif %}" data-id="{{link.id}}">
-    <div class="vote_buttons" x:model="links.LinkVote" x:id="2015">
+    <div class="vote_buttons" x:model="links.LinkVote" x:id="{{link.id}}">
         <a href="#" class="upVote" x:value="1"></a>
-        <a href="#" class="downVote" x:value="-1"></a>
         <div class="score">0</div>
+        <a href="#" class="downVote" x:value="-1"></a>
     </div>
     {% if link.thumbnail_url %}
         <div class="thumbnail">
