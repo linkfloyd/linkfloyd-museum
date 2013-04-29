@@ -7,7 +7,7 @@ from links.models import Subscription as LinkSubscription
 
 from django.contrib.auth.models import User
 
-from utils import reduced_markdown
+from markdown import markdown
 
 from django.utils.translation import ugettext as _
 from datetime import datetime
@@ -29,7 +29,7 @@ class Comment(models.Model):
         return u"%s's comment on %s" % (self.posted_by, self.link)
 
     def save(self, *args, **kwargs):
-        self.as_html = reduced_markdown(self.body, safe_mode="remove")
+        self.as_html = markdown(self.body, safe_mode="remove")
         super(Comment, self).save(*args, **kwargs)
 
 

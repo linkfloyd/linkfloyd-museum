@@ -18,6 +18,9 @@ from qhonuskan_votes.models import vote_changed
 from django.dispatch import receiver
 from notifications.models import Notification, NotificationType
 
+from markdown import markdown
+
+
 SITE_RATINGS = (
     (1, _("Safe Posts")),
     (2, _("Moderate (can contain nudity, rude gestures)")),
@@ -32,8 +35,9 @@ class Link(models.Model):
     url = models.URLField(null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(
-        max_length=2048, null=True, blank=True,
+        null=True, blank=True,
         help_text="You can use markdown here.")
+    description_as_html = models.TextField(null=True, blank=True)
     thumbnail_url = models.URLField(null=True, blank=True)
     thumbnail_offset = models.IntegerField(null=True, blank=True, default=0)
     rating = models.PositiveIntegerField(
@@ -74,6 +78,9 @@ class Link(models.Model):
     def __unicode__(self):
         return u"%s by %s" % (self.title, self.posted_by)
 
+    def save(self, *args, **kwargs):
+        self.description_as_html = markdown(self.description, safe_mode="remove")
+        super(Link, self).save(*args, **kwargs)
 
 class Subscription(models.Model):
     """We're holding unsubscriptions instead of subscriptions.
@@ -91,9 +98,9 @@ class Subscription(models.Model):
 def link_saved(sender, **kwargs):
 
     from summaries.models import Unseen
+    link = kwargs['instance']
 
     if kwargs['created']:
-        link = kwargs['instance']
         subscriptions = \
             ChannelSubscription.objects.filter(channel=link.channel)
         for subscription in subscriptions:

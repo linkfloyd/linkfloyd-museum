@@ -110,6 +110,7 @@ def link_detail(request, link_id):
                                link.linkvote_set.filter(value=1)],
             "show_attachments": True,
             "show_comments": True,
+            "show_description": True,
             "form": CommentForm(initial={"link": link})
         }, context_instance=RequestContext(request))
 

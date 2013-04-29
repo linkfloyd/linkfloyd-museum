@@ -1,24 +1,19 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{% trans "Login" %}{% endblock %}
 {% block content %}
-<div class="one-column">
-    <div class="section narrow">
-        <h2 class="header">{% trans "Log in" %}</h2>
-        <div class="content">
-            {% if form.errors %}
-            <p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
-            {% endif %}
-            <form method="post" action="{% url django.contrib.auth.views.login %}">
-                {% csrf_token %}
-                {% for field in form %}
-                {% include "forms/form_field.html" %}
-                {% endfor %}
-                <p><a href="{% url registration_register %}">{% trans "Do you need an account" %}</a>?</p>
-                <p><a href="/accounts/password/reset/">{% trans "Don't you remember your password" %}</a>?</p>
-                <input type="submit" value="{% trans "Log in" %}" />
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form>
-        </div>
-    </div>
-</div>
+{% if form.errors %}
+<p class="error">{% trans "Your username and password didn't match. Please try again." %}</p>
+{% endif %}
+<h1>{% trans "Log in" %}</h1>
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+    {% csrf_token %}
+    {% for field in form %}
+    {% include "forms/form_field.html" %}
+    {% endfor %}
+    <input type="submit" value="{% trans "Log in" %}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+<p><a href="{% url registration_register %}">{% trans "Do you need an account" %}</a>?</p>
+<p><a href="/accounts/password/reset/">{% trans "Don't you remember your password" %}</a>?</p>
+
 {% endblock %}
