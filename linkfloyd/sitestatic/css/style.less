@@ -12,7 +12,7 @@
 
 .small      { font-size: 11px; line-height: 15px; }
 .normal     { font-size: 14px; line-height: 18px; }
-.strong     { font-size: 17px; line-height: 21px; font-weight: bold; }
+.strong     { font-size: 17px; line-height: 21px; }
 
 .buttonized { background-color: @m2;
               color: @m5;
@@ -289,7 +289,7 @@ div.post {
     position: relative;
     overflow: auto;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     a.avatar {
         width: 40px;
         height: 40px;
@@ -349,14 +349,26 @@ div.post {
     }
     div.body {
         display: table-cell;
-        a.title, p.description, ul.actions, p.info {
+        p.title, p.description, ul.actions, p.info {
             margin: 0 0 3px 0;
             display: block;
         }
-        a.title {
-            .strong;
-            text-decoration: none;
+        p.title {
+            text-decoration: underline;
             color: @red;
+            .strong;
+            display: block;
+            overflow: auto;
+            a {
+                float: left;
+            }
+            a.external {
+                margin-left: 10px;
+                width: 17px;
+                height: 17px;
+                background: url(../img/external.png) top left;
+                clear: right;
+            }
         }
         p.description {
             color: @m2;

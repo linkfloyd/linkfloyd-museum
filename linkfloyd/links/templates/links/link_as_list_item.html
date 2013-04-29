@@ -9,24 +9,25 @@
         <div class="thumbnail">
             <img
                 class="thumbnail {% if link.player %}playble{% endif %}"
-                src="{% thumbnail link.thumbnail_url '100x70' crop='center' as im %}{{ im.url }}{% endthumbnail %}"
+                src="{% thumbnail link.thumbnail_url '90x60' crop='center' as im %}{{ im.url }}{% endthumbnail %}"
             />
             {% if link.player %}<i player="{{link.player}}"></i>{% endif %}</a>
         </div>
     {% endif %}
     <div class="body">
-        <a class="title" href="{{link.url}}">
-            {% if link.title %}
-                {% if link.rating = 2 %}<span class="mod"></span>{% endif %}
-                {% if link.rating = 3 %}<span class="lib"></span>{% endif %}
-                {{link.title}}
-            {% else %}
-                {{link.url|truncatechars:60}}
-            {% endif %}
-        </a>
-        {% if link.description_as_html and show_description %}
-            {{link.description_as_html|safe}}
-        {% endif %}
+        <p class="title">
+            <a class="title" href="{{link.get_absolute_url}}">
+                {% if link.title %}
+                    {% if link.rating = 2 %}<span class="mod"></span>{% endif %}
+                    {% if link.rating = 3 %}<span class="lib"></span>{% endif %}
+                    {{link.title}}
+                {% else %}
+                    {{link.url|truncatechars:60}}
+                {% endif %}
+            </a>
+            <a class="external" href="{{link.url}}"></a>
+        </p>
+        {% if link.description_as_html and show_description %}{{link.description_as_html|safe}}{% endif %}
         {% if show_attachments %}
             <div class="embed_player">{{link.player|safe}}</div>
         {% endif %}
