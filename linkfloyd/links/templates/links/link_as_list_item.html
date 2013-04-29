@@ -24,12 +24,8 @@
                 {{link.url|truncatechars:60}}
             {% endif %}
         </a>
-        {% if link.description %}
-            {% if show_description %}
-                {{link.description_as_html|safe}}
-            {% else %}
-                {{link.description_as_html|truncatewords_html:20|safe}}
-            {% endif %}
+        {% if link.description_as_html and show_description %}
+            {{link.description_as_html|safe}}
         {% endif %}
         {% if show_attachments %}
             <div class="embed_player">{{link.player|safe}}</div>
