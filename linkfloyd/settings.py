@@ -129,8 +129,49 @@ INSTALLED_APPS = [
     'registration',
     'gravatar',
     'south',
-    'seo_cascade'
+    'seo_cascade',
+    'pipeline',
 ]
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+
+PIPELINE_CSS = {
+    'bootstrap': {
+        'source_filenames': (
+            'less/bootstrap.less',
+            'less/responsive.less',
+            'css/style.less'
+        ),
+        'output_filename': 'css/b.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+
+PIPELINE_JS = {
+    'bootstrap': {
+        'source_filenames': (
+          'js/bootstrap-transition.js',
+          'js/bootstrap-alert.js',
+          'js/bootstrap-dropdown.js',
+          'js/bootstrap-scrollspy.js',
+          'js/bootstrap-tab.js',
+          'js/bootstrap-tooltip.js',
+          'js/bootstrap-popover.js',
+          'js/bootstrap-button.js',
+          'js/bootstrap-collapse.js',
+          'js/bootstrap-carousel.js',
+          'js/bootstrap-typeahead.js',
+          'js/bootstrap-affix.js',
+        ),
+        'output_filename': 'js/b.js',
+    },
+}
 
 # EMAIL
 
