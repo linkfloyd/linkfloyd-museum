@@ -15,7 +15,7 @@ def pull():
     run('git pull')
 
 def update_libs():
-    run('pip install -r ../requirements.txt')
+    run('pip install -r ../requirements')
 
 def syncdb():
     run('python manage.py syncdb --noinput --migrate')
