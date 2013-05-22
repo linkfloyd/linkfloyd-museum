@@ -172,7 +172,7 @@ def switch_channel_subscription(request):
             )
             return HttpResponse(simplejson.dumps({
                 "status": "subscribed",
-                "update_text": _("Subscribed"),
+                "update_text": _("subscribed"),
             }), status=200)
 
         if request.POST.get("requested_status") == "admin":
@@ -199,20 +199,20 @@ def switch_channel_subscription(request):
                 subscription.delete()
                 return HttpResponse(simplejson.dumps({
                     "status": "unsubscribed",
-                    "update_text": _("Subscribe")
+                    "update_text": _("subscribe")
                 }))
             else:
                 return HttpResponse(simplejson.dumps({
                     "status": "confirmation_needed",
-                    "confirmation_text": _("You will loose your " \
-                                           "adminstration rights from this " \
+                    "confirmation_text": _("You will loose your "
+                                           "adminstration rights from this "
                                            "channel. Are you sure?")
                 }))
         else:
             subscription.delete()
             return HttpResponse(simplejson.dumps({
                 "status": "unsubscribed",
-                "update_text": _("Subscribe")
+                "update_text": _("subscribe")
             }))
 
 
@@ -239,8 +239,8 @@ def switch_link_subscription(request):
                 return HttpResponse(
                     simplejson.dumps({
                         "status": "subscribed",
-                        "update_text": "Unsubscribe",
-                        "update_title": "Do not email me when somebody" \
+                        "update_text": "unsubscribe",
+                        "update_title": "Do not email me when somebody"
                                         "comments on that link"
                     }, 'application/javascript')
                 )
@@ -250,8 +250,8 @@ def switch_link_subscription(request):
                 return HttpResponse(
                     simplejson.dumps({
                         "status": "unsubscribed",
-                        "update_text": "Subscribe",
-                        "update_title": "Email me when somebody comments " \
+                        "update_text": "subscribe",
+                        "update_title": "Email me when somebody comments "
                                         "on that link"
                     }, 'application/javascript')
                 )

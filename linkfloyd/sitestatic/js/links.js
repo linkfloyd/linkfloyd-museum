@@ -34,12 +34,12 @@ $(document).ready( function() {
         });
     });
     $(".post").bind("delete", function(event) {
-        var link_el = $(this);
+        var link_el = $(event.target).parent();
 	    $.ajax({
             type: "GET",
 	        url: "/api/links/delete/",
 	        data: {
-                'id': link_el.attr("id")
+                'id': link_el.attr("data-id")
             },
 	        success : function(data, textStatus, jqXHR) {	
                 link_el.slideUp();
@@ -52,12 +52,12 @@ $(document).ready( function() {
         });
     });
     $(".post").bind("switch_follow", function(event) {
-        var link_el = $(this);
+        var link_el = $(event.target).parent();
 	    $.ajax({
             type: "POST",
 	        url: "/api/links/subscription/switch/",
 	        data: {
-                'link_id': link_el.attr("id")
+                'link_id': link_el.attr("data-id")
             },
             dataType: "json",
 	        success : function(data, textStatus, jqXHR) {

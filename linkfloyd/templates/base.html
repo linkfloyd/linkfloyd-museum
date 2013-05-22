@@ -30,6 +30,39 @@
     {% compressed_css 'bootstrap' %}
 
     {% include "includes/google_analytics.html" %}
+    <script type="text/javascript" >
+        function setPositionOfMenus() {
+            $("a.parent").each(function(i, v){
+                var el = $(v)
+                var offs = el.offset();
+                var sub_el= $($($(v).attr("href"))[0]);
+                sub_el.css("top", offs.top + 40);
+                sub_el.css("left", offs.left - 1);
+                el.click(function(){
+                    sub_el.toggle();
+                    return false;
+                });
+            });
+        }
+
+        $(document).ready(function() {
+            var notifications_loaded = false;
+            $("a[href=#notifications-subnav]").click(function() {
+                if (!notifications_loaded) {
+                    $.get("/api/notifications/", function(data) {
+                        $("#notifications-subnav").html(data);
+                        notifications_loaded = true;
+                    })                    
+                }
+            })            
+            setPositionOfMenus();
+        });
+
+        $(window).resize(function () {
+            setPositionOfMenus();
+        });
+
+    </script>
 
 	{% block extra_head %}{% endblock %}
 </head>

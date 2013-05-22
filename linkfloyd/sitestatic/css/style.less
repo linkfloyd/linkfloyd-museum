@@ -63,6 +63,16 @@
 .ba         { border: 1px solid #ccc;}
 .nb         { border: none;}
 
+.rt         { border-top-right-radius: 5px;
+              border-top-left-radius: 5px}
+.rb         { border-bottom-right-radius: 5px;
+              border-bottom-left-radius: 5px}
+.rl         { border-top-left-radius: 5px;
+              border-bottom-left-radius: 5px}
+.rr         { border-top-right-radius: 5px;
+              border-bottom-right-radius: 5px}
+.ra         { border-radius: 5px;}
+
 .fl         { float: left; }
 .fr         { float: right; }
 .oa         { overflow: auto; }
@@ -72,18 +82,18 @@
 .fwn        { font-weight: normal; }
 .tac        { text-align: center; }
 
-.bttn { background-color: @m2;
-        color: @m5;
-        padding: 4px 15px;
-        font-weight: bold;
-        border: 1px outset @m2;
-        .rounded;
-        text-decoration: none;
-        &:hover    { color: @m4; }
-        &:active   { background: @m2;
-                   border-style: inset; }
-        &:disabled { color: @m4;
-                     background: @m3;}}
+.bttn       { background-color: @m2;
+              color: @m5;
+              padding: 4px 15px;
+              .fwb;
+              border: 1px outset @m2;
+              .ra;
+              text-decoration: none;
+              &:hover    { color: @m4; }
+              &:active   { background: @m2;
+                           border-style: inset; }
+              &:disabled { color: @m4;
+                           background: @m3;}}
 
 h1       { .huge; }
 h2       { .bggr; }
@@ -91,7 +101,7 @@ h3       { .stng; }
 h4       { .nrml; }
 
 h1, h2,
-h3, h4   { color: @m1; }
+h3, h4   { color: @m1; .oa; }
 
 h1, h2, h3, h4, p, img, form, ul, ol, dl { .mb; }
 
@@ -122,7 +132,7 @@ ul.flat  { margin: 0;
                   padding: 0; }
            > li:first-child { margin-left: 0; }}
 
-div.section { .mb; }
+div.section { .mb; .oa; }
 p.success, p.error, p.warning {
     .stng; .pa; .tac;
     box-shadow: inset 0px 2px 16px rgba(0,0,0,0.4);
@@ -302,12 +312,10 @@ ul#nav, ul.subnav {
     }
 }
 ul.subnav {
-    background: @m3;
+    background: @m2;
     position: absolute;
     display: none;
-    .rounded;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    .rb;
     border-left: 1px solid @m4;
     border-right: 1px solid @m2;
     border-bottom: 1px solid @m2;
