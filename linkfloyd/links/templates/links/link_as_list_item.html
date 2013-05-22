@@ -16,7 +16,7 @@
     {% endif %}
     <div class="body">
         <p class="title">
-            <a class="title" href="{{link.get_absolute_url}}">
+            <a class="title" href="{% if show_attachments %}{{ link.url }}{% else %}{{ link.get_absolute_url }}{% endif %}">
                 {% if link.title %}
                     {% if link.rating = 2 %}<span class="mod"></span>{% endif %}
                     {% if link.rating = 3 %}<span class="lib"></span>{% endif %}
@@ -25,27 +25,30 @@
                     {{link.url|truncatechars:60}}
                 {% endif %}
             </a>
-            <a class="external" href="{{link.url}}"></a>
         </p>
-        {% if link.description_as_html and show_description %}<div class="description">{{link.description_as_html|safe}}</div>{% endif %}
+        {% if link.description_as_html and show_description %}{{link.description_as_html|safe}}{% endif %}
         {% if show_attachments %}
             <div class="embed_player">{{link.player|safe}}</div>
         {% endif %}
         <p class="info">Posted by <a href="{{link.posted_by.get_absolute_url}}">{{link.posted_by}}</a> to <a class="channel" href="{{link.channel.get_absolute_url}}">{{link.channel}}</a>, {{link.posted_at|timesince}} ago.</p>
-        <div class="btn-group">
-            <a class="btn" href="{{link.get_absolute_url}}">{{link.comment_score}} {% trans "comments" %}</a></li>
+        <ul class="flat actions">
+            <li><a href="{{link.get_absolute_url}}">{{link.comment_score}} {% trans "comments" %}</a></li>
             {% if link.posted_by == user or user.is_staff %}
-                <a class="btn" href="{% url update_link link.id %}">{% trans "update" %}</a>
-                <a class="btn" href="#" class="deleteLink">{% trans "delete" %}</a>
+                <li><a href="{% url update_link link.id %}">{% trans "update" %}</a></li>
+                <li><a href="#" class="deleteLink">{% trans "delete" %}</a></li>
             {% endif %}
             {% if user.is_authenticated %}
-                {% if link.is_subscribed %}
-                    <a class="btn" class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "unsubscribe" %}</a></li>
-                {% else %}
-                    <a class="btn switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "subscribe" %}</a></li>
-                {% endif %}
+                <li>
+                    {% if link.is_subscribed %}
+                        <a class="switchFollowLink" title="Do not send emails about that link anymore" href="#">{% trans "unsubscribe" %}</a></li>
+                    {% else %}
+                        <a class="switchFollowLink" title="Email me when somebody comments on that link" href="#">{% trans "subscribe" %}</a></li>
+                    {% endif %}
+                </li>
             {% endif %}
-            <a class="btn" href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "share" %}</a>
+            <li>
+                <a href="http://www.addthis.com/bookmark.php" class="addthis_button" addthis:url="{{link.get_full_url}}" addthis:title="{{link.channel}}: {{link.title}}" {% if link.description %}addthis:description="{{link.description}}"{% endif %}>{% trans "share" %}</a>
+            </li>
         </ul>
     </div>
     {% if show_comments %}
