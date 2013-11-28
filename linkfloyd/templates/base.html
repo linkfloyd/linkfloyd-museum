@@ -1,6 +1,5 @@
-{% load static meta i18n gravatar notification_tags compressed %}
+{% load static meta i18n gravatar compressed %}
 {% get_static_prefix as STATIC_PREFIX %}
-{% get_unread_notifications_count as notifications_count %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,19 +44,6 @@
             });
         }
 
-        $(document).ready(function() {
-            var notifications_loaded = false;
-            $("a[href=#notifications-subnav]").click(function() {
-                if (!notifications_loaded) {
-                    $.get("/api/notifications/", function(data) {
-                        $("#notifications-subnav").html(data);
-                        notifications_loaded = true;
-                    })                    
-                }
-            })            
-            setPositionOfMenus();
-        });
-
         $(window).resize(function () {
             setPositionOfMenus();
         });
@@ -85,11 +71,6 @@
                         {% trans "Channels" %}
                     </a>
                 </li>
-                {% if user.is_authenticated %}
-                <li>
-                    <a class="parent" href="#notifications-subnav">{% trans "Notifications" %} {% if notifications_count %} ({{ notifications_count }}){% endif %}</a>
-                </li>
-                {% endif %}
                 <li>
                     <a href="/links/random/">{% trans "Random" %}</a>
                 </li>
