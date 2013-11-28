@@ -100,8 +100,6 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
 )
 
-SOUTH_TESTS_MIGRATE = False
-
 INSTALLED_APPS = [
     # contrib
     'django.contrib.auth',
@@ -128,7 +126,6 @@ INSTALLED_APPS = [
     'qhonuskan_votes',
     'registration',
     'gravatar',
-    'south',
     'seo_cascade',
     'pipeline',
 ]
@@ -150,6 +147,8 @@ PIPELINE_CSS = {
         },
     },
 }
+
+PIPELINE_LESS_BINARY = "~/node_modules/less/bin/lessc"
 
 # EMAIL
 
