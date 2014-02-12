@@ -5,7 +5,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from links.models import Link
 from channels.models import Channel
 from django.views.generic.simple import direct_to_template
-from django.contrib.sitemaps import Sitemap
 from django.contrib.sitemaps import GenericSitemap
 admin.autodiscover()
 
@@ -22,7 +21,6 @@ urlpatterns = patterns(
     url(r'^wiki/', include('wiki.urls')),
     url(r'^api/', include('linkfloyd.api.urls')),
     url(r'^preferences/', include('linkfloyd.preferences.urls')),
-    url(r'^notifications/', 'linkfloyd.notifications.views.list'),
     url(r'^404/$', direct_to_template, {'template': '404.html'}),
     url(r'^500/$', direct_to_template, {'template': '500.html'}),
     url(r'^testpage/$', direct_to_template, {
@@ -32,8 +30,7 @@ urlpatterns = patterns(
             'channels': Channel.objects.all()[0:5],
             'expanded_comments': True,
             'expanded_attachment': True,
-        }
-    }),
+        }}),
     url(r'^favicon\.ico$', 'django.views.generic.simple.redirect_to',
         {'url': '/static/img/favicon.ico'}),
 
