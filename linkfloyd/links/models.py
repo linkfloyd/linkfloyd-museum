@@ -79,7 +79,9 @@ class Link(models.Model):
         return u"%s by %s" % (self.title, self.posted_by)
 
     def save(self, *args, **kwargs):
-        self.description_as_html = markdown(self.description, safe_mode="remove")
+        self.description_as_html = markdown(
+            self.description,
+            safe_mode="remove")
         super(Link, self).save(*args, **kwargs)
 
 class Subscription(models.Model):

@@ -41,7 +41,6 @@ def submit_link(request, bookmarklet=False):
                 return HttpResponseRedirect("%s?highlight=%s" % (
                     link.channel.get_absolute_url(), link.id))
         else:
-            print form.errors
             return render_to_response(
                 template, {
                     "form": form,
