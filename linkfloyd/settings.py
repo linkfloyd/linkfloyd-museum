@@ -4,47 +4,33 @@ import os
 
 ugettext = lambda s: s  # dummy ugettext function, as django's docs say
 
-from local_settings import *
-
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-THUMBNAIL_DEBUG = False
+THUMBNAIL_DEBUG = DEBUG
 
-ADMINS = (
-    ('Mirat Can Bayrak', 'miratcanbayrak@gmail.com'),
-)
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__.decode('utf-8')))
 
+ADMINS = (('Mirat Can Bayrak', 'miratcanbayrak@gmail.com'),)
 SERVER_EMAIL = "django@linkfloyd.com"
-
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, 'sqlite3.db'),
-
-    }
-}
+        'NAME': os.path.join(PROJECT_ROOT, 'sqlite3.db')}}
 
 TIME_ZONE = 'America/Chicago'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'tr'
-
-LANGUAGES = (
-    ('tr', 'Türkçe'),
-    ('en', 'English')
-)
-
+LANGUAGES = (('tr', 'Türkçe'), ('en', 'English'))
 SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale
 USE_L10N = False
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
+
+MEDIA_URL = "/media/"
+STATIC_URL = "/static/"
 
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
@@ -184,3 +170,5 @@ LOGGING = {
         },
     }
 }
+
+from local_settings import *
