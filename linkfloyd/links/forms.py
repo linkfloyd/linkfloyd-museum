@@ -4,7 +4,7 @@ from channels.models import Channel
 
 
 class SubmitLinkForm(forms.ModelForm):
-    url = forms.URLField(verify_exists=False)
+    url = forms.URLField(verify_exists=False, required=False)
 
     title = forms.CharField(
         required=False,
@@ -29,8 +29,8 @@ class SubmitLinkForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         self.fields.keyOrder = [
-            'title',
             'url',
+            'title',
             'description',
             'channel',
             'rating',
