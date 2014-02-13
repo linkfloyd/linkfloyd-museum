@@ -43,13 +43,13 @@
                 });
             });
         }
-
         $(window).resize(function () {
             setPositionOfMenus();
         });
-
+        $(document).ready(function() {
+            setPositionOfMenus();            
+        })
     </script>
-
 	{% block extra_head %}{% endblock %}
 </head>
 <body {% block class_body %}{% endblock %}>
