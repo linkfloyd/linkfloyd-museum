@@ -1,7 +1,7 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{% trans "Activation complete" %}{% endblock %}
 {% block content %}
-    {% with login_url=url auth_login %}
+    {% with login_url=auth_login %}
     <p class="success">{% blocktrans %}Activation complete. Now <a href='{{login_url}}'>log in</a> using the username and password you set at registration.{% endblocktrans %}</p>
 {% endblock %}a
 
