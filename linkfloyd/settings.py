@@ -21,13 +21,13 @@ DATABASES = {
 
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'tr'
-LANGUAGES = (('tr', 'Türkçe'), ('en', 'English'))
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = False
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
+LOCALE_PATHS = (os.path.join(PROJECT_ROOT, "locale"),)
 
 MEDIA_URL = "/media/"
 STATIC_URL = "/static/"

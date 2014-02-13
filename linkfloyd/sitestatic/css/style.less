@@ -359,6 +359,10 @@ div.post {
     position: relative;
     .oa;
     .mb;
+    &.withThumbnail {
+        .body, .embed_player { margin-left: 110px; }
+    }
+    .embed_player > * { width: 100%; }
     a.avatar {
         width: 40px;
         height: 40px;
@@ -417,7 +421,6 @@ div.post {
         }
     }
     div.body {
-        display: table-cell;
         p.title, p.description, ul.actions, p.info {
             margin: 0 0 3px 0;
             display: block;
@@ -446,8 +449,8 @@ div.post {
         ul.actions, p.info {
             .weak;
             color: @m3;
-            a { font-weight: bold;
-                color: lighten(@blue, 40)}
+            a { font-weight: normal;
+                color: #426591; }
         }
     }
     div.thumbnail {
