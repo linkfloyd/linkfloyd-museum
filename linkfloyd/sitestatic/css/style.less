@@ -341,8 +341,8 @@ a#logo {
 }
 
 div.panel {
-    width: 300px;
-    margin-left: 20px;
+    width: 280px;
+    margin-left: 10px;
     .fr;
     div.avatars {
         a {
@@ -555,3 +555,13 @@ div.channel {
     }
 }
 
+@media all and (max-width: 699px) {
+    .panel { display: none; }
+    .orderings { display: block; width: 100%; }
+}
+
+@media all and (max-width: 400px) {
+    .thumbnail { display: none; }
+    div.post.withThumbnail .body { margin-left: 0; }
+    #nav li { display: none; }
+}

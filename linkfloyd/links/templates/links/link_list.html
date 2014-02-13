@@ -90,11 +90,13 @@
 </div>
 <div class="content section">
   <h2>{{title}}
+    <span class="orerings">
     <span class="ordering{% if ordering == 'controversial' %} active{% endif %}">
       <a href="?ordering=controversial">{% trans "Controversial" %}</a>
     </span>
     <span class="ordering{% if ordering == 'latest' %} active{% endif %}">
       <a href="?ordering=latest">{% trans "Latest" %}</a>
+    </span>
     </span>
   </h2>
 
