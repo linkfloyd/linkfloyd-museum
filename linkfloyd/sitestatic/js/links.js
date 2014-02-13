@@ -112,13 +112,12 @@ $(document).ready( function() {
         if (embed_player_el.length === 0) {
             embed_player_el = $("<div class='embed_player'></div>");
             embed_player_el.append($(this).attr("player"));
-            attachment_el.append(embed_player_el);
+            attachment_el.find('p.title').after(embed_player_el);
             attachment_el.addClass("expanded");
         } else {
-            embed_player_el.empty();
+            embed_player_el.remove();
             attachment_el.removeClass("expanded");
         }
-
         return false;
     });
 });
